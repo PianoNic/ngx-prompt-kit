@@ -67,7 +67,7 @@ I need to find a number that, when **multiplied by itself**, equals 144.
           <pk-reasoning [isStreaming]="basicStreaming()">
             <pk-reasoning-trigger>Show reasoning</pk-reasoning-trigger>
             <pk-reasoning-content
-              class="border-l-border ml-2 border-l-2 px-2 pb-1"
+              contentClass="border-l-border ml-2 border-l-2 px-2 pb-1"
               [content]="basicText()"
             />
           </pk-reasoning>
@@ -94,7 +94,7 @@ I need to find a number that, when **multiplied by itself**, equals 144.
           <pk-reasoning [isStreaming]="markdownStreaming()">
             <pk-reasoning-trigger>Show AI reasoning</pk-reasoning-trigger>
             <pk-reasoning-content
-              class="border-l-border ml-2 border-l-2 px-2 pb-1"
+              contentClass="border-l-border ml-2 border-l-2 px-2 pb-1"
               [markdown]="true"
               [content]="markdownText()"
             />
@@ -154,7 +154,7 @@ export class ReasoningDemo {
 <pk-reasoning [isStreaming]="streaming()">
   <pk-reasoning-trigger>Show reasoning</pk-reasoning-trigger>
   <pk-reasoning-content
-    class="border-l-border ml-2 border-l-2 px-2 pb-1"
+    contentClass="border-l-border ml-2 border-l-2 px-2 pb-1"
     [content]="text()"
   />
 </pk-reasoning>`;
@@ -167,7 +167,7 @@ export class ReasoningDemo {
 <pk-reasoning [isStreaming]="streaming()">
   <pk-reasoning-trigger>Show AI reasoning</pk-reasoning-trigger>
   <pk-reasoning-content
-    class="border-l-border ml-2 border-l-2 px-2 pb-1"
+    contentClass="border-l-border ml-2 border-l-2 px-2 pb-1"
     [markdown]="true"
     [content]="text()"
   />
