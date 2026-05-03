@@ -7,6 +7,16 @@ export const routes: Routes = [
     children: [
       { path: '', loadComponent: () => import('./pages/landing').then((m) => m.Landing) },
       {
+        path: 'blocks',
+        loadComponent: () => import('./pages/coming-soon').then((m) => m.ComingSoon),
+        data: { title: 'Blocks' },
+      },
+      {
+        path: 'showcase/full-chat',
+        loadComponent: () => import('./pages/coming-soon').then((m) => m.ComingSoon),
+        data: { title: 'Full Chat' },
+      },
+      {
         path: 'components/message',
         loadComponent: () => import('./demo/message-demo').then((m) => m.MessageDemo),
       },
