@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
 import {
   lucideArrowUp,
+  lucideCoffee,
   lucideEllipsis,
   lucideGlobe,
   lucidePlus,
@@ -37,7 +38,7 @@ interface Feature {
     PkCodeBlockImports,
     PkPromptInputImports,
   ],
-  providers: [provideIcons({ lucidePlus, lucideGlobe, lucideEllipsis, lucideArrowUp })],
+  providers: [provideIcons({ lucidePlus, lucideGlobe, lucideEllipsis, lucideArrowUp, lucideCoffee })],
   template: `
     <div class="mx-auto max-w-4xl py-4 md:py-12">
       <section class="text-center">
@@ -129,7 +130,15 @@ interface Feature {
           <div class="flex items-center gap-4">
             <a href="https://github.com/PianoNic/prompt-kit-ng" target="_blank" rel="noopener noreferrer" class="hover:text-foreground">GitHub</a>
             <a href="https://www.npmjs.com/package/@pianonic/prompt-kit-ng" target="_blank" rel="noopener noreferrer" class="hover:text-foreground">npm</a>
-            <a href="https://buymeacoffee.com/PianoNic" target="_blank" rel="noopener noreferrer" class="hover:text-foreground">Buy me a coffee ☕</a>
+            <a
+              href="https://buymeacoffee.com/PianoNic"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-foreground inline-flex items-center gap-1.5"
+            >
+              <ng-icon hlm size="xs" name="lucideCoffee" />
+              Buy me a coffee
+            </a>
           </div>
         </div>
       </footer>
