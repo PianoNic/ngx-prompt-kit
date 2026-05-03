@@ -1,12 +1,21 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { provideIcons } from '@ng-icons/core';
+import {
+  lucideArrowUp,
+  lucideEllipsis,
+  lucideGlobe,
+  lucidePlus,
+} from '@ng-icons/lucide';
+import { HlmButton } from '@spartan-ng/helm/button';
 import {
   HlmCard,
   HlmCardDescription,
   HlmCardHeader,
   HlmCardTitle,
 } from '@spartan-ng/helm/card';
-import { HlmButton } from '@spartan-ng/helm/button';
+import { HlmIconImports } from '@spartan-ng/helm/icon';
+import { HlmH1, HlmH2, HlmLead, HlmMuted } from '@spartan-ng/helm/typography';
 import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
 import { PkPromptInputImports } from 'prompt-kit-ng/prompt-input';
 
@@ -25,66 +34,56 @@ interface Feature {
     HlmCardDescription,
     HlmCardHeader,
     HlmCardTitle,
+    HlmIconImports,
+    HlmH1,
+    HlmH2,
+    HlmLead,
+    HlmMuted,
     PkCodeBlockImports,
     PkPromptInputImports,
   ],
+  providers: [provideIcons({ lucidePlus, lucideGlobe, lucideEllipsis, lucideArrowUp })],
   template: `
     <div class="mx-auto max-w-4xl py-4 md:py-12">
-      <!-- Hero -->
       <section class="text-center">
-        <p
-          class="text-muted-foreground mb-3 text-sm font-medium uppercase tracking-wider"
-        >
-          prompt-kit-ng
-        </p>
-        <h1 class="text-4xl font-semibold tracking-tight md:text-5xl">
-          AI chat components for Angular.
-        </h1>
-        <p class="text-muted-foreground mx-auto mt-4 max-w-2xl text-lg">
+        <p hlmMuted class="mb-3 uppercase tracking-wider">prompt-kit-ng</p>
+        <h1 hlmH1>AI chat components for Angular.</h1>
+        <p hlmLead class="mx-auto mt-4 max-w-2xl">
           Standalone, signal-based components for building AI interfaces. Composes
           with Spartan UI. Distributed via schematics — the source lives in your
           project, not in a black-box dependency.
         </p>
         <div class="mt-7 flex flex-wrap items-center justify-center gap-3">
           <a hlmBtn routerLink="/showcase/full-chat" type="button">See it in action</a>
-          <a hlmBtn variant="outline" routerLink="/blocks" type="button">
-            Browse blocks
-          </a>
+          <a hlmBtn variant="outline" routerLink="/blocks" type="button">Browse blocks</a>
         </div>
       </section>
 
-      <!-- Live PromptInput hero -->
-      <section class="mt-12">
-        <pk-prompt-input
-          class="max-w-2xl mx-auto block"
-          [(value)]="heroValue"
-          (submitted)="onHeroSubmit()"
-        >
-          <pk-prompt-input-textarea />
-          <pk-prompt-input-actions class="mt-2 justify-end gap-1">
+      <section class="mx-auto mt-12 max-w-2xl">
+        <pk-prompt-input class="block" [(value)]="heroValue" (submitted)="onHeroSubmit()">
+          <pk-prompt-input-textarea placeholder="Ask prompt-kit-ng anything..." />
+          <pk-prompt-input-actions class="mt-2 justify-between">
+            <div class="flex items-center gap-1">
+              <pk-prompt-input-action tooltip="Attach files">
+                <button hlmBtn variant="ghost" size="icon-sm" type="button" class="rounded-full" aria-label="Attach files">
+                  <ng-icon hlm size="sm" name="lucidePlus" />
+                </button>
+              </pk-prompt-input-action>
+              <pk-prompt-input-action tooltip="Search the web">
+                <button hlmBtn variant="outline" size="sm" type="button" class="rounded-full gap-1.5">
+                  <ng-icon hlm size="xs" name="lucideGlobe" />
+                  Search
+                </button>
+              </pk-prompt-input-action>
+              <pk-prompt-input-action tooltip="More tools">
+                <button hlmBtn variant="ghost" size="icon-sm" type="button" class="rounded-full" aria-label="More tools">
+                  <ng-icon hlm size="sm" name="lucideEllipsis" />
+                </button>
+              </pk-prompt-input-action>
+            </div>
             <pk-prompt-input-action tooltip="Send message">
-              <button
-                hlmBtn
-                size="icon-sm"
-                type="button"
-                class="rounded-full"
-                (click)="onHeroSubmit()"
-                aria-label="Send"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="m5 12 7-7 7 7" />
-                  <path d="M12 19V5" />
-                </svg>
+              <button hlmBtn size="icon-sm" type="button" class="rounded-full" (click)="onHeroSubmit()" aria-label="Send">
+                <ng-icon hlm size="xs" name="lucideArrowUp" />
               </button>
             </pk-prompt-input-action>
           </pk-prompt-input-actions>
@@ -95,11 +94,8 @@ interface Feature {
           </p>
         }
 
-        <!-- Source preview -->
-        <div class="mt-8 max-w-2xl mx-auto">
-          <p
-            class="text-muted-foreground mb-2 px-1 text-xs font-medium uppercase tracking-wider"
-          >
+        <div class="mt-8">
+          <p class="text-muted-foreground mb-2 px-1 text-xs font-medium uppercase tracking-wider">
             What you write
           </p>
           <pk-code-block>
@@ -108,11 +104,8 @@ interface Feature {
         </div>
       </section>
 
-      <!-- Features -->
       <section class="mt-20">
-        <h2 class="text-center text-2xl font-semibold tracking-tight">
-          Built for the Angular way of working.
-        </h2>
+        <h2 hlmH2 class="border-none text-center">Built for the Angular way of working.</h2>
         <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           @for (f of features; track f.title) {
             <div hlmCard>
@@ -125,36 +118,16 @@ interface Feature {
         </div>
       </section>
 
-      <!-- Footer -->
-      <footer
-        class="border-border text-muted-foreground mt-20 border-t pt-6 text-sm"
-      >
+      <footer class="border-border text-muted-foreground mt-20 border-t pt-6 text-sm">
         <div class="flex flex-wrap items-center justify-between gap-4">
           <p>
             Original React implementation by
-            <a
-              href="https://github.com/ibelick"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-foreground underline-offset-4 hover:underline"
-              >Julien Thibeaut (ibelick)</a
-            >. MIT licensed.
+            <a href="https://github.com/ibelick" target="_blank" rel="noopener noreferrer" class="text-foreground underline-offset-4 hover:underline">Julien Thibeaut (ibelick)</a>.
+            MIT licensed.
           </p>
           <div class="flex items-center gap-4">
-            <a
-              href="https://github.com/PianoNic/prompt-kit-ng"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="hover:text-foreground"
-              >GitHub</a
-            >
-            <a
-              href="https://www.npmjs.com/package/@pianonic/prompt-kit-ng"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="hover:text-foreground"
-              >npm</a
-            >
+            <a href="https://github.com/PianoNic/prompt-kit-ng" target="_blank" rel="noopener noreferrer" class="hover:text-foreground">GitHub</a>
+            <a href="https://www.npmjs.com/package/@pianonic/prompt-kit-ng" target="_blank" rel="noopener noreferrer" class="hover:text-foreground">npm</a>
           </div>
         </div>
       </footer>
@@ -166,10 +139,25 @@ export class Landing {
   protected readonly lastSubmitted = signal('');
 
   protected readonly snippet = `<pk-prompt-input [(value)]="value" (submitted)="onSubmit()">
-  <pk-prompt-input-textarea />
-  <pk-prompt-input-actions class="mt-2 justify-end">
+  <pk-prompt-input-textarea placeholder="Ask prompt-kit-ng anything..." />
+  <pk-prompt-input-actions class="mt-2 justify-between">
+    <div class="flex items-center gap-1">
+      <pk-prompt-input-action tooltip="Attach files">
+        <button hlmBtn variant="ghost" size="icon-sm">
+          <ng-icon hlm size="sm" name="lucidePlus" />
+        </button>
+      </pk-prompt-input-action>
+      <pk-prompt-input-action tooltip="Search the web">
+        <button hlmBtn variant="outline" size="sm">
+          <ng-icon hlm size="xs" name="lucideGlobe" />
+          Search
+        </button>
+      </pk-prompt-input-action>
+    </div>
     <pk-prompt-input-action tooltip="Send message">
-      <button hlmBtn size="icon-sm" (click)="onSubmit()">Send</button>
+      <button hlmBtn size="icon-sm" (click)="onSubmit()">
+        <ng-icon hlm size="xs" name="lucideArrowUp" />
+      </button>
     </pk-prompt-input-action>
   </pk-prompt-input-actions>
 </pk-prompt-input>`;
@@ -212,7 +200,5 @@ export class Landing {
     if (!v) return;
     this.lastSubmitted.set(v);
     this.heroValue.set('');
-    // eslint-disable-next-line no-console
-    console.log('[hero] submitted:', v);
   }
 }

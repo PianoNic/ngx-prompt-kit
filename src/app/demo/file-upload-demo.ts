@@ -1,31 +1,53 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { DocExample } from '../layout/doc-example';
+import { DocPage } from '../layout/doc-page';
 import { PkFileUploadImports } from 'prompt-kit-ng/file-upload';
 
 @Component({
   selector: 'app-file-upload-demo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PkFileUploadImports],
+  imports: [DocPage, DocExample, PkFileUploadImports],
   template: `
-    <h2 class="text-xl font-semibold mb-4">File Upload</h2>
-    <pk-file-upload (filesAdded)="onFiles($event)">
-      <pk-file-upload-trigger
-        class="rounded bg-primary text-primary-foreground px-3 py-1 text-sm"
+    <app-doc-page
+      title="File Upload"
+      description="Drop files anywhere on the page or pick them via the trigger. Emits a File[] — does not upload anything itself."
+    >
+      <app-doc-example
+        title="Trigger + drop overlay"
+        description="The dashed overlay appears anywhere on the page while a drag is in progress."
       >
-        Choose files
-      </pk-file-upload-trigger>
-      <pk-file-upload-content>
-        <div class="rounded-lg border-2 border-dashed border-primary p-8 text-lg">
-          Drop files anywhere
+        <div class="flex w-full flex-col items-start gap-4">
+          <pk-file-upload (filesAdded)="onFiles($event)">
+            <pk-file-upload-trigger
+              class="border-input hover:bg-muted rounded-md border bg-background px-3 py-2 text-sm shadow-xs"
+            >
+              Choose files
+            </pk-file-upload-trigger>
+            <pk-file-upload-content>
+              <div
+                class="border-primary text-primary rounded-xl border-2 border-dashed bg-background/90 px-12 py-10 text-lg font-medium shadow-lg"
+              >
+                Drop files anywhere
+              </div>
+            </pk-file-upload-content>
+          </pk-file-upload>
+          @if (files().length) {
+            <ul class="text-sm">
+              @for (f of files(); track f.name) {
+                <li class="font-mono">
+                  {{ f.name }}
+                  <span class="text-muted-foreground">({{ f.size }} bytes)</span>
+                </li>
+              }
+            </ul>
+          } @else {
+            <p class="text-muted-foreground text-xs">
+              No files yet. Click the button or drag files into the page.
+            </p>
+          }
         </div>
-      </pk-file-upload-content>
-    </pk-file-upload>
-    @if (files().length) {
-      <ul class="mt-4 text-sm">
-        @for (f of files(); track f.name) {
-          <li>{{ f.name }} ({{ f.size }} bytes)</li>
-        }
-      </ul>
-    }
+      </app-doc-example>
+    </app-doc-page>
   `,
 })
 export class FileUploadDemo {

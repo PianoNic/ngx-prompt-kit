@@ -1,25 +1,63 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { HlmButton } from '@spartan-ng/helm/button';
+import { DocExample } from '../layout/doc-example';
+import { DocPage } from '../layout/doc-page';
 import { PkResponseStream } from 'prompt-kit-ng/response-stream';
 
 @Component({
   selector: 'app-response-stream-demo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PkResponseStream],
+  imports: [DocPage, DocExample, HlmButton, PkResponseStream],
   template: `
-    <h2 class="text-xl font-semibold mb-4">Response Stream</h2>
-    <button class="mb-4 rounded bg-primary text-primary-foreground px-3 py-1 text-sm" (click)="restart()">Restart</button>
-    <pk-response-stream class="block max-w-2xl" [textStream]="text()" mode="typewriter" [speed]="40" />
-    <h3 class="mt-6 mb-2 font-semibold">Fade mode</h3>
-    <pk-response-stream class="block max-w-2xl" [textStream]="text()" mode="fade" [speed]="40" />
+    <app-doc-page
+      title="Response Stream"
+      description="Reveals text chunk-by-chunk to mimic an LLM's streaming response. Two modes: typewriter (cumulative) or fade (per-word)."
+    >
+      <app-doc-example
+        title="Typewriter mode"
+        description="One chunk per animation frame. Speed is on a 1–100 scale."
+      >
+        <div class="w-full">
+          <button hlmBtn variant="outline" size="sm" type="button" class="mb-4" (click)="restart('tw')">
+            Restart
+          </button>
+          <pk-response-stream
+            class="text-base leading-relaxed"
+            [textStream]="twText()"
+            mode="typewriter"
+            [speed]="40"
+          />
+        </div>
+      </app-doc-example>
+
+      <app-doc-example
+        title="Fade mode"
+        description="Each word fades in independently. Feels softer for long-form output."
+      >
+        <div class="w-full">
+          <button hlmBtn variant="outline" size="sm" type="button" class="mb-4" (click)="restart('fade')">
+            Restart
+          </button>
+          <pk-response-stream
+            class="text-base leading-relaxed"
+            [textStream]="fadeText()"
+            mode="fade"
+            [speed]="40"
+          />
+        </div>
+      </app-doc-example>
+    </app-doc-page>
   `,
 })
 export class ResponseStreamDemo {
-  protected readonly text = signal(
-    'This is a streamed response that reveals one chunk at a time, simulating an AI assistant typing.',
-  );
-  protected restart(): void {
-    const t = this.text();
-    this.text.set('');
-    setTimeout(() => this.text.set(t), 50);
+  private readonly canned =
+    'A response stream lets you reveal generated text incrementally. The component takes a string, a mode, and a speed; it handles the rendering frames for you.';
+  protected readonly twText = signal(this.canned);
+  protected readonly fadeText = signal(this.canned);
+
+  protected restart(which: 'tw' | 'fade'): void {
+    const target = which === 'tw' ? this.twText : this.fadeText;
+    target.set('');
+    setTimeout(() => target.set(this.canned), 50);
   }
 }

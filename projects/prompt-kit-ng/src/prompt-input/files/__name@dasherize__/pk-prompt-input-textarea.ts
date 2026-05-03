@@ -24,6 +24,7 @@ import { PROMPT_INPUT_STATE } from './prompt-input.state';
       [class]="computedClass()"
       [value]="state.value()"
       [disabled]="state.disabled()"
+      [attr.placeholder]="placeholder() || null"
       (input)="onInput($event)"
       (keydown)="onKeyDown($event)"
       rows="1"
@@ -33,6 +34,7 @@ import { PROMPT_INPUT_STATE } from './prompt-input.state';
 export class PkPromptInputTextarea implements AfterViewInit {
   public readonly disableAutosize = input<boolean>(false);
   public readonly class = input<string>('');
+  public readonly placeholder = input<string>('');
 
   protected readonly state = inject(PROMPT_INPUT_STATE);
   protected readonly ta = viewChild.required<ElementRef<HTMLTextAreaElement>>('ta');

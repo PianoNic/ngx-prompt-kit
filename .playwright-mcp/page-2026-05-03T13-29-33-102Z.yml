@@ -1,0 +1,122 @@
+- generic [ref=e4]:
+  - banner [ref=e5]:
+    - link "prompt-kit-ng home" [ref=e6] [cursor=pointer]:
+      - /url: /
+      - img [ref=e7]
+      - generic [ref=e10]: prompt-kit-ng
+    - button "Switch to dark theme" [ref=e12]:
+      - img [ref=e13]
+  - generic [ref=e15]:
+    - complementary [ref=e16]:
+      - navigation [ref=e19]:
+        - generic [ref=e20]:
+          - paragraph [ref=e21]: Get Started
+          - list [ref=e22]:
+            - listitem [ref=e23]:
+              - link "Introduction" [ref=e24] [cursor=pointer]:
+                - /url: /
+        - generic [ref=e25]:
+          - paragraph [ref=e26]: Showcase
+          - list [ref=e27]:
+            - listitem [ref=e28]:
+              - link "Blocks" [ref=e29] [cursor=pointer]:
+                - /url: /blocks
+            - listitem [ref=e30]:
+              - link "Full Chat" [ref=e31] [cursor=pointer]:
+                - /url: /showcase/full-chat
+        - generic [ref=e32]:
+          - paragraph [ref=e33]: Components
+          - list [ref=e34]:
+            - listitem [ref=e35]:
+              - link "Message" [ref=e36] [cursor=pointer]:
+                - /url: /components/message
+            - listitem [ref=e37]:
+              - link "Markdown" [ref=e38] [cursor=pointer]:
+                - /url: /components/markdown
+            - listitem [ref=e39]:
+              - link "Code Block" [ref=e40] [cursor=pointer]:
+                - /url: /components/code-block
+            - listitem [ref=e41]:
+              - link "Prompt Input" [ref=e42] [cursor=pointer]:
+                - /url: /components/prompt-input
+            - listitem [ref=e43]:
+              - link "Response Stream" [ref=e44] [cursor=pointer]:
+                - /url: /components/response-stream
+            - listitem [ref=e45]:
+              - link "Loader" [ref=e46] [cursor=pointer]:
+                - /url: /components/loader
+            - listitem [ref=e47]:
+              - link "Chat Container" [ref=e48] [cursor=pointer]:
+                - /url: /components/chat-container
+            - listitem [ref=e49]:
+              - link "Scroll Button" [ref=e50] [cursor=pointer]:
+                - /url: /components/scroll-button
+            - listitem [ref=e51]:
+              - link "Prompt Suggestion" [ref=e52] [cursor=pointer]:
+                - /url: /components/prompt-suggestion
+            - listitem [ref=e53]:
+              - link "File Upload" [ref=e54] [cursor=pointer]:
+                - /url: /components/file-upload
+            - listitem [ref=e55]:
+              - link "Reasoning" [ref=e56] [cursor=pointer]:
+                - /url: /components/reasoning
+    - main [ref=e57]:
+      - generic [ref=e59]:
+        - generic [ref=e60]:
+          - paragraph [ref=e61]: prompt-kit-ng
+          - heading "AI chat components for Angular." [level=1] [ref=e62]
+          - paragraph [ref=e63]: Standalone, signal-based components for building AI interfaces. Composes with Spartan UI. Distributed via schematics — the source lives in your project, not in a black-box dependency.
+          - generic [ref=e64]:
+            - link "See it in action" [ref=e65] [cursor=pointer]:
+              - /url: /showcase/full-chat
+            - link "Browse blocks" [ref=e66] [cursor=pointer]:
+              - /url: /blocks
+        - generic [ref=e67]:
+          - generic [ref=e68]:
+            - textbox "Ask prompt-kit-ng anything..." [ref=e70]
+            - generic [ref=e71]:
+              - generic [ref=e72]:
+                - button "Attach files" [ref=e75]:
+                  - img [ref=e76]
+                - button "Search" [ref=e79]:
+                  - img [ref=e80]
+                  - text: Search
+                - button "More tools" [ref=e85]:
+                  - img [ref=e86]
+              - button "Send" [ref=e92]:
+                - img [ref=e93]
+          - generic [ref=e95]:
+            - paragraph [ref=e96]: What you write
+            - code [ref=e101]: <pk-prompt-input [(value)]="value" (submitted)="onSubmit()"> <pk-prompt-input-textarea placeholder="Ask prompt-kit-ng anything..." /> <pk-prompt-input-actions class="mt-2 justify-between"> <div class="flex items-center gap-1"> <pk-prompt-input-action tooltip="Attach files"> <button hlmBtn variant="ghost" size="icon-sm">+</button> </pk-prompt-input-action> <pk-prompt-input-action tooltip="Search the web"> <button hlmBtn variant="outline" size="sm">Search</button> </pk-prompt-input-action> </div> <pk-prompt-input-action tooltip="Send message"> <button hlmBtn size="icon-sm" (click)="onSubmit()">→</button> </pk-prompt-input-action> </pk-prompt-input-actions> </pk-prompt-input>
+        - generic [ref=e102]:
+          - heading "Built for the Angular way of working." [level=2] [ref=e103]
+          - generic [ref=e104]:
+            - generic [ref=e106]:
+              - heading "Schematic distribution" [level=3] [ref=e107]
+              - paragraph [ref=e108]: Components are copied into your project via ng generate. You own the source — edit, fork, version it on your terms.
+            - generic [ref=e110]:
+              - heading "Built on Spartan UI" [level=3] [ref=e111]
+              - paragraph [ref=e112]: Composes with Spartan helm primitives (button, tooltip, avatar, textarea). Theme-consistent out of the box.
+            - generic [ref=e114]:
+              - heading "Signal-based + standalone" [level=3] [ref=e115]
+              - paragraph [ref=e116]: Every component uses input(), output(), computed(). No NgModules. Zoneless-friendly. OnPush throughout.
+            - generic [ref=e118]:
+              - heading "AI-chat-ready primitives" [level=3] [ref=e119]
+              - paragraph [ref=e120]: Streaming responses, markdown with code highlighting, file drop zones, expanding reasoning blocks — the AI surface area covered.
+            - generic [ref=e122]:
+              - heading "Tailwind v4 native" [level=3] [ref=e123]
+              - paragraph [ref=e124]: Plain Tailwind utility classes, no proprietary CSS-in-JS. Inherits your existing design tokens.
+            - generic [ref=e126]:
+              - heading "SSR-safe" [level=3] [ref=e127]
+              - paragraph [ref=e128]: Browser APIs (clipboard, ResizeObserver, requestAnimationFrame) guarded behind isPlatformBrowser. Renders on the server without crashing.
+        - generic [ref=e130]:
+          - paragraph [ref=e131]:
+            - text: Original React implementation by
+            - link "Julien Thibeaut (ibelick)" [ref=e132] [cursor=pointer]:
+              - /url: https://github.com/ibelick
+            - text: . MIT licensed.
+          - generic [ref=e133]:
+            - link "GitHub" [ref=e134] [cursor=pointer]:
+              - /url: https://github.com/PianoNic/prompt-kit-ng
+            - link "npm" [ref=e135] [cursor=pointer]:
+              - /url: https://www.npmjs.com/package/@pianonic/prompt-kit-ng
