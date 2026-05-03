@@ -43,3 +43,7 @@ __screenshots__/
 .DS_Store
 Thumbs.db
 .reference/
+
+# AI tooling
+.claude/
+.playwright-mcp/
