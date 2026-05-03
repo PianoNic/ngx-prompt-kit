@@ -20,6 +20,7 @@ import { PkPromptInputImports } from 'prompt-kit-ng/prompt-input';
       <app-doc-example
         title="Basic input"
         description="Type and press Enter to submit. The value below shows what was sent."
+        [code]="basicCode"
       >
         <div class="w-full max-w-2xl">
           <pk-prompt-input [(value)]="value" (submitted)="onSubmit()">
@@ -42,6 +43,7 @@ import { PkPromptInputImports } from 'prompt-kit-ng/prompt-input';
       <app-doc-example
         title="Multiple actions"
         description="Multi-action toolbar — attach, voice, send."
+        [code]="multiCode"
       >
         <pk-prompt-input class="w-full max-w-2xl" [(value)]="multiValue">
           <pk-prompt-input-textarea placeholder="Ask anything..." />
@@ -79,4 +81,38 @@ export class PromptInputDemo {
     this.lastSubmitted.set(v);
     this.value.set('');
   }
+
+  protected readonly basicCode = `<pk-prompt-input [(value)]="value" (submitted)="onSubmit()">
+  <pk-prompt-input-textarea placeholder="Type a message..." />
+  <pk-prompt-input-actions class="mt-2 justify-end">
+    <pk-prompt-input-action tooltip="Send">
+      <button hlmBtn size="icon-sm" class="rounded-full" (click)="onSubmit()">
+        <ng-icon hlm size="xs" name="lucideArrowUp" />
+      </button>
+    </pk-prompt-input-action>
+  </pk-prompt-input-actions>
+</pk-prompt-input>`;
+
+  protected readonly multiCode = `<pk-prompt-input [(value)]="value">
+  <pk-prompt-input-textarea placeholder="Ask anything..." />
+  <pk-prompt-input-actions class="mt-2 justify-between">
+    <div class="flex gap-1">
+      <pk-prompt-input-action tooltip="Attach file">
+        <button hlmBtn size="icon-sm" variant="ghost">
+          <ng-icon hlm size="sm" name="lucidePaperclip" />
+        </button>
+      </pk-prompt-input-action>
+      <pk-prompt-input-action tooltip="Voice">
+        <button hlmBtn size="icon-sm" variant="ghost">
+          <ng-icon hlm size="sm" name="lucideMic" />
+        </button>
+      </pk-prompt-input-action>
+    </div>
+    <pk-prompt-input-action tooltip="Send">
+      <button hlmBtn size="icon-sm" class="rounded-full">
+        <ng-icon hlm size="xs" name="lucideArrowUp" />
+      </button>
+    </pk-prompt-input-action>
+  </pk-prompt-input-actions>
+</pk-prompt-input>`;
 }

@@ -25,6 +25,7 @@ import { PkScrollButton } from 'prompt-kit-ng/scroll-button';
       <app-doc-example
         title="Auto-scroll on new messages"
         description="Add a message; the container scrolls to keep up. Scroll up manually and the auto-scroll yields to you — the floating button takes you back."
+        [code]="autoScrollCode"
       >
         <div class="w-full max-w-2xl">
           <button hlmBtn variant="outline" size="sm" type="button" class="mb-3" (click)="addMessage()">
@@ -69,4 +70,19 @@ export class ChatContainerDemo {
       { id: list.length, text: `Message ${list.length + 1}` },
     ]);
   }
+
+  protected readonly autoScrollCode = `<pk-chat-container-root class="relative h-[360px] p-4">
+  <pk-chat-container-content class="gap-3">
+    @for (m of messages(); track m.id) {
+      <pk-message>
+        <pk-message-avatar [src]="m.avatar" alt="" />
+        <pk-message-content [content]="m.text" />
+      </pk-message>
+    }
+  </pk-chat-container-content>
+  <pk-chat-container-scroll-anchor />
+  <div class="sticky bottom-2 ml-auto w-fit pr-1">
+    <pk-scroll-button />
+  </div>
+</pk-chat-container-root>`;
 }

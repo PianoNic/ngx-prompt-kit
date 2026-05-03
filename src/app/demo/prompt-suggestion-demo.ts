@@ -12,7 +12,7 @@ import { PkPromptSuggestion } from 'prompt-kit-ng/prompt-suggestion';
       title="Prompt Suggestion"
       description="Clickable prompt chips. Two modes: pill (no highlight) and inline list (with substring highlight against a query)."
     >
-      <app-doc-example title="Pill chips" description="Default style — outline buttons in a row.">
+      <app-doc-example title="Pill chips" description="Default style — outline buttons in a row." [code]="pillsCode">
         <div class="flex w-full max-w-2xl flex-wrap gap-2">
           @for (s of suggestions; track s) {
             <pk-prompt-suggestion [content]="s" (clicked)="picked.set(s)" />
@@ -23,6 +23,7 @@ import { PkPromptSuggestion } from 'prompt-kit-ng/prompt-suggestion';
       <app-doc-example
         title="Filterable list"
         description="Pass a highlight string; the matching substring is emphasized."
+        [code]="filterableCode"
       >
         <div class="w-full max-w-md">
           <input
@@ -61,4 +62,24 @@ export class PromptSuggestionDemo {
     "Summarize today's news",
     'Outline a 3-week sprint plan',
   ];
+
+  protected readonly pillsCode = `<div class="flex flex-wrap gap-2">
+  @for (s of suggestions; track s) {
+    <pk-prompt-suggestion [content]="s" (clicked)="onPick(s)" />
+  }
+</div>`;
+
+  protected readonly filterableCode = `<input
+  class="..."
+  placeholder="Filter..."
+  [value]="filter()"
+  (input)="filter.set($any($event.target).value)"
+/>
+@for (s of suggestions; track s) {
+  <pk-prompt-suggestion
+    [content]="s"
+    [highlight]="filter()"
+    (clicked)="onPick(s)"
+  />
+}`;
 }

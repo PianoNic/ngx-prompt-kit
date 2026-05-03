@@ -15,6 +15,7 @@ import { PkFileUploadImports } from 'prompt-kit-ng/file-upload';
       <app-doc-example
         title="Trigger + drop overlay"
         description="The dashed overlay appears anywhere on the page while a drag is in progress."
+        [code]="uploadCode"
       >
         <div class="flex w-full flex-col items-start gap-4">
           <pk-file-upload (filesAdded)="onFiles($event)">
@@ -55,4 +56,15 @@ export class FileUploadDemo {
   protected onFiles(files: File[]): void {
     this.files.set(files);
   }
+
+  protected readonly uploadCode = `<pk-file-upload (filesAdded)="onFiles($event)">
+  <pk-file-upload-trigger class="...">
+    Choose files
+  </pk-file-upload-trigger>
+  <pk-file-upload-content>
+    <div class="border-primary text-primary rounded-xl border-2 border-dashed px-12 py-10">
+      Drop files anywhere
+    </div>
+  </pk-file-upload-content>
+</pk-file-upload>`;
 }

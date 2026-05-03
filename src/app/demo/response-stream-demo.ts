@@ -16,6 +16,7 @@ import { PkResponseStream } from 'prompt-kit-ng/response-stream';
       <app-doc-example
         title="Typewriter mode"
         description="One chunk per animation frame. Speed is on a 1–100 scale."
+        [code]="twCode"
       >
         <div class="w-full">
           <button hlmBtn variant="outline" size="sm" type="button" class="mb-4" (click)="restart('tw')">
@@ -33,6 +34,7 @@ import { PkResponseStream } from 'prompt-kit-ng/response-stream';
       <app-doc-example
         title="Fade mode"
         description="Each word fades in independently. Feels softer for long-form output."
+        [code]="fadeCode"
       >
         <div class="w-full">
           <button hlmBtn variant="outline" size="sm" type="button" class="mb-4" (click)="restart('fade')">
@@ -60,4 +62,16 @@ export class ResponseStreamDemo {
     target.set('');
     setTimeout(() => target.set(this.canned), 50);
   }
+
+  protected readonly twCode = `<pk-response-stream
+  [textStream]="text"
+  mode="typewriter"
+  [speed]="40"
+/>`;
+
+  protected readonly fadeCode = `<pk-response-stream
+  [textStream]="text"
+  mode="fade"
+  [speed]="40"
+/>`;
 }

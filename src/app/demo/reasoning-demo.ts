@@ -16,6 +16,7 @@ import { PkReasoningImports } from 'prompt-kit-ng/reasoning';
       <app-doc-example
         title="Click to expand"
         description="The trigger toggles open/closed. Content height animates."
+        [code]="basicCode"
       >
         <pk-reasoning class="block w-full max-w-xl rounded-lg border p-4">
           <pk-reasoning-trigger>Show reasoning</pk-reasoning-trigger>
@@ -33,6 +34,7 @@ import { PkReasoningImports } from 'prompt-kit-ng/reasoning';
       <app-doc-example
         title="Streaming auto-expand"
         description="Toggle 'streaming' on — the block auto-opens. Toggle off — it auto-collapses."
+        [code]="streamingCode"
       >
         <div class="flex w-full max-w-xl flex-col gap-3">
           <button hlmBtn variant="outline" size="sm" type="button" (click)="streaming.update((s) => !s)">
@@ -51,4 +53,23 @@ import { PkReasoningImports } from 'prompt-kit-ng/reasoning';
 })
 export class ReasoningDemo {
   protected readonly streaming = signal(false);
+
+  protected readonly basicCode = `<pk-reasoning class="block rounded-lg border p-4">
+  <pk-reasoning-trigger>Show reasoning</pk-reasoning-trigger>
+  <pk-reasoning-content
+    [markdown]="true"
+    content="The answer is **42**.
+
+1. Considered the question.
+2. Recalled the canonical reference.
+3. Returned the established result."
+  />
+</pk-reasoning>`;
+
+  protected readonly streamingCode = `<pk-reasoning [isStreaming]="streaming()" class="block rounded-lg border p-4">
+  <pk-reasoning-trigger>
+    {{ streaming() ? 'Thinking…' : 'Show reasoning' }}
+  </pk-reasoning-trigger>
+  <pk-reasoning-content content="Walking the call graph..." />
+</pk-reasoning>`;
 }

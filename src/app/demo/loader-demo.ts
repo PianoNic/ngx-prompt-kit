@@ -20,6 +20,7 @@ interface VariantSpec {
       <app-doc-example
         title="All variants"
         description="Same component, different variant input."
+        [code]="variantsCode"
       >
         <div class="grid w-full grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
           @for (v of variants; track v.variant) {
@@ -36,6 +37,7 @@ interface VariantSpec {
       <app-doc-example
         title="Sizes"
         description="Pass size='sm' | 'md' | 'lg' for variants that have a fixed footprint."
+        [code]="sizesCode"
       >
         <div class="flex w-full items-end justify-around gap-6">
           <pk-loader variant="dots" size="sm" />
@@ -61,4 +63,21 @@ export class LoaderDemo {
     { variant: 'text-shimmer', label: 'text-shimmer' },
     { variant: 'loading-dots', label: 'loading-dots' },
   ];
+
+  protected readonly variantsCode = `<pk-loader variant="circular" />
+<pk-loader variant="classic" />
+<pk-loader variant="pulse" />
+<pk-loader variant="pulse-dot" />
+<pk-loader variant="dots" />
+<pk-loader variant="typing" />
+<pk-loader variant="wave" />
+<pk-loader variant="bars" />
+<pk-loader variant="terminal" />
+<pk-loader variant="text-blink" text="Thinking" />
+<pk-loader variant="text-shimmer" text="Thinking" />
+<pk-loader variant="loading-dots" text="Thinking" />`;
+
+  protected readonly sizesCode = `<pk-loader variant="dots" size="sm" />
+<pk-loader variant="dots" size="md" />
+<pk-loader variant="dots" size="lg" />`;
 }

@@ -1,0 +1,116 @@
+- generic [ref=e4]:
+  - banner [ref=e5]:
+    - link "prompt-kit-ng home" [ref=e6] [cursor=pointer]:
+      - /url: /
+      - img [ref=e7]
+      - generic [ref=e10]: prompt-kit-ng
+    - button "Switch to dark theme" [ref=e12]:
+      - img:
+        - img
+  - generic [ref=e13]:
+    - complementary [ref=e14]:
+      - navigation [ref=e17]:
+        - generic [ref=e18]:
+          - paragraph [ref=e19]: Get Started
+          - list [ref=e20]:
+            - listitem [ref=e21]:
+              - link "Introduction" [ref=e22] [cursor=pointer]:
+                - /url: /
+        - generic [ref=e23]:
+          - paragraph [ref=e24]: Showcase
+          - list [ref=e25]:
+            - listitem [ref=e26]:
+              - link "Blocks" [ref=e27] [cursor=pointer]:
+                - /url: /blocks
+            - listitem [ref=e28]:
+              - link "Full Chat" [ref=e29] [cursor=pointer]:
+                - /url: /showcase/full-chat
+        - generic [ref=e30]:
+          - paragraph [ref=e31]: Components
+          - list [ref=e32]:
+            - listitem [ref=e33]:
+              - link "Message" [ref=e34] [cursor=pointer]:
+                - /url: /components/message
+            - listitem [ref=e35]:
+              - link "Markdown" [ref=e36] [cursor=pointer]:
+                - /url: /components/markdown
+            - listitem [ref=e37]:
+              - link "Code Block" [ref=e38] [cursor=pointer]:
+                - /url: /components/code-block
+            - listitem [ref=e39]:
+              - link "Prompt Input" [ref=e40] [cursor=pointer]:
+                - /url: /components/prompt-input
+            - listitem [ref=e41]:
+              - link "Response Stream" [ref=e42] [cursor=pointer]:
+                - /url: /components/response-stream
+            - listitem [ref=e43]:
+              - link "Loader" [ref=e44] [cursor=pointer]:
+                - /url: /components/loader
+            - listitem [ref=e45]:
+              - link "Chat Container" [ref=e46] [cursor=pointer]:
+                - /url: /components/chat-container
+            - listitem [ref=e47]:
+              - link "Scroll Button" [ref=e48] [cursor=pointer]:
+                - /url: /components/scroll-button
+            - listitem [ref=e49]:
+              - link "Prompt Suggestion" [ref=e50] [cursor=pointer]:
+                - /url: /components/prompt-suggestion
+            - listitem [ref=e51]:
+              - link "File Upload" [ref=e52] [cursor=pointer]:
+                - /url: /components/file-upload
+            - listitem [ref=e53]:
+              - link "Reasoning" [ref=e54] [cursor=pointer]:
+                - /url: /components/reasoning
+    - main [ref=e55]:
+      - generic "Markdown" [ref=e57]:
+        - article [ref=e58]:
+          - generic [ref=e59]:
+            - heading "Markdown" [level=1] [ref=e60]
+            - paragraph [ref=e61]: Renders markdown content using the marked parser. Sanitized via DomSanitizer. Streams gracefully — partial markdown still renders.
+          - paragraph [ref=e62]: Examples
+          - generic [ref=e63]:
+            - generic "Rich content" [ref=e64]:
+              - generic [ref=e65]:
+                - heading "Rich content" [level=4] [ref=e66]
+                - paragraph [ref=e67]: Headings, lists, links, emphasis, and inline code.
+                - generic [ref=e68]:
+                  - tablist [ref=e69]:
+                    - tab "Preview" [selected] [ref=e70]
+                    - tab "Code" [ref=e71]
+                  - tabpanel "Preview" [ref=e72]:
+                    - generic [ref=e74]:
+                      - heading "Release notes — v0.1.0" [level=2] [ref=e75]
+                      - paragraph [ref=e76]:
+                        - text: This is the first tagged release of
+                        - strong [ref=e77]: prompt-kit-ng
+                        - text: .
+                      - list [ref=e78]:
+                        - listitem [ref=e79]:
+                          - text: 11 components plus the
+                          - code [ref=e80]: cn()
+                          - text: utility
+                        - listitem [ref=e81]:
+                          - text: Built on
+                          - link "Spartan UI" [ref=e82] [cursor=pointer]:
+                            - /url: https://www.spartan.ng
+                          - text: primitives
+                        - listitem [ref=e83]: Distributed via Angular schematics
+                      - paragraph [ref=e84]:
+                        - text: Run
+                        - code [ref=e85]: ng add @pianonic/prompt-kit-ng
+                        - text: to get started.
+            - generic "Streaming snapshot" [ref=e86]:
+              - generic [ref=e87]:
+                - heading "Streaming snapshot" [level=4] [ref=e88]
+                - paragraph [ref=e89]: A mid-stream chunk where the assistant hasn't finished writing the bullet list yet.
+                - generic [ref=e90]:
+                  - tablist [ref=e91]:
+                    - tab "Preview" [selected] [ref=e92]
+                    - tab "Code" [ref=e93]
+                  - tabpanel "Preview" [ref=e94]:
+                    - generic [ref=e96]:
+                      - heading "Steps so far" [level=3] [ref=e97]
+                      - list [ref=e98]:
+                        - listitem [ref=e99]: Read the file
+                        - listitem [ref=e100]: Parsed the AST
+                        - listitem [ref=e101]: Looking up the symbol now

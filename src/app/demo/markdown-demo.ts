@@ -12,13 +12,18 @@ import { PkMarkdown } from 'prompt-kit-ng/markdown';
       title="Markdown"
       description="Renders markdown content using the marked parser. Sanitized via DomSanitizer. Streams gracefully — partial markdown still renders."
     >
-      <app-doc-example title="Rich content" description="Headings, lists, links, emphasis, and inline code.">
+      <app-doc-example
+        title="Rich content"
+        description="Headings, lists, links, emphasis, and inline code."
+        [code]="richCode"
+      >
         <pk-markdown class="prose prose-sm dark:prose-invert max-w-none w-full" [content]="rich" />
       </app-doc-example>
 
       <app-doc-example
         title="Streaming snapshot"
         description="A mid-stream chunk where the assistant hasn't finished writing the bullet list yet."
+        [code]="partialCode"
       >
         <pk-markdown
           class="prose prose-sm dark:prose-invert max-w-none w-full"
@@ -44,4 +49,14 @@ Run \`ng add @pianonic/prompt-kit-ng\` to get started.`;
 1. Read the file
 2. Parsed the AST
 3. Looking up the symbol now`;
+
+  protected readonly richCode = `<pk-markdown
+  class="prose prose-sm dark:prose-invert max-w-none"
+  [content]="markdownString"
+/>`;
+
+  protected readonly partialCode = `<pk-markdown
+  class="prose prose-sm dark:prose-invert max-w-none"
+  [content]="partialMarkdown"
+/>`;
 }
