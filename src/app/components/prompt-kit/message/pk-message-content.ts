@@ -6,16 +6,17 @@ import { cn } from '../utils/cn';
   selector: 'pk-message-content',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [PkMarkdown],
+  host: {
+    '[class]': 'computedClass()',
+  },
   template: `
     @if (markdown()) {
-      <pk-markdown [content]="content() ?? ''" [class]="computedClass()" />
+      <pk-markdown [content]="content() ?? ''" />
     } @else {
-      <div [class]="computedClass()">
-        @if (content(); as c) {
-          {{ c }}
-        }
-        <ng-content />
-      </div>
+      @if (content(); as c) {
+        {{ c }}
+      }
+      <ng-content />
     }
   `,
 })
@@ -25,7 +26,7 @@ export class PkMessageContent {
   public readonly class = input<string>('');
   protected readonly computedClass = computed(() =>
     cn(
-      'rounded-2xl px-3 py-2 text-foreground bg-secondary prose break-words whitespace-normal',
+      'inline-block rounded-2xl px-3 py-2 text-foreground bg-secondary prose break-words whitespace-normal',
       this.class(),
     ),
   );
