@@ -1,0 +1,271 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e6]:
+      - main [ref=e7]:
+        - generic [ref=e8]:
+          - heading "File Upload" [level=1] [ref=e9]
+          - paragraph [ref=e10]: A component for creating drag-and-drop file upload interfaces with support for single or multiple files, custom triggers, and visual feedback during file dragging operations.
+          - heading "Examples" [level=2] [ref=e11]
+          - heading "File Upload with Prompt Input" [level=3] [ref=e12]
+          - paragraph [ref=e13]:
+            - text: You can combine the file upload component with the
+            - link "Prompt Input" [ref=e14] [cursor=pointer]:
+              - /url: /docs/prompt-input
+            - text: component to create a full-featured input component with file upload support. You can try to drop a file to see the visual feedback.
+          - generic [ref=e16]:
+            - tablist [ref=e17]:
+              - tab "Preview" [selected] [ref=e18]: Preview
+              - tab "Code" [ref=e21]
+            - tabpanel "Preview" [ref=e22]:
+              - generic [ref=e24]:
+                - textbox "Type a message or drop files..." [ref=e25]
+                - generic [ref=e26]:
+                  - button [ref=e27] [cursor=pointer]:
+                    - img [ref=e28]
+                  - button [ref=e31]:
+                    - img
+          - heading "Installation" [level=2] [ref=e32]
+          - generic [ref=e33]:
+            - tablist [ref=e34]:
+              - tab "CLI" [selected] [ref=e35]: CLI
+              - tab "Manual" [ref=e38]
+            - tabpanel "CLI" [ref=e39]:
+              - generic [ref=e40]:
+                - button "Copy code" [ref=e41]:
+                  - img [ref=e43]
+                  - generic:
+                    - img
+                - code [ref=e48]:
+                  - generic [ref=e49]: npx shadcn add "https://prompt-kit.com/c/file-upload.json"
+          - heading "Component API" [level=2] [ref=e50]
+          - heading "FileUpload" [level=3] [ref=e51]
+          - table [ref=e53]:
+            - rowgroup [ref=e54]:
+              - row "Prop Type Default Description" [ref=e55]:
+                - columnheader "Prop" [ref=e56]
+                - columnheader "Type" [ref=e57]
+                - columnheader "Default" [ref=e58]
+                - columnheader "Description" [ref=e59]
+            - rowgroup [ref=e60]:
+              - 'row "onFilesAdded (files: File[]) => void Function called when files are added" [ref=e61]':
+                - cell "onFilesAdded" [ref=e62]
+                - 'cell "(files: File[]) => void" [ref=e63]'
+                - cell [ref=e64]
+                - cell "Function called when files are added" [ref=e65]
+              - row "children React.ReactNode Child components" [ref=e66]:
+                - cell "children" [ref=e67]
+                - cell "React.ReactNode" [ref=e68]
+                - cell [ref=e69]
+                - cell "Child components" [ref=e70]
+              - row "multiple boolean true Allow selection of multiple files" [ref=e71]:
+                - cell "multiple" [ref=e72]
+                - cell "boolean" [ref=e73]
+                - cell "true" [ref=e74]
+                - cell "Allow selection of multiple files" [ref=e75]
+              - row "accept string File types to accept (e.g., \".jpg,.png\")" [ref=e76]:
+                - cell "accept" [ref=e77]
+                - cell "string" [ref=e78]
+                - cell [ref=e79]
+                - cell "File types to accept (e.g., \".jpg,.png\")" [ref=e80]
+          - heading "FileUploadTrigger" [level=3] [ref=e81]
+          - table [ref=e83]:
+            - rowgroup [ref=e84]:
+              - row "Prop Type Default Description" [ref=e85]:
+                - columnheader "Prop" [ref=e86]
+                - columnheader "Type" [ref=e87]
+                - columnheader "Default" [ref=e88]
+                - columnheader "Description" [ref=e89]
+            - rowgroup [ref=e90]:
+              - row "asChild boolean false Use child element as the trigger" [ref=e91]:
+                - cell "asChild" [ref=e92]
+                - cell "boolean" [ref=e93]
+                - cell "false" [ref=e94]
+                - cell "Use child element as the trigger" [ref=e95]
+              - row "className string Additional CSS classes" [ref=e96]:
+                - cell "className" [ref=e97]
+                - cell "string" [ref=e98]
+                - cell [ref=e99]
+                - cell "Additional CSS classes" [ref=e100]
+              - row "children React.ReactNode Child components" [ref=e101]:
+                - cell "children" [ref=e102]
+                - cell "React.ReactNode" [ref=e103]
+                - cell [ref=e104]
+                - cell "Child components" [ref=e105]
+              - row "...props React.ComponentPropsWithoutRef<\"button\"> All other button props" [ref=e106]:
+                - cell "...props" [ref=e107]
+                - cell "React.ComponentPropsWithoutRef<\"button\">" [ref=e108]:
+                  - code [ref=e109]: React.ComponentPropsWithoutRef<"button">
+                - cell [ref=e110]
+                - cell "All other button props" [ref=e111]
+          - heading "FileUploadContent" [level=3] [ref=e112]
+          - table [ref=e114]:
+            - rowgroup [ref=e115]:
+              - row "Prop Type Default Description" [ref=e116]:
+                - columnheader "Prop" [ref=e117]
+                - columnheader "Type" [ref=e118]
+                - columnheader "Default" [ref=e119]
+                - columnheader "Description" [ref=e120]
+            - rowgroup [ref=e121]:
+              - row "className string Additional CSS classes" [ref=e122]:
+                - cell "className" [ref=e123]
+                - cell "string" [ref=e124]
+                - cell [ref=e125]
+                - cell "Additional CSS classes" [ref=e126]
+              - row "...props React.HTMLAttributes<HTMLDivElement> All other div props" [ref=e127]:
+                - cell "...props" [ref=e128]
+                - cell "React.HTMLAttributes<HTMLDivElement>" [ref=e129]:
+                  - code [ref=e130]: React.HTMLAttributes<HTMLDivElement>
+                - cell [ref=e131]
+                - cell "All other div props" [ref=e132]
+      - generic [ref=e133]:
+        - link "Feedback Bar" [ref=e134] [cursor=pointer]:
+          - /url: /docs/feedback-bar
+          - img [ref=e135]
+          - text: Feedback Bar
+        - link "Image" [ref=e137] [cursor=pointer]:
+          - /url: /docs/image
+          - text: Image
+          - img [ref=e138]
+    - generic [ref=e145]:
+      - link "prompt-kit" [ref=e147] [cursor=pointer]:
+        - /url: /
+        - img [ref=e148]
+        - heading "prompt-kit" [level=1] [ref=e150]
+      - generic [ref=e151]:
+        - generic [ref=e152]: Get Started
+        - list [ref=e154]:
+          - listitem [ref=e155]:
+            - link "Home" [ref=e156] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e157]:
+            - link "Introduction" [ref=e158] [cursor=pointer]:
+              - /url: /docs/introduction
+          - listitem [ref=e159]:
+            - link "Installation" [ref=e160] [cursor=pointer]:
+              - /url: /docs/installation
+          - listitem [ref=e161]:
+            - link "Model Context Protocol" [ref=e162] [cursor=pointer]:
+              - /url: /docs/mcp
+        - generic [ref=e163]: Components
+        - list [ref=e165]:
+          - listitem [ref=e166]:
+            - link "Chain of Thought" [ref=e167] [cursor=pointer]:
+              - /url: /docs/chain-of-thought
+              - generic [ref=e168]: Chain of Thought
+          - listitem [ref=e169]:
+            - link "Chat Container" [ref=e170] [cursor=pointer]:
+              - /url: /docs/chat-container
+              - generic [ref=e171]: Chat Container
+          - listitem [ref=e172]:
+            - link "Code Block" [ref=e173] [cursor=pointer]:
+              - /url: /docs/code-block
+              - generic [ref=e174]: Code Block
+          - listitem [ref=e175]:
+            - link "Feedback Bar new" [ref=e176] [cursor=pointer]:
+              - /url: /docs/feedback-bar
+              - generic [ref=e177]: Feedback Bar
+              - generic [ref=e178]: new
+          - listitem [ref=e179]:
+            - link "File Upload" [ref=e180] [cursor=pointer]:
+              - /url: /docs/file-upload
+              - generic [ref=e181]: File Upload
+          - listitem [ref=e182]:
+            - link "Image" [ref=e183] [cursor=pointer]:
+              - /url: /docs/image
+              - generic [ref=e184]: Image
+          - listitem [ref=e185]:
+            - link "Loader" [ref=e186] [cursor=pointer]:
+              - /url: /docs/loader
+              - generic [ref=e187]: Loader
+          - listitem [ref=e188]:
+            - link "Markdown" [ref=e189] [cursor=pointer]:
+              - /url: /docs/markdown
+              - generic [ref=e190]: Markdown
+          - listitem [ref=e191]:
+            - link "Message" [ref=e192] [cursor=pointer]:
+              - /url: /docs/message
+              - generic [ref=e193]: Message
+          - listitem [ref=e194]:
+            - link "Prompt Input" [ref=e195] [cursor=pointer]:
+              - /url: /docs/prompt-input
+              - generic [ref=e196]: Prompt Input
+          - listitem [ref=e197]:
+            - link "Prompt Suggestion" [ref=e198] [cursor=pointer]:
+              - /url: /docs/prompt-suggestion
+              - generic [ref=e199]: Prompt Suggestion
+          - listitem [ref=e200]:
+            - link "Reasoning" [ref=e201] [cursor=pointer]:
+              - /url: /docs/reasoning
+              - generic [ref=e202]: Reasoning
+          - listitem [ref=e203]:
+            - link "Scroll Button" [ref=e204] [cursor=pointer]:
+              - /url: /docs/scroll-button
+              - generic [ref=e205]: Scroll Button
+          - listitem [ref=e206]:
+            - link "Source" [ref=e207] [cursor=pointer]:
+              - /url: /docs/source
+              - generic [ref=e208]: Source
+          - listitem [ref=e209]:
+            - link "Steps" [ref=e210] [cursor=pointer]:
+              - /url: /docs/steps
+              - generic [ref=e211]: Steps
+          - listitem [ref=e212]:
+            - link "System Message" [ref=e213] [cursor=pointer]:
+              - /url: /docs/system-message
+              - generic [ref=e214]: System Message
+          - listitem [ref=e215]:
+            - link "Text Shimmer new" [ref=e216] [cursor=pointer]:
+              - /url: /docs/text-shimmer
+              - generic [ref=e217]: Text Shimmer
+              - generic [ref=e218]: new
+          - listitem [ref=e219]:
+            - link "Thinking Bar new" [ref=e220] [cursor=pointer]:
+              - /url: /docs/thinking-bar
+              - generic [ref=e221]: Thinking Bar
+              - generic [ref=e222]: new
+          - listitem [ref=e223]:
+            - link "Tool" [ref=e224] [cursor=pointer]:
+              - /url: /docs/tool
+              - generic [ref=e225]: Tool
+        - generic [ref=e226]:
+          - link "Blocks" [ref=e228] [cursor=pointer]:
+            - /url: /blocks
+          - link "Primitives new" [ref=e230] [cursor=pointer]:
+            - /url: /primitives
+            - text: Primitives
+            - generic [ref=e231]: new
+        - generic [ref=e232]: Integrations
+        - list [ref=e234]:
+          - listitem [ref=e235]:
+            - link "OpenAI SDK" [ref=e236] [cursor=pointer]:
+              - /url: /openai-sdk
+          - listitem [ref=e237]:
+            - link "Vercel AI SDK" [ref=e238] [cursor=pointer]:
+              - /url: /vercel-ai-sdk
+          - listitem [ref=e239]:
+            - link "Chat UI" [ref=e240] [cursor=pointer]:
+              - /url: /chat-ui
+          - listitem [ref=e241]:
+            - link "AI SDK" [ref=e242] [cursor=pointer]:
+              - /url: /ai-sdk
+        - generic [ref=e243]: LLMs
+        - list [ref=e245]:
+          - listitem [ref=e246]:
+            - link "llms.txt" [ref=e247] [cursor=pointer]:
+              - /url: /llms.txt
+          - listitem [ref=e248]:
+            - link "llms-full.txt" [ref=e249] [cursor=pointer]:
+              - /url: /llms-full.txt
+        - link "Showcase" [ref=e251] [cursor=pointer]:
+          - /url: /docs/showcase
+        - generic [ref=e252]: Social
+        - list [ref=e254]:
+          - listitem [ref=e255]:
+            - link "GitHub" [ref=e256] [cursor=pointer]:
+              - /url: https://github.com/ibelick/prompt-kit
+          - listitem [ref=e257]:
+            - link "X (Twitter)" [ref=e258] [cursor=pointer]:
+              - /url: https://twitter.com/ibelick
+        - generic [ref=e259]: Theme
+        - 'button "Theme: Light. Click to switch to dark" [ref=e261]': Light
+  - alert [ref=e262]

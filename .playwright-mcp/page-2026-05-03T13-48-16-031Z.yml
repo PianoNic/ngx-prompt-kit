@@ -1,0 +1,88 @@
+- generic [ref=e4]:
+  - banner [ref=e5]:
+    - link "prompt-kit-ng home" [ref=e6] [cursor=pointer]:
+      - /url: /
+      - img [ref=e7]
+      - generic [ref=e10]: prompt-kit-ng
+    - button "Switch to dark theme" [ref=e12]:
+      - img:
+        - img
+  - generic [ref=e13]:
+    - complementary [ref=e14]:
+      - navigation [ref=e17]:
+        - generic [ref=e18]:
+          - paragraph [ref=e19]: Get Started
+          - list [ref=e20]:
+            - listitem [ref=e21]:
+              - link "Introduction" [ref=e22] [cursor=pointer]:
+                - /url: /
+        - generic [ref=e23]:
+          - paragraph [ref=e24]: Showcase
+          - list [ref=e25]:
+            - listitem [ref=e26]:
+              - link "Blocks" [ref=e27] [cursor=pointer]:
+                - /url: /blocks
+            - listitem [ref=e28]:
+              - link "Full Chat" [ref=e29] [cursor=pointer]:
+                - /url: /showcase/full-chat
+        - generic [ref=e30]:
+          - paragraph [ref=e31]: Components
+          - list [ref=e32]:
+            - listitem [ref=e33]:
+              - link "Message" [ref=e34] [cursor=pointer]:
+                - /url: /components/message
+            - listitem [ref=e35]:
+              - link "Markdown" [ref=e36] [cursor=pointer]:
+                - /url: /components/markdown
+            - listitem [ref=e37]:
+              - link "Code Block" [ref=e38] [cursor=pointer]:
+                - /url: /components/code-block
+            - listitem [ref=e39]:
+              - link "Prompt Input" [ref=e40] [cursor=pointer]:
+                - /url: /components/prompt-input
+            - listitem [ref=e41]:
+              - link "Response Stream" [ref=e42] [cursor=pointer]:
+                - /url: /components/response-stream
+            - listitem [ref=e43]:
+              - link "Loader" [ref=e44] [cursor=pointer]:
+                - /url: /components/loader
+            - listitem [ref=e45]:
+              - link "Chat Container" [ref=e46] [cursor=pointer]:
+                - /url: /components/chat-container
+            - listitem [ref=e47]:
+              - link "Scroll Button" [ref=e48] [cursor=pointer]:
+                - /url: /components/scroll-button
+            - listitem [ref=e49]:
+              - link "Prompt Suggestion" [ref=e50] [cursor=pointer]:
+                - /url: /components/prompt-suggestion
+            - listitem [ref=e51]:
+              - link "File Upload" [ref=e52] [cursor=pointer]:
+                - /url: /components/file-upload
+            - listitem [ref=e53]:
+              - link "Reasoning" [ref=e54] [cursor=pointer]:
+                - /url: /components/reasoning
+    - main [ref=e55]:
+      - generic "File Upload" [ref=e57]:
+        - article [ref=e58]:
+          - generic [ref=e59]:
+            - heading "File Upload" [level=1] [ref=e60]
+            - paragraph [ref=e61]: Drag-and-drop or click-to-pick. Composes with PromptInput so file chips render above the textarea, the attach action wires to the picker, and a full-page drop overlay catches files dropped anywhere.
+          - paragraph [ref=e62]: Examples
+          - generic "File Upload with Prompt Input" [ref=e64]:
+            - generic [ref=e65]:
+              - heading "File Upload with Prompt Input" [level=4] [ref=e66]
+              - paragraph [ref=e67]: Drop a file anywhere on the page or click the paperclip. Submitted files clear after a fake 2-second send.
+              - generic [ref=e68]:
+                - tablist [ref=e69]:
+                  - tab "Preview" [selected] [ref=e70]
+                  - tab "Code" [ref=e71]
+                - tabpanel "Preview" [ref=e72]:
+                  - generic [ref=e74]:
+                    - textbox "Type a message or drop files..." [ref=e76]
+                    - generic [ref=e77]:
+                      - button "Attach files" [ref=e80]:
+                        - img:
+                          - img
+                      - button "Send" [ref=e83]:
+                        - img:
+                          - img
