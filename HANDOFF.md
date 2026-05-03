@@ -61,14 +61,8 @@ Plus `utils` (the `cn()` helper, auto-chained by every component schematic).
 
 ### Pre-publish
 
-1. **Commit the rename** — proposed message `chore: rename to ngx-prompt-kit`. ~176 files staged.
-2. **C.1 follow-up — drop the `@pianonic/` scope**. Currently `@pianonic/ngx-prompt-kit`, target is unscoped `ngx-prompt-kit`. Touch:
-   - `projects/ngx-prompt-kit/package.json` `name` field
-   - `_lib/component-rule.ts` `externalSchematic('@pianonic/ngx-prompt-kit', 'utils', ...)` call
-   - `projects/ngx-prompt-kit/README.md` install snippets
-   - `src/app/pages/installation.ts` Bun/npm/ng tab snippets (3 sections)
-   - Anywhere else `@pianonic/` appears as part of the package name (NOT the GitHub repo URL — that stays under `PianoNic/`)
-   - **Note**: `npm publish --access public` flag still works for unscoped packages but is redundant. Can stay.
+1. ~~Commit the rename~~ — done in `83c005a`.
+2. ~~Drop `@pianonic/` scope~~ — done. Package is unscoped `ngx-prompt-kit` everywhere; `--access public` flag dropped from publish.yml.
 3. **C.2 — history scrub**. Rewrite every commit to remove:
    - `Co-Authored-By:` trailers
    - `🤖 Generated with...` / "Generated with [Claude Code]" footers

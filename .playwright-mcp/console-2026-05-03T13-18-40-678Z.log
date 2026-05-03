@@ -1,6 +1,0 @@
-[      44ms] [LOG] Angular is running in development mode. @ http://localhost:4200/@fs/C:/Coding/prompt-kit-ng/prompt-kit-ng/.angular/cache/21.2.9/demo/vite/deps/chunk-EGMOF4R2.js?v=03be9ce1:15010
-[      47ms] [ERROR] ERROR RuntimeError: NG04002: Cannot match any routes. URL Segment: 'icon-preview.html'
-    at Recognizer.noMatchError (http://localhost:4200/@fs/C:/Coding/prompt-kit-ng/prompt-kit-ng/.angular/cache/21.2.9/demo/vite/deps/@angular_router.js?v=03be9ce1:2900:12)
-    at Recognizer.match (http://localhost:4200/@fs/C:/Coding/prompt-kit-ng/prompt-kit-ng/.angular/cache/21.2.9/demo/vite/deps/@angular_router.js?v=03be9ce1:2932:20)
-    at async Recognizer.recognize (http://localhost:4200/@fs/C:/Coding/prompt-kit-ng/prompt-kit-ng/.angular/cache/21.2.9/demo/vite/deps/@angular_router.js?v=03be9ce1:2907:9)
-    at async http://localhost:4200/@fs/C:/Coding/prompt-kit-ng/prompt-kit-ng/.angular/cache/21.2.9/demo/vite/deps/@angular_router.js?v=03be9ce1:3160:9 @ http://localhost:4200/@fs/C:/Coding/prompt-kit-ng/prompt-kit-ng/.angular/cache/21.2.9/demo/vite/deps/chunk-EGMOF4R2.js?v=03be9ce1:3745
