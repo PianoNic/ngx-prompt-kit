@@ -14,7 +14,7 @@ import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
         <p hlmMuted class="mt-1 text-sm normal-case tracking-normal">{{ d }}</p>
       }
       <hlm-tabs tab="preview" class="mt-4">
-        <hlm-tabs-list variant="line" class="border-border w-full justify-start border-b">
+        <hlm-tabs-list variant="line">
           <button hlmTabsTrigger="preview">Preview</button>
           @if (code()) {
             <button hlmTabsTrigger="code">Code</button>

@@ -1,0 +1,134 @@
+- generic [ref=e4]:
+  - banner [ref=e5]:
+    - link "prompt-kit-ng home" [ref=e6] [cursor=pointer]:
+      - /url: /
+      - img [ref=e7]
+      - generic [ref=e10]: prompt-kit-ng
+    - button "Switch to dark theme" [ref=e12]:
+      - img:
+        - img
+  - generic [ref=e13]:
+    - complementary [ref=e14]:
+      - navigation [ref=e17]:
+        - generic [ref=e18]:
+          - paragraph [ref=e19]: Get Started
+          - list [ref=e20]:
+            - listitem [ref=e21]:
+              - link "Introduction" [ref=e22] [cursor=pointer]:
+                - /url: /
+        - generic [ref=e23]:
+          - paragraph [ref=e24]: Showcase
+          - list [ref=e25]:
+            - listitem [ref=e26]:
+              - link "Blocks" [ref=e27] [cursor=pointer]:
+                - /url: /blocks
+            - listitem [ref=e28]:
+              - link "Full Chat" [ref=e29] [cursor=pointer]:
+                - /url: /showcase/full-chat
+        - generic [ref=e30]:
+          - paragraph [ref=e31]: Components
+          - list [ref=e32]:
+            - listitem [ref=e33]:
+              - link "Message" [ref=e34] [cursor=pointer]:
+                - /url: /components/message
+            - listitem [ref=e35]:
+              - link "Markdown" [ref=e36] [cursor=pointer]:
+                - /url: /components/markdown
+            - listitem [ref=e37]:
+              - link "Code Block" [ref=e38] [cursor=pointer]:
+                - /url: /components/code-block
+            - listitem [ref=e39]:
+              - link "Prompt Input" [ref=e40] [cursor=pointer]:
+                - /url: /components/prompt-input
+            - listitem [ref=e41]:
+              - link "Response Stream" [ref=e42] [cursor=pointer]:
+                - /url: /components/response-stream
+            - listitem [ref=e43]:
+              - link "Loader" [ref=e44] [cursor=pointer]:
+                - /url: /components/loader
+            - listitem [ref=e45]:
+              - link "Chat Container" [ref=e46] [cursor=pointer]:
+                - /url: /components/chat-container
+            - listitem [ref=e47]:
+              - link "Scroll Button" [ref=e48] [cursor=pointer]:
+                - /url: /components/scroll-button
+            - listitem [ref=e49]:
+              - link "Prompt Suggestion" [ref=e50] [cursor=pointer]:
+                - /url: /components/prompt-suggestion
+            - listitem [ref=e51]:
+              - link "File Upload" [ref=e52] [cursor=pointer]:
+                - /url: /components/file-upload
+            - listitem [ref=e53]:
+              - link "Reasoning" [ref=e54] [cursor=pointer]:
+                - /url: /components/reasoning
+    - main [ref=e55]:
+      - generic "Message" [ref=e57]:
+        - article [ref=e58]:
+          - generic [ref=e59]:
+            - heading "Message" [level=1] [ref=e60]
+            - paragraph [ref=e61]: A row in a chat thread. Pairs an avatar with content; supports plain text or markdown, plus a row of inline actions.
+          - paragraph [ref=e62]: Examples
+          - generic [ref=e63]:
+            - generic "Basic conversation" [ref=e64]:
+              - generic [ref=e65]:
+                - heading "Basic conversation" [level=4] [ref=e66]
+                - paragraph [ref=e67]: A back-and-forth exchange. User messages align right, assistant messages align left with an avatar.
+                - generic [ref=e68]:
+                  - tablist [ref=e69]:
+                    - tab "Preview" [selected] [ref=e70]
+                    - tab "Code" [ref=e71]
+                  - tabpanel "Preview" [ref=e72]:
+                    - generic [ref=e73]:
+                      - generic [ref=e76]: Could you summarize the latest commit log into release notes?
+                      - generic [ref=e77]:
+                        - generic [ref=e80]: AI
+                        - generic [ref=e82]: I can help with that — pull the commit range and I'll group them into features, fixes, and chores.
+            - generic "With markdown" [ref=e83]:
+              - generic [ref=e84]:
+                - heading "With markdown" [level=4] [ref=e85]
+                - paragraph [ref=e86]: Set [markdown]=true on the content to render headings, lists, code, and emphasis.
+                - generic [ref=e87]:
+                  - tablist [ref=e88]:
+                    - tab "Preview" [selected] [ref=e89]
+                    - tab "Code" [ref=e90]
+                  - tabpanel "Preview" [ref=e91]:
+                    - generic [ref=e92]:
+                      - generic [ref=e95]: Give me the v0.1.0 changelog as markdown.
+                      - generic [ref=e96]:
+                        - generic [ref=e99]: AI
+                        - generic [ref=e102]:
+                          - paragraph [ref=e103]:
+                            - strong [ref=e104]: v0.1.0
+                          - list [ref=e105]:
+                            - listitem [ref=e106]: Refactored the auth middleware
+                            - listitem [ref=e107]:
+                              - text: Added
+                              - code [ref=e108]: session.refresh()
+                              - text: helper
+                            - listitem [ref=e109]: Fixed an off-by-one in pagination
+                          - paragraph [ref=e110]: Want me to group by author next time?
+            - generic "With actions" [ref=e111]:
+              - generic [ref=e112]:
+                - heading "With actions" [level=4] [ref=e113]
+                - paragraph [ref=e114]: MessageActions and MessageAction add interactive controls below an assistant message — copy, regenerate, thumbs up/down.
+                - generic [ref=e115]:
+                  - tablist [ref=e116]:
+                    - tab "Preview" [selected] [ref=e117]
+                    - tab "Code" [ref=e118]
+                  - tabpanel "Preview" [ref=e119]:
+                    - generic [ref=e120]:
+                      - generic [ref=e123]: Explain the difference between signal() and computed().
+                      - generic [ref=e124]:
+                        - generic [ref=e125]:
+                          - generic [ref=e128]: AI
+                          - generic [ref=e130]: signal() holds writable state. computed() derives a read-only value from one or more signals; it re-evaluates lazily when its dependencies change.
+                        - generic [ref=e131]:
+                          - button "Copy" [ref=e134]:
+                            - img:
+                              - img
+                          - button "Thumbs up" [ref=e137]:
+                            - img:
+                              - img
+                          - button "Thumbs down" [ref=e140]:
+                            - img:
+                              - img
