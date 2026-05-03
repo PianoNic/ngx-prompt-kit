@@ -1,0 +1,115 @@
+- generic [ref=e4]:
+  - banner [ref=e5]:
+    - link "prompt-kit-ng home" [ref=e6] [cursor=pointer]:
+      - /url: /
+      - img [ref=e7]
+      - generic [ref=e10]: prompt-kit-ng
+    - button "Switch to dark theme" [ref=e12]:
+      - img:
+        - img
+  - generic [ref=e13]:
+    - complementary [ref=e14]:
+      - navigation [ref=e17]:
+        - generic [ref=e18]:
+          - paragraph [ref=e19]: Get Started
+          - list [ref=e20]:
+            - listitem [ref=e21]:
+              - link "Introduction" [ref=e22] [cursor=pointer]:
+                - /url: /
+        - generic [ref=e23]:
+          - paragraph [ref=e24]: Showcase
+          - list [ref=e25]:
+            - listitem [ref=e26]:
+              - link "Blocks" [ref=e27] [cursor=pointer]:
+                - /url: /blocks
+            - listitem [ref=e28]:
+              - link "Full Chat" [ref=e29] [cursor=pointer]:
+                - /url: /showcase/full-chat
+        - generic [ref=e30]:
+          - paragraph [ref=e31]: Components
+          - list [ref=e32]:
+            - listitem [ref=e33]:
+              - link "Message" [ref=e34] [cursor=pointer]:
+                - /url: /components/message
+            - listitem [ref=e35]:
+              - link "Markdown" [ref=e36] [cursor=pointer]:
+                - /url: /components/markdown
+            - listitem [ref=e37]:
+              - link "Code Block" [ref=e38] [cursor=pointer]:
+                - /url: /components/code-block
+            - listitem [ref=e39]:
+              - link "Prompt Input" [ref=e40] [cursor=pointer]:
+                - /url: /components/prompt-input
+            - listitem [ref=e41]:
+              - link "Response Stream" [ref=e42] [cursor=pointer]:
+                - /url: /components/response-stream
+            - listitem [ref=e43]:
+              - link "Loader" [ref=e44] [cursor=pointer]:
+                - /url: /components/loader
+            - listitem [ref=e45]:
+              - link "Chat Container" [ref=e46] [cursor=pointer]:
+                - /url: /components/chat-container
+            - listitem [ref=e47]:
+              - link "Scroll Button" [ref=e48] [cursor=pointer]:
+                - /url: /components/scroll-button
+            - listitem [ref=e49]:
+              - link "Prompt Suggestion" [ref=e50] [cursor=pointer]:
+                - /url: /components/prompt-suggestion
+            - listitem [ref=e51]:
+              - link "File Upload" [ref=e52] [cursor=pointer]:
+                - /url: /components/file-upload
+            - listitem [ref=e53]:
+              - link "Reasoning" [ref=e54] [cursor=pointer]:
+                - /url: /components/reasoning
+    - main [ref=e55]:
+      - generic "Loader" [ref=e57]:
+        - article [ref=e58]:
+          - generic [ref=e59]:
+            - heading "Loader" [level=1] [ref=e60]
+            - paragraph [ref=e61]: "Twelve loading-state variants for AI chat: spinners, dots, bars, terminal cursor, and animated text."
+          - paragraph [ref=e62]: Examples
+          - generic [ref=e63]:
+            - generic "All variants" [ref=e64]:
+              - generic [ref=e65]:
+                - heading "All variants" [level=4] [ref=e66]
+                - paragraph [ref=e67]: Same component, different variant input.
+                - generic [ref=e68]:
+                  - tablist [ref=e69]:
+                    - tab "Preview" [selected] [ref=e70]
+                  - tabpanel "Preview" [ref=e71]:
+                    - generic [ref=e72]:
+                      - generic [ref=e73]:
+                        - generic [ref=e76]: Loading
+                        - generic [ref=e77]: circular
+                      - generic [ref=e94]: classic
+                      - generic [ref=e99]: pulse
+                      - generic [ref=e103]: pulse-dot
+                      - generic [ref=e110]: dots
+                      - generic [ref=e117]: typing
+                      - generic [ref=e126]: wave
+                      - generic [ref=e133]: bars
+                      - generic [ref=e134]:
+                        - generic [ref=e137]: ">"
+                        - generic [ref=e139]: terminal
+                      - generic [ref=e140]:
+                        - generic [ref=e142]: Thinking
+                        - generic [ref=e143]: text-blink
+                      - generic [ref=e144]:
+                        - generic [ref=e146]: Thinking
+                        - generic [ref=e147]: text-shimmer
+                      - generic [ref=e148]:
+                        - generic [ref=e150]:
+                          - generic [ref=e151]: Thinking
+                          - generic [ref=e152]:
+                            - generic [ref=e153]: .
+                            - generic [ref=e154]: .
+                            - generic [ref=e155]: .
+                        - generic [ref=e156]: loading-dots
+            - generic "Sizes" [ref=e157]:
+              - generic [ref=e158]:
+                - heading "Sizes" [level=4] [ref=e159]
+                - paragraph [ref=e160]: Pass size='sm' | 'md' | 'lg' for variants that have a fixed footprint.
+                - generic [ref=e161]:
+                  - tablist [ref=e162]:
+                    - tab "Preview" [selected] [ref=e163]
+                  - tabpanel "Preview" [ref=e164]

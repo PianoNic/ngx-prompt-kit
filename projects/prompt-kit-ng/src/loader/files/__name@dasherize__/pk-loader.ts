@@ -168,10 +168,11 @@ const TEXT_SIZE: Record<LoaderSize, string> = {
               class()
             )
           "
-          [style.background]="
+          [style.background-image]="
             'linear-gradient(to right, var(--muted-foreground) 40%, var(--foreground) 60%, var(--muted-foreground) 80%)'
           "
           [style.background-size]="'200% auto'"
+          [style.-webkit-background-clip]="'text'"
           [style.animation]="'shimmer 4s infinite linear'"
         >
           {{ text() }}

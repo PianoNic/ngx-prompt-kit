@@ -156,8 +156,11 @@ const TEXT_SIZE: Record<LoaderSize, string> = {
       @case ('text-shimmer') {
         <div
           [class]="cn('bg-clip-text font-medium text-transparent', TEXT_SIZE[size()], class())"
-          [style.background]="'linear-gradient(to right, var(--muted-foreground) 40%, var(--foreground) 60%, var(--muted-foreground) 80%)'"
+          [style.background-image]="
+            'linear-gradient(to right, var(--muted-foreground) 40%, var(--foreground) 60%, var(--muted-foreground) 80%)'
+          "
           [style.background-size]="'200% auto'"
+          [style.-webkit-background-clip]="'text'"
           [style.animation]="'shimmer 4s infinite linear'"
         >
           {{ text() }}
