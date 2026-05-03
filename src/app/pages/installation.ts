@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { HlmTabsImports } from '@spartan-ng/helm/tabs';
 import { DocNav } from '../layout/doc-nav';
 import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
 
 @Component({
   selector: 'app-installation',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DocNav, PkCodeBlockImports],
+  imports: [DocNav, HlmTabsImports, PkCodeBlockImports],
   template: `
     <article class="mx-auto max-w-3xl">
       <header class="mb-10">
@@ -25,21 +26,21 @@ import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
         <ul class="mt-3 list-disc space-y-1 pl-5 text-sm">
           <li>
             <a
-              href="https://nodejs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="font-medium underline underline-offset-4"
-              >Node.js</a
-            >
-            22 or later, or
-            <a
               href="https://bun.sh"
               target="_blank"
               rel="noopener noreferrer"
               class="font-medium underline underline-offset-4"
               >Bun</a
             >
-            1.1+
+            1.1+ or
+            <a
+              href="https://nodejs.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-medium underline underline-offset-4"
+              >npm</a
+            >
+            10+ (Node.js 22+)
           </li>
           <li>
             <a
@@ -71,9 +72,22 @@ import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
           Spartan in your workspace first:
         </p>
         <div class="mt-3">
-          <pk-code-block>
-            <pk-code-block-code [code]="spartanInstall" language="bash" />
-          </pk-code-block>
+          <hlm-tabs tab="bun">
+            <hlm-tabs-list variant="line">
+              <button hlmTabsTrigger="bun">Bun</button>
+              <button hlmTabsTrigger="npm">npm</button>
+            </hlm-tabs-list>
+            <div hlmTabsContent="bun" class="mt-3">
+              <pk-code-block>
+                <pk-code-block-code [code]="spartanBun" language="bash" />
+              </pk-code-block>
+            </div>
+            <div hlmTabsContent="npm" class="mt-3">
+              <pk-code-block>
+                <pk-code-block-code [code]="spartanNpm" language="bash" />
+              </pk-code-block>
+            </div>
+          </hlm-tabs>
         </div>
         <p class="text-muted-foreground mt-3 text-sm leading-relaxed">
           When prompted, select at minimum these helm components:
@@ -93,9 +107,22 @@ import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
           and warns if Spartan isn't detected.
         </p>
         <div class="mt-3">
-          <pk-code-block>
-            <pk-code-block-code [code]="ngAdd" language="bash" />
-          </pk-code-block>
+          <hlm-tabs tab="bun">
+            <hlm-tabs-list variant="line">
+              <button hlmTabsTrigger="bun">Bun</button>
+              <button hlmTabsTrigger="npm">npm</button>
+            </hlm-tabs-list>
+            <div hlmTabsContent="bun" class="mt-3">
+              <pk-code-block>
+                <pk-code-block-code [code]="ngAddBun" language="bash" />
+              </pk-code-block>
+            </div>
+            <div hlmTabsContent="npm" class="mt-3">
+              <pk-code-block>
+                <pk-code-block-code [code]="ngAddNpm" language="bash" />
+              </pk-code-block>
+            </div>
+          </hlm-tabs>
         </div>
       </section>
 
@@ -113,9 +140,22 @@ import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
           when needed.
         </p>
         <div class="mt-3">
-          <pk-code-block>
-            <pk-code-block-code [code]="ngGenerate" language="bash" />
-          </pk-code-block>
+          <hlm-tabs tab="bun">
+            <hlm-tabs-list variant="line">
+              <button hlmTabsTrigger="bun">Bun</button>
+              <button hlmTabsTrigger="npm">npm</button>
+            </hlm-tabs-list>
+            <div hlmTabsContent="bun" class="mt-3">
+              <pk-code-block>
+                <pk-code-block-code [code]="ngGenerateBun" language="bash" />
+              </pk-code-block>
+            </div>
+            <div hlmTabsContent="npm" class="mt-3">
+              <pk-code-block>
+                <pk-code-block-code [code]="ngGenerateNpm" language="bash" />
+              </pk-code-block>
+            </div>
+          </hlm-tabs>
         </div>
         <p class="text-muted-foreground mt-3 text-sm leading-relaxed">
           Components land at
@@ -143,15 +183,25 @@ import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
   `,
 })
 export class Installation {
-  protected readonly spartanInstall = `bun add -d @spartan-ng/cli
-ng g @spartan-ng/cli:init
-ng g @spartan-ng/cli:ui`;
+  protected readonly spartanBun = `bun add -d @spartan-ng/cli
+bun x ng g @spartan-ng/cli:init
+bun x ng g @spartan-ng/cli:ui`;
 
-  protected readonly ngAdd = `ng add @pianonic/prompt-kit-ng`;
+  protected readonly spartanNpm = `npm install --save-dev @spartan-ng/cli
+npx ng g @spartan-ng/cli:init
+npx ng g @spartan-ng/cli:ui`;
 
-  protected readonly ngGenerate = `ng generate @pianonic/prompt-kit-ng:message
-ng generate @pianonic/prompt-kit-ng:prompt-input
-ng generate @pianonic/prompt-kit-ng:markdown
+  protected readonly ngAddBun = `bun x ng add @pianonic/prompt-kit-ng`;
+  protected readonly ngAddNpm = `npx ng add @pianonic/prompt-kit-ng`;
+
+  protected readonly ngGenerateBun = `bun x ng generate @pianonic/prompt-kit-ng:message
+bun x ng generate @pianonic/prompt-kit-ng:prompt-input
+bun x ng generate @pianonic/prompt-kit-ng:markdown
+# ...etc.`;
+
+  protected readonly ngGenerateNpm = `npx ng generate @pianonic/prompt-kit-ng:message
+npx ng generate @pianonic/prompt-kit-ng:prompt-input
+npx ng generate @pianonic/prompt-kit-ng:markdown
 # ...etc.`;
 
   protected readonly usage = `import { Component, signal } from '@angular/core';
