@@ -12,7 +12,10 @@ export interface NavGroup {
 export const NAV: NavGroup[] = [
   {
     heading: 'Get Started',
-    links: [{ label: 'Introduction', path: '/' }],
+    links: [
+      { label: 'Introduction', path: '/' },
+      { label: 'Installation', path: '/installation' },
+    ],
   },
   {
     heading: 'Showcase',

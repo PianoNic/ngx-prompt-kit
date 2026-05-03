@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { HlmH1, HlmLead, HlmMuted } from '@spartan-ng/helm/typography';
+import { DocNav } from './doc-nav';
 
 @Component({
   selector: 'app-doc-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [HlmH1, HlmLead, HlmMuted],
+  imports: [HlmH1, HlmLead, HlmMuted, DocNav],
   template: `
     <article class="mx-auto max-w-3xl">
       <header class="mb-10">
@@ -17,6 +18,7 @@ import { HlmH1, HlmLead, HlmMuted } from '@spartan-ng/helm/typography';
       <div class="flex flex-col gap-12">
         <ng-content />
       </div>
+      <app-doc-nav />
     </article>
   `,
 })
