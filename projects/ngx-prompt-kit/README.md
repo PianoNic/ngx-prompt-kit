@@ -1,9 +1,40 @@
-# ngx-prompt-kit
+# <p align="center">ngx-prompt-kit</p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/PianoNic/ngx-prompt-kit/master/public/icon.svg" width="120" alt="ngx-prompt-kit logo">
+</p>
 
-Angular components for AI chat interfaces, built to compose with [Spartan UI](https://www.spartan.ng).
-Port of [ibelick/prompt-kit](https://github.com/ibelick/prompt-kit).
+<p align="center">
+  <strong>Angular components for AI chat interfaces, built on Spartan UI.</strong>
+</p>
 
-Components are distributed via Angular schematics — `ng add` and `ng generate` copy source into your project, where you own the code.
+<p align="center">
+  <a href="https://www.npmjs.com/package/ngx-prompt-kit"><img src="https://img.shields.io/npm/v/ngx-prompt-kit?color=c87941" alt="npm version"/></a>
+  <a href="https://github.com/PianoNic/ngx-prompt-kit/blob/master/LICENSE"><img src="https://img.shields.io/github/license/PianoNic/ngx-prompt-kit?color=c87941"/></a>
+  <a href="https://www.npmjs.com/package/ngx-prompt-kit"><img src="https://img.shields.io/npm/dm/ngx-prompt-kit?color=c87941" alt="npm downloads"/></a>
+</p>
+
+<p align="center">
+  <a href="https://ngx-prompt-kit.pianonic.ch">Live Demo</a>
+</p>
+
+## About
+
+Port of [ibelick/prompt-kit](https://github.com/ibelick/prompt-kit) to Angular. 20 components for building AI chat UIs — message threads, prompt input, streaming responses, markdown rendering, code blocks, and more.
+
+Distributed via Angular schematics: `ng add` and `ng generate` copy source into your project, where you own and edit the code. No runtime dependency on this package after generation.
+
+## Features
+
+- **20 components** - Full parity with the React lineup (jsx-preview omitted)
+- **Schematic-based** - Source lands in your project, no version-pinning hell
+- **Spartan UI native** - Composes with the helm primitives you already use
+- **Signal-based** - `input()`, `output()`, `model()`, `viewChild()` throughout
+- **OnPush by default** - Every component uses `ChangeDetectionStrategy.OnPush`
+- **SSR-safe** - All browser APIs guarded with `isPlatformBrowser` / `afterNextRender`
+- **Tailwind v4** - Utility-first styling, no CSS-in-JS
+- **Accessible** - ARIA labels, keyboard navigation, focus management
+- **Standalone** - No NgModules, just import and use
+- **Tree-shakeable** - Add only the components you use
 
 ## Prerequisites
 
@@ -11,15 +42,21 @@ Components are distributed via Angular schematics — `ng add` and `ng generate`
 - Tailwind CSS v4
 - [Spartan UI](https://www.spartan.ng) installed in your workspace
 
-## Setup
-
-One-time bootstrap (installs `clsx` and `tailwind-merge`, checks for Spartan):
+## Installation
 
 ```bash
 ng add ngx-prompt-kit
 ```
 
 ## Add components
+
+```bash
+ng generate ngx-prompt-kit:message
+ng generate ngx-prompt-kit:prompt-input
+ng generate ngx-prompt-kit:markdown
+```
+
+Components land at `<sourceRoot>/app/components/prompt-kit/<name>/`. The `cn()` utility lands alongside automatically.
 
 | Component           | Helm dependencies   | Other deps |
 |---------------------|---------------------|------------|
@@ -44,29 +81,42 @@ ng add ngx-prompt-kit
 | `thinking-bar`      | icon                | —          |
 | `tool`              | icon                | —          |
 
-Add a component:
-
-```bash
-ng generate ngx-prompt-kit:message
-```
-
-Components land in `<sourceRoot>/app/components/prompt-kit/<name>/`. The `cn()` utility is auto-generated alongside.
-
 Helm prerequisites must be installed separately via Spartan's CLI:
 
 ```bash
 ng g @spartan-ng/cli:ui
 ```
 
-## Coverage
+## Usage
 
-All components from [ibelick/prompt-kit](https://github.com/ibelick/prompt-kit) are available, except `jsx-preview` (React-specific, no clean Angular equivalent).
+```typescript
+import { Component, signal } from '@angular/core';
+import { PkPromptInputImports } from './components/prompt-kit/prompt-input';
+
+@Component({
+  selector: 'app-chat',
+  imports: [PkPromptInputImports],
+  template: `
+    <pk-prompt-input [(value)]="value" (submitted)="onSubmit()">
+      <pk-prompt-input-textarea placeholder="Ask anything..." />
+    </pk-prompt-input>
+  `,
+})
+export class Chat {
+  protected readonly value = signal('');
+  protected onSubmit(): void {
+    console.log('submitted:', this.value());
+  }
+}
+```
+
+See the [live demo](https://ngx-prompt-kit.pianonic.ch) for every component with code snippets.
 
 ## Notes
 
 - Re-running a component schematic overwrites the existing files. If you've customized them, commit your changes first.
-- You own the generated source — edit freely. We won't push updates to your code.
-- `image` internally uses Angular's [`NgOptimizedImage`](https://angular.dev/api/common/NgOptimizedImage) directive when given a real `src` URL; falls back to a native `<img>` for base64/blob payloads (NgOptimizedImage doesn't accept `data:` URLs).
+- You own the generated source — edit freely. Updates to this package won't push changes to your code.
+- `image` uses Angular's `NgOptimizedImage` directive when given a real `src` URL; falls back to a native `<img>` for base64/blob payloads.
 
 ## Credit
 
