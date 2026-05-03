@@ -76,6 +76,7 @@ import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
             <hlm-tabs-list variant="line">
               <button hlmTabsTrigger="bun">Bun</button>
               <button hlmTabsTrigger="npm">npm</button>
+              <button hlmTabsTrigger="ng">ng</button>
             </hlm-tabs-list>
             <div hlmTabsContent="bun" class="mt-3">
               <pk-code-block>
@@ -85,6 +86,11 @@ import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
             <div hlmTabsContent="npm" class="mt-3">
               <pk-code-block>
                 <pk-code-block-code [code]="spartanNpm" language="bash" />
+              </pk-code-block>
+            </div>
+            <div hlmTabsContent="ng" class="mt-3">
+              <pk-code-block>
+                <pk-code-block-code [code]="spartanNg" language="bash" />
               </pk-code-block>
             </div>
           </hlm-tabs>
@@ -111,6 +117,7 @@ import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
             <hlm-tabs-list variant="line">
               <button hlmTabsTrigger="bun">Bun</button>
               <button hlmTabsTrigger="npm">npm</button>
+              <button hlmTabsTrigger="ng">ng</button>
             </hlm-tabs-list>
             <div hlmTabsContent="bun" class="mt-3">
               <pk-code-block>
@@ -120,6 +127,11 @@ import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
             <div hlmTabsContent="npm" class="mt-3">
               <pk-code-block>
                 <pk-code-block-code [code]="ngAddNpm" language="bash" />
+              </pk-code-block>
+            </div>
+            <div hlmTabsContent="ng" class="mt-3">
+              <pk-code-block>
+                <pk-code-block-code [code]="ngAddNg" language="bash" />
               </pk-code-block>
             </div>
           </hlm-tabs>
@@ -144,6 +156,7 @@ import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
             <hlm-tabs-list variant="line">
               <button hlmTabsTrigger="bun">Bun</button>
               <button hlmTabsTrigger="npm">npm</button>
+              <button hlmTabsTrigger="ng">ng</button>
             </hlm-tabs-list>
             <div hlmTabsContent="bun" class="mt-3">
               <pk-code-block>
@@ -153,6 +166,11 @@ import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
             <div hlmTabsContent="npm" class="mt-3">
               <pk-code-block>
                 <pk-code-block-code [code]="ngGenerateNpm" language="bash" />
+              </pk-code-block>
+            </div>
+            <div hlmTabsContent="ng" class="mt-3">
+              <pk-code-block>
+                <pk-code-block-code [code]="ngGenerateNg" language="bash" />
               </pk-code-block>
             </div>
           </hlm-tabs>
@@ -191,8 +209,14 @@ bun x ng g @spartan-ng/cli:ui`;
 npx ng g @spartan-ng/cli:init
 npx ng g @spartan-ng/cli:ui`;
 
+  protected readonly spartanNg = `# requires @angular/cli installed globally
+ng add @spartan-ng/cli
+ng g @spartan-ng/cli:init
+ng g @spartan-ng/cli:ui`;
+
   protected readonly ngAddBun = `bun x ng add @pianonic/prompt-kit-ng`;
   protected readonly ngAddNpm = `npx ng add @pianonic/prompt-kit-ng`;
+  protected readonly ngAddNg = `ng add @pianonic/prompt-kit-ng`;
 
   protected readonly ngGenerateBun = `bun x ng generate @pianonic/prompt-kit-ng:message
 bun x ng generate @pianonic/prompt-kit-ng:prompt-input
@@ -202,6 +226,11 @@ bun x ng generate @pianonic/prompt-kit-ng:markdown
   protected readonly ngGenerateNpm = `npx ng generate @pianonic/prompt-kit-ng:message
 npx ng generate @pianonic/prompt-kit-ng:prompt-input
 npx ng generate @pianonic/prompt-kit-ng:markdown
+# ...etc.`;
+
+  protected readonly ngGenerateNg = `ng generate @pianonic/prompt-kit-ng:message
+ng generate @pianonic/prompt-kit-ng:prompt-input
+ng generate @pianonic/prompt-kit-ng:markdown
 # ...etc.`;
 
   protected readonly usage = `import { Component, signal } from '@angular/core';
