@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { PkPromptSuggestion } from 'prompt-kit-ng';
+import { PkPromptSuggestion } from 'prompt-kit-ng/prompt-suggestion';
 
 @Component({
   selector: 'app-prompt-suggestion-demo',

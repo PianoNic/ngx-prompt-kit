@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { PkResponseStream } from 'prompt-kit-ng';
+import { PkResponseStream } from 'prompt-kit-ng/response-stream';
 
 @Component({
   selector: 'app-response-stream-demo',

@@ -1,0 +1,841 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e6]:
+      - main [ref=e7]:
+        - generic [ref=e8]:
+          - generic [ref=e9]:
+            - paragraph [ref=e10]: Blocks
+            - paragraph [ref=e11]: UI blocks for AI applications, built with shadcn/ui and prompt-kit.
+          - generic [ref=e12]:
+            - generic [ref=e13]:
+              - heading "Prompt input with actions" [level=4] [ref=e14]
+              - generic [ref=e16]:
+                - tablist [ref=e17]:
+                  - tab "Preview" [selected] [ref=e18]: Preview
+                  - tab "Code" [ref=e21]
+                  - link [ref=e23] [cursor=pointer]:
+                    - /url: https://www.prompt-kit.com/c/prompt-input-actions
+                    - img [ref=e24]
+                - tabpanel "Preview" [ref=e28]:
+                  - iframe [ref=e30]:
+                    - generic [active] [ref=f1e1]:
+                      - generic [ref=f1e5]:
+                        - textbox "Ask anything" [ref=f1e6]
+                        - generic [ref=f1e7]:
+                          - generic [ref=f1e8]:
+                            - button [ref=f1e9]:
+                              - img
+                            - button "Search" [ref=f1e10]:
+                              - img
+                              - text: Search
+                            - button [ref=f1e11]:
+                              - img
+                          - generic [ref=f1e12]:
+                            - button [ref=f1e13]:
+                              - img
+                            - button [disabled]:
+                              - img
+                      - alert [ref=f1e14]
+            - generic [ref=e31]:
+              - heading "Prompt input with suggestions" [level=4] [ref=e32]
+              - generic [ref=e34]:
+                - tablist [ref=e35]:
+                  - tab "Preview" [selected] [ref=e36]: Preview
+                  - tab "Code" [ref=e39]
+                  - link [ref=e41] [cursor=pointer]:
+                    - /url: https://www.prompt-kit.com/c/prompt-input-suggestions
+                    - img [ref=e42]
+                - tabpanel "Preview" [ref=e46]:
+                  - iframe [ref=e48]:
+                    - generic [active] [ref=f2e1]:
+                      - generic [ref=f2e3]:
+                        - generic [ref=f2e4]:
+                          - textbox "Ask anything..." [ref=f2e5]
+                          - generic [ref=f2e6]:
+                            - button [disabled]:
+                              - img
+                        - generic [ref=f2e8]:
+                          - button "Summary" [ref=f2e9]:
+                            - img
+                            - text: Summary
+                          - button "Code" [ref=f2e10]:
+                            - img
+                            - text: Code
+                          - button "Design" [ref=f2e11]:
+                            - img
+                            - text: Design
+                          - button "Research" [ref=f2e12]:
+                            - img
+                            - text: Research
+                      - alert [ref=f2e13]
+            - generic [ref=e49]:
+              - heading "Prompt input with autocomplete" [level=4] [ref=e50]
+              - generic [ref=e52]:
+                - tablist [ref=e53]:
+                  - tab "Preview" [selected] [ref=e54]: Preview
+                  - tab "Code" [ref=e57]
+                  - link [ref=e59] [cursor=pointer]:
+                    - /url: https://www.prompt-kit.com/c/prompt-autocomplete-highlight
+                    - img [ref=e60]
+                - tabpanel "Preview" [ref=e64]:
+                  - iframe [ref=e66]:
+                    - generic [active] [ref=f3e1]:
+                      - generic [ref=f3e3]:
+                        - generic [ref=f3e4]:
+                          - textbox "Ask anything..." [ref=f3e5]: how to
+                          - button [ref=f3e7]:
+                            - img
+                        - generic [ref=f3e8]:
+                          - button "How to create a React component" [ref=f3e9] [cursor=pointer]:
+                            - generic [ref=f3e10]: How to
+                            - generic [ref=f3e11]: create a React component
+                          - button "How to optimize website performance" [ref=f3e12] [cursor=pointer]:
+                            - generic [ref=f3e13]: How to
+                            - generic [ref=f3e14]: optimize website performance
+                          - button "How to implement dark mode in a web app" [ref=f3e15] [cursor=pointer]:
+                            - generic [ref=f3e16]: How to
+                            - generic [ref=f3e17]: implement dark mode in a web app
+                          - button "How to use CSS Grid effectively" [ref=f3e18] [cursor=pointer]:
+                            - generic [ref=f3e19]: How to
+                            - generic [ref=f3e20]: use CSS Grid effectively
+                          - button "How to fetch data from an API in JavaScript" [ref=f3e21] [cursor=pointer]:
+                            - generic [ref=f3e22]: How to
+                            - generic [ref=f3e23]: fetch data from an API in JavaScript
+                          - button "How to build a REST API with Node.js" [ref=f3e24] [cursor=pointer]:
+                            - generic [ref=f3e25]: How to
+                            - generic [ref=f3e26]: build a REST API with Node.js
+                          - button "How to deploy a Next.js application" [ref=f3e27] [cursor=pointer]:
+                            - generic [ref=f3e28]: How to
+                            - generic [ref=f3e29]: deploy a Next.js application
+                          - button "How to implement authentication in a web app" [ref=f3e30] [cursor=pointer]:
+                            - generic [ref=f3e31]: How to
+                            - generic [ref=f3e32]: implement authentication in a web app
+                      - alert [ref=f3e33]
+            - generic [ref=e67]:
+              - heading "Basic full conversation" [level=4] [ref=e68]
+              - generic [ref=e70]:
+                - tablist [ref=e71]:
+                  - tab "Preview" [selected] [ref=e72]: Preview
+                  - tab "Code" [ref=e75]
+                  - link [ref=e77] [cursor=pointer]:
+                    - /url: https://www.prompt-kit.com/c/full-conversation
+                    - img [ref=e78]
+                - tabpanel "Preview" [ref=e82]:
+                  - iframe [ref=e84]:
+                    - generic [active] [ref=f4e1]:
+                      - log [ref=f4e3]:
+                        - generic [ref=f4e5]:
+                          - generic [ref=f4e7]: Hello! Can you help me with a coding question?
+                          - paragraph [ref=f4e10]: Of course! I'd be happy to help with your coding question. What would you like to know?
+                          - generic [ref=f4e12]: How do I create a responsive layout with CSS Grid?
+                          - generic [ref=f4e14]:
+                            - paragraph [ref=f4e15]: "Creating a responsive layout with CSS Grid is straightforward. Here's a basic example:"
+                            - code [ref=f4e19]:
+                              - generic [ref=f4e20]: ".container {"
+                              - generic [ref=f4e21]: "display: grid;"
+                              - generic [ref=f4e22]: "grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));"
+                              - generic [ref=f4e23]: "gap: 1rem;"
+                              - generic [ref=f4e24]: "}"
+                            - paragraph [ref=f4e25]: "This creates a grid where:"
+                            - list [ref=f4e26]:
+                              - listitem [ref=f4e27]: Columns automatically fit as many as possible
+                              - listitem [ref=f4e28]: Each column is at least 250px wide
+                              - listitem [ref=f4e29]: Columns expand to fill available space
+                              - listitem [ref=f4e30]: There's a 1rem gap between items
+                            - paragraph [ref=f4e31]: Would you like me to explain more about how this works?
+                          - generic [ref=f4e33]: What is the capital of France?
+                          - paragraph [ref=f4e36]: The capital of France is Paris.
+                      - alert [ref=f4e37]
+            - generic [ref=e85]:
+              - heading "Conversation with avatars" [level=4] [ref=e86]
+              - generic [ref=e88]:
+                - tablist [ref=e89]:
+                  - tab "Preview" [selected] [ref=e90]: Preview
+                  - tab "Code" [ref=e93]
+                  - link [ref=e95] [cursor=pointer]:
+                    - /url: https://www.prompt-kit.com/c/conversation-avatars
+                    - img [ref=e96]
+                - tabpanel "Preview" [ref=e100]:
+                  - iframe [ref=e102]:
+                    - generic [active] [ref=f5e1]:
+                      - log [ref=f5e3]:
+                        - generic [ref=f5e5]:
+                          - generic [ref=f5e7]:
+                            - img "Avatar of the user" [ref=f5e9]
+                            - generic [ref=f5e10]: Hello! Can you help me with a coding question?
+                          - generic [ref=f5e12]:
+                            - img "Avatar of the assistant" [ref=f5e14]
+                            - paragraph [ref=f5e16]: Of course! I'd be happy to help with your coding question. What would you like to know?
+                          - generic [ref=f5e18]:
+                            - img "Avatar of the user" [ref=f5e20]
+                            - generic [ref=f5e21]: How do I create a responsive layout with CSS Grid?
+                          - generic [ref=f5e23]:
+                            - img "Avatar of the assistant" [ref=f5e25]
+                            - generic [ref=f5e26]:
+                              - paragraph [ref=f5e27]: "Creating a responsive layout with CSS Grid is straightforward. Here's a basic example:"
+                              - code [ref=f5e31]:
+                                - generic [ref=f5e32]: ".container {"
+                                - generic [ref=f5e33]: "display: grid;"
+                                - generic [ref=f5e34]: "grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));"
+                                - generic [ref=f5e35]: "gap: 1rem;"
+                                - generic [ref=f5e36]: "}"
+                              - paragraph [ref=f5e37]: "This creates a grid where:"
+                              - list [ref=f5e38]:
+                                - listitem [ref=f5e39]: Columns automatically fit as many as possible
+                                - listitem [ref=f5e40]: Each column is at least 250px wide
+                                - listitem [ref=f5e41]: Columns expand to fill available space
+                                - listitem [ref=f5e42]: There's a 1rem gap between items
+                              - paragraph [ref=f5e43]: Would you like me to explain more about how this works?
+                          - generic [ref=f5e45]:
+                            - img "Avatar of the user" [ref=f5e47]
+                            - generic [ref=f5e48]: What is the capital of France?
+                          - generic [ref=f5e50]:
+                            - img "Avatar of the assistant" [ref=f5e52]
+                            - paragraph [ref=f5e54]: The capital of France is Paris.
+                      - alert [ref=f5e55]
+            - generic [ref=e103]:
+              - heading "Conversation with actions" [level=4] [ref=e104]
+              - generic [ref=e106]:
+                - tablist [ref=e107]:
+                  - tab "Preview" [selected] [ref=e108]: Preview
+                  - tab "Code" [ref=e111]
+                  - link [ref=e113] [cursor=pointer]:
+                    - /url: https://www.prompt-kit.com/c/conversation-actions
+                    - img [ref=e114]
+                - tabpanel "Preview" [ref=e118]:
+                  - iframe [ref=e120]:
+                    - generic [active] [ref=f6e1]:
+                      - log [ref=f6e3]:
+                        - generic [ref=f6e5]:
+                          - generic [ref=f6e7]:
+                            - generic [ref=f6e8]: Hello! Can you help me with a coding question?
+                            - generic [ref=f6e9]:
+                              - button [ref=f6e10]:
+                                - img
+                              - button [ref=f6e11]:
+                                - img
+                              - button [ref=f6e12]:
+                                - img
+                          - generic [ref=f6e14]:
+                            - paragraph [ref=f6e16]: Of course! I'd be happy to help with your coding question. What would you like to know?
+                            - generic [ref=f6e17]:
+                              - button [ref=f6e18]:
+                                - img
+                              - button [ref=f6e19]:
+                                - img
+                              - button [ref=f6e20]:
+                                - img
+                          - generic [ref=f6e22]:
+                            - generic [ref=f6e23]: How do I create a responsive layout with CSS Grid?
+                            - generic [ref=f6e24]:
+                              - button [ref=f6e25]:
+                                - img
+                              - button [ref=f6e26]:
+                                - img
+                              - button [ref=f6e27]:
+                                - img
+                          - generic [ref=f6e29]:
+                            - generic [ref=f6e30]:
+                              - paragraph [ref=f6e31]: "Creating a responsive layout with CSS Grid is straightforward. Here's a basic example:"
+                              - code [ref=f6e35]:
+                                - generic [ref=f6e36]: ".container {"
+                                - generic [ref=f6e37]: "display: grid;"
+                                - generic [ref=f6e38]: "grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));"
+                                - generic [ref=f6e39]: "gap: 1rem;"
+                                - generic [ref=f6e40]: "}"
+                              - paragraph [ref=f6e41]: "This creates a grid where:"
+                              - list [ref=f6e42]:
+                                - listitem [ref=f6e43]: Columns automatically fit as many as possible
+                                - listitem [ref=f6e44]: Each column is at least 250px wide
+                                - listitem [ref=f6e45]: Columns expand to fill available space
+                                - listitem [ref=f6e46]: There's a 1rem gap between items
+                              - paragraph [ref=f6e47]: Would you like me to explain more about how this works?
+                            - generic [ref=f6e48]:
+                              - button [ref=f6e49]:
+                                - img
+                              - button [ref=f6e50]:
+                                - img
+                              - button [ref=f6e51]:
+                                - img
+                          - generic [ref=f6e53]:
+                            - generic [ref=f6e54]: What is the capital of France?
+                            - generic [ref=f6e55]:
+                              - button [ref=f6e56]:
+                                - img
+                              - button [ref=f6e57]:
+                                - img
+                              - button [ref=f6e58]:
+                                - img
+                          - generic [ref=f6e60]:
+                            - paragraph [ref=f6e62]: The capital of France is Paris.
+                            - generic [ref=f6e63]:
+                              - button [ref=f6e64]:
+                                - img
+                              - button [ref=f6e65]:
+                                - img
+                              - button [ref=f6e66]:
+                                - img
+                      - alert [ref=f6e67]
+            - generic [ref=e121]:
+              - heading "Conversation with scroll to bottom" [level=4] [ref=e122]
+              - generic [ref=e124]:
+                - tablist [ref=e125]:
+                  - tab "Preview" [selected] [ref=e126]: Preview
+                  - tab "Code" [ref=e129]
+                  - link [ref=e131] [cursor=pointer]:
+                    - /url: https://www.prompt-kit.com/c/conversation-scroll-bottom
+                    - img [ref=e132]
+                - tabpanel "Preview" [ref=e136]:
+                  - iframe [ref=e138]:
+                    - generic [active] [ref=f7e1]:
+                      - log [ref=f7e4]:
+                        - generic [ref=f7e6]:
+                          - generic [ref=f7e8]: Hello! Can you help me with a coding question?
+                          - paragraph [ref=f7e11]: Of course! I'd be happy to help with your coding question. What would you like to know?
+                          - generic [ref=f7e13]: How do I create a responsive layout with CSS Grid?
+                          - generic [ref=f7e15]:
+                            - paragraph [ref=f7e16]: "Creating a responsive layout with CSS Grid is straightforward. Here's a basic example:"
+                            - code [ref=f7e20]:
+                              - generic [ref=f7e21]: ".container {"
+                              - generic [ref=f7e22]: "display: grid;"
+                              - generic [ref=f7e23]: "grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));"
+                              - generic [ref=f7e24]: "gap: 1rem;"
+                              - generic [ref=f7e25]: "}"
+                            - paragraph [ref=f7e26]: "This creates a grid where:"
+                            - list [ref=f7e27]:
+                              - listitem [ref=f7e28]: Columns automatically fit as many as possible
+                              - listitem [ref=f7e29]: Each column is at least 250px wide
+                              - listitem [ref=f7e30]: Columns expand to fill available space
+                              - listitem [ref=f7e31]: There's a 1rem gap between items
+                            - paragraph [ref=f7e32]: Would you like me to explain more about how this works?
+                          - generic [ref=f7e34]: What is the capital of France?
+                          - paragraph [ref=f7e37]: The capital of France is Paris.
+                          - generic [ref=f7e39]: Can you tell me more about CSS Grid?
+                          - generic [ref=f7e41]:
+                            - paragraph [ref=f7e42]: Sure! CSS Grid is a powerful two-dimensional layout system designed for the browser. Unlike Flexbox which is primarily designed for either a row or a column, Grid can work with both rows and columns together.
+                            - paragraph [ref=f7e43]: "Here are some key features of CSS Grid:"
+                            - list [ref=f7e44]:
+                              - listitem [ref=f7e45]:
+                                - strong [ref=f7e46]: Two-dimensional layout
+                                - text: ": Control both rows and columns simultaneously"
+                              - listitem [ref=f7e47]:
+                                - strong [ref=f7e48]: Grid lines
+                                - text: ": Position items by referencing grid lines"
+                              - listitem [ref=f7e49]:
+                                - strong [ref=f7e50]: Grid tracks
+                                - text: ": Rows and columns can be explicitly sized or can adjust automatically"
+                              - listitem [ref=f7e51]:
+                                - strong [ref=f7e52]: Grid cells
+                                - text: ": Intersections of rows and columns"
+                              - listitem [ref=f7e53]:
+                                - strong [ref=f7e54]: Grid areas
+                                - text: ": Named regions spanning multiple grid cells"
+                            - paragraph [ref=f7e55]: "Basic syntax example:"
+                            - code [ref=f7e59]:
+                              - generic [ref=f7e60]: ".container {"
+                              - generic [ref=f7e61]: "display: grid;"
+                              - generic [ref=f7e62]: "grid-template-columns: 1fr 2fr 1fr;"
+                              - generic [ref=f7e63]: "grid-template-rows: auto 200px auto;"
+                              - generic [ref=f7e64]: "gap: 20px;"
+                              - generic [ref=f7e65]: "}"
+                              - generic [ref=f7e66]: ".item {"
+                              - generic [ref=f7e67]: "grid-column: 1 / 3; /* Start at line 1, end at line 3 */"
+                              - generic [ref=f7e68]: "grid-row: 2 / 3; /* Start at line 2, end at line 3 */"
+                              - generic [ref=f7e69]: "}"
+                            - paragraph [ref=f7e70]: This creates a layout with three columns (the middle one being twice as wide) and three rows (middle one fixed at 200px), with 20px gaps between all cells.
+                          - generic [ref=f7e72]: What about Flexbox vs Grid?
+                          - generic [ref=f7e74]:
+                            - paragraph [ref=f7e75]:
+                              - strong [ref=f7e76]: "Flexbox vs. Grid: When to Use Each"
+                            - paragraph [ref=f7e77]:
+                              - strong [ref=f7e78]: "Flexbox (one-dimensional):"
+                            - list [ref=f7e79]:
+                              - listitem [ref=f7e80]: Best for arranging items in a single row or column
+                              - listitem [ref=f7e81]: Great for distributing space among items within a container
+                              - listitem [ref=f7e82]:
+                                - text: "Perfect for:"
+                                - list [ref=f7e83]:
+                                  - listitem [ref=f7e84]: Navigation menus
+                                  - listitem [ref=f7e85]: Card layouts with variable content length
+                                  - listitem [ref=f7e86]: Centering items vertically and horizontally
+                                  - listitem [ref=f7e87]: Simple layouts that need to be flexible in one direction
+                            - paragraph [ref=f7e88]:
+                              - strong [ref=f7e89]: "Grid (two-dimensional):"
+                            - list [ref=f7e90]:
+                              - listitem [ref=f7e91]: Best for complex layouts with both rows and columns
+                              - listitem [ref=f7e92]: Excellent for precisely positioning items in a grid system
+                              - listitem [ref=f7e93]:
+                                - text: "Perfect for:"
+                                - list [ref=f7e94]:
+                                  - listitem [ref=f7e95]: Full-page layouts
+                                  - listitem [ref=f7e96]: Dashboard interfaces
+                                  - listitem [ref=f7e97]: Image galleries with consistent spacing
+                                  - listitem [ref=f7e98]: Any design that requires alignment across both rows and columns
+                            - paragraph [ref=f7e99]:
+                              - strong [ref=f7e100]: "When to use both:"
+                              - text: It's common to use Grid for the main page layout and Flexbox for individual components within that layout. They complement each other well!
+                          - generic [ref=f7e102]: Thanks for all this information about CSS layouts!
+                          - generic [ref=f7e104]:
+                            - paragraph [ref=f7e105]: You're welcome! CSS layout systems like Flexbox and Grid have revolutionized web design, making it much easier to create responsive and complex layouts without relying on hacks or workarounds.
+                            - paragraph [ref=f7e106]: If you ever have more questions about CSS or web development in general, feel free to ask. Happy coding! 😊
+                        - generic [ref=f7e108]:
+                          - button:
+                            - img
+                      - alert [ref=f7e109]
+            - generic [ref=e139]:
+              - heading "Conversation with prompt input" [level=4] [ref=e140]
+              - generic [ref=e142]:
+                - tablist [ref=e143]:
+                  - tab "Preview" [selected] [ref=e144]: Preview
+                  - tab "Code" [ref=e147]
+                  - link [ref=e149] [cursor=pointer]:
+                    - /url: https://www.prompt-kit.com/c/conversation-prompt-input
+                    - img [ref=e150]
+                - tabpanel "Preview" [ref=e154]:
+                  - iframe [ref=e156]:
+                    - generic [active] [ref=f8e1]:
+                      - generic [ref=f8e3]:
+                        - log [ref=f8e4]:
+                          - generic [ref=f8e6]:
+                            - generic [ref=f8e8]:
+                              - generic [ref=f8e9]: Hello! Can you help me with a coding question?
+                              - generic [ref=f8e10]:
+                                - button [ref=f8e11]:
+                                  - img
+                                - button [ref=f8e12]:
+                                  - img
+                                - button [ref=f8e13]:
+                                  - img
+                            - generic [ref=f8e15]:
+                              - paragraph [ref=f8e17]: Of course! I'd be happy to help with your coding question. What would you like to know?
+                              - generic [ref=f8e18]:
+                                - button [ref=f8e19]:
+                                  - img
+                                - button [ref=f8e20]:
+                                  - img
+                                - button [ref=f8e21]:
+                                  - img
+                            - generic [ref=f8e23]:
+                              - generic [ref=f8e24]: How do I create a responsive layout with CSS Grid?
+                              - generic [ref=f8e25]:
+                                - button [ref=f8e26]:
+                                  - img
+                                - button [ref=f8e27]:
+                                  - img
+                                - button [ref=f8e28]:
+                                  - img
+                            - generic [ref=f8e30]:
+                              - generic [ref=f8e31]:
+                                - paragraph [ref=f8e32]: "Creating a responsive layout with CSS Grid is straightforward. Here's a basic example:"
+                                - code [ref=f8e36]:
+                                  - generic [ref=f8e37]: ".container {"
+                                  - generic [ref=f8e38]: "display: grid;"
+                                  - generic [ref=f8e39]: "grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));"
+                                  - generic [ref=f8e40]: "gap: 1rem;"
+                                  - generic [ref=f8e41]: "}"
+                                - paragraph [ref=f8e42]: "This creates a grid where:"
+                                - list [ref=f8e43]:
+                                  - listitem [ref=f8e44]: Columns automatically fit as many as possible
+                                  - listitem [ref=f8e45]: Each column is at least 250px wide
+                                  - listitem [ref=f8e46]: Columns expand to fill available space
+                                  - listitem [ref=f8e47]: There's a 1rem gap between items
+                                - paragraph [ref=f8e48]: Would you like me to explain more about how this works?
+                              - generic [ref=f8e49]:
+                                - button [ref=f8e50]:
+                                  - img
+                                - button [ref=f8e51]:
+                                  - img
+                                - button [ref=f8e52]:
+                                  - img
+                            - generic [ref=f8e54]:
+                              - generic [ref=f8e55]: What is the capital of France?
+                              - generic [ref=f8e56]:
+                                - button [ref=f8e57]:
+                                  - img
+                                - button [ref=f8e58]:
+                                  - img
+                                - button [ref=f8e59]:
+                                  - img
+                            - generic [ref=f8e61]:
+                              - paragraph [ref=f8e63]: The capital of France is Paris.
+                              - generic [ref=f8e64]:
+                                - button [ref=f8e65]:
+                                  - img
+                                - button [ref=f8e66]:
+                                  - img
+                                - button [ref=f8e67]:
+                                  - img
+                        - generic [ref=f8e70]:
+                          - textbox "Ask anything" [ref=f8e71]
+                          - generic [ref=f8e72]:
+                            - generic [ref=f8e73]:
+                              - button [ref=f8e74]:
+                                - img
+                              - button "Search" [ref=f8e75]:
+                                - img
+                                - text: Search
+                              - button [ref=f8e76]:
+                                - img
+                            - generic [ref=f8e77]:
+                              - button [ref=f8e78]:
+                                - img
+                              - button [disabled]:
+                                - img
+                      - alert [ref=f8e79]
+            - generic [ref=e157]:
+              - heading "Sidebar with chat history" [level=4] [ref=e158]
+              - generic [ref=e160]:
+                - tablist [ref=e161]:
+                  - tab "Preview" [selected] [ref=e162]: Preview
+                  - tab "Code" [ref=e165]
+                  - link [ref=e167] [cursor=pointer]:
+                    - /url: https://www.prompt-kit.com/c/sidebar-chat-history
+                    - img [ref=e168]
+                - tabpanel "Preview" [ref=e172]:
+                  - iframe [ref=e174]:
+                    - generic [active] [ref=f9e1]:
+                      - generic [ref=f9e3]:
+                        - generic [ref=f9e6]:
+                          - generic [ref=f9e7]:
+                            - generic [ref=f9e10]: zola.chat
+                            - button [ref=f9e11]:
+                              - img
+                          - generic [ref=f9e12]:
+                            - generic [ref=f9e13]:
+                              - generic [ref=f9e14]: Today
+                              - list [ref=f9e15]:
+                                - button "Project Roadmap Discussion" [ref=f9e16]:
+                                  - generic [ref=f9e17]: Project Roadmap Discussion
+                                - button "API Documentation Review" [ref=f9e18]:
+                                  - generic [ref=f9e19]: API Documentation Review
+                                - button "Frontend Bug Analysis" [ref=f9e20]:
+                                  - generic [ref=f9e21]: Frontend Bug Analysis
+                            - generic [ref=f9e22]:
+                              - generic [ref=f9e23]: Yesterday
+                              - list [ref=f9e24]:
+                                - button "Database Schema Design" [ref=f9e25]:
+                                  - generic [ref=f9e26]: Database Schema Design
+                                - button "Performance Optimization" [ref=f9e27]:
+                                  - generic [ref=f9e28]: Performance Optimization
+                            - generic [ref=f9e29]:
+                              - generic [ref=f9e30]: Last 7 days
+                              - list [ref=f9e31]:
+                                - button "Authentication Flow" [ref=f9e32]:
+                                  - generic [ref=f9e33]: Authentication Flow
+                                - button "Component Library" [ref=f9e34]:
+                                  - generic [ref=f9e35]: Component Library
+                                - button "UI/UX Feedback" [ref=f9e36]:
+                                  - generic [ref=f9e37]: UI/UX Feedback
+                            - generic [ref=f9e38]:
+                              - generic [ref=f9e39]: Last month
+                              - list [ref=f9e40]:
+                                - button "Initial Project Setup" [ref=f9e41]:
+                                  - generic [ref=f9e42]: Initial Project Setup
+                                - button "Requirements Gathering" [ref=f9e43]:
+                                  - generic [ref=f9e44]: Requirements Gathering
+                                - button "Tech Stack Selection" [ref=f9e45]:
+                                  - generic [ref=f9e46]: Tech Stack Selection
+                                - button "Project Planning" [ref=f9e47]:
+                                  - generic [ref=f9e48]: Project Planning
+                                - button "Code Review" [ref=f9e49]:
+                                  - generic [ref=f9e50]: Code Review
+                                - button "Bug Discussion" [ref=f9e51]:
+                                  - generic [ref=f9e52]: Bug Discussion
+                                - button "Project Planning" [ref=f9e53]:
+                                  - generic [ref=f9e54]: Project Planning
+                        - main [ref=f9e55]:
+                          - main [ref=f9e56]:
+                            - button "Toggle Sidebar" [ref=f9e58]:
+                              - img
+                              - generic [ref=f9e59]: Toggle Sidebar
+                      - alert [ref=f9e86]
+            - generic [ref=e175]:
+              - heading "Full chat app" [level=4] [ref=e176]
+              - generic [ref=e178]:
+                - tablist [ref=e179]:
+                  - tab "Preview" [selected] [ref=e180]: Preview
+                  - tab "Code" [ref=e183]
+                  - link [ref=e185] [cursor=pointer]:
+                    - /url: https://www.prompt-kit.com/c/full-chat-app
+                    - img [ref=e186]
+                - tabpanel "Preview" [ref=e190]:
+                  - iframe [ref=e192]:
+                    - generic [active] [ref=f10e1]:
+                      - generic [ref=f10e3]:
+                        - generic [ref=f10e6]:
+                          - generic [ref=f10e7]:
+                            - generic [ref=f10e10]: zola.chat
+                            - button [ref=f10e11]:
+                              - img
+                          - generic [ref=f10e12]:
+                            - button "New Chat" [ref=f10e14]:
+                              - img
+                              - generic [ref=f10e15]: New Chat
+                            - generic [ref=f10e16]:
+                              - generic [ref=f10e17]: Today
+                              - list [ref=f10e18]:
+                                - button "Project roadmap discussion" [ref=f10e19]:
+                                  - generic [ref=f10e20]: Project roadmap discussion
+                                - button "API Documentation Review" [ref=f10e21]:
+                                  - generic [ref=f10e22]: API Documentation Review
+                                - button "Frontend Bug Analysis" [ref=f10e23]:
+                                  - generic [ref=f10e24]: Frontend Bug Analysis
+                            - generic [ref=f10e25]:
+                              - generic [ref=f10e26]: Yesterday
+                              - list [ref=f10e27]:
+                                - button "Database Schema Design" [ref=f10e28]:
+                                  - generic [ref=f10e29]: Database Schema Design
+                                - button "Performance Optimization" [ref=f10e30]:
+                                  - generic [ref=f10e31]: Performance Optimization
+                            - generic [ref=f10e32]:
+                              - generic [ref=f10e33]: Last 7 days
+                              - list [ref=f10e34]:
+                                - button "Authentication Flow" [ref=f10e35]:
+                                  - generic [ref=f10e36]: Authentication Flow
+                                - button "Component Library" [ref=f10e37]:
+                                  - generic [ref=f10e38]: Component Library
+                                - button "UI/UX Feedback" [ref=f10e39]:
+                                  - generic [ref=f10e40]: UI/UX Feedback
+                            - generic [ref=f10e41]:
+                              - generic [ref=f10e42]: Last month
+                              - list [ref=f10e43]:
+                                - button "Initial Project Setup" [ref=f10e44]:
+                                  - generic [ref=f10e45]: Initial Project Setup
+                        - main [ref=f10e46]:
+                          - main [ref=f10e47]:
+                            - generic [ref=f10e48]:
+                              - button "Toggle Sidebar" [ref=f10e49]:
+                                - img
+                                - generic [ref=f10e50]: Toggle Sidebar
+                              - generic [ref=f10e51]: Project roadmap discussion
+                            - log [ref=f10e53]:
+                              - generic [ref=f10e55]:
+                                - generic [ref=f10e57]:
+                                  - generic [ref=f10e58]: Hello! Can you help me with a coding question?
+                                  - generic [ref=f10e59]:
+                                    - button [ref=f10e60]:
+                                      - img
+                                    - button [ref=f10e61]:
+                                      - img
+                                    - button [ref=f10e62]:
+                                      - img
+                                - generic [ref=f10e64]:
+                                  - paragraph [ref=f10e66]: Of course! I'd be happy to help with your coding question. What would you like to know?
+                                  - generic [ref=f10e67]:
+                                    - button [ref=f10e68]:
+                                      - img
+                                    - button [ref=f10e69]:
+                                      - img
+                                    - button [ref=f10e70]:
+                                      - img
+                                - generic [ref=f10e72]:
+                                  - generic [ref=f10e73]: How do I create a responsive layout with CSS Grid?
+                                  - generic [ref=f10e74]:
+                                    - button [ref=f10e75]:
+                                      - img
+                                    - button [ref=f10e76]:
+                                      - img
+                                    - button [ref=f10e77]:
+                                      - img
+                                - generic [ref=f10e79]:
+                                  - generic [ref=f10e80]:
+                                    - paragraph [ref=f10e81]: "Creating a responsive layout with CSS Grid is straightforward. Here's a basic example:"
+                                    - code [ref=f10e85]:
+                                      - generic [ref=f10e86]: ".container {"
+                                      - generic [ref=f10e87]: "display: grid;"
+                                      - generic [ref=f10e88]: "grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));"
+                                      - generic [ref=f10e89]: "gap: 1rem;"
+                                      - generic [ref=f10e90]: "}"
+                                    - paragraph [ref=f10e91]: "This creates a grid where:"
+                                    - list [ref=f10e92]:
+                                      - listitem [ref=f10e93]: Columns automatically fit as many as possible
+                                      - listitem [ref=f10e94]: Each column is at least 250px wide
+                                      - listitem [ref=f10e95]: Columns expand to fill available space
+                                      - listitem [ref=f10e96]: There's a 1rem gap between items
+                                    - paragraph [ref=f10e97]: Would you like me to explain more about how this works?
+                                  - generic [ref=f10e98]:
+                                    - button [ref=f10e99]:
+                                      - img
+                                    - button [ref=f10e100]:
+                                      - img
+                                    - button [ref=f10e101]:
+                                      - img
+                              - generic [ref=f10e102]:
+                                - button:
+                                  - img
+                            - generic [ref=f10e106]:
+                              - textbox "Ask anything" [ref=f10e107]
+                              - generic [ref=f10e108]:
+                                - generic [ref=f10e109]:
+                                  - button [ref=f10e110]:
+                                    - img
+                                  - button "Search" [ref=f10e111]:
+                                    - img
+                                    - text: Search
+                                  - button [ref=f10e112]:
+                                    - img
+                                - generic [ref=f10e113]:
+                                  - button [ref=f10e114]:
+                                    - img
+                                  - button [disabled]:
+                                    - img
+                      - alert [ref=f10e115]
+          - generic [ref=e193]:
+            - paragraph [ref=e194]: Something missing?
+            - generic [ref=e195]:
+              - link "Suggest a new block" [ref=e196] [cursor=pointer]:
+                - /url: https://github.com/ibelick/prompt-kit/issues/new?title=%5BBlock+Request%5D+&labels=block&template=block_request.yml
+              - link "Contribute to prompt-kit" [ref=e197] [cursor=pointer]:
+                - /url: https://github.com/ibelick/prompt-kit/blob/main/CONTRIBUTING.md
+      - generic [ref=e198]:
+        - link "Tool" [ref=e199] [cursor=pointer]:
+          - /url: /docs/tool
+          - img [ref=e200]
+          - text: Tool
+        - link "Primitives" [ref=e202] [cursor=pointer]:
+          - /url: /primitives
+          - text: Primitives
+          - img [ref=e203]
+    - generic [ref=e210]:
+      - link "prompt-kit" [ref=e212] [cursor=pointer]:
+        - /url: /
+        - img [ref=e213]
+        - heading "prompt-kit" [level=1] [ref=e215]
+      - generic [ref=e216]:
+        - generic [ref=e217]: Get Started
+        - list [ref=e219]:
+          - listitem [ref=e220]:
+            - link "Home" [ref=e221] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e222]:
+            - link "Introduction" [ref=e223] [cursor=pointer]:
+              - /url: /docs/introduction
+          - listitem [ref=e224]:
+            - link "Installation" [ref=e225] [cursor=pointer]:
+              - /url: /docs/installation
+          - listitem [ref=e226]:
+            - link "Model Context Protocol" [ref=e227] [cursor=pointer]:
+              - /url: /docs/mcp
+        - generic [ref=e228]: Components
+        - list [ref=e230]:
+          - listitem [ref=e231]:
+            - link "Chain of Thought" [ref=e232] [cursor=pointer]:
+              - /url: /docs/chain-of-thought
+              - generic [ref=e233]: Chain of Thought
+          - listitem [ref=e234]:
+            - link "Chat Container" [ref=e235] [cursor=pointer]:
+              - /url: /docs/chat-container
+              - generic [ref=e236]: Chat Container
+          - listitem [ref=e237]:
+            - link "Code Block" [ref=e238] [cursor=pointer]:
+              - /url: /docs/code-block
+              - generic [ref=e239]: Code Block
+          - listitem [ref=e240]:
+            - link "Feedback Bar new" [ref=e241] [cursor=pointer]:
+              - /url: /docs/feedback-bar
+              - generic [ref=e242]: Feedback Bar
+              - generic [ref=e243]: new
+          - listitem [ref=e244]:
+            - link "File Upload" [ref=e245] [cursor=pointer]:
+              - /url: /docs/file-upload
+              - generic [ref=e246]: File Upload
+          - listitem [ref=e247]:
+            - link "Image" [ref=e248] [cursor=pointer]:
+              - /url: /docs/image
+              - generic [ref=e249]: Image
+          - listitem [ref=e250]:
+            - link "Loader" [ref=e251] [cursor=pointer]:
+              - /url: /docs/loader
+              - generic [ref=e252]: Loader
+          - listitem [ref=e253]:
+            - link "Markdown" [ref=e254] [cursor=pointer]:
+              - /url: /docs/markdown
+              - generic [ref=e255]: Markdown
+          - listitem [ref=e256]:
+            - link "Message" [ref=e257] [cursor=pointer]:
+              - /url: /docs/message
+              - generic [ref=e258]: Message
+          - listitem [ref=e259]:
+            - link "Prompt Input" [ref=e260] [cursor=pointer]:
+              - /url: /docs/prompt-input
+              - generic [ref=e261]: Prompt Input
+          - listitem [ref=e262]:
+            - link "Prompt Suggestion" [ref=e263] [cursor=pointer]:
+              - /url: /docs/prompt-suggestion
+              - generic [ref=e264]: Prompt Suggestion
+          - listitem [ref=e265]:
+            - link "Reasoning" [ref=e266] [cursor=pointer]:
+              - /url: /docs/reasoning
+              - generic [ref=e267]: Reasoning
+          - listitem [ref=e268]:
+            - link "Scroll Button" [ref=e269] [cursor=pointer]:
+              - /url: /docs/scroll-button
+              - generic [ref=e270]: Scroll Button
+          - listitem [ref=e271]:
+            - link "Source" [ref=e272] [cursor=pointer]:
+              - /url: /docs/source
+              - generic [ref=e273]: Source
+          - listitem [ref=e274]:
+            - link "Steps" [ref=e275] [cursor=pointer]:
+              - /url: /docs/steps
+              - generic [ref=e276]: Steps
+          - listitem [ref=e277]:
+            - link "System Message" [ref=e278] [cursor=pointer]:
+              - /url: /docs/system-message
+              - generic [ref=e279]: System Message
+          - listitem [ref=e280]:
+            - link "Text Shimmer new" [ref=e281] [cursor=pointer]:
+              - /url: /docs/text-shimmer
+              - generic [ref=e282]: Text Shimmer
+              - generic [ref=e283]: new
+          - listitem [ref=e284]:
+            - link "Thinking Bar new" [ref=e285] [cursor=pointer]:
+              - /url: /docs/thinking-bar
+              - generic [ref=e286]: Thinking Bar
+              - generic [ref=e287]: new
+          - listitem [ref=e288]:
+            - link "Tool" [ref=e289] [cursor=pointer]:
+              - /url: /docs/tool
+              - generic [ref=e290]: Tool
+        - generic [ref=e291]:
+          - link "Blocks" [ref=e293] [cursor=pointer]:
+            - /url: /blocks
+          - link "Primitives new" [ref=e295] [cursor=pointer]:
+            - /url: /primitives
+            - text: Primitives
+            - generic [ref=e296]: new
+        - generic [ref=e297]: Integrations
+        - list [ref=e299]:
+          - listitem [ref=e300]:
+            - link "OpenAI SDK" [ref=e301] [cursor=pointer]:
+              - /url: /openai-sdk
+          - listitem [ref=e302]:
+            - link "Vercel AI SDK" [ref=e303] [cursor=pointer]:
+              - /url: /vercel-ai-sdk
+          - listitem [ref=e304]:
+            - link "Chat UI" [ref=e305] [cursor=pointer]:
+              - /url: /chat-ui
+          - listitem [ref=e306]:
+            - link "AI SDK" [ref=e307] [cursor=pointer]:
+              - /url: /ai-sdk
+        - generic [ref=e308]: LLMs
+        - list [ref=e310]:
+          - listitem [ref=e311]:
+            - link "llms.txt" [ref=e312] [cursor=pointer]:
+              - /url: /llms.txt
+          - listitem [ref=e313]:
+            - link "llms-full.txt" [ref=e314] [cursor=pointer]:
+              - /url: /llms-full.txt
+        - link "Showcase" [ref=e316] [cursor=pointer]:
+          - /url: /docs/showcase
+        - generic [ref=e317]: Social
+        - list [ref=e319]:
+          - listitem [ref=e320]:
+            - link "GitHub" [ref=e321] [cursor=pointer]:
+              - /url: https://github.com/ibelick/prompt-kit
+          - listitem [ref=e322]:
+            - link "X (Twitter)" [ref=e323] [cursor=pointer]:
+              - /url: https://twitter.com/ibelick
+        - generic [ref=e324]: Theme
+        - 'button "Theme: Light. Click to switch to dark" [ref=e326]': Light
+  - alert [ref=e327]

@@ -1,0 +1,235 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e6]:
+      - main [ref=e7]:
+        - generic [ref=e8]:
+          - generic [ref=e9]:
+            - paragraph [ref=e10]: Primitives
+            - paragraph [ref=e11]:
+              - text: Fullstack building blocks for AI applications. Each one includes a UI component and an API route using the
+              - link "Vercel AI SDK (v5)" [ref=e12] [cursor=pointer]:
+                - /url: https://v5.ai-sdk.dev
+              - text: . Easy to install with the shadcn registry.
+          - generic [ref=e13]:
+            - paragraph [ref=e14]:
+              - text: To test the demos, set your
+              - code [ref=e15]: OPENAI_API_KEY
+              - text: below. It’s stored in localStorage.
+            - textbox "OPENAI_API_KEY" [ref=e18]
+          - generic [ref=e19]:
+            - generic [ref=e20]:
+              - heading "Full chatbot" [level=4] [ref=e21]
+              - generic [ref=e23]:
+                - tablist [ref=e24]:
+                  - tab "Preview" [selected] [ref=e25]: Preview
+                  - tab "UI (page.tsx)" [ref=e28]
+                  - tab "API (route.ts)" [ref=e29]
+                  - link [ref=e31] [cursor=pointer]:
+                    - /url: https://www.prompt-kit.com/demo/chatbot
+                    - img [ref=e32]
+                - tabpanel "Preview" [ref=e36]:
+                  - iframe [ref=e38]:
+                    - generic [active] [ref=f11e1]:
+                      - generic [ref=f11e3]:
+                        - log [ref=f11e4]
+                        - generic [ref=f11e9]:
+                          - textbox "Ask anything" [ref=f11e10]
+                          - generic [ref=f11e12]:
+                            - button [disabled]:
+                              - img
+                      - alert [ref=f11e13]
+              - generic [ref=e39]:
+                - button "Copy code" [ref=e40]:
+                  - img [ref=e42]
+                  - generic:
+                    - img
+                - code [ref=e47]:
+                  - generic [ref=e48]: npx shadcn@latest add "https://prompt-kit.com/c/chatbot.json"
+            - generic [ref=e49]:
+              - heading "Tool calling" [level=4] [ref=e50]
+              - generic [ref=e52]:
+                - tablist [ref=e53]:
+                  - tab "Preview" [selected] [ref=e54]: Preview
+                  - tab "UI (page.tsx)" [ref=e57]
+                  - tab "API (route.ts)" [ref=e58]
+                  - link [ref=e60] [cursor=pointer]:
+                    - /url: https://www.prompt-kit.com/demo/tool-calling
+                    - img [ref=e61]
+                - tabpanel "Preview" [ref=e65]:
+                  - iframe [ref=e67]:
+                    - generic [active] [ref=f12e1]:
+                      - generic [ref=f12e3]:
+                        - log [ref=f12e4]:
+                          - generic [ref=f12e7]:
+                            - generic [ref=f12e8]: "Try asking:"
+                            - list [ref=f12e9]:
+                              - listitem [ref=f12e10]: what's the current date?
+                              - listitem [ref=f12e11]: what time is it in Tokyo?
+                              - listitem [ref=f12e12]: give me the current time in Europe/Paris
+                        - generic [ref=f12e15]:
+                          - textbox "Ask anything" [ref=f12e16]
+                          - generic [ref=f12e18]:
+                            - button [disabled]:
+                              - img
+                      - alert [ref=f12e19]
+              - generic [ref=e68]:
+                - button "Copy code" [ref=e69]:
+                  - img [ref=e71]
+                  - generic:
+                    - img
+                - code [ref=e76]:
+                  - generic [ref=e77]: npx shadcn@latest add "https://prompt-kit.com/c/tool-calling.json"
+          - generic [ref=e78]:
+            - paragraph [ref=e79]: Something missing?
+            - generic [ref=e80]:
+              - link "Suggest a new primitive" [ref=e81] [cursor=pointer]:
+                - /url: https://github.com/ibelick/prompt-kit/issues/new?title=%5BPrimitive+Request%5D+&labels=primitive&template=primitive_request.yml
+              - link "Contribute to prompt-kit" [ref=e82] [cursor=pointer]:
+                - /url: https://github.com/ibelick/prompt-kit/blob/main/CONTRIBUTING.md
+      - link "Blocks" [ref=e84] [cursor=pointer]:
+        - /url: /blocks
+        - img [ref=e85]
+        - text: Blocks
+    - generic [ref=e92]:
+      - link "prompt-kit" [ref=e94] [cursor=pointer]:
+        - /url: /
+        - img [ref=e95]
+        - heading "prompt-kit" [level=1] [ref=e97]
+      - generic [ref=e98]:
+        - generic [ref=e99]: Get Started
+        - list [ref=e101]:
+          - listitem [ref=e102]:
+            - link "Home" [ref=e103] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e104]:
+            - link "Introduction" [ref=e105] [cursor=pointer]:
+              - /url: /docs/introduction
+          - listitem [ref=e106]:
+            - link "Installation" [ref=e107] [cursor=pointer]:
+              - /url: /docs/installation
+          - listitem [ref=e108]:
+            - link "Model Context Protocol" [ref=e109] [cursor=pointer]:
+              - /url: /docs/mcp
+        - generic [ref=e110]: Components
+        - list [ref=e112]:
+          - listitem [ref=e113]:
+            - link "Chain of Thought" [ref=e114] [cursor=pointer]:
+              - /url: /docs/chain-of-thought
+              - generic [ref=e115]: Chain of Thought
+          - listitem [ref=e116]:
+            - link "Chat Container" [ref=e117] [cursor=pointer]:
+              - /url: /docs/chat-container
+              - generic [ref=e118]: Chat Container
+          - listitem [ref=e119]:
+            - link "Code Block" [ref=e120] [cursor=pointer]:
+              - /url: /docs/code-block
+              - generic [ref=e121]: Code Block
+          - listitem [ref=e122]:
+            - link "Feedback Bar new" [ref=e123] [cursor=pointer]:
+              - /url: /docs/feedback-bar
+              - generic [ref=e124]: Feedback Bar
+              - generic [ref=e125]: new
+          - listitem [ref=e126]:
+            - link "File Upload" [ref=e127] [cursor=pointer]:
+              - /url: /docs/file-upload
+              - generic [ref=e128]: File Upload
+          - listitem [ref=e129]:
+            - link "Image" [ref=e130] [cursor=pointer]:
+              - /url: /docs/image
+              - generic [ref=e131]: Image
+          - listitem [ref=e132]:
+            - link "Loader" [ref=e133] [cursor=pointer]:
+              - /url: /docs/loader
+              - generic [ref=e134]: Loader
+          - listitem [ref=e135]:
+            - link "Markdown" [ref=e136] [cursor=pointer]:
+              - /url: /docs/markdown
+              - generic [ref=e137]: Markdown
+          - listitem [ref=e138]:
+            - link "Message" [ref=e139] [cursor=pointer]:
+              - /url: /docs/message
+              - generic [ref=e140]: Message
+          - listitem [ref=e141]:
+            - link "Prompt Input" [ref=e142] [cursor=pointer]:
+              - /url: /docs/prompt-input
+              - generic [ref=e143]: Prompt Input
+          - listitem [ref=e144]:
+            - link "Prompt Suggestion" [ref=e145] [cursor=pointer]:
+              - /url: /docs/prompt-suggestion
+              - generic [ref=e146]: Prompt Suggestion
+          - listitem [ref=e147]:
+            - link "Reasoning" [ref=e148] [cursor=pointer]:
+              - /url: /docs/reasoning
+              - generic [ref=e149]: Reasoning
+          - listitem [ref=e150]:
+            - link "Scroll Button" [ref=e151] [cursor=pointer]:
+              - /url: /docs/scroll-button
+              - generic [ref=e152]: Scroll Button
+          - listitem [ref=e153]:
+            - link "Source" [ref=e154] [cursor=pointer]:
+              - /url: /docs/source
+              - generic [ref=e155]: Source
+          - listitem [ref=e156]:
+            - link "Steps" [ref=e157] [cursor=pointer]:
+              - /url: /docs/steps
+              - generic [ref=e158]: Steps
+          - listitem [ref=e159]:
+            - link "System Message" [ref=e160] [cursor=pointer]:
+              - /url: /docs/system-message
+              - generic [ref=e161]: System Message
+          - listitem [ref=e162]:
+            - link "Text Shimmer new" [ref=e163] [cursor=pointer]:
+              - /url: /docs/text-shimmer
+              - generic [ref=e164]: Text Shimmer
+              - generic [ref=e165]: new
+          - listitem [ref=e166]:
+            - link "Thinking Bar new" [ref=e167] [cursor=pointer]:
+              - /url: /docs/thinking-bar
+              - generic [ref=e168]: Thinking Bar
+              - generic [ref=e169]: new
+          - listitem [ref=e170]:
+            - link "Tool" [ref=e171] [cursor=pointer]:
+              - /url: /docs/tool
+              - generic [ref=e172]: Tool
+        - generic [ref=e173]:
+          - link "Blocks" [ref=e175] [cursor=pointer]:
+            - /url: /blocks
+          - link "Primitives new" [ref=e177] [cursor=pointer]:
+            - /url: /primitives
+            - text: Primitives
+            - generic [ref=e178]: new
+        - generic [ref=e179]: Integrations
+        - list [ref=e181]:
+          - listitem [ref=e182]:
+            - link "OpenAI SDK" [ref=e183] [cursor=pointer]:
+              - /url: /openai-sdk
+          - listitem [ref=e184]:
+            - link "Vercel AI SDK" [ref=e185] [cursor=pointer]:
+              - /url: /vercel-ai-sdk
+          - listitem [ref=e186]:
+            - link "Chat UI" [ref=e187] [cursor=pointer]:
+              - /url: /chat-ui
+          - listitem [ref=e188]:
+            - link "AI SDK" [ref=e189] [cursor=pointer]:
+              - /url: /ai-sdk
+        - generic [ref=e190]: LLMs
+        - list [ref=e192]:
+          - listitem [ref=e193]:
+            - link "llms.txt" [ref=e194] [cursor=pointer]:
+              - /url: /llms.txt
+          - listitem [ref=e195]:
+            - link "llms-full.txt" [ref=e196] [cursor=pointer]:
+              - /url: /llms-full.txt
+        - link "Showcase" [ref=e198] [cursor=pointer]:
+          - /url: /docs/showcase
+        - generic [ref=e199]: Social
+        - list [ref=e201]:
+          - listitem [ref=e202]:
+            - link "GitHub" [ref=e203] [cursor=pointer]:
+              - /url: https://github.com/ibelick/prompt-kit
+          - listitem [ref=e204]:
+            - link "X (Twitter)" [ref=e205] [cursor=pointer]:
+              - /url: https://twitter.com/ibelick
+        - generic [ref=e206]: Theme
+        - 'button "Theme: Light. Click to switch to dark" [ref=e208]': Light
+  - alert [ref=e209]

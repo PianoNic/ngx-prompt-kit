@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PkReasoningImports } from 'prompt-kit-ng';
+import { PkReasoningImports } from 'prompt-kit-ng/reasoning';
 
 @Component({
   selector: 'app-reasoning-demo',

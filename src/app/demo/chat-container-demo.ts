@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { PkChatContainerImports } from 'prompt-kit-ng';
-import { PkMessageImports } from 'prompt-kit-ng';
-import { PkScrollButton } from 'prompt-kit-ng';
+import { PkChatContainerImports } from 'prompt-kit-ng/chat-container';
+import { PkMessageImports } from 'prompt-kit-ng/message';
+import { PkScrollButton } from 'prompt-kit-ng/scroll-button';
 
 @Component({
   selector: 'app-chat-container-demo',

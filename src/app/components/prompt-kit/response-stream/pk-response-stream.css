@@ -1,0 +1,21 @@
+@keyframes pk-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.pk-fade-segment {
+  display: inline-block;
+  opacity: 0;
+  animation-name: pk-fade-in;
+  animation-duration: var(--pk-fade-duration, 200ms);
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+.pk-fade-segment-space {
+  white-space: pre;
+}

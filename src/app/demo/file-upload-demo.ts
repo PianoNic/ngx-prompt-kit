@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { PkFileUploadImports } from 'prompt-kit-ng';
+import { PkFileUploadImports } from 'prompt-kit-ng/file-upload';
 
 @Component({
   selector: 'app-file-upload-demo',

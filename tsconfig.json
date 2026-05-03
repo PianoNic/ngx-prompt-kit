@@ -69,7 +69,19 @@
       "@spartan-ng/helm/toggle-group": ["./libs/ui/toggle-group/src/index.ts"],
       "@spartan-ng/helm/tooltip": ["./libs/ui/tooltip/src/index.ts"],
       "@spartan-ng/helm/typography": ["./libs/ui/typography/src/index.ts"],
-      "@spartan-ng/helm/utils": ["./libs/ui/utils/src/index.ts"]
+      "@spartan-ng/helm/utils": ["./libs/ui/utils/src/index.ts"],
+      "prompt-kit-ng/utils": ["./src/app/components/prompt-kit/utils"],
+      "prompt-kit-ng/message": ["./src/app/components/prompt-kit/message"],
+      "prompt-kit-ng/markdown": ["./src/app/components/prompt-kit/markdown"],
+      "prompt-kit-ng/code-block": ["./src/app/components/prompt-kit/code-block"],
+      "prompt-kit-ng/prompt-input": ["./src/app/components/prompt-kit/prompt-input"],
+      "prompt-kit-ng/response-stream": ["./src/app/components/prompt-kit/response-stream"],
+      "prompt-kit-ng/loader": ["./src/app/components/prompt-kit/loader"],
+      "prompt-kit-ng/chat-container": ["./src/app/components/prompt-kit/chat-container"],
+      "prompt-kit-ng/scroll-button": ["./src/app/components/prompt-kit/scroll-button"],
+      "prompt-kit-ng/prompt-suggestion": ["./src/app/components/prompt-kit/prompt-suggestion"],
+      "prompt-kit-ng/file-upload": ["./src/app/components/prompt-kit/file-upload"],
+      "prompt-kit-ng/reasoning": ["./src/app/components/prompt-kit/reasoning"]
     }
   },
   "angularCompilerOptions": {

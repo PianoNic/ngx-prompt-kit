@@ -1,0 +1,416 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - main [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - generic [ref=e10]: chat ui
+          - heading "Chat UI components for modern interfaces" [level=1] [ref=e11]
+          - paragraph [ref=e12]: Model-agnostic chat UI components for layouts, message lists, avatars, history, and core conversation patterns.
+          - link "Get Started" [ref=e13] [cursor=pointer]:
+            - /url: /docs
+            - button "Get Started" [ref=e14]
+        - generic [ref=e15]:
+          - heading "Build a chat UI with React components" [level=2] [ref=e16]
+          - generic [ref=e17]:
+            - generic [ref=e20]:
+              - textbox "Message ChatGPT" [ref=e21]
+              - generic [ref=e22]:
+                - generic [ref=e23]:
+                  - button "Attach files" [ref=e24]:
+                    - img
+                  - button "Search the web" [ref=e25]:
+                    - img
+                    - text: Search
+                  - button "View tools" [ref=e26]:
+                    - img
+                - button "Send message" [ref=e27]:
+                  - img
+            - generic [ref=e28]:
+              - button "ChatGPT logo ChatGPT" [ref=e29]:
+                - generic [ref=e30]:
+                  - img "ChatGPT logo" [ref=e31]
+                  - text: ChatGPT
+              - button "Mistral AI logo Mistral AI" [ref=e33]:
+                - generic [ref=e34]:
+                  - img "Mistral AI logo" [ref=e35]
+                  - text: Mistral AI
+              - button "DeepSeek logo DeepSeek" [ref=e36]:
+                - generic [ref=e37]:
+                  - img "DeepSeek logo" [ref=e38]
+                  - text: DeepSeek
+        - generic [ref=e40]:
+          - generic [ref=e41]:
+            - heading "What is a chat UI?" [level=2] [ref=e42]
+            - generic [ref=e43]:
+              - paragraph [ref=e44]: A chat UI is the interface layer for conversations, regardless of model or provider. It includes a conversation layout, a message list with roles, and a message renderer that keeps long threads readable. Common building blocks are avatars, timestamps, message grouping, and a history panel for navigation.
+              - paragraph [ref=e45]: The goal is clarity and continuity. A solid chat UI defines spacing, alignment, and affordances so users can scan messages quickly and understand context. It also includes input patterns that support multi-line prompts and consistent keyboard behavior.
+              - paragraph [ref=e46]: "This page focuses on chat UI layout patterns and components that are model-agnostic: message lists, avatars, chat history, and conversation shells. Use these building blocks to assemble a chat interface that can plug into any backend or SDK."
+          - generic [ref=e47]:
+            - heading "Chat UI components included" [level=2] [ref=e48]
+            - generic [ref=e49]:
+              - link "Prompt input with actions" [ref=e50] [cursor=pointer]:
+                - /url: /c/prompt-input-actions
+                - img [ref=e51]
+                - generic [ref=e53]: Prompt input with actions
+              - link "Prompt input with suggestions" [ref=e54] [cursor=pointer]:
+                - /url: /c/prompt-input-suggestions
+                - img [ref=e55]
+                - generic [ref=e57]: Prompt input with suggestions
+              - link "Prompt input with autocomplete" [ref=e58] [cursor=pointer]:
+                - /url: /c/prompt-autocomplete-highlight
+                - img [ref=e59]
+                - generic [ref=e61]: Prompt input with autocomplete
+              - link "Conversation with avatars" [ref=e62] [cursor=pointer]:
+                - /url: /c/conversation-avatars
+                - img [ref=e63]
+                - generic [ref=e65]: Conversation with avatars
+              - link "Conversation with actions" [ref=e66] [cursor=pointer]:
+                - /url: /c/conversation-actions
+                - img [ref=e67]
+                - generic [ref=e69]: Conversation with actions
+              - link "Conversation with scroll to bottom" [ref=e70] [cursor=pointer]:
+                - /url: /c/conversation-scroll-bottom
+                - img [ref=e71]
+                - generic [ref=e73]: Conversation with scroll to bottom
+              - link "Conversation with prompt input" [ref=e74] [cursor=pointer]:
+                - /url: /c/conversation-prompt-input
+                - img [ref=e75]
+                - generic [ref=e77]: Conversation with prompt input
+              - link "Sidebar with chat history" [ref=e78] [cursor=pointer]:
+                - /url: /c/sidebar-chat-history
+                - img [ref=e79]
+                - generic [ref=e81]: Sidebar with chat history
+              - link "Full chat app" [ref=e82] [cursor=pointer]:
+                - /url: /c/full-chat-app
+                - img [ref=e83]
+                - generic [ref=e85]: Full chat app
+              - link "Full chatbot (primitive)" [ref=e86] [cursor=pointer]:
+                - /url: /demo/chatbot
+                - img [ref=e87]
+                - generic [ref=e89]: Full chatbot (primitive)
+              - link "Tool calling (primitive)" [ref=e90] [cursor=pointer]:
+                - /url: /demo/tool-calling
+                - img [ref=e91]
+                - generic [ref=e93]: Tool calling (primitive)
+          - generic [ref=e94]:
+            - heading "Chat UI examples" [level=2] [ref=e95]
+            - generic [ref=e96]:
+              - link "Full chatbot (primitive) Streaming responses with markdown and code blocks for production chat UIs." [ref=e97] [cursor=pointer]:
+                - /url: /demo/chatbot
+                - heading "Full chatbot (primitive)" [level=3] [ref=e98]
+                - paragraph [ref=e99]: Streaming responses with markdown and code blocks for production chat UIs.
+              - link "Tool calling (primitive) Tool-call UI patterns with structured outputs and code-friendly responses." [ref=e100] [cursor=pointer]:
+                - /url: /demo/tool-calling
+                - heading "Tool calling (primitive)" [level=3] [ref=e101]
+                - paragraph [ref=e102]: Tool-call UI patterns with structured outputs and code-friendly responses.
+              - link "Conversation with prompt input (block) Prompt input, send actions, and input UX optimized for long prompts." [ref=e103] [cursor=pointer]:
+                - /url: /c/conversation-prompt-input
+                - heading "Conversation with prompt input (block)" [level=3] [ref=e104]
+                - paragraph [ref=e105]: Prompt input, send actions, and input UX optimized for long prompts.
+              - link "Full chat app (block) End-to-end chat UI layout with history, streaming, and message states." [ref=e106] [cursor=pointer]:
+                - /url: /c/full-chat-app
+                - heading "Full chat app (block)" [level=3] [ref=e107]
+                - paragraph [ref=e108]: End-to-end chat UI layout with history, streaming, and message states.
+        - generic [ref=e109]:
+          - heading "The foundation for your AI application" [level=2] [ref=e110]
+          - generic [ref=e111]:
+            - generic [ref=e112]:
+              - heading "Components" [level=3] [ref=e113]
+              - list [ref=e114]:
+                - listitem [ref=e115]:
+                  - img [ref=e116]
+                  - generic [ref=e118]: Everything to build your own UI
+                - listitem [ref=e119]:
+                  - img [ref=e120]
+                  - generic [ref=e122]: UI for AI elements
+                - listitem [ref=e123]:
+                  - img [ref=e124]
+                  - generic [ref=e126]: Headless logic
+                - listitem [ref=e127]:
+                  - img [ref=e128]
+                  - generic [ref=e130]: React, shadcn/ui and Tailwind CSS
+              - link "See more" [ref=e132] [cursor=pointer]:
+                - /url: /docs/prompt-input
+            - generic [ref=e133]:
+              - heading "Blocks" [level=3] [ref=e134]
+              - list [ref=e135]:
+                - listitem [ref=e136]:
+                  - img [ref=e137]
+                  - generic [ref=e139]: Ready-to-use UI pieces
+                - listitem [ref=e140]:
+                  - img [ref=e141]
+                  - generic [ref=e143]: Pure frontend
+                - listitem [ref=e144]:
+                  - img [ref=e145]
+                  - generic [ref=e147]: React, shadcn/ui and Tailwind CSS
+                - listitem [ref=e148]:
+                  - img [ref=e149]
+                  - generic [ref=e151]: Composable
+              - link "See more" [ref=e153] [cursor=pointer]:
+                - /url: /blocks
+            - generic [ref=e154]:
+              - heading "Primitives" [level=3] [ref=e155]
+              - list [ref=e156]:
+                - listitem [ref=e157]:
+                  - img [ref=e158]
+                  - generic [ref=e160]: Fullstack blocks
+                - listitem [ref=e161]:
+                  - img [ref=e162]
+                  - generic [ref=e164]: UI components
+                - listitem [ref=e165]:
+                  - img [ref=e166]
+                  - generic [ref=e168]: API logic
+                - listitem [ref=e169]:
+                  - img [ref=e170]
+                  - generic [ref=e172]: Vercel AI SDK
+              - link "See more" [ref=e174] [cursor=pointer]:
+                - /url: /primitives
+        - generic [ref=e175]:
+          - heading "Prebuilt, composable AI components" [level=2] [ref=e176]
+          - generic [ref=e177]:
+            - generic [ref=e179]:
+              - textbox "Ask me anything..." [ref=e180]
+              - generic [ref=e181]:
+                - img [ref=e183] [cursor=pointer]
+                - button [ref=e186]:
+                  - img
+            - generic [ref=e188]:
+              - generic [ref=e189]:
+                - button "Prompt Input" [expanded] [ref=e190]:
+                  - heading "Prompt Input" [level=3] [ref=e191]
+                  - img [ref=e192]
+                - paragraph [ref=e195]: An input field that allows users to enter and submit text to an AI model.
+              - button "Source" [ref=e197]:
+                - heading "Source" [level=3] [ref=e198]
+                - img [ref=e199]
+              - button "Code Block" [ref=e202]:
+                - heading "Code Block" [level=3] [ref=e203]
+                - img [ref=e204]
+        - generic [ref=e206]:
+          - link "\" You're one npx command away from a fully functional chatbot with tool calls. Amazing work by @Ibelick \"" [ref=e207] [cursor=pointer]:
+            - /url: https://x.com/shadcn/status/1953137884728381678
+          - generic [ref=e208]:
+            - generic [ref=e210]: CN
+            - generic [ref=e211]:
+              - paragraph [ref=e212]: shadcn
+              - paragraph [ref=e213]: Creator of shadcn/ui
+        - generic [ref=e214]:
+          - generic [ref=e215]: One command to install
+          - generic [ref=e216]:
+            - button "Copy code" [ref=e217]:
+              - img [ref=e219]
+              - generic:
+                - img
+            - code [ref=e224]:
+              - generic [ref=e225]: npx shadcn@latest add "https://prompt-kit.com/c/[COMPONENT].json"
+        - generic [ref=e226]:
+          - generic [ref=e227]:
+            - heading "Frequently asked questions" [level=2] [ref=e228]
+            - paragraph [ref=e229]: Here are some of the most common questions we receive from our users.
+          - generic [ref=e230]:
+            - button "What is a chat UI?" [ref=e232]:
+              - generic [ref=e233]:
+                - generic [ref=e234]: What is a chat UI?
+                - img [ref=e235]
+            - button "How do I build a React chat UI?" [ref=e238]:
+              - generic [ref=e239]:
+                - generic [ref=e240]: How do I build a React chat UI?
+                - img [ref=e241]
+            - button "Does it support streaming responses?" [ref=e244]:
+              - generic [ref=e245]:
+                - generic [ref=e246]: Does it support streaming responses?
+                - img [ref=e247]
+            - button "Can I render markdown and code blocks?" [ref=e250]:
+              - generic [ref=e251]:
+                - generic [ref=e252]: Can I render markdown and code blocks?
+                - img [ref=e253]
+            - button "How do I add a prompt input with actions?" [ref=e256]:
+              - generic [ref=e257]:
+                - generic [ref=e258]: How do I add a prompt input with actions?
+                - img [ref=e259]
+            - button "Which SDKs can I use with this chat UI?" [ref=e262]:
+              - generic [ref=e263]:
+                - generic [ref=e264]: Which SDKs can I use with this chat UI?
+                - img [ref=e265]
+        - generic [ref=e268]:
+          - generic [ref=e269]: Related pages
+          - generic [ref=e270]:
+            - generic [ref=e271]:
+              - generic [ref=e272]: Chat UI
+              - generic [ref=e273]:
+                - link "Chat UI" [ref=e274] [cursor=pointer]:
+                  - /url: /chat-ui
+                - link "AI Chat UI" [ref=e275] [cursor=pointer]:
+                  - /url: /ai-chat-ui
+                - link "Chat UI Kit" [ref=e276] [cursor=pointer]:
+                  - /url: /chat-ui-kit
+            - generic [ref=e277]:
+              - generic [ref=e278]: Prompt UI
+              - generic [ref=e279]:
+                - link "Prompt UI" [ref=e280] [cursor=pointer]:
+                  - /url: /prompt-ui
+                - link "AI SDK Components" [ref=e281] [cursor=pointer]:
+                  - /url: /ai-sdk-components
+            - generic [ref=e282]:
+              - generic [ref=e283]: SDK UI
+              - generic [ref=e284]:
+                - link "Vercel AI SDK UI" [ref=e285] [cursor=pointer]:
+                  - /url: /vercel-ai-sdk
+                - link "OpenAI SDK UI" [ref=e286] [cursor=pointer]:
+                  - /url: /openai-sdk
+                - link "AI SDK UI" [ref=e287] [cursor=pointer]:
+                  - /url: /ai-sdk
+            - generic [ref=e288]:
+              - generic [ref=e289]: Agent UI
+              - generic [ref=e290]:
+                - link "Agent UI" [ref=e291] [cursor=pointer]:
+                  - /url: /agent-ui
+                - link "AI Agent UI" [ref=e292] [cursor=pointer]:
+                  - /url: /ai-agent-ui
+                - link "Agent Chat UI" [ref=e293] [cursor=pointer]:
+                  - /url: /agent-chat-ui
+                - link "Agent Dashboard UI" [ref=e294] [cursor=pointer]:
+                  - /url: /agent-dashboard-ui
+    - generic [ref=e301]:
+      - link "prompt-kit" [ref=e303] [cursor=pointer]:
+        - /url: /
+        - img [ref=e304]
+        - heading "prompt-kit" [level=1] [ref=e306]
+      - generic [ref=e307]:
+        - generic [ref=e308]: Get Started
+        - list [ref=e310]:
+          - listitem [ref=e311]:
+            - link "Home" [ref=e312] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e313]:
+            - link "Introduction" [ref=e314] [cursor=pointer]:
+              - /url: /docs/introduction
+          - listitem [ref=e315]:
+            - link "Installation" [ref=e316] [cursor=pointer]:
+              - /url: /docs/installation
+          - listitem [ref=e317]:
+            - link "Model Context Protocol" [ref=e318] [cursor=pointer]:
+              - /url: /docs/mcp
+        - generic [ref=e319]: Components
+        - list [ref=e321]:
+          - listitem [ref=e322]:
+            - link "Chain of Thought" [ref=e323] [cursor=pointer]:
+              - /url: /docs/chain-of-thought
+              - generic [ref=e324]: Chain of Thought
+          - listitem [ref=e325]:
+            - link "Chat Container" [ref=e326] [cursor=pointer]:
+              - /url: /docs/chat-container
+              - generic [ref=e327]: Chat Container
+          - listitem [ref=e328]:
+            - link "Code Block" [ref=e329] [cursor=pointer]:
+              - /url: /docs/code-block
+              - generic [ref=e330]: Code Block
+          - listitem [ref=e331]:
+            - link "Feedback Bar new" [ref=e332] [cursor=pointer]:
+              - /url: /docs/feedback-bar
+              - generic [ref=e333]: Feedback Bar
+              - generic [ref=e334]: new
+          - listitem [ref=e335]:
+            - link "File Upload" [ref=e336] [cursor=pointer]:
+              - /url: /docs/file-upload
+              - generic [ref=e337]: File Upload
+          - listitem [ref=e338]:
+            - link "Image" [ref=e339] [cursor=pointer]:
+              - /url: /docs/image
+              - generic [ref=e340]: Image
+          - listitem [ref=e341]:
+            - link "Loader" [ref=e342] [cursor=pointer]:
+              - /url: /docs/loader
+              - generic [ref=e343]: Loader
+          - listitem [ref=e344]:
+            - link "Markdown" [ref=e345] [cursor=pointer]:
+              - /url: /docs/markdown
+              - generic [ref=e346]: Markdown
+          - listitem [ref=e347]:
+            - link "Message" [ref=e348] [cursor=pointer]:
+              - /url: /docs/message
+              - generic [ref=e349]: Message
+          - listitem [ref=e350]:
+            - link "Prompt Input" [ref=e351] [cursor=pointer]:
+              - /url: /docs/prompt-input
+              - generic [ref=e352]: Prompt Input
+          - listitem [ref=e353]:
+            - link "Prompt Suggestion" [ref=e354] [cursor=pointer]:
+              - /url: /docs/prompt-suggestion
+              - generic [ref=e355]: Prompt Suggestion
+          - listitem [ref=e356]:
+            - link "Reasoning" [ref=e357] [cursor=pointer]:
+              - /url: /docs/reasoning
+              - generic [ref=e358]: Reasoning
+          - listitem [ref=e359]:
+            - link "Scroll Button" [ref=e360] [cursor=pointer]:
+              - /url: /docs/scroll-button
+              - generic [ref=e361]: Scroll Button
+          - listitem [ref=e362]:
+            - link "Source" [ref=e363] [cursor=pointer]:
+              - /url: /docs/source
+              - generic [ref=e364]: Source
+          - listitem [ref=e365]:
+            - link "Steps" [ref=e366] [cursor=pointer]:
+              - /url: /docs/steps
+              - generic [ref=e367]: Steps
+          - listitem [ref=e368]:
+            - link "System Message" [ref=e369] [cursor=pointer]:
+              - /url: /docs/system-message
+              - generic [ref=e370]: System Message
+          - listitem [ref=e371]:
+            - link "Text Shimmer new" [ref=e372] [cursor=pointer]:
+              - /url: /docs/text-shimmer
+              - generic [ref=e373]: Text Shimmer
+              - generic [ref=e374]: new
+          - listitem [ref=e375]:
+            - link "Thinking Bar new" [ref=e376] [cursor=pointer]:
+              - /url: /docs/thinking-bar
+              - generic [ref=e377]: Thinking Bar
+              - generic [ref=e378]: new
+          - listitem [ref=e379]:
+            - link "Tool" [ref=e380] [cursor=pointer]:
+              - /url: /docs/tool
+              - generic [ref=e381]: Tool
+        - generic [ref=e382]:
+          - link "Blocks" [ref=e384] [cursor=pointer]:
+            - /url: /blocks
+          - link "Primitives new" [ref=e386] [cursor=pointer]:
+            - /url: /primitives
+            - text: Primitives
+            - generic [ref=e387]: new
+        - generic [ref=e388]: Integrations
+        - list [ref=e390]:
+          - listitem [ref=e391]:
+            - link "OpenAI SDK" [ref=e392] [cursor=pointer]:
+              - /url: /openai-sdk
+          - listitem [ref=e393]:
+            - link "Vercel AI SDK" [ref=e394] [cursor=pointer]:
+              - /url: /vercel-ai-sdk
+          - listitem [ref=e395]:
+            - link "Chat UI" [ref=e396] [cursor=pointer]:
+              - /url: /chat-ui
+          - listitem [ref=e397]:
+            - link "AI SDK" [ref=e398] [cursor=pointer]:
+              - /url: /ai-sdk
+        - generic [ref=e399]: LLMs
+        - list [ref=e401]:
+          - listitem [ref=e402]:
+            - link "llms.txt" [ref=e403] [cursor=pointer]:
+              - /url: /llms.txt
+          - listitem [ref=e404]:
+            - link "llms-full.txt" [ref=e405] [cursor=pointer]:
+              - /url: /llms-full.txt
+        - link "Showcase" [ref=e407] [cursor=pointer]:
+          - /url: /docs/showcase
+        - generic [ref=e408]: Social
+        - list [ref=e410]:
+          - listitem [ref=e411]:
+            - link "GitHub" [ref=e412] [cursor=pointer]:
+              - /url: https://github.com/ibelick/prompt-kit
+          - listitem [ref=e413]:
+            - link "X (Twitter)" [ref=e414] [cursor=pointer]:
+              - /url: https://twitter.com/ibelick
+        - generic [ref=e415]: Theme
+        - 'button "Theme: Light. Click to switch to dark" [ref=e417]': Light
+  - alert [ref=e418]

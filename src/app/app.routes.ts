@@ -3,51 +3,57 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./demo/demo-shell').then((m) => m.DemoShell),
+    loadComponent: () => import('./layout/shell').then((m) => m.Shell),
     children: [
-      { path: '', redirectTo: 'message', pathMatch: 'full' },
+      { path: '', loadComponent: () => import('./pages/landing').then((m) => m.Landing) },
       {
-        path: 'message',
+        path: 'components/message',
         loadComponent: () => import('./demo/message-demo').then((m) => m.MessageDemo),
       },
       {
-        path: 'markdown',
+        path: 'components/markdown',
         loadComponent: () => import('./demo/markdown-demo').then((m) => m.MarkdownDemo),
       },
       {
-        path: 'code-block',
+        path: 'components/code-block',
         loadComponent: () => import('./demo/code-block-demo').then((m) => m.CodeBlockDemo),
       },
       {
-        path: 'prompt-input',
-        loadComponent: () => import('./demo/prompt-input-demo').then((m) => m.PromptInputDemo),
+        path: 'components/prompt-input',
+        loadComponent: () =>
+          import('./demo/prompt-input-demo').then((m) => m.PromptInputDemo),
       },
       {
-        path: 'response-stream',
+        path: 'components/response-stream',
         loadComponent: () =>
           import('./demo/response-stream-demo').then((m) => m.ResponseStreamDemo),
       },
       {
-        path: 'loader',
+        path: 'components/loader',
         loadComponent: () => import('./demo/loader-demo').then((m) => m.LoaderDemo),
       },
       {
-        path: 'chat-container',
+        path: 'components/chat-container',
         loadComponent: () =>
           import('./demo/chat-container-demo').then((m) => m.ChatContainerDemo),
       },
       {
-        path: 'prompt-suggestion',
+        path: 'components/scroll-button',
+        loadComponent: () =>
+          import('./demo/chat-container-demo').then((m) => m.ChatContainerDemo),
+      },
+      {
+        path: 'components/prompt-suggestion',
         loadComponent: () =>
           import('./demo/prompt-suggestion-demo').then((m) => m.PromptSuggestionDemo),
       },
       {
-        path: 'file-upload',
+        path: 'components/file-upload',
         loadComponent: () =>
           import('./demo/file-upload-demo').then((m) => m.FileUploadDemo),
       },
       {
-        path: 'reasoning',
+        path: 'components/reasoning',
         loadComponent: () => import('./demo/reasoning-demo').then((m) => m.ReasoningDemo),
       },
     ],

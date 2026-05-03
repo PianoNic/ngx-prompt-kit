@@ -1,0 +1,219 @@
+- generic [ref=e3]:
+  - generic [ref=e6]:
+    - main [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - paragraph [ref=e10]: Core building blocks for AI apps.
+          - paragraph [ref=e11]: High-quality, accessible, and customizable components for AI interfaces.
+        - generic [ref=e12]:
+          - link "Get Started" [ref=e13] [cursor=pointer]:
+            - /url: /docs/introduction
+          - link "Star on GitHub" [ref=e14] [cursor=pointer]:
+            - /url: https://github.com/ibelick/prompt-kit
+            - img [ref=e15]
+            - text: Star on GitHub
+      - generic [ref=e19]:
+        - generic [ref=e22]:
+          - textbox "Message ChatGPT" [ref=e23]
+          - generic [ref=e24]:
+            - generic [ref=e25]:
+              - button "Attach files" [ref=e26]:
+                - img
+              - button "Search the web" [ref=e27]:
+                - img
+                - text: Search
+              - button "View tools" [ref=e28]:
+                - img
+            - button "Send message" [ref=e29]:
+              - img
+        - generic [ref=e30]:
+          - button "ChatGPT logo ChatGPT" [ref=e31]:
+            - generic [ref=e32]:
+              - img "ChatGPT logo" [ref=e33]
+              - text: ChatGPT
+          - button "Mistral AI logo Mistral AI" [ref=e34]:
+            - generic [ref=e35]:
+              - img "Mistral AI logo" [ref=e36]
+              - text: Mistral AI
+          - button "DeepSeek logo DeepSeek" [ref=e37]:
+            - generic [ref=e38]:
+              - img "DeepSeek logo" [ref=e39]
+              - text: DeepSeek
+      - generic [ref=e40]:
+        - button "Copy" [ref=e42]:
+          - paragraph [ref=e43]:
+            - generic [ref=e44]: C
+            - generic [ref=e45]: o
+            - generic [ref=e46]: p
+            - generic [ref=e47]: "y"
+        - generic [ref=e48]:
+          - button "Copy code" [ref=e49]:
+            - img [ref=e51]
+            - generic:
+              - img
+          - code [ref=e56]:
+            - generic [ref=e57]: "import {"
+            - generic [ref=e58]: PromptInput,
+            - generic [ref=e59]: PromptInputTextarea,
+            - generic [ref=e60]: PromptInputAction,
+            - generic [ref=e61]: "} from '@/components/ui/prompt-input';"
+            - generic [ref=e62]: "function PromptInputBasic() {"
+            - generic [ref=e63]: return (
+            - generic [ref=e64]: <PromptInput>
+            - generic [ref=e65]: <PromptInputTextarea placeholder='Ask prompt-kit' />
+            - generic [ref=e66]: <PromptInputActions>
+            - generic [ref=e67]: <PromptInputAction tooltip='Upload File'>
+            - generic [ref=e68]: <Button>Upload File</Button>
+            - generic [ref=e69]: </PromptInputAction>
+            - generic [ref=e70]: <PromptInputAction tooltip='Send'>
+            - generic [ref=e71]: <Button>Send</Button>
+            - generic [ref=e72]: </PromptInputAction>
+            - generic [ref=e73]: </PromptInputActions>
+            - generic [ref=e74]: </PromptInput>
+            - generic [ref=e75]: );
+            - generic [ref=e76]: "}"
+    - link "Introduction" [ref=e79] [cursor=pointer]:
+      - /url: /docs/introduction
+      - text: Introduction
+      - img [ref=e80]
+  - generic [ref=e87]:
+    - link "prompt-kit" [ref=e89] [cursor=pointer]:
+      - /url: /
+      - img [ref=e90]
+      - heading "prompt-kit" [level=1] [ref=e92]
+    - generic [ref=e93]:
+      - generic [ref=e94]: Get Started
+      - list [ref=e96]:
+        - listitem [ref=e97]:
+          - link "Home" [ref=e98] [cursor=pointer]:
+            - /url: /
+        - listitem [ref=e99]:
+          - link "Introduction" [ref=e100] [cursor=pointer]:
+            - /url: /docs/introduction
+        - listitem [ref=e101]:
+          - link "Installation" [ref=e102] [cursor=pointer]:
+            - /url: /docs/installation
+        - listitem [ref=e103]:
+          - link "Model Context Protocol" [ref=e104] [cursor=pointer]:
+            - /url: /docs/mcp
+      - generic [ref=e105]: Components
+      - list [ref=e107]:
+        - listitem [ref=e108]:
+          - link "Chain of Thought" [ref=e109] [cursor=pointer]:
+            - /url: /docs/chain-of-thought
+            - generic [ref=e110]: Chain of Thought
+        - listitem [ref=e111]:
+          - link "Chat Container" [ref=e112] [cursor=pointer]:
+            - /url: /docs/chat-container
+            - generic [ref=e113]: Chat Container
+        - listitem [ref=e114]:
+          - link "Code Block" [ref=e115] [cursor=pointer]:
+            - /url: /docs/code-block
+            - generic [ref=e116]: Code Block
+        - listitem [ref=e117]:
+          - link "Feedback Bar new" [ref=e118] [cursor=pointer]:
+            - /url: /docs/feedback-bar
+            - generic [ref=e119]: Feedback Bar
+            - generic [ref=e120]: new
+        - listitem [ref=e121]:
+          - link "File Upload" [ref=e122] [cursor=pointer]:
+            - /url: /docs/file-upload
+            - generic [ref=e123]: File Upload
+        - listitem [ref=e124]:
+          - link "Image" [ref=e125] [cursor=pointer]:
+            - /url: /docs/image
+            - generic [ref=e126]: Image
+        - listitem [ref=e127]:
+          - link "Loader" [ref=e128] [cursor=pointer]:
+            - /url: /docs/loader
+            - generic [ref=e129]: Loader
+        - listitem [ref=e130]:
+          - link "Markdown" [ref=e131] [cursor=pointer]:
+            - /url: /docs/markdown
+            - generic [ref=e132]: Markdown
+        - listitem [ref=e133]:
+          - link "Message" [ref=e134] [cursor=pointer]:
+            - /url: /docs/message
+            - generic [ref=e135]: Message
+        - listitem [ref=e136]:
+          - link "Prompt Input" [ref=e137] [cursor=pointer]:
+            - /url: /docs/prompt-input
+            - generic [ref=e138]: Prompt Input
+        - listitem [ref=e139]:
+          - link "Prompt Suggestion" [ref=e140] [cursor=pointer]:
+            - /url: /docs/prompt-suggestion
+            - generic [ref=e141]: Prompt Suggestion
+        - listitem [ref=e142]:
+          - link "Reasoning" [ref=e143] [cursor=pointer]:
+            - /url: /docs/reasoning
+            - generic [ref=e144]: Reasoning
+        - listitem [ref=e145]:
+          - link "Scroll Button" [ref=e146] [cursor=pointer]:
+            - /url: /docs/scroll-button
+            - generic [ref=e147]: Scroll Button
+        - listitem [ref=e148]:
+          - link "Source" [ref=e149] [cursor=pointer]:
+            - /url: /docs/source
+            - generic [ref=e150]: Source
+        - listitem [ref=e151]:
+          - link "Steps" [ref=e152] [cursor=pointer]:
+            - /url: /docs/steps
+            - generic [ref=e153]: Steps
+        - listitem [ref=e154]:
+          - link "System Message" [ref=e155] [cursor=pointer]:
+            - /url: /docs/system-message
+            - generic [ref=e156]: System Message
+        - listitem [ref=e157]:
+          - link "Text Shimmer new" [ref=e158] [cursor=pointer]:
+            - /url: /docs/text-shimmer
+            - generic [ref=e159]: Text Shimmer
+            - generic [ref=e160]: new
+        - listitem [ref=e161]:
+          - link "Thinking Bar new" [ref=e162] [cursor=pointer]:
+            - /url: /docs/thinking-bar
+            - generic [ref=e163]: Thinking Bar
+            - generic [ref=e164]: new
+        - listitem [ref=e165]:
+          - link "Tool" [ref=e166] [cursor=pointer]:
+            - /url: /docs/tool
+            - generic [ref=e167]: Tool
+      - generic [ref=e168]:
+        - link "Blocks" [ref=e170] [cursor=pointer]:
+          - /url: /blocks
+        - link "Primitives new" [ref=e172] [cursor=pointer]:
+          - /url: /primitives
+          - text: Primitives
+          - generic [ref=e173]: new
+      - generic [ref=e174]: Integrations
+      - list [ref=e176]:
+        - listitem [ref=e177]:
+          - link "OpenAI SDK" [ref=e178] [cursor=pointer]:
+            - /url: /openai-sdk
+        - listitem [ref=e179]:
+          - link "Vercel AI SDK" [ref=e180] [cursor=pointer]:
+            - /url: /vercel-ai-sdk
+        - listitem [ref=e181]:
+          - link "Chat UI" [ref=e182] [cursor=pointer]:
+            - /url: /chat-ui
+        - listitem [ref=e183]:
+          - link "AI SDK" [ref=e184] [cursor=pointer]:
+            - /url: /ai-sdk
+      - generic [ref=e185]: LLMs
+      - list [ref=e187]:
+        - listitem [ref=e188]:
+          - link "llms.txt" [ref=e189] [cursor=pointer]:
+            - /url: /llms.txt
+        - listitem [ref=e190]:
+          - link "llms-full.txt" [ref=e191] [cursor=pointer]:
+            - /url: /llms-full.txt
+      - link "Showcase" [ref=e193] [cursor=pointer]:
+        - /url: /docs/showcase
+      - generic [ref=e194]: Social
+      - list [ref=e196]:
+        - listitem [ref=e197]:
+          - link "GitHub" [ref=e198] [cursor=pointer]:
+            - /url: https://github.com/ibelick/prompt-kit
+        - listitem [ref=e199]:
+          - link "X (Twitter)" [ref=e200] [cursor=pointer]:
+            - /url: https://twitter.com/ibelick
+      - generic [ref=e201]: Theme
