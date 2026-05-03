@@ -23,17 +23,26 @@ ng add @pianonic/prompt-kit-ng
 
 | Component           | Helm dependencies   | Other deps |
 |---------------------|---------------------|------------|
-| `message`           | avatar, tooltip     | —          |
-| `markdown`          | —                   | marked     |
-| `code-block`        | —                   | shiki      |
-| `prompt-input`      | textarea, tooltip   | —          |
-| `response-stream`   | —                   | —          |
-| `loader`            | —                   | —          |
+| `chain-of-thought`  | icon                | —          |
 | `chat-container`    | —                   | —          |
-| `scroll-button`     | button              | —          |
-| `prompt-suggestion` | button              | —          |
+| `code-block`        | —                   | shiki      |
+| `feedback-bar`      | icon                | —          |
 | `file-upload`       | —                   | —          |
+| `image`             | —                   | —          |
+| `loader`            | —                   | —          |
+| `markdown`          | —                   | marked     |
+| `message`           | avatar, tooltip     | —          |
+| `prompt-input`      | textarea, tooltip   | —          |
+| `prompt-suggestion` | button              | —          |
 | `reasoning`         | —                   | —          |
+| `response-stream`   | —                   | —          |
+| `scroll-button`     | button              | —          |
+| `source`            | hover-card          | —          |
+| `steps`             | icon                | —          |
+| `system-message`    | button, icon        | —          |
+| `text-shimmer`      | —                   | —          |
+| `thinking-bar`      | icon                | —          |
+| `tool`              | icon                | —          |
 
 Add a component:
 
@@ -49,10 +58,15 @@ Helm prerequisites must be installed separately via Spartan's CLI:
 ng g @spartan-ng/cli:ui
 ```
 
+## Coverage
+
+All components from [ibelick/prompt-kit](https://github.com/ibelick/prompt-kit) are available, except `jsx-preview` (React-specific, no clean Angular equivalent).
+
 ## Notes
 
 - Re-running a component schematic overwrites the existing files. If you've customized them, commit your changes first.
 - You own the generated source — edit freely. We won't push updates to your code.
+- `image` internally uses Angular's [`NgOptimizedImage`](https://angular.dev/api/common/NgOptimizedImage) directive when given a real `src` URL; falls back to a native `<img>` for base64/blob payloads (NgOptimizedImage doesn't accept `data:` URLs).
 
 ## Credit
 

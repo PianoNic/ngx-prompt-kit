@@ -1,0 +1,76 @@
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  ElementRef,
+  PLATFORM_ID,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+  viewChild,
+} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { cn } from '../utils/cn';
+import { STEPS_STATE } from './steps.state';
+
+@Component({
+  selector: 'pk-steps-content',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <div
+      [class]="wrapperClass()"
+      [style.maxHeight]="state.isOpen() ? maxHeightPx() + 'px' : '0px'"
+    >
+      <div
+        #inner
+        class="mt-3 grid max-w-full min-w-0 grid-cols-[min-content_minmax(0,1fr)] items-start gap-x-3"
+      >
+        <div class="min-w-0 self-stretch">
+          <ng-content select="[stepsBar]" />
+          <div class="bg-muted h-full w-[2px]" aria-hidden="true" data-default-bar></div>
+        </div>
+        <div class="min-w-0 space-y-2"><ng-content /></div>
+      </div>
+    </div>
+  `,
+})
+export class PkStepsContent implements AfterViewInit {
+  public readonly class = input<string>('');
+
+  protected readonly state = inject(STEPS_STATE);
+  private readonly inner = viewChild.required<ElementRef<HTMLDivElement>>('inner');
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+
+  protected readonly maxHeightPx = signal<number>(0);
+
+  protected readonly wrapperClass = computed(() =>
+    cn(
+      'text-popover-foreground overflow-hidden transition-[max-height] duration-150 ease-out',
+      this.class(),
+    ),
+  );
+
+  constructor() {
+    effect(() => {
+      this.state.isOpen();
+      this.measure();
+    });
+  }
+
+  ngAfterViewInit(): void {
+    if (!this.isBrowser) return;
+    const observer = new ResizeObserver(() => this.measure());
+    observer.observe(this.inner().nativeElement);
+    this.destroyRef.onDestroy(() => observer.disconnect());
+    this.measure();
+  }
+
+  private measure(): void {
+    const el = this.inner?.()?.nativeElement;
+    if (el) this.maxHeightPx.set(el.scrollHeight);
+  }
+}

@@ -70,6 +70,51 @@ export const routes: Routes = [
         path: 'components/reasoning',
         loadComponent: () => import('./demo/reasoning-demo').then((m) => m.ReasoningDemo),
       },
+      {
+        path: 'components/text-shimmer',
+        loadComponent: () => import('./pages/coming-soon').then((m) => m.ComingSoon),
+        data: { title: 'Text Shimmer' },
+      },
+      {
+        path: 'components/thinking-bar',
+        loadComponent: () => import('./pages/coming-soon').then((m) => m.ComingSoon),
+        data: { title: 'Thinking Bar' },
+      },
+      {
+        path: 'components/system-message',
+        loadComponent: () => import('./pages/coming-soon').then((m) => m.ComingSoon),
+        data: { title: 'System Message' },
+      },
+      {
+        path: 'components/steps',
+        loadComponent: () => import('./pages/coming-soon').then((m) => m.ComingSoon),
+        data: { title: 'Steps' },
+      },
+      {
+        path: 'components/image',
+        loadComponent: () => import('./pages/coming-soon').then((m) => m.ComingSoon),
+        data: { title: 'Image' },
+      },
+      {
+        path: 'components/source',
+        loadComponent: () => import('./pages/coming-soon').then((m) => m.ComingSoon),
+        data: { title: 'Source' },
+      },
+      {
+        path: 'components/feedback-bar',
+        loadComponent: () => import('./pages/coming-soon').then((m) => m.ComingSoon),
+        data: { title: 'Feedback Bar' },
+      },
+      {
+        path: 'components/chain-of-thought',
+        loadComponent: () => import('./pages/coming-soon').then((m) => m.ComingSoon),
+        data: { title: 'Chain Of Thought' },
+      },
+      {
+        path: 'components/tool',
+        loadComponent: () => import('./pages/coming-soon').then((m) => m.ComingSoon),
+        data: { title: 'Tool' },
+      },
     ],
   },
 ];

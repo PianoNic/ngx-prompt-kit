@@ -36,6 +36,13 @@ const HELM_REQUIREMENTS: Record<string, string[]> = {
   'prompt-input': ['textarea', 'tooltip'],
   'prompt-suggestion': ['button'],
   'scroll-button': ['button'],
+  'system-message': ['button', 'icon'],
+  'thinking-bar': ['icon'],
+  'feedback-bar': ['icon'],
+  steps: ['icon'],
+  'chain-of-thought': ['icon'],
+  tool: ['icon'],
+  source: ['hover-card'],
 };
 
 function resolveProjectName(
