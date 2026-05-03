@@ -40,11 +40,7 @@ import { PkScrollButton } from 'prompt-kit-ng/scroll-button';
               <pk-chat-container-content class="gap-3">
                 @for (m of messages(); track m.id) {
                   <pk-message>
-                    <pk-message-avatar
-                      [src]="'https://i.pravatar.cc/64?u=' + m.id"
-                      alt="User"
-                      fallback="U"
-                    />
+                    <pk-message-avatar src="" alt="User" fallback="U" />
                     <pk-message-content [content]="m.text" />
                   </pk-message>
                 }

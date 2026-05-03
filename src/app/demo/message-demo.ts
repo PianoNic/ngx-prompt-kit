@@ -33,7 +33,11 @@ import { PkMessageImports } from 'prompt-kit-ng/message';
             />
           </pk-message>
           <pk-message>
-            <pk-message-avatar src="" alt="Assistant" fallback="AI" />
+            <pk-message-avatar
+              src="https://avatars.githubusercontent.com/u/0?v=4"
+              alt="Assistant"
+              fallback="AI"
+            />
             <pk-message-content
               content="I can help with that — pull the commit range and I'll group them into features, fixes, and chores."
             />
