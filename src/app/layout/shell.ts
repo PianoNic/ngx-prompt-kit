@@ -75,7 +75,7 @@ import { ThemeToggle } from './theme-toggle';
           <app-sidebar-nav />
         </aside>
 
-        <main class="min-h-[calc(100vh-3.5rem)]">
+        <main class="min-h-[calc(100vh-3.5rem)] px-6 py-8 md:px-10">
           <router-outlet />
         </main>
       </div>

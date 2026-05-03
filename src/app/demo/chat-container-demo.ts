@@ -15,8 +15,8 @@ import { PkScrollButton } from 'prompt-kit-ng/scroll-button';
     >
       Add message
     </button>
-    <div class="relative max-w-2xl border rounded-lg" style="height: 400px;">
-      <pk-chat-container-root class="h-full p-4 gap-3">
+    <div class="max-w-2xl border rounded-lg" style="height: 400px;">
+      <pk-chat-container-root class="relative h-full p-4 gap-3">
         <pk-chat-container-content class="gap-3">
           @for (m of messages(); track m.id) {
             <pk-message>
@@ -26,10 +26,10 @@ import { PkScrollButton } from 'prompt-kit-ng/scroll-button';
           }
         </pk-chat-container-content>
         <pk-chat-container-scroll-anchor />
+        <div class="sticky bottom-4 ml-auto w-fit">
+          <pk-scroll-button />
+        </div>
       </pk-chat-container-root>
-      <div class="absolute bottom-4 right-4">
-        <pk-scroll-button />
-      </div>
     </div>
   `,
 })

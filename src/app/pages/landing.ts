@@ -29,7 +29,7 @@ interface Feature {
     PkPromptInputImports,
   ],
   template: `
-    <div class="mx-auto max-w-4xl px-6 py-12 md:py-20">
+    <div class="mx-auto max-w-4xl py-4 md:py-12">
       <!-- Hero -->
       <section class="text-center">
         <p
