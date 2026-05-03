@@ -3,14 +3,16 @@ import { provideIcons } from '@ng-icons/core';
 import { lucideCopy, lucideThumbsDown, lucideThumbsUp } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
+import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
+import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
 import { PkMessageImports } from 'prompt-kit-ng/message';
 
 @Component({
   selector: 'app-message-demo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DocPage, DocExample, HlmButton, HlmIconImports, PkMessageImports],
+  imports: [DocPage, DocExample, DocInstall, DocApi, HlmButton, HlmIconImports, PkMessageImports],
   providers: [provideIcons({ lucideCopy, lucideThumbsUp, lucideThumbsDown })],
   template: `
     <app-doc-page
@@ -108,10 +110,53 @@ Want me to group by author next time?"
           </div>
         </div>
       </app-doc-example>
+
+      <app-doc-install component="message" />
+      <app-doc-api [sections]="api" />
     </app-doc-page>
   `,
 })
 export class MessageDemo {
+  protected readonly api: ApiSection[] = [
+    {
+      name: 'PkMessage',
+      props: [
+        { name: 'class', type: 'string', description: 'Extra classes merged onto the host.' },
+      ],
+    },
+    {
+      name: 'PkMessageAvatar',
+      props: [
+        { name: 'src', type: 'string', description: 'Avatar image URL (required).' },
+        { name: 'alt', type: 'string', description: 'Alt text for the image (required).' },
+        { name: 'fallback', type: 'string', description: 'Initials shown if the image fails.' },
+        { name: 'class', type: 'string', description: 'Extra classes for the avatar.' },
+      ],
+    },
+    {
+      name: 'PkMessageContent',
+      props: [
+        { name: 'content', type: 'string', description: 'The text content. Optional — you can also project markup via ng-content.' },
+        { name: 'markdown', type: 'boolean', default: 'false', description: 'Render content as markdown via pk-markdown.' },
+        { name: 'class', type: 'string', description: 'Extra classes for the bubble.' },
+      ],
+    },
+    {
+      name: 'PkMessageActions',
+      props: [
+        { name: 'class', type: 'string', description: 'Extra classes for the action row.' },
+      ],
+    },
+    {
+      name: 'PkMessageAction',
+      props: [
+        { name: 'tooltip', type: 'string', description: 'Tooltip label shown on hover (required).' },
+        { name: 'side', type: '"top" | "bottom" | "left" | "right"', default: '"top"', description: 'Tooltip placement.' },
+        { name: 'class', type: 'string', description: 'Extra classes applied to the tooltip content.' },
+      ],
+    },
+  ];
+
   protected readonly basicCode = `<pk-message class="justify-end">
   <pk-message-content
     class="bg-primary text-primary-foreground"

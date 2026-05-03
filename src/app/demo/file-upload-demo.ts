@@ -8,7 +8,9 @@ import {
 } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
+import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
+import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
 import { PkFileUploadImports } from 'prompt-kit-ng/file-upload';
 import { PkPromptInputImports } from 'prompt-kit-ng/prompt-input';
@@ -19,6 +21,8 @@ import { PkPromptInputImports } from 'prompt-kit-ng/prompt-input';
   imports: [
     DocPage,
     DocExample,
+    DocInstall,
+    DocApi,
     HlmButton,
     HlmIconImports,
     PkFileUploadImports,
@@ -121,10 +125,38 @@ import { PkPromptInputImports } from 'prompt-kit-ng/prompt-input';
           </pk-file-upload-content>
         </pk-file-upload>
       </app-doc-example>
+
+      <app-doc-install component="file-upload" />
+      <app-doc-api [sections]="api" />
     </app-doc-page>
   `,
 })
 export class FileUploadDemo {
+  protected readonly api: ApiSection[] = [
+    {
+      name: 'PkFileUpload',
+      props: [
+        { name: 'multiple', type: 'boolean', default: 'true', description: 'Allow selecting multiple files at once.' },
+        { name: 'accept', type: 'string', description: 'Standard accept attribute (e.g. ".jpg,.png").' },
+        { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable the picker and ignore drops.' },
+        { name: 'filesAdded', type: 'output<File[]>', description: 'Fires when files are picked or dropped.' },
+        { name: 'openPicker()', type: '() => void', description: 'Programmatically open the native file picker.' },
+      ],
+    },
+    {
+      name: 'PkFileUploadTrigger',
+      props: [
+        { name: 'class', type: 'string', description: 'Extra classes for the trigger button.' },
+      ],
+    },
+    {
+      name: 'PkFileUploadContent',
+      props: [
+        { name: 'class', type: 'string', description: 'Extra classes for the drag-state overlay.' },
+      ],
+    },
+  ];
+
   protected readonly input = signal('');
   protected readonly isLoading = signal(false);
   protected readonly files = signal<File[]>([]);

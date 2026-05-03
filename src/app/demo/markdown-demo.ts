@@ -1,12 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
+import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
 import { PkMarkdown } from 'prompt-kit-ng/markdown';
 
 @Component({
   selector: 'app-markdown-demo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DocPage, DocExample, PkMarkdown],
+  imports: [DocPage, DocExample, DocInstall, DocApi, PkMarkdown],
   template: `
     <app-doc-page
       title="Markdown"
@@ -30,10 +32,23 @@ import { PkMarkdown } from 'prompt-kit-ng/markdown';
           [content]="partial"
         />
       </app-doc-example>
+
+      <app-doc-install component="markdown" />
+      <app-doc-api [sections]="api" />
     </app-doc-page>
   `,
 })
 export class MarkdownDemo {
+  protected readonly api: ApiSection[] = [
+    {
+      name: 'PkMarkdown',
+      props: [
+        { name: 'content', type: 'string', default: "''", description: 'The markdown source to render.' },
+        { name: 'class', type: 'string', description: 'Extra classes for the rendered container.' },
+      ],
+    },
+  ];
+
   protected readonly rich = `## Release notes — v0.1.0
 
 This is the first tagged release of **prompt-kit-ng**.

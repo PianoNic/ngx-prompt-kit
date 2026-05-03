@@ -3,14 +3,16 @@ import { provideIcons } from '@ng-icons/core';
 import { lucideArrowUp, lucideMic, lucidePaperclip } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
+import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
+import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
 import { PkPromptInputImports } from 'prompt-kit-ng/prompt-input';
 
 @Component({
   selector: 'app-prompt-input-demo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DocPage, DocExample, HlmButton, HlmIconImports, PkPromptInputImports],
+  imports: [DocPage, DocExample, DocInstall, DocApi, HlmButton, HlmIconImports, PkPromptInputImports],
   providers: [provideIcons({ lucideArrowUp, lucideMic, lucidePaperclip })],
   template: `
     <app-doc-page
@@ -68,10 +70,49 @@ import { PkPromptInputImports } from 'prompt-kit-ng/prompt-input';
           </pk-prompt-input-actions>
         </pk-prompt-input>
       </app-doc-example>
+
+      <app-doc-install component="prompt-input" />
+      <app-doc-api [sections]="api" />
     </app-doc-page>
   `,
 })
 export class PromptInputDemo {
+  protected readonly api: ApiSection[] = [
+    {
+      name: 'PkPromptInput',
+      props: [
+        { name: 'value', type: 'model<string>', default: "''", description: 'Two-way bound text value.' },
+        { name: 'isLoading', type: 'boolean', default: 'false', description: 'Disables submit and shows the loading state.' },
+        { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the input entirely.' },
+        { name: 'maxHeight', type: 'number | string', default: '240', description: 'Cap on the autosizing textarea height.' },
+        { name: 'submitted', type: 'output<void>', description: 'Fires on Enter (without Shift) or programmatic submit().' },
+        { name: 'class', type: 'string', description: 'Extra classes for the wrapper.' },
+      ],
+    },
+    {
+      name: 'PkPromptInputTextarea',
+      props: [
+        { name: 'placeholder', type: 'string', default: "''", description: 'Native textarea placeholder.' },
+        { name: 'disableAutosize', type: 'boolean', default: 'false', description: 'Skip auto height adjustment.' },
+        { name: 'class', type: 'string', description: 'Extra classes for the textarea.' },
+      ],
+    },
+    {
+      name: 'PkPromptInputActions',
+      props: [
+        { name: 'class', type: 'string', description: 'Extra classes for the action row.' },
+      ],
+    },
+    {
+      name: 'PkPromptInputAction',
+      props: [
+        { name: 'tooltip', type: 'string', description: 'Tooltip label (required).' },
+        { name: 'side', type: '"top" | "bottom" | "left" | "right"', default: '"top"', description: 'Tooltip placement.' },
+        { name: 'class', type: 'string', description: 'Extra classes for the tooltip content.' },
+      ],
+    },
+  ];
+
   protected readonly value = signal('');
   protected readonly multiValue = signal('');
   protected readonly lastSubmitted = signal('');

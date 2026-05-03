@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
+import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
 import { PkLoader, type LoaderVariant } from 'prompt-kit-ng/loader';
 
@@ -11,7 +13,7 @@ interface VariantSpec {
 @Component({
   selector: 'app-loader-demo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DocPage, DocExample, PkLoader],
+  imports: [DocPage, DocExample, DocInstall, DocApi, PkLoader],
   template: `
     <app-doc-page
       title="Loader"
@@ -45,10 +47,25 @@ interface VariantSpec {
           <pk-loader variant="dots" size="lg" />
         </div>
       </app-doc-example>
+
+      <app-doc-install component="loader" />
+      <app-doc-api [sections]="api" />
     </app-doc-page>
   `,
 })
 export class LoaderDemo {
+  protected readonly api: ApiSection[] = [
+    {
+      name: 'PkLoader',
+      props: [
+        { name: 'variant', type: 'LoaderVariant', default: '"circular"', description: 'circular | classic | pulse | pulse-dot | dots | typing | wave | bars | terminal | text-blink | text-shimmer | loading-dots' },
+        { name: 'size', type: '"sm" | "md" | "lg"', default: '"md"', description: 'Visual size for variants with a fixed footprint.' },
+        { name: 'text', type: 'string', default: '"Thinking"', description: 'Label for text-* variants.' },
+        { name: 'class', type: 'string', description: 'Extra classes for the wrapper.' },
+      ],
+    },
+  ];
+
   protected readonly variants: VariantSpec[] = [
     { variant: 'circular', label: 'circular' },
     { variant: 'classic', label: 'classic' },

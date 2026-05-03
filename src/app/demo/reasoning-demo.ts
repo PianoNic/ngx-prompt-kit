@@ -8,7 +8,9 @@ import {
   signal,
 } from '@angular/core';
 import { HlmButton } from '@spartan-ng/helm/button';
+import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
+import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
 import { PkReasoningImports } from 'prompt-kit-ng/reasoning';
 
@@ -41,7 +43,7 @@ I need to find a number that, when **multiplied by itself**, equals 144.
 @Component({
   selector: 'app-reasoning-demo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DocPage, DocExample, HlmButton, PkReasoningImports],
+  imports: [DocPage, DocExample, DocInstall, DocApi, HlmButton, PkReasoningImports],
   template: `
     <app-doc-page
       title="Reasoning"
@@ -101,10 +103,40 @@ I need to find a number that, when **multiplied by itself**, equals 144.
           </pk-reasoning>
         </div>
       </app-doc-example>
+
+      <app-doc-install component="reasoning" />
+      <app-doc-api [sections]="api" />
     </app-doc-page>
   `,
 })
 export class ReasoningDemo {
+  protected readonly api: ApiSection[] = [
+    {
+      name: 'PkReasoning',
+      props: [
+        { name: 'open', type: 'model<boolean>', description: 'Two-way bound open state. Leave unbound for uncontrolled.' },
+        { name: 'isStreaming', type: 'boolean', default: 'false', description: 'Auto-opens while true; auto-closes when it flips back to false.' },
+        { name: 'class', type: 'string', description: 'Extra classes for the wrapper.' },
+      ],
+    },
+    {
+      name: 'PkReasoningTrigger',
+      props: [
+        { name: 'class', type: 'string', description: 'Extra classes for the trigger button.' },
+      ],
+    },
+    {
+      name: 'PkReasoningContent',
+      props: [
+        { name: 'content', type: 'string', description: 'The body text. Optional — projected ng-content also supported.' },
+        { name: 'markdown', type: 'boolean', default: 'false', description: 'Render content as markdown via pk-markdown.' },
+        { name: 'class', type: 'string', description: 'Extra classes for the outer collapsing wrapper.' },
+        { name: 'contentClass', type: 'string', description: 'Extra classes for the inner content (use this for borders / padding so they collapse with the panel).' },
+      ],
+    },
+  ];
+
+
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   private readonly destroyRef = inject(DestroyRef);
   private timers: ReturnType<typeof setTimeout>[] = [];

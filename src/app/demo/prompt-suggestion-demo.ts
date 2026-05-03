@@ -1,12 +1,14 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
+import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
 import { PkPromptSuggestion } from 'prompt-kit-ng/prompt-suggestion';
 
 @Component({
   selector: 'app-prompt-suggestion-demo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DocPage, DocExample, PkPromptSuggestion],
+  imports: [DocPage, DocExample, DocInstall, DocApi, PkPromptSuggestion],
   template: `
     <app-doc-page
       title="Prompt Suggestion"
@@ -49,10 +51,27 @@ import { PkPromptSuggestion } from 'prompt-kit-ng/prompt-suggestion';
           Picked: <span class="text-foreground font-medium">{{ picked() }}</span>
         </p>
       }
+
+      <app-doc-install component="prompt-suggestion" />
+      <app-doc-api [sections]="api" />
     </app-doc-page>
   `,
 })
 export class PromptSuggestionDemo {
+  protected readonly api: ApiSection[] = [
+    {
+      name: 'PkPromptSuggestion',
+      props: [
+        { name: 'content', type: 'string', default: "''", description: 'The suggestion text.' },
+        { name: 'highlight', type: 'string', default: "''", description: 'When non-empty, switches to inline list mode and highlights this substring inside content.' },
+        { name: 'variant', type: 'ButtonVariants["variant"]', description: 'Override the underlying hlmBtn variant.' },
+        { name: 'size', type: 'ButtonVariants["size"]', description: 'Override the underlying hlmBtn size.' },
+        { name: 'clicked', type: 'output<void>', description: 'Fires when the chip is clicked.' },
+        { name: 'class', type: 'string', description: 'Extra classes for the button.' },
+      ],
+    },
+  ];
+
   protected readonly filter = signal('');
   protected readonly picked = signal('');
   protected readonly suggestions = [
