@@ -53,8 +53,8 @@ interface Feature {
           project, not in a black-box dependency.
         </p>
         <div class="mt-7 flex flex-wrap items-center justify-center gap-3">
-          <a hlmBtn routerLink="/showcase/full-chat" type="button">See it in action</a>
-          <a hlmBtn variant="outline" routerLink="/blocks" type="button">Browse blocks</a>
+          <a hlmBtn routerLink="/installation" type="button">Get started</a>
+          <a hlmBtn variant="outline" routerLink="/showcase/full-chat" type="button">See it in action</a>
         </div>
       </section>
 
