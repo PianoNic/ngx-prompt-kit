@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { provideIcons } from '@ng-icons/core';
-import { lucideMenu } from '@ng-icons/lucide';
+import { lucideMenu, lucideX } from '@ng-icons/lucide';
 import { BrnSheetContent, BrnSheetTrigger } from '@spartan-ng/brain/sheet';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
@@ -24,7 +24,7 @@ import { ThemeToggle } from './theme-toggle';
     SidebarNav,
     ThemeToggle,
   ],
-  providers: [provideIcons({ lucideMenu })],
+  providers: [provideIcons({ lucideMenu, lucideX })],
   template: `
     <div class="bg-background text-foreground min-h-screen">
       <header
@@ -42,7 +42,26 @@ import { ThemeToggle } from './theme-toggle';
           >
             <ng-icon hlm size="sm" name="lucideMenu" />
           </button>
-          <hlm-sheet-content *brnSheetContent="let ctx" class="w-72 p-0 overflow-y-auto">
+          <hlm-sheet-content
+            *brnSheetContent="let ctx"
+            [showCloseButton]="false"
+            class="w-72 p-0 overflow-y-auto"
+          >
+            <div
+              class="border-border bg-background sticky top-0 z-10 flex h-14 items-center justify-between border-b px-4"
+            >
+              <span class="font-semibold tracking-tight">prompt-kit-ng</span>
+              <button
+                hlmBtn
+                variant="ghost"
+                size="icon-sm"
+                type="button"
+                aria-label="Close navigation"
+                (click)="ctx.close()"
+              >
+                <ng-icon hlm size="sm" name="lucideX" />
+              </button>
+            </div>
             <app-sidebar-nav (navigate)="ctx.close()" />
           </hlm-sheet-content>
         </hlm-sheet>
