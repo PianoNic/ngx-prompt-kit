@@ -45,10 +45,22 @@ import { ThemeToggle } from './theme-toggle';
           class="flex items-center gap-2 font-semibold tracking-tight"
           aria-label="prompt-kit-ng home"
         >
-          <span
-            class="bg-foreground text-background inline-flex h-6 w-6 items-center justify-center rounded text-[11px] font-bold"
-            >pk</span
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 64 64"
+            class="text-foreground h-6 w-6"
+            aria-hidden="true"
+            fill="none"
           >
+            <rect width="64" height="64" rx="14" fill="currentColor" />
+            <path
+              d="M20 14 L44 32 L20 50"
+              stroke="var(--background)"
+              stroke-width="8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
           <span>prompt-kit-ng</span>
         </a>
 

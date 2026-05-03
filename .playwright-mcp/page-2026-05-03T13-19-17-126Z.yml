@@ -1,0 +1,30 @@
+- generic [active] [ref=e1]:
+  - heading "Icon at size" [level=3] [ref=e2]
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - img [ref=e5]
+      - generic [ref=e6]: 16px (favicon)
+    - generic [ref=e7]:
+      - img [ref=e8]
+      - generic [ref=e9]: 24px
+    - generic [ref=e10]:
+      - img [ref=e11]
+      - generic [ref=e12]: 32px
+    - generic [ref=e13]:
+      - img [ref=e14]
+      - generic [ref=e15]: 64px
+    - generic [ref=e16]:
+      - img [ref=e17]
+      - generic [ref=e18]: 128px
+    - generic [ref=e19]:
+      - img [ref=e20]
+      - generic [ref=e21]: 192px
+  - heading "On dark background" [level=3] [ref=e22]
+  - generic [ref=e23]:
+    - img [ref=e25]
+    - img [ref=e27]
+    - img [ref=e29]
+  - heading "Maskable (full-bleed)" [level=3] [ref=e30]
+  - generic [ref=e32]:
+    - img [ref=e33]
+    - generic [ref=e34]: 192px

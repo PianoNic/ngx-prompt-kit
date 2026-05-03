@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="prompt-kit-ng">
+  <style>
+    .bg { fill: #0A0A0A; }
+    .ink { stroke: #FAFAFA; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #FAFAFA; }
+      .ink { stroke: #0A0A0A; }
+    }
+  </style>
+  <rect class="bg" width="64" height="64" rx="14" />
+  <path class="ink" d="M20 14 L44 32 L20 50" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
