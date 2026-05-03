@@ -72,48 +72,42 @@ export const routes: Routes = [
       },
       {
         path: 'components/text-shimmer',
-        loadComponent: () => import('./pages/coming-soon').then((m) => m.ComingSoon),
-        data: { title: 'Text Shimmer' },
+        loadComponent: () => import('./demo/text-shimmer-demo').then((m) => m.TextShimmerDemo),
       },
       {
         path: 'components/thinking-bar',
-        loadComponent: () => import('./pages/coming-soon').then((m) => m.ComingSoon),
-        data: { title: 'Thinking Bar' },
+        loadComponent: () => import('./demo/thinking-bar-demo').then((m) => m.ThinkingBarDemo),
       },
       {
         path: 'components/system-message',
-        loadComponent: () => import('./pages/coming-soon').then((m) => m.ComingSoon),
-        data: { title: 'System Message' },
+        loadComponent: () =>
+          import('./demo/system-message-demo').then((m) => m.SystemMessageDemo),
       },
       {
         path: 'components/steps',
-        loadComponent: () => import('./pages/coming-soon').then((m) => m.ComingSoon),
-        data: { title: 'Steps' },
+        loadComponent: () => import('./demo/steps-demo').then((m) => m.StepsDemo),
       },
       {
         path: 'components/image',
-        loadComponent: () => import('./pages/coming-soon').then((m) => m.ComingSoon),
-        data: { title: 'Image' },
+        loadComponent: () => import('./demo/image-demo').then((m) => m.ImageDemo),
       },
       {
         path: 'components/source',
-        loadComponent: () => import('./pages/coming-soon').then((m) => m.ComingSoon),
-        data: { title: 'Source' },
+        loadComponent: () => import('./demo/source-demo').then((m) => m.SourceDemo),
       },
       {
         path: 'components/feedback-bar',
-        loadComponent: () => import('./pages/coming-soon').then((m) => m.ComingSoon),
-        data: { title: 'Feedback Bar' },
+        loadComponent: () =>
+          import('./demo/feedback-bar-demo').then((m) => m.FeedbackBarDemo),
       },
       {
         path: 'components/chain-of-thought',
-        loadComponent: () => import('./pages/coming-soon').then((m) => m.ComingSoon),
-        data: { title: 'Chain Of Thought' },
+        loadComponent: () =>
+          import('./demo/chain-of-thought-demo').then((m) => m.ChainOfThoughtDemo),
       },
       {
         path: 'components/tool',
-        loadComponent: () => import('./pages/coming-soon').then((m) => m.ComingSoon),
-        data: { title: 'Tool' },
+        loadComponent: () => import('./demo/tool-demo').then((m) => m.ToolDemo),
       },
     ],
   },

@@ -81,7 +81,16 @@
       "prompt-kit-ng/scroll-button": ["./src/app/components/prompt-kit/scroll-button"],
       "prompt-kit-ng/prompt-suggestion": ["./src/app/components/prompt-kit/prompt-suggestion"],
       "prompt-kit-ng/file-upload": ["./src/app/components/prompt-kit/file-upload"],
-      "prompt-kit-ng/reasoning": ["./src/app/components/prompt-kit/reasoning"]
+      "prompt-kit-ng/reasoning": ["./src/app/components/prompt-kit/reasoning"],
+      "prompt-kit-ng/text-shimmer": ["./src/app/components/prompt-kit/text-shimmer"],
+      "prompt-kit-ng/thinking-bar": ["./src/app/components/prompt-kit/thinking-bar"],
+      "prompt-kit-ng/system-message": ["./src/app/components/prompt-kit/system-message"],
+      "prompt-kit-ng/steps": ["./src/app/components/prompt-kit/steps"],
+      "prompt-kit-ng/image": ["./src/app/components/prompt-kit/image"],
+      "prompt-kit-ng/source": ["./src/app/components/prompt-kit/source"],
+      "prompt-kit-ng/feedback-bar": ["./src/app/components/prompt-kit/feedback-bar"],
+      "prompt-kit-ng/chain-of-thought": ["./src/app/components/prompt-kit/chain-of-thought"],
+      "prompt-kit-ng/tool": ["./src/app/components/prompt-kit/tool"]
     }
   },
   "angularCompilerOptions": {
