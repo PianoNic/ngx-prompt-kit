@@ -26,7 +26,7 @@ export class PkMessageContent {
   public readonly class = input<string>('');
   protected readonly computedClass = computed(() =>
     cn(
-      'inline-block rounded-2xl px-3 py-2 text-foreground bg-secondary prose break-words whitespace-normal',
+      'inline-block rounded-xl px-3 py-2 text-foreground bg-secondary prose break-words whitespace-normal',
       this.class(),
     ),
   );
