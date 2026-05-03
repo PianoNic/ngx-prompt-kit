@@ -1,6 +1,6 @@
 {
   "name": "ngx-prompt-kit",
-  "version": "0.1.0",
+  "version": "21.0.0",
   "description": "Angular components for AI chat interfaces. Schematic-based — bring your own Spartan UI.",
   "keywords": ["angular", "ai", "chat", "llm", "spartan", "schematics", "components"],
   "license": "MIT",
