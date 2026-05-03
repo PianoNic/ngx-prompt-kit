@@ -19,9 +19,13 @@ jobs:
         with:
           node-version: 22
 
+      - run: corepack enable
+      - run: corepack prepare npm@latest --activate
+      - run: npm --version
+
       - run: bun install --frozen-lockfile
 
       - run: bun run build:lib
 
-      - run: npm publish --provenance
+      - run: npm publish
         working-directory: dist/ngx-prompt-kit
