@@ -70,18 +70,7 @@
       "@spartan-ng/helm/tooltip": ["./libs/ui/tooltip/src/index.ts"],
       "@spartan-ng/helm/typography": ["./libs/ui/typography/src/index.ts"],
       "@spartan-ng/helm/utils": ["./libs/ui/utils/src/index.ts"],
-      "prompt-kit-ng/utils": ["./libs/prompt-kit/utils/src/index.ts"],
-      "prompt-kit-ng/message": ["./libs/prompt-kit/message/src/index.ts"],
-      "prompt-kit-ng/markdown": ["./libs/prompt-kit/markdown/src/index.ts"],
-      "prompt-kit-ng/code-block": ["./libs/prompt-kit/code-block/src/index.ts"],
-      "prompt-kit-ng/prompt-input": ["./libs/prompt-kit/prompt-input/src/index.ts"],
-      "prompt-kit-ng/response-stream": ["./libs/prompt-kit/response-stream/src/index.ts"],
-      "prompt-kit-ng/loader": ["./libs/prompt-kit/loader/src/index.ts"],
-      "prompt-kit-ng/chat-container": ["./libs/prompt-kit/chat-container/src/index.ts"],
-      "prompt-kit-ng/scroll-button": ["./libs/prompt-kit/scroll-button/src/index.ts"],
-      "prompt-kit-ng/prompt-suggestion": ["./libs/prompt-kit/prompt-suggestion/src/index.ts"],
-      "prompt-kit-ng/file-upload": ["./libs/prompt-kit/file-upload/src/index.ts"],
-      "prompt-kit-ng/reasoning": ["./libs/prompt-kit/reasoning/src/index.ts"]
+      "prompt-kit-ng": ["./dist/prompt-kit-ng"]
     }
   },
   "angularCompilerOptions": {
@@ -97,6 +86,12 @@
     },
     {
       "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/prompt-kit-ng/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/prompt-kit-ng/tsconfig.spec.json"
     }
   ]
 }

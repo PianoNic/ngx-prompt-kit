@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PkMessageImports } from 'prompt-kit-ng/message';
+import { PkMessageImports } from 'prompt-kit-ng';
 
 @Component({
   selector: 'app-message-demo',

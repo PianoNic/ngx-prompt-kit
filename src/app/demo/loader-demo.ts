@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PkLoader, type LoaderVariant } from 'prompt-kit-ng/loader';
+import { PkLoader, type LoaderVariant } from 'prompt-kit-ng';
 
 @Component({
   selector: 'app-loader-demo',

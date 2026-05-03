@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { PkPromptInputImports } from 'prompt-kit-ng/prompt-input';
+import { PkPromptInputImports } from 'prompt-kit-ng';
 
 @Component({
   selector: 'app-prompt-input-demo',

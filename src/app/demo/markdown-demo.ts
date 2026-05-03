@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PkMarkdown } from 'prompt-kit-ng/markdown';
+import { PkMarkdown } from 'prompt-kit-ng';
 
 @Component({
   selector: 'app-markdown-demo',

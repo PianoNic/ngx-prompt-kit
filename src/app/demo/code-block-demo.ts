@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
+import { PkCodeBlockImports } from 'prompt-kit-ng';
 
 @Component({
   selector: 'app-code-block-demo',
