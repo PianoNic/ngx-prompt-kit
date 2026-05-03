@@ -23,12 +23,9 @@ import { STEPS_STATE } from './steps.state';
     <div [class]="wrapperClass()" [style.maxHeight]="state.isOpen() ? maxHeightPx() + 'px' : '0px'">
       <div
         #inner
-        class="mt-3 grid max-w-full min-w-0 grid-cols-[min-content_minmax(0,1fr)] items-start gap-x-3"
+        class="grid max-w-full min-w-0 grid-cols-[min-content_minmax(0,1fr)] items-start gap-x-3 pt-3"
       >
-        <div class="min-w-0 self-stretch">
-          <ng-content select="[stepsBar]" />
-          <div class="bg-muted h-full w-[2px]" aria-hidden="true" data-default-bar></div>
-        </div>
+        <div class="bg-muted ml-1.5 h-full w-[2px] self-stretch" aria-hidden="true"></div>
         <div class="min-w-0 space-y-2"><ng-content /></div>
       </div>
     </div>

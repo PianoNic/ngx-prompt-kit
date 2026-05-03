@@ -129,6 +129,7 @@ interface Feature {
           <div class="flex items-center gap-4">
             <a href="https://github.com/PianoNic/prompt-kit-ng" target="_blank" rel="noopener noreferrer" class="hover:text-foreground">GitHub</a>
             <a href="https://www.npmjs.com/package/@pianonic/prompt-kit-ng" target="_blank" rel="noopener noreferrer" class="hover:text-foreground">npm</a>
+            <a href="https://buymeacoffee.com/PianoNic" target="_blank" rel="noopener noreferrer" class="hover:text-foreground">Buy me a coffee ☕</a>
           </div>
         </div>
       </footer>
