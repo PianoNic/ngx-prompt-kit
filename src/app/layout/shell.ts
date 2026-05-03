@@ -30,7 +30,7 @@ import { ThemeToggle } from './theme-toggle';
       <header
         class="border-border bg-background/80 sticky top-0 z-30 flex h-14 items-center gap-2 border-b px-4 backdrop-blur"
       >
-        <hlm-sheet>
+        <hlm-sheet side="left">
           <button
             hlmBtn
             brnSheetTrigger
@@ -42,7 +42,7 @@ import { ThemeToggle } from './theme-toggle';
           >
             <ng-icon hlm size="sm" name="lucideMenu" />
           </button>
-          <hlm-sheet-content *brnSheetContent="let ctx" side="left" class="w-72 p-0">
+          <hlm-sheet-content *brnSheetContent="let ctx" class="w-72 p-0 overflow-y-auto">
             <app-sidebar-nav (navigate)="ctx.close()" />
           </hlm-sheet-content>
         </hlm-sheet>
