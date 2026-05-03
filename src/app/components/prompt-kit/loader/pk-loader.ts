@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation,
+  computed,
+  input,
+} from '@angular/core';
 import { cn } from '../utils/cn';
 
 export type LoaderVariant =
@@ -27,6 +33,7 @@ const TEXT_SIZE: Record<LoaderSize, string> = {
 @Component({
   selector: 'pk-loader',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   styleUrl: './loader-keyframes.css',
   template: `
     @switch (variant()) {

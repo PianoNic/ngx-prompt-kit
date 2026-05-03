@@ -4,6 +4,7 @@ import {
   Component,
   DestroyRef,
   PLATFORM_ID,
+  ViewEncapsulation,
   computed,
   effect,
   inject,
@@ -23,6 +24,7 @@ interface Segment {
 @Component({
   selector: 'pk-response-stream',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   styleUrl: './pk-response-stream.css',
   template: `
     @if (mode() === 'typewriter') {
