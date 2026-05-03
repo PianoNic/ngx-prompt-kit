@@ -72,7 +72,7 @@ import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
           Spartan in your workspace first:
         </p>
         <div class="mt-3">
-          <hlm-tabs tab="bun">
+          <hlm-tabs tab="ng">
             <hlm-tabs-list variant="line">
               <button hlmTabsTrigger="bun">Bun</button>
               <button hlmTabsTrigger="npm">npm</button>
@@ -113,7 +113,7 @@ import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
           and warns if Spartan isn't detected.
         </p>
         <div class="mt-3">
-          <hlm-tabs tab="bun">
+          <hlm-tabs tab="ng">
             <hlm-tabs-list variant="line">
               <button hlmTabsTrigger="bun">Bun</button>
               <button hlmTabsTrigger="npm">npm</button>
@@ -152,7 +152,7 @@ import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
           when needed.
         </p>
         <div class="mt-3">
-          <hlm-tabs tab="bun">
+          <hlm-tabs tab="ng">
             <hlm-tabs-list variant="line">
               <button hlmTabsTrigger="bun">Bun</button>
               <button hlmTabsTrigger="npm">npm</button>
