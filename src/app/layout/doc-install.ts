@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
+import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
 
 @Component({
   selector: 'app-doc-install',
@@ -23,6 +23,6 @@ import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
 export class DocInstall {
   public readonly component = input.required<string>();
   protected readonly cmd = computed(
-    () => `ng generate @pianonic/prompt-kit-ng:${this.component()}`,
+    () => `ng generate ngx-prompt-kit:${this.component()}`,
   );
 }

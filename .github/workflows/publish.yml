@@ -26,4 +26,4 @@ jobs:
       - run: bun run build:lib
 
       - run: npm publish --provenance --access public
-        working-directory: dist/prompt-kit-ng
+        working-directory: dist/ngx-prompt-kit

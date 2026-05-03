@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { HlmTabsImports } from '@spartan-ng/helm/tabs';
 import { HlmH4, HlmMuted } from '@spartan-ng/helm/typography';
-import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
+import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
 
 @Component({
   selector: 'app-doc-example',

@@ -12,7 +12,7 @@ import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
-import { PkReasoningImports } from 'prompt-kit-ng/reasoning';
+import { PkReasoningImports } from 'ngx-prompt-kit/reasoning';
 
 const BASIC_REASONING = `I calculated the best color balance for the image:
 

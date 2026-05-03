@@ -3,7 +3,7 @@ import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
-import { PkThinkingBar } from 'prompt-kit-ng/thinking-bar';
+import { PkThinkingBar } from 'ngx-prompt-kit/thinking-bar';
 
 @Component({
   selector: 'app-thinking-bar-demo',

@@ -6,7 +6,7 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "outDir": "../../dist/prompt-kit-ng/schematics",
+    "outDir": "../../dist/ngx-prompt-kit/schematics",
     "rootDir": "src",
     "declaration": true
   },

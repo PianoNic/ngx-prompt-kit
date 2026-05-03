@@ -3,7 +3,7 @@ import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
-import { PkStepsImports } from 'prompt-kit-ng/steps';
+import { PkStepsImports } from 'ngx-prompt-kit/steps';
 
 @Component({
   selector: 'app-steps-demo',

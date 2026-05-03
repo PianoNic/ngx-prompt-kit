@@ -3,8 +3,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const root = path.resolve(__dirname, '..');
-const srcDir = path.join(root, 'projects', 'prompt-kit-ng');
-const distDir = path.join(root, 'dist', 'prompt-kit-ng');
+const srcDir = path.join(root, 'projects', 'ngx-prompt-kit');
+const distDir = path.join(root, 'dist', 'ngx-prompt-kit');
 const schematicsSrc = path.join(srcDir, 'src');
 const schematicsDist = path.join(distDir, 'schematics');
 

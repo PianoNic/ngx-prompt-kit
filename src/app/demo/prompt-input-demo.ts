@@ -7,7 +7,7 @@ import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
-import { PkPromptInputImports } from 'prompt-kit-ng/prompt-input';
+import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
 
 @Component({
   selector: 'app-prompt-input-demo',

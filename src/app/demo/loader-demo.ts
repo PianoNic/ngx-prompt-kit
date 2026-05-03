@@ -3,7 +3,7 @@ import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
-import { PkLoader, type LoaderVariant } from 'prompt-kit-ng/loader';
+import { PkLoader, type LoaderVariant } from 'ngx-prompt-kit/loader';
 
 interface VariantSpec {
   variant: LoaderVariant;

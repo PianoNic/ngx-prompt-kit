@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { HlmTabsImports } from '@spartan-ng/helm/tabs';
 import { DocNav } from '../layout/doc-nav';
-import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
+import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
 
 @Component({
   selector: 'app-installation',
@@ -12,7 +12,7 @@ import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
       <header class="mb-10">
         <h1 class="text-3xl font-semibold tracking-tight">Installation</h1>
         <p class="text-muted-foreground mt-2 max-w-2xl text-base leading-relaxed">
-          Get prompt-kit-ng wired into an Angular workspace. Components are
+          Get ngx-prompt-kit wired into an Angular workspace. Components are
           distributed via schematics — the source lands in your project where you
           own it.
         </p>
@@ -68,7 +68,7 @@ import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
       <section class="mt-10">
         <h2 class="text-xl font-semibold tracking-tight">Install Spartan UI</h2>
         <p class="text-muted-foreground mt-2 text-sm leading-relaxed">
-          prompt-kit-ng composes Spartan UI helm primitives. Install and initialize
+          ngx-prompt-kit composes Spartan UI helm primitives. Install and initialize
           Spartan in your workspace first:
         </p>
         <div class="mt-3">
@@ -105,7 +105,7 @@ import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
       </section>
 
       <section class="mt-10">
-        <h2 class="text-xl font-semibold tracking-tight">Add prompt-kit-ng</h2>
+        <h2 class="text-xl font-semibold tracking-tight">Add ngx-prompt-kit</h2>
         <p class="text-muted-foreground mt-2 text-sm leading-relaxed">
           One-time bootstrap. Patches the universal runtime deps
           (<code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs">clsx</code>,
@@ -214,23 +214,23 @@ ng add @spartan-ng/cli
 ng g @spartan-ng/cli:init
 ng g @spartan-ng/cli:ui`;
 
-  protected readonly ngAddBun = `bun x ng add @pianonic/prompt-kit-ng`;
-  protected readonly ngAddNpm = `npx ng add @pianonic/prompt-kit-ng`;
-  protected readonly ngAddNg = `ng add @pianonic/prompt-kit-ng`;
+  protected readonly ngAddBun = `bun x ng add ngx-prompt-kit`;
+  protected readonly ngAddNpm = `npx ng add ngx-prompt-kit`;
+  protected readonly ngAddNg = `ng add ngx-prompt-kit`;
 
-  protected readonly ngGenerateBun = `bun x ng generate @pianonic/prompt-kit-ng:message
-bun x ng generate @pianonic/prompt-kit-ng:prompt-input
-bun x ng generate @pianonic/prompt-kit-ng:markdown
+  protected readonly ngGenerateBun = `bun x ng generate ngx-prompt-kit:message
+bun x ng generate ngx-prompt-kit:prompt-input
+bun x ng generate ngx-prompt-kit:markdown
 # ...etc.`;
 
-  protected readonly ngGenerateNpm = `npx ng generate @pianonic/prompt-kit-ng:message
-npx ng generate @pianonic/prompt-kit-ng:prompt-input
-npx ng generate @pianonic/prompt-kit-ng:markdown
+  protected readonly ngGenerateNpm = `npx ng generate ngx-prompt-kit:message
+npx ng generate ngx-prompt-kit:prompt-input
+npx ng generate ngx-prompt-kit:markdown
 # ...etc.`;
 
-  protected readonly ngGenerateNg = `ng generate @pianonic/prompt-kit-ng:message
-ng generate @pianonic/prompt-kit-ng:prompt-input
-ng generate @pianonic/prompt-kit-ng:markdown
+  protected readonly ngGenerateNg = `ng generate ngx-prompt-kit:message
+ng generate ngx-prompt-kit:prompt-input
+ng generate ngx-prompt-kit:markdown
 # ...etc.`;
 
   protected readonly usage = `import { Component, signal } from '@angular/core';

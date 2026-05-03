@@ -3,7 +3,7 @@ import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
-import { PkTool, type ToolPart } from 'prompt-kit-ng/tool';
+import { PkTool, type ToolPart } from 'ngx-prompt-kit/tool';
 
 @Component({
   selector: 'app-tool-demo',

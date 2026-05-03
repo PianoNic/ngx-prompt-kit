@@ -3,7 +3,7 @@ import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
-import { PkMarkdown } from 'prompt-kit-ng/markdown';
+import { PkMarkdown } from 'ngx-prompt-kit/markdown';
 
 @Component({
   selector: 'app-markdown-demo',
@@ -51,13 +51,13 @@ export class MarkdownDemo {
 
   protected readonly rich = `## Release notes — v0.1.0
 
-This is the first tagged release of **prompt-kit-ng**.
+This is the first tagged release of **ngx-prompt-kit**.
 
 - 11 components plus the \`cn()\` utility
 - Built on [Spartan UI](https://www.spartan.ng) primitives
 - Distributed via Angular schematics
 
-Run \`ng add @pianonic/prompt-kit-ng\` to get started.`;
+Run \`ng add ngx-prompt-kit\` to get started.`;
 
   protected readonly partial = `### Steps so far
 

@@ -2,7 +2,7 @@
   "$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
     "ng-add": {
-      "description": "Bootstrap prompt-kit-ng in this workspace.",
+      "description": "Bootstrap ngx-prompt-kit in this workspace.",
       "factory": "./ng-add/index#ngAdd",
       "schema": "./ng-add/schema.json"
     },

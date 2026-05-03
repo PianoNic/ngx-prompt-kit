@@ -3,7 +3,7 @@ import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
-import { PkSystemMessage } from 'prompt-kit-ng/system-message';
+import { PkSystemMessage } from 'ngx-prompt-kit/system-message';
 
 @Component({
   selector: 'app-system-message-demo',

@@ -4,9 +4,9 @@ import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
-import { PkChatContainerImports } from 'prompt-kit-ng/chat-container';
-import { PkMessageImports } from 'prompt-kit-ng/message';
-import { PkScrollButton } from 'prompt-kit-ng/scroll-button';
+import { PkChatContainerImports } from 'ngx-prompt-kit/chat-container';
+import { PkMessageImports } from 'ngx-prompt-kit/message';
+import { PkScrollButton } from 'ngx-prompt-kit/scroll-button';
 
 @Component({
   selector: 'app-chat-container-demo',

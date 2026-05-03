@@ -11,7 +11,7 @@ const UNIVERSAL_DEPS: Record<string, string> = {
 };
 
 const REQUIRED_HELM_HINT = `
-prompt-kit-ng components compose Spartan UI helm components.
+ngx-prompt-kit components compose Spartan UI helm components.
 If you haven't already, run:
 
   ng g @spartan-ng/cli:ui
@@ -53,8 +53,8 @@ export function ngAdd(_options: NgAddOptions): Rule {
     }
 
     context.logger.info('');
-    context.logger.info('prompt-kit-ng is ready. Add components with:');
-    context.logger.info('  ng generate @pianonic/prompt-kit-ng:<component>');
+    context.logger.info('ngx-prompt-kit is ready. Add components with:');
+    context.logger.info('  ng generate ngx-prompt-kit:<component>');
 
     return tree;
   };

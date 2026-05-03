@@ -16,7 +16,7 @@ import { HlmButton } from '@spartan-ng/helm/button';
       <h1 class="text-3xl font-semibold tracking-tight">{{ title() }}</h1>
       <p class="text-muted-foreground max-w-md">
         Not built yet. In the meantime, browse the per-component demos to see each
-        prompt-kit-ng piece in isolation.
+        ngx-prompt-kit piece in isolation.
       </p>
       <a hlmBtn variant="outline" routerLink="/components/message" type="button">
         Component demos

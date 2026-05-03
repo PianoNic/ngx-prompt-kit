@@ -1,4 +1,4 @@
-# @pianonic/prompt-kit-ng
+# ngx-prompt-kit
 
 Angular components for AI chat interfaces, built to compose with [Spartan UI](https://www.spartan.ng).
 Port of [ibelick/prompt-kit](https://github.com/ibelick/prompt-kit).
@@ -16,7 +16,7 @@ Components are distributed via Angular schematics — `ng add` and `ng generate`
 One-time bootstrap (installs `clsx` and `tailwind-merge`, checks for Spartan):
 
 ```bash
-ng add @pianonic/prompt-kit-ng
+ng add ngx-prompt-kit
 ```
 
 ## Add components
@@ -47,7 +47,7 @@ ng add @pianonic/prompt-kit-ng
 Add a component:
 
 ```bash
-ng generate @pianonic/prompt-kit-ng:message
+ng generate ngx-prompt-kit:message
 ```
 
 Components land in `<sourceRoot>/app/components/prompt-kit/<name>/`. The `cn()` utility is auto-generated alongside.

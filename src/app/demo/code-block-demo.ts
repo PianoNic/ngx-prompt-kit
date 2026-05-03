@@ -3,7 +3,7 @@ import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
-import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
+import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
 
 @Component({
   selector: 'app-code-block-demo',
@@ -74,8 +74,8 @@ export class CodeBlockDemo {
 
 console.log(greet('world'));`;
 
-  protected readonly bash = `ng add @pianonic/prompt-kit-ng
-ng generate @pianonic/prompt-kit-ng:message`;
+  protected readonly bash = `ng add ngx-prompt-kit
+ng generate ngx-prompt-kit:message`;
 
   protected readonly withHeaderCode = `<pk-code-block class="max-w-2xl">
   <pk-code-block-group class="border-b border-border px-4 py-2 text-xs">

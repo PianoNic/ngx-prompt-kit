@@ -114,7 +114,7 @@ export function buildComponent(spec: ComponentSpec): (opts: ComponentSchema) => 
       const rules: Rule[] = [];
       if (spec.needsUtils) {
         rules.push(
-          externalSchematic('@pianonic/prompt-kit-ng', 'utils', { project: projectName }),
+          externalSchematic('ngx-prompt-kit', 'utils', { project: projectName }),
         );
       }
       rules.push(mergeWith(templateSource, MergeStrategy.Overwrite));

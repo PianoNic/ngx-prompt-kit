@@ -3,7 +3,7 @@ import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
-import { PkImage } from 'prompt-kit-ng/image';
+import { PkImage } from 'ngx-prompt-kit/image';
 
 // 1x1 transparent PNG (smallest valid base64 payload).
 const TRANSPARENT_PNG_BASE64 =

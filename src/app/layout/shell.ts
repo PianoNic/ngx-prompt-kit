@@ -50,7 +50,7 @@ import { ThemeToggle } from './theme-toggle';
             <div
               class="border-border bg-background sticky top-0 z-10 flex h-16 items-center justify-between border-b px-4 pb-2 pt-2"
             >
-              <span class="font-semibold tracking-tight">prompt-kit-ng</span>
+              <span class="font-semibold tracking-tight">ngx-prompt-kit</span>
               <button
                 hlmBtn
                 variant="ghost"
@@ -71,7 +71,7 @@ import { ThemeToggle } from './theme-toggle';
         <a
           routerLink="/"
           class="flex items-center gap-2 font-semibold tracking-tight"
-          aria-label="prompt-kit-ng home"
+          aria-label="ngx-prompt-kit home"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -89,7 +89,7 @@ import { ThemeToggle } from './theme-toggle';
               stroke-linejoin="round"
             />
           </svg>
-          <span>prompt-kit-ng</span>
+          <span>ngx-prompt-kit</span>
         </a>
 
         <div class="flex-1"></div>

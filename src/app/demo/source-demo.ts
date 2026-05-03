@@ -3,7 +3,7 @@ import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
-import { PkSourceImports } from 'prompt-kit-ng/source';
+import { PkSourceImports } from 'ngx-prompt-kit/source';
 
 @Component({
   selector: 'app-source-demo',

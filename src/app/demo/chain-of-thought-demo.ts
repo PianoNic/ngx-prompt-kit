@@ -6,7 +6,7 @@ import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
-import { PkChainOfThoughtImports } from 'prompt-kit-ng/chain-of-thought';
+import { PkChainOfThoughtImports } from 'ngx-prompt-kit/chain-of-thought';
 
 @Component({
   selector: 'app-chain-of-thought-demo',

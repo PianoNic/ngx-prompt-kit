@@ -16,8 +16,8 @@ import {
   HlmCardTitle,
 } from '@spartan-ng/helm/card';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
-import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
-import { PkPromptInputImports } from 'prompt-kit-ng/prompt-input';
+import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
+import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
 
 interface Feature {
   title: string;
@@ -43,7 +43,7 @@ interface Feature {
     <div class="mx-auto max-w-4xl py-4 md:py-12">
       <section class="text-center">
         <p class="text-muted-foreground mb-3 text-sm font-medium uppercase tracking-wider">
-          prompt-kit-ng
+          ngx-prompt-kit
         </p>
         <h1 class="text-4xl font-semibold tracking-tight md:text-5xl">
           AI chat components for Angular.
@@ -61,7 +61,7 @@ interface Feature {
 
       <section class="mx-auto mt-12 max-w-2xl">
         <pk-prompt-input class="block" [(value)]="heroValue" (submitted)="onHeroSubmit()">
-          <pk-prompt-input-textarea placeholder="Ask prompt-kit-ng anything..." />
+          <pk-prompt-input-textarea placeholder="Ask ngx-prompt-kit anything..." />
           <pk-prompt-input-actions class="mt-2 justify-between">
             <div class="flex items-center gap-1">
               <pk-prompt-input-action tooltip="Attach files">
@@ -128,8 +128,8 @@ interface Feature {
             MIT licensed.
           </p>
           <div class="flex items-center gap-4">
-            <a href="https://github.com/PianoNic/prompt-kit-ng" target="_blank" rel="noopener noreferrer" class="hover:text-foreground">GitHub</a>
-            <a href="https://www.npmjs.com/package/@pianonic/prompt-kit-ng" target="_blank" rel="noopener noreferrer" class="hover:text-foreground">npm</a>
+            <a href="https://github.com/PianoNic/ngx-prompt-kit" target="_blank" rel="noopener noreferrer" class="hover:text-foreground">GitHub</a>
+            <a href="https://www.npmjs.com/package/ngx-prompt-kit" target="_blank" rel="noopener noreferrer" class="hover:text-foreground">npm</a>
             <a
               href="https://buymeacoffee.com/PianoNic"
               target="_blank"
@@ -150,7 +150,7 @@ export class Landing {
   protected readonly lastSubmitted = signal('');
 
   protected readonly snippet = `<pk-prompt-input [(value)]="value" (submitted)="onSubmit()">
-  <pk-prompt-input-textarea placeholder="Ask prompt-kit-ng anything..." />
+  <pk-prompt-input-textarea placeholder="Ask ngx-prompt-kit anything..." />
   <pk-prompt-input-actions class="mt-2 justify-between">
     <div class="flex items-center gap-1">
       <pk-prompt-input-action tooltip="Attach files">

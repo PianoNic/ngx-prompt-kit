@@ -8,7 +8,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   template: `
     <div class="flex min-h-screen">
       <aside class="w-56 border-r border-border p-4 space-y-1 text-sm">
-        <h1 class="font-semibold mb-3">prompt-kit-ng</h1>
+        <h1 class="font-semibold mb-3">ngx-prompt-kit</h1>
         @for (l of links; track l.path) {
           <a
             [routerLink]="l.path"

@@ -4,7 +4,7 @@ import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
-import { PkResponseStream } from 'prompt-kit-ng/response-stream';
+import { PkResponseStream } from 'ngx-prompt-kit/response-stream';
 
 @Component({
   selector: 'app-response-stream-demo',
