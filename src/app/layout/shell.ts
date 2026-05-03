@@ -48,7 +48,7 @@ import { ThemeToggle } from './theme-toggle';
             class="w-72 p-0 overflow-y-auto"
           >
             <div
-              class="border-border bg-background sticky top-0 z-10 flex h-14 items-center justify-between border-b px-4"
+              class="border-border bg-background sticky top-0 z-10 flex h-16 items-center justify-between border-b px-4 pb-2 pt-2"
             >
               <span class="font-semibold tracking-tight">prompt-kit-ng</span>
               <button
@@ -62,7 +62,9 @@ import { ThemeToggle } from './theme-toggle';
                 <ng-icon hlm size="sm" name="lucideX" />
               </button>
             </div>
-            <app-sidebar-nav (navigate)="ctx.close()" />
+            <div class="pt-2">
+              <app-sidebar-nav (navigate)="ctx.close()" />
+            </div>
           </hlm-sheet-content>
         </hlm-sheet>
 
