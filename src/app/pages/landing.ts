@@ -15,7 +15,6 @@ import {
   HlmCardTitle,
 } from '@spartan-ng/helm/card';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
-import { HlmH1, HlmH2, HlmLead, HlmMuted } from '@spartan-ng/helm/typography';
 import { PkCodeBlockImports } from 'prompt-kit-ng/code-block';
 import { PkPromptInputImports } from 'prompt-kit-ng/prompt-input';
 
@@ -35,10 +34,6 @@ interface Feature {
     HlmCardHeader,
     HlmCardTitle,
     HlmIconImports,
-    HlmH1,
-    HlmH2,
-    HlmLead,
-    HlmMuted,
     PkCodeBlockImports,
     PkPromptInputImports,
   ],
@@ -46,9 +41,13 @@ interface Feature {
   template: `
     <div class="mx-auto max-w-4xl py-4 md:py-12">
       <section class="text-center">
-        <p hlmMuted class="mb-3 uppercase tracking-wider">prompt-kit-ng</p>
-        <h1 hlmH1>AI chat components for Angular.</h1>
-        <p hlmLead class="mx-auto mt-4 max-w-2xl">
+        <p class="text-muted-foreground mb-3 text-sm font-medium uppercase tracking-wider">
+          prompt-kit-ng
+        </p>
+        <h1 class="text-4xl font-semibold tracking-tight md:text-5xl">
+          AI chat components for Angular.
+        </h1>
+        <p class="text-muted-foreground mx-auto mt-4 max-w-2xl text-lg">
           Standalone, signal-based components for building AI interfaces. Composes
           with Spartan UI. Distributed via schematics — the source lives in your
           project, not in a black-box dependency.
@@ -105,7 +104,9 @@ interface Feature {
       </section>
 
       <section class="mt-20">
-        <h2 hlmH2 class="border-none text-center">Built for the Angular way of working.</h2>
+        <h2 class="text-center text-2xl font-semibold tracking-tight">
+          Built for the Angular way of working.
+        </h2>
         <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           @for (f of features; track f.title) {
             <div hlmCard>
