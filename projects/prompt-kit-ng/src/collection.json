@@ -1,0 +1,70 @@
+{
+  "$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Bootstrap prompt-kit-ng in this workspace.",
+      "factory": "./ng-add/index#ngAdd",
+      "schema": "./ng-add/schema.json"
+    },
+    "message": {
+      "description": "Add the message component.",
+      "factory": "./message/index#message",
+      "schema": "./message/schema.json"
+    },
+    "markdown": {
+      "description": "Add the markdown component.",
+      "factory": "./markdown/index#markdown",
+      "schema": "./markdown/schema.json"
+    },
+    "code-block": {
+      "description": "Add the code-block component.",
+      "factory": "./code-block/index#codeBlock",
+      "schema": "./code-block/schema.json"
+    },
+    "prompt-input": {
+      "description": "Add the prompt-input component.",
+      "factory": "./prompt-input/index#promptInput",
+      "schema": "./prompt-input/schema.json"
+    },
+    "response-stream": {
+      "description": "Add the response-stream component.",
+      "factory": "./response-stream/index#responseStream",
+      "schema": "./response-stream/schema.json"
+    },
+    "loader": {
+      "description": "Add the loader component.",
+      "factory": "./loader/index#loader",
+      "schema": "./loader/schema.json"
+    },
+    "chat-container": {
+      "description": "Add the chat-container component.",
+      "factory": "./chat-container/index#chatContainer",
+      "schema": "./chat-container/schema.json"
+    },
+    "scroll-button": {
+      "description": "Add the scroll-button component.",
+      "factory": "./scroll-button/index#scrollButton",
+      "schema": "./scroll-button/schema.json"
+    },
+    "prompt-suggestion": {
+      "description": "Add the prompt-suggestion component.",
+      "factory": "./prompt-suggestion/index#promptSuggestion",
+      "schema": "./prompt-suggestion/schema.json"
+    },
+    "file-upload": {
+      "description": "Add the file-upload component.",
+      "factory": "./file-upload/index#fileUpload",
+      "schema": "./file-upload/schema.json"
+    },
+    "reasoning": {
+      "description": "Add the reasoning component.",
+      "factory": "./reasoning/index#reasoning",
+      "schema": "./reasoning/schema.json"
+    },
+    "utils": {
+      "description": "Add the cn() utility (auto-installed by other components).",
+      "factory": "./utils/index#utils",
+      "schema": "./utils/schema.json"
+    }
+  }
+}

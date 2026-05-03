@@ -1,29 +1,18 @@
 {
-  "name": "prompt-kit-ng",
+  "name": "@pianonic/prompt-kit-ng",
   "version": "0.1.0",
-  "description": "Angular components for AI chat interfaces, built on Spartan UI. Port of ibelick/prompt-kit.",
-  "keywords": ["angular", "ai", "chat", "llm", "spartan", "tailwind", "components"],
+  "description": "Angular components for AI chat interfaces. Schematic-based — bring your own Spartan UI.",
+  "keywords": ["angular", "ai", "chat", "llm", "spartan", "schematics", "components"],
   "license": "MIT",
   "author": "PianoNic",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/PianoNic/prompt-kit-ng.git"
-  },
+  "repository": { "type": "git", "url": "https://github.com/PianoNic/prompt-kit-ng.git" },
   "homepage": "https://github.com/PianoNic/prompt-kit-ng#readme",
-  "bugs": {
-    "url": "https://github.com/PianoNic/prompt-kit-ng/issues"
-  },
-  "peerDependencies": {
-    "@angular/common": "^19.0.0 || ^20.0.0 || ^21.0.0",
-    "@angular/core": "^19.0.0 || ^20.0.0 || ^21.0.0",
-    "@spartan-ng/brain": "^0.0.1-alpha.683"
-  },
+  "bugs": { "url": "https://github.com/PianoNic/prompt-kit-ng/issues" },
+  "schematics": "./schematics/collection.json",
+  "ng-add": { "save": "devDependencies" },
   "dependencies": {
-    "tslib": "^2.3.0",
-    "marked": "^18.0.3",
-    "shiki": "^4.0.2",
-    "clsx": "^2.1.1",
-    "tailwind-merge": "^3.5.0"
-  },
-  "sideEffects": false
+    "@angular-devkit/core": "^21.0.0",
+    "@angular-devkit/schematics": "^21.0.0",
+    "@schematics/angular": "^21.0.0"
+  }
 }

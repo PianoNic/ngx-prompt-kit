@@ -66,32 +66,6 @@
           "builder": "@angular/build:unit-test"
         }
       }
-    },
-    "prompt-kit-ng": {
-      "projectType": "library",
-      "root": "projects/prompt-kit-ng",
-      "sourceRoot": "projects/prompt-kit-ng/src",
-      "prefix": "pk",
-      "architect": {
-        "build": {
-          "builder": "@angular/build:ng-packagr",
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/prompt-kit-ng/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/prompt-kit-ng/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular/build:unit-test",
-          "options": {
-            "tsConfig": "projects/prompt-kit-ng/tsconfig.spec.json"
-          }
-        }
-      }
     }
   }
 }

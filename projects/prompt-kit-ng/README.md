@@ -1,64 +1,63 @@
-# PromptKitNg
+# @pianonic/prompt-kit-ng
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.0.
+Angular components for AI chat interfaces, built to compose with [Spartan UI](https://www.spartan.ng).
+Port of [ibelick/prompt-kit](https://github.com/ibelick/prompt-kit).
 
-## Code scaffolding
+Components are distributed via Angular schematics — `ng add` and `ng generate` copy source into your project, where you own the code.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Prerequisites
 
-```bash
-ng generate component component-name
-```
+- Angular 19+ (tested on Angular 21)
+- Tailwind CSS v4
+- [Spartan UI](https://www.spartan.ng) installed in your workspace
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Setup
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the library, run:
+One-time bootstrap (installs `clsx` and `tailwind-merge`, checks for Spartan):
 
 ```bash
-ng build prompt-kit-ng
+ng add @pianonic/prompt-kit-ng
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+## Add components
 
-### Publishing the Library
+| Component           | Helm dependencies   | Other deps |
+|---------------------|---------------------|------------|
+| `message`           | avatar, tooltip     | —          |
+| `markdown`          | —                   | marked     |
+| `code-block`        | —                   | shiki      |
+| `prompt-input`      | textarea, tooltip   | —          |
+| `response-stream`   | —                   | —          |
+| `loader`            | —                   | —          |
+| `chat-container`    | —                   | —          |
+| `scroll-button`     | button              | —          |
+| `prompt-suggestion` | button              | —          |
+| `file-upload`       | —                   | —          |
+| `reasoning`         | —                   | —          |
 
-Once the project is built, you can publish your library by following these steps:
-
-1. Navigate to the `dist` directory:
-
-   ```bash
-   cd dist/prompt-kit-ng
-   ```
-
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Add a component:
 
 ```bash
-ng test
+ng generate @pianonic/prompt-kit-ng:message
 ```
 
-## Running end-to-end tests
+Components land in `<sourceRoot>/app/components/prompt-kit/<name>/`. The `cn()` utility is auto-generated alongside.
 
-For end-to-end (e2e) testing, run:
+Helm prerequisites must be installed separately via Spartan's CLI:
 
 ```bash
-ng e2e
+ng g @spartan-ng/cli:ui
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Notes
 
-## Additional Resources
+- Re-running a component schematic overwrites the existing files. If you've customized them, commit your changes first.
+- You own the generated source — edit freely. We won't push updates to your code.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Credit
+
+Original React implementation by [Julien Thibeaut (ibelick)](https://github.com/ibelick) — MIT-licensed.
+
+## License
+
+MIT

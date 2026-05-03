@@ -69,8 +69,7 @@
       "@spartan-ng/helm/toggle-group": ["./libs/ui/toggle-group/src/index.ts"],
       "@spartan-ng/helm/tooltip": ["./libs/ui/tooltip/src/index.ts"],
       "@spartan-ng/helm/typography": ["./libs/ui/typography/src/index.ts"],
-      "@spartan-ng/helm/utils": ["./libs/ui/utils/src/index.ts"],
-      "prompt-kit-ng": ["./dist/prompt-kit-ng"]
+      "@spartan-ng/helm/utils": ["./libs/ui/utils/src/index.ts"]
     }
   },
   "angularCompilerOptions": {
@@ -86,12 +85,6 @@
     },
     {
       "path": "./tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/prompt-kit-ng/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/prompt-kit-ng/tsconfig.spec.json"
     }
   ]
 }

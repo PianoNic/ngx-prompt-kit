@@ -7,8 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build:lib": "ng build prompt-kit-ng --configuration production",
-    "watch:lib": "ng build prompt-kit-ng --watch --configuration development",
+    "build:lib": "node -e \"require('node:fs').rmSync('dist/prompt-kit-ng',{recursive:true,force:true})\" && tsc -p projects/prompt-kit-ng/tsconfig.json && bun run build:lib:assets",
+    "build:lib:assets": "node scripts/copy-schematic-assets.js",
     "format": "prettier --write \"**/*.{ts,html,scss,css,md}\""
   },
   "private": true,

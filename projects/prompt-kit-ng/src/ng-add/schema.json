@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "PromptKitNgAddSchema",
+  "title": "Bootstrap prompt-kit-ng",
+  "type": "object",
+  "properties": {
+    "skipHelmCheck": {
+      "type": "boolean",
+      "default": false,
+      "description": "Skip the Spartan helm prerequisite check."
+    }
+  }
+}
