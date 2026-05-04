@@ -98,6 +98,11 @@ export const routes: Routes = [
         loadComponent: () => import('./demo/steps-demo').then((m) => m.StepsDemo),
       },
       {
+        path: 'components/stream-controls',
+        loadComponent: () =>
+          import('./demo/stream-controls-demo').then((m) => m.StreamControlsDemo),
+      },
+      {
         path: 'components/image',
         loadComponent: () => import('./demo/image-demo').then((m) => m.ImageDemo),
       },

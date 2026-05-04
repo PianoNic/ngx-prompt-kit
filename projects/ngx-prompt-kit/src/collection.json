@@ -91,6 +91,11 @@
       "factory": "./steps/index#steps",
       "schema": "./steps/schema.json"
     },
+    "stream-controls": {
+      "description": "Add the stream-controls component (ngx-prompt-kit original).",
+      "factory": "./stream-controls/index#streamControls",
+      "schema": "./stream-controls/schema.json"
+    },
     "system-message": {
       "description": "Add the system-message component.",
       "factory": "./system-message/index#systemMessage",

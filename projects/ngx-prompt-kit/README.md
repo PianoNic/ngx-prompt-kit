@@ -54,6 +54,7 @@ Components new to ngx-prompt-kit (not part of the upstream React library):
 
 - `conversation-list` — chat history sidebar with date grouping
 - `token-counter` — character/token display for input
+- `stream-controls` — stop while streaming, regenerate after
 
 ## Add components
 
@@ -84,6 +85,7 @@ Components land at `<sourceRoot>/app/components/prompt-kit/<name>/`. The `cn()` 
 | `scroll-button`       | button                         | —          |
 | `source`              | hover-card                     | —          |
 | `steps`               | icon                           | —          |
+| `stream-controls` 🆕   | button                         | —          |
 | `system-message`      | button, icon                   | —          |
 | `text-shimmer`        | —                              | —          |
 | `thinking-bar`        | icon                           | —          |

@@ -44,6 +44,7 @@ export const NAV: NavGroup[] = [
       { label: 'Scroll Button', path: '/components/scroll-button' },
       { label: 'Source', path: '/components/source' },
       { label: 'Steps', path: '/components/steps' },
+      { label: 'Stream Controls', path: '/components/stream-controls', badge: 'New' },
       { label: 'System Message', path: '/components/system-message' },
       { label: 'Text Shimmer', path: '/components/text-shimmer' },
       { label: 'Thinking Bar', path: '/components/thinking-bar' },
