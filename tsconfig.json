@@ -90,7 +90,8 @@
       "ngx-prompt-kit/source": ["./src/app/components/prompt-kit/source"],
       "ngx-prompt-kit/feedback-bar": ["./src/app/components/prompt-kit/feedback-bar"],
       "ngx-prompt-kit/chain-of-thought": ["./src/app/components/prompt-kit/chain-of-thought"],
-      "ngx-prompt-kit/tool": ["./src/app/components/prompt-kit/tool"]
+      "ngx-prompt-kit/tool": ["./src/app/components/prompt-kit/tool"],
+      "ngx-prompt-kit/conversation-list": ["./src/app/components/prompt-kit/conversation-list"]
     }
   },
   "angularCompilerOptions": {

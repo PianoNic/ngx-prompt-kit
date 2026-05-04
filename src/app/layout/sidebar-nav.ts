@@ -24,9 +24,16 @@ import { NAV } from './nav-data';
                     routerLinkActive="bg-accent text-accent-foreground font-medium"
                     [routerLinkActiveOptions]="{ exact: link.path === '/' }"
                     (click)="navigate.emit()"
-                    class="text-muted-foreground hover:bg-muted hover:text-foreground block rounded px-2 py-1.5 transition-colors"
+                    class="text-muted-foreground hover:bg-muted hover:text-foreground flex items-center justify-between gap-2 rounded px-2 py-1.5 transition-colors"
                   >
-                    {{ link.label }}
+                    <span>{{ link.label }}</span>
+                    @if (link.badge; as b) {
+                      <span
+                        class="bg-primary/10 text-primary rounded-full px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wider"
+                      >
+                        {{ b }}
+                      </span>
+                    }
                   </a>
                 </li>
               }

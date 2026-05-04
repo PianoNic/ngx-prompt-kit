@@ -30,6 +30,7 @@ export const NAV: NavGroup[] = [
       { label: 'Chain Of Thought', path: '/components/chain-of-thought' },
       { label: 'Chat Container', path: '/components/chat-container' },
       { label: 'Code Block', path: '/components/code-block' },
+      { label: 'Conversation List', path: '/components/conversation-list', badge: 'New' },
       { label: 'Feedback Bar', path: '/components/feedback-bar' },
       { label: 'File Upload', path: '/components/file-upload' },
       { label: 'Image', path: '/components/image' },

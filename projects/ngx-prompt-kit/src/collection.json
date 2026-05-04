@@ -21,6 +21,11 @@
       "factory": "./code-block/index#codeBlock",
       "schema": "./code-block/schema.json"
     },
+    "conversation-list": {
+      "description": "Add the conversation-list component (ngx-prompt-kit original).",
+      "factory": "./conversation-list/index#conversationList",
+      "schema": "./conversation-list/schema.json"
+    },
     "feedback-bar": {
       "description": "Add the feedback-bar component.",
       "factory": "./feedback-bar/index#feedbackBar",

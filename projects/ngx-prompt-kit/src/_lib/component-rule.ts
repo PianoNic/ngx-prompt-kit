@@ -43,6 +43,7 @@ const HELM_REQUIREMENTS: Record<string, string[]> = {
   'chain-of-thought': ['icon'],
   tool: ['icon'],
   source: ['hover-card'],
+  'conversation-list': ['button', 'separator', 'dropdown-menu'],
 };
 
 function resolveProjectName(

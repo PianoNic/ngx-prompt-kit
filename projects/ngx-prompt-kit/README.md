@@ -48,6 +48,12 @@ Distributed via Angular schematics: `ng add` and `ng generate` copy source into 
 ng add ngx-prompt-kit
 ```
 
+## 🆕 New in v21.0.3
+
+Components new to ngx-prompt-kit (not part of the upstream React library):
+
+- `conversation-list` — chat history sidebar with date grouping
+
 ## Add components
 
 ```bash
@@ -58,28 +64,31 @@ ng generate ngx-prompt-kit:markdown
 
 Components land at `<sourceRoot>/app/components/prompt-kit/<name>/`. The `cn()` utility lands alongside automatically.
 
-| Component           | Helm dependencies   | Other deps |
-|---------------------|---------------------|------------|
-| `chain-of-thought`  | icon                | —          |
-| `chat-container`    | —                   | —          |
-| `code-block`        | —                   | shiki      |
-| `feedback-bar`      | icon                | —          |
-| `file-upload`       | —                   | —          |
-| `image`             | —                   | —          |
-| `loader`            | —                   | —          |
-| `markdown`          | —                   | marked     |
-| `message`           | avatar, tooltip     | —          |
-| `prompt-input`      | textarea, tooltip   | —          |
-| `prompt-suggestion` | button              | —          |
-| `reasoning`         | —                   | —          |
-| `response-stream`   | —                   | —          |
-| `scroll-button`     | button              | —          |
-| `source`            | hover-card          | —          |
-| `steps`             | icon                | —          |
-| `system-message`    | button, icon        | —          |
-| `text-shimmer`      | —                   | —          |
-| `thinking-bar`      | icon                | —          |
-| `tool`              | icon                | —          |
+| Component             | Helm dependencies              | Other deps |
+|-----------------------|--------------------------------|------------|
+| `chain-of-thought`    | icon                           | —          |
+| `chat-container`      | —                              | —          |
+| `code-block`          | —                              | shiki      |
+| `conversation-list` 🆕 | button, separator, dropdown-menu | —        |
+| `feedback-bar`        | icon                           | —          |
+| `file-upload`         | —                              | —          |
+| `image`               | —                              | —          |
+| `loader`              | —                              | —          |
+| `markdown`            | —                              | marked     |
+| `message`             | avatar, tooltip                | —          |
+| `prompt-input`        | textarea, tooltip              | —          |
+| `prompt-suggestion`   | button                         | —          |
+| `reasoning`           | —                              | —          |
+| `response-stream`     | —                              | —          |
+| `scroll-button`       | button                         | —          |
+| `source`              | hover-card                     | —          |
+| `steps`               | icon                           | —          |
+| `system-message`      | button, icon                   | —          |
+| `text-shimmer`        | —                              | —          |
+| `thinking-bar`        | icon                           | —          |
+| `tool`                | icon                           | —          |
+
+🆕 = ngx-prompt-kit original (not in upstream prompt-kit)
 
 Helm prerequisites must be installed separately via Spartan's CLI:
 
