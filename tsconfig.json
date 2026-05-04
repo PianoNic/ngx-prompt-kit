@@ -96,7 +96,8 @@
       "ngx-prompt-kit/stream-controls": ["./src/app/components/prompt-kit/stream-controls"],
       "ngx-prompt-kit/chat-empty": ["./src/app/components/prompt-kit/chat-empty"],
       "ngx-prompt-kit/cost-display": ["./src/app/components/prompt-kit/cost-display"],
-      "ngx-prompt-kit/message-edit": ["./src/app/components/prompt-kit/message-edit"]
+      "ngx-prompt-kit/message-edit": ["./src/app/components/prompt-kit/message-edit"],
+      "ngx-prompt-kit/approval": ["./src/app/components/prompt-kit/approval"]
     }
   },
   "angularCompilerOptions": {

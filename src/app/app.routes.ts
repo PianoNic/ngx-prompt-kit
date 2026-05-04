@@ -130,6 +130,10 @@ export const routes: Routes = [
           import('./demo/feedback-bar-demo').then((m) => m.FeedbackBarDemo),
       },
       {
+        path: 'components/approval',
+        loadComponent: () => import('./demo/approval-demo').then((m) => m.ApprovalDemo),
+      },
+      {
         path: 'components/chain-of-thought',
         loadComponent: () =>
           import('./demo/chain-of-thought-demo').then((m) => m.ChainOfThoughtDemo),

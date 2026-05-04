@@ -6,6 +6,11 @@
       "factory": "./ng-add/index#ngAdd",
       "schema": "./ng-add/schema.json"
     },
+    "approval": {
+      "description": "Add the approval component (ngx-prompt-kit original).",
+      "factory": "./approval/index#approval",
+      "schema": "./approval/schema.json"
+    },
     "chain-of-thought": {
       "description": "Add the chain-of-thought component.",
       "factory": "./chain-of-thought/index#chainOfThought",
