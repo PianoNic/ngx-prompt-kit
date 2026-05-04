@@ -48,6 +48,25 @@ Distributed via Angular schematics: `ng add` and `ng generate` copy source into 
 ng add ngx-prompt-kit
 ```
 
+## 🆕 New in v21.0.6
+
+Seven components closing the agent-UI toolkit gaps:
+
+- `approval` — action approval card for tool execution
+- `attachment-preview` — chip row for staged attachments above the input
+- `message-actions-bar` — standard action toolbar below messages
+- `branch-nav` — sibling-message version navigation
+- `model-picker` — dropdown model selector
+- `model-list` — Open WebUI / Ollama-style searchable list
+- `model-browser` — OpenRouter-style split-pane picker with detail pane
+
+Plus polish to existing components:
+
+- `pk-response-stream` continues typing on text-extension updates instead
+  of restarting the animation
+- `pk-code-block` auto-detects dark theme via `documentElement.class`
+  and defaults its dark theme to `dark-plus` (VS Code Dark Modern syntax)
+
 ## 🆕 New in v21.0.3
 
 Components new to ngx-prompt-kit (not part of the upstream React library):
@@ -69,25 +88,32 @@ ng generate ngx-prompt-kit:markdown
 
 Components land at `<sourceRoot>/app/components/prompt-kit/<name>/`. The `cn()` utility lands alongside automatically.
 
-| Component             | Helm dependencies              | Other deps |
-|-----------------------|--------------------------------|------------|
-| `chain-of-thought`    | icon                           | —          |
-| `chat-container`      | —                              | —          |
-| `chat-empty` 🆕       | card                           | —          |
-| `code-block`          | —                              | shiki      |
-| `conversation-list` 🆕 | button, separator, dropdown-menu | —        |
-| `cost-display` 🆕     | —                              | —          |
-| `feedback-bar`        | icon                           | —          |
-| `file-upload`         | —                              | —          |
-| `image`               | —                              | —          |
-| `loader`              | —                              | —          |
-| `markdown`            | —                              | marked     |
-| `message`             | avatar, tooltip                | —          |
-| `message-edit` 🆕     | button, textarea               | —          |
-| `prompt-input`        | textarea, tooltip              | —          |
-| `prompt-suggestion`   | button                         | —          |
-| `reasoning`           | —                              | —          |
-| `response-stream`     | —                              | —          |
+| Component                | Helm dependencies                  | Other deps      |
+|--------------------------|------------------------------------|-----------------|
+| `approval` 🆕            | button, card, badge                | —               |
+| `attachment-preview` 🆕  | button                             | —               |
+| `branch-nav` 🆕          | button                             | —               |
+| `chain-of-thought`       | icon                               | —               |
+| `chat-container`         | —                                  | —               |
+| `chat-empty` 🆕          | card                               | —               |
+| `code-block`             | —                                  | shiki           |
+| `conversation-list` 🆕   | button, separator, dropdown-menu   | —               |
+| `cost-display` 🆕        | —                                  | —               |
+| `feedback-bar`           | icon                               | —               |
+| `file-upload`            | —                                  | —               |
+| `image`                  | —                                  | —               |
+| `loader`                 | —                                  | —               |
+| `markdown`               | —                                  | marked, katex, mermaid |
+| `message`                | avatar, tooltip                    | —               |
+| `message-actions-bar` 🆕 | button, tooltip                    | —               |
+| `message-edit` 🆕        | button, textarea, dropdown-menu    | —               |
+| `model-browser` 🆕       | badge                              | —               |
+| `model-list` 🆕          | —                                  | —               |
+| `model-picker` 🆕        | button, dropdown-menu, badge       | —               |
+| `prompt-input`           | textarea, tooltip                  | —               |
+| `prompt-suggestion`      | button                             | —               |
+| `reasoning`              | —                                  | —               |
+| `response-stream`        | —                                  | —               |
 | `scroll-button`       | button                         | —          |
 | `source`              | hover-card                     | —          |
 | `steps`               | icon                           | —          |
