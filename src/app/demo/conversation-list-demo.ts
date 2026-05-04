@@ -27,7 +27,7 @@ const now = Date.now();
         description="Default mode. Empty buckets are not rendered. Hover or focus a row to reveal the actions menu."
         [code]="groupedCode"
       >
-        <div class="border-border bg-background h-[420px] w-full max-w-xs rounded-lg border">
+        <div class="border-border bg-background h-[520px] w-full max-w-xs rounded-lg border">
           <pk-conversation-list
             [conversations]="grouped()"
             [activeId]="activeId()"
@@ -68,8 +68,8 @@ export class ConversationListDemo {
     },
     {
       id: '2',
-      title: 'Signal vs computed primer',
-      preview: 'Writable state vs derived read-only values',
+      title: 'Signal vs computed primer for the new Angular reactivity model',
+      preview: 'Writable state vs derived read-only values, lazy evaluation, and dependency tracking semantics',
       updatedAt: new Date(now - 8 * 60 * 60 * 1000),
     },
     {
