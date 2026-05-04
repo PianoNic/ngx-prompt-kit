@@ -16,6 +16,11 @@
       "factory": "./chat-container/index#chatContainer",
       "schema": "./chat-container/schema.json"
     },
+    "chat-empty": {
+      "description": "Add the chat-empty component (ngx-prompt-kit original).",
+      "factory": "./chat-empty/index#chatEmpty",
+      "schema": "./chat-empty/schema.json"
+    },
     "code-block": {
       "description": "Add the code-block component.",
       "factory": "./code-block/index#codeBlock",

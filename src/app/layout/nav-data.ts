@@ -29,6 +29,7 @@ export const NAV: NavGroup[] = [
     links: [
       { label: 'Chain Of Thought', path: '/components/chain-of-thought' },
       { label: 'Chat Container', path: '/components/chat-container' },
+      { label: 'Chat Empty', path: '/components/chat-empty', badge: 'New' },
       { label: 'Code Block', path: '/components/code-block' },
       { label: 'Conversation List', path: '/components/conversation-list', badge: 'New' },
       { label: 'Feedback Bar', path: '/components/feedback-bar' },

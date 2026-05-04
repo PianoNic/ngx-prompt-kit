@@ -52,6 +52,10 @@ export const routes: Routes = [
           import('./demo/chat-container-demo').then((m) => m.ChatContainerDemo),
       },
       {
+        path: 'components/chat-empty',
+        loadComponent: () => import('./demo/chat-empty-demo').then((m) => m.ChatEmptyDemo),
+      },
+      {
         path: 'components/conversation-list',
         loadComponent: () =>
           import('./demo/conversation-list-demo').then((m) => m.ConversationListDemo),
