@@ -134,6 +134,11 @@ export const routes: Routes = [
         loadComponent: () => import('./demo/approval-demo').then((m) => m.ApprovalDemo),
       },
       {
+        path: 'components/attachment-preview',
+        loadComponent: () =>
+          import('./demo/attachment-preview-demo').then((m) => m.AttachmentPreviewDemo),
+      },
+      {
         path: 'components/chain-of-thought',
         loadComponent: () =>
           import('./demo/chain-of-thought-demo').then((m) => m.ChainOfThoughtDemo),

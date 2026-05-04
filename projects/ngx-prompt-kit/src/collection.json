@@ -11,6 +11,11 @@
       "factory": "./approval/index#approval",
       "schema": "./approval/schema.json"
     },
+    "attachment-preview": {
+      "description": "Add the attachment-preview component (ngx-prompt-kit original).",
+      "factory": "./attachment-preview/index#attachmentPreview",
+      "schema": "./attachment-preview/schema.json"
+    },
     "chain-of-thought": {
       "description": "Add the chain-of-thought component.",
       "factory": "./chain-of-thought/index#chainOfThought",
