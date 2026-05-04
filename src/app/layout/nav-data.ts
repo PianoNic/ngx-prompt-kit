@@ -32,6 +32,7 @@ export const NAV: NavGroup[] = [
       { label: 'Chat Empty', path: '/components/chat-empty', badge: 'New' },
       { label: 'Code Block', path: '/components/code-block' },
       { label: 'Conversation List', path: '/components/conversation-list', badge: 'New' },
+      { label: 'Cost Display', path: '/components/cost-display', badge: 'New' },
       { label: 'Feedback Bar', path: '/components/feedback-bar' },
       { label: 'File Upload', path: '/components/file-upload' },
       { label: 'Image', path: '/components/image' },

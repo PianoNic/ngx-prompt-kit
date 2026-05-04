@@ -61,6 +61,11 @@ export const routes: Routes = [
           import('./demo/conversation-list-demo').then((m) => m.ConversationListDemo),
       },
       {
+        path: 'components/cost-display',
+        loadComponent: () =>
+          import('./demo/cost-display-demo').then((m) => m.CostDisplayDemo),
+      },
+      {
         path: 'components/scroll-button',
         loadComponent: () =>
           import('./demo/chat-container-demo').then((m) => m.ChatContainerDemo),

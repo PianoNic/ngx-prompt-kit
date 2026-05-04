@@ -56,6 +56,7 @@ Components new to ngx-prompt-kit (not part of the upstream React library):
 - `token-counter` — character/token display for input
 - `stream-controls` — stop while streaming, regenerate after
 - `chat-empty` — landing state with suggestion grid
+- `cost-display` — locale-aware running cost for an LLM exchange
 
 ## Add components
 
@@ -74,6 +75,7 @@ Components land at `<sourceRoot>/app/components/prompt-kit/<name>/`. The `cn()` 
 | `chat-empty` 🆕       | card                           | —          |
 | `code-block`          | —                              | shiki      |
 | `conversation-list` 🆕 | button, separator, dropdown-menu | —        |
+| `cost-display` 🆕     | —                              | —          |
 | `feedback-bar`        | icon                           | —          |
 | `file-upload`         | —                              | —          |
 | `image`               | —                              | —          |
@@ -132,6 +134,7 @@ See the [live demo](https://ngx-prompt-kit.pianonic.ch) for every component with
 - Re-running a component schematic overwrites the existing files. If you've customized them, commit your changes first.
 - You own the generated source — edit freely. Updates to this package won't push changes to your code.
 - `image` uses Angular's `NgOptimizedImage` directive when given a real `src` URL; falls back to a native `<img>` for base64/blob payloads.
+- `cost-display` does **not** bundle model pricing tables — those drift constantly (GPT-4o was $5/1M six months ago, $2.50/1M now). Pass `inputPricePer1M` / `outputPricePer1M` from your own source of truth. Currency conversion is also out of scope: convert before passing in if your API charges in one currency and you display in another.
 
 ## Credit
 

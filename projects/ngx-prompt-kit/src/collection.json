@@ -31,6 +31,11 @@
       "factory": "./conversation-list/index#conversationList",
       "schema": "./conversation-list/schema.json"
     },
+    "cost-display": {
+      "description": "Add the cost-display component (ngx-prompt-kit original).",
+      "factory": "./cost-display/index#costDisplay",
+      "schema": "./cost-display/schema.json"
+    },
     "feedback-bar": {
       "description": "Add the feedback-bar component.",
       "factory": "./feedback-bar/index#feedbackBar",
