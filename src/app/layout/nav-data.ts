@@ -44,6 +44,8 @@ export const NAV: NavGroup[] = [
       { label: 'Message', path: '/components/message' },
       { label: 'Message Actions Bar', path: '/components/message-actions-bar', badge: 'New' },
       { label: 'Message Edit', path: '/components/message-edit', badge: 'New' },
+      { label: 'Model Browser', path: '/components/model-browser', badge: 'New' },
+      { label: 'Model List', path: '/components/model-list', badge: 'New' },
       { label: 'Model Picker', path: '/components/model-picker', badge: 'New' },
       { label: 'Prompt Input', path: '/components/prompt-input' },
       { label: 'Prompt Suggestion', path: '/components/prompt-suggestion' },

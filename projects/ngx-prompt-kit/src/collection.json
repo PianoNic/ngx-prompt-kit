@@ -91,6 +91,16 @@
       "factory": "./message-edit/index#messageEdit",
       "schema": "./message-edit/schema.json"
     },
+    "model-browser": {
+      "description": "Add the model-browser component (ngx-prompt-kit original).",
+      "factory": "./model-browser/index#modelBrowser",
+      "schema": "./model-browser/schema.json"
+    },
+    "model-list": {
+      "description": "Add the model-list component (ngx-prompt-kit original).",
+      "factory": "./model-list/index#modelList",
+      "schema": "./model-list/schema.json"
+    },
     "model-picker": {
       "description": "Add the model-picker component (ngx-prompt-kit original).",
       "factory": "./model-picker/index#modelPicker",
