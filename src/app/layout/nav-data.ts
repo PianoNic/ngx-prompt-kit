@@ -47,6 +47,7 @@ export const NAV: NavGroup[] = [
       { label: 'System Message', path: '/components/system-message' },
       { label: 'Text Shimmer', path: '/components/text-shimmer' },
       { label: 'Thinking Bar', path: '/components/thinking-bar' },
+      { label: 'Token Counter', path: '/components/token-counter', badge: 'New' },
       { label: 'Tool', path: '/components/tool' },
     ],
   },

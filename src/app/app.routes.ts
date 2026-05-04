@@ -84,6 +84,11 @@ export const routes: Routes = [
         loadComponent: () => import('./demo/thinking-bar-demo').then((m) => m.ThinkingBarDemo),
       },
       {
+        path: 'components/token-counter',
+        loadComponent: () =>
+          import('./demo/token-counter-demo').then((m) => m.TokenCounterDemo),
+      },
+      {
         path: 'components/system-message',
         loadComponent: () =>
           import('./demo/system-message-demo').then((m) => m.SystemMessageDemo),

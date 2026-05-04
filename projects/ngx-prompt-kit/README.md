@@ -53,6 +53,7 @@ ng add ngx-prompt-kit
 Components new to ngx-prompt-kit (not part of the upstream React library):
 
 - `conversation-list` — chat history sidebar with date grouping
+- `token-counter` — character/token display for input
 
 ## Add components
 
@@ -86,6 +87,7 @@ Components land at `<sourceRoot>/app/components/prompt-kit/<name>/`. The `cn()` 
 | `system-message`      | button, icon                   | —          |
 | `text-shimmer`        | —                              | —          |
 | `thinking-bar`        | icon                           | —          |
+| `token-counter` 🆕    | —                              | —          |
 | `tool`                | icon                           | —          |
 
 🆕 = ngx-prompt-kit original (not in upstream prompt-kit)
