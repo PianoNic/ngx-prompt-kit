@@ -46,7 +46,7 @@ const HELM_REQUIREMENTS: Record<string, string[]> = {
   'conversation-list': ['button', 'separator', 'dropdown-menu'],
   'stream-controls': ['button'],
   'chat-empty': ['card'],
-  'message-edit': ['button', 'textarea'],
+  'message-edit': ['button', 'textarea', 'dropdown-menu'],
 };
 
 function resolveProjectName(
