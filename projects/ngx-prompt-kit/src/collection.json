@@ -91,6 +91,11 @@
       "factory": "./message-edit/index#messageEdit",
       "schema": "./message-edit/schema.json"
     },
+    "model-picker": {
+      "description": "Add the model-picker component (ngx-prompt-kit original).",
+      "factory": "./model-picker/index#modelPicker",
+      "schema": "./model-picker/schema.json"
+    },
     "prompt-input": {
       "description": "Add the prompt-input component.",
       "factory": "./prompt-input/index#promptInput",

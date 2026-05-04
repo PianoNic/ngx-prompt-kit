@@ -100,7 +100,8 @@
       "ngx-prompt-kit/approval": ["./src/app/components/prompt-kit/approval"],
       "ngx-prompt-kit/attachment-preview": ["./src/app/components/prompt-kit/attachment-preview"],
       "ngx-prompt-kit/message-actions-bar": ["./src/app/components/prompt-kit/message-actions-bar"],
-      "ngx-prompt-kit/branch-nav": ["./src/app/components/prompt-kit/branch-nav"]
+      "ngx-prompt-kit/branch-nav": ["./src/app/components/prompt-kit/branch-nav"],
+      "ngx-prompt-kit/model-picker": ["./src/app/components/prompt-kit/model-picker"]
     }
   },
   "angularCompilerOptions": {

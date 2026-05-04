@@ -39,6 +39,11 @@ export const routes: Routes = [
           import('./demo/message-actions-bar-demo').then((m) => m.MessageActionsBarDemo),
       },
       {
+        path: 'components/model-picker',
+        loadComponent: () =>
+          import('./demo/model-picker-demo').then((m) => m.ModelPickerDemo),
+      },
+      {
         path: 'components/markdown',
         loadComponent: () => import('./demo/markdown-demo').then((m) => m.MarkdownDemo),
       },

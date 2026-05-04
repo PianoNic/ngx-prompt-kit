@@ -51,6 +51,7 @@ const HELM_REQUIREMENTS: Record<string, string[]> = {
   'attachment-preview': ['button'],
   'message-actions-bar': ['button', 'tooltip'],
   'branch-nav': ['button'],
+  'model-picker': ['button', 'dropdown-menu', 'badge'],
 };
 
 function resolveProjectName(
