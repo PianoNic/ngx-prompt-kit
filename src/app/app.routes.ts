@@ -25,6 +25,11 @@ export const routes: Routes = [
         loadComponent: () => import('./demo/message-demo').then((m) => m.MessageDemo),
       },
       {
+        path: 'components/message-edit',
+        loadComponent: () =>
+          import('./demo/message-edit-demo').then((m) => m.MessageEditDemo),
+      },
+      {
         path: 'components/markdown',
         loadComponent: () => import('./demo/markdown-demo').then((m) => m.MarkdownDemo),
       },

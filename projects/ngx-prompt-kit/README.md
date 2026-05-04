@@ -57,6 +57,7 @@ Components new to ngx-prompt-kit (not part of the upstream React library):
 - `stream-controls` — stop while streaming, regenerate after
 - `chat-empty` — landing state with suggestion grid
 - `cost-display` — locale-aware running cost for an LLM exchange
+- `message-edit` — inline edit for user messages
 
 ## Add components
 
@@ -82,6 +83,7 @@ Components land at `<sourceRoot>/app/components/prompt-kit/<name>/`. The `cn()` 
 | `loader`              | —                              | —          |
 | `markdown`            | —                              | marked     |
 | `message`             | avatar, tooltip                | —          |
+| `message-edit` 🆕     | button, textarea               | —          |
 | `prompt-input`        | textarea, tooltip              | —          |
 | `prompt-suggestion`   | button                         | —          |
 | `reasoning`           | —                              | —          |

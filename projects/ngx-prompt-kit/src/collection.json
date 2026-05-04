@@ -66,6 +66,11 @@
       "factory": "./message/index#message",
       "schema": "./message/schema.json"
     },
+    "message-edit": {
+      "description": "Add the message-edit component (ngx-prompt-kit original).",
+      "factory": "./message-edit/index#messageEdit",
+      "schema": "./message-edit/schema.json"
+    },
     "prompt-input": {
       "description": "Add the prompt-input component.",
       "factory": "./prompt-input/index#promptInput",
