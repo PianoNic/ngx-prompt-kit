@@ -51,6 +51,80 @@ import { PkResponseStream } from 'ngx-prompt-kit/response-stream';
         </div>
       </app-doc-example>
 
+      <app-doc-example
+        title="Live streaming (continues, doesn't restart)"
+        description="Simulates an LLM streaming response: chunks arrive every ~150ms and append to the bound signal. The typewriter continues from where it left off rather than restarting on every update."
+        [code]="liveCode"
+      >
+        <div class="flex w-full flex-col gap-3">
+          <div class="flex gap-2">
+            <button
+              hlmBtn
+              variant="default"
+              size="sm"
+              type="button"
+              [disabled]="streaming()"
+              (click)="startStreaming()"
+            >
+              {{ streaming() ? 'Streaming…' : 'Start streaming' }}
+            </button>
+            <button
+              hlmBtn
+              variant="outline"
+              size="sm"
+              type="button"
+              [disabled]="streaming()"
+              (click)="resetStreaming()"
+            >
+              Reset
+            </button>
+          </div>
+          <pk-response-stream
+            class="text-base leading-relaxed"
+            [textStream]="liveText()"
+            mode="typewriter"
+            [speed]="60"
+          />
+        </div>
+      </app-doc-example>
+
+      <app-doc-example
+        title="Big chunks, slow cadence"
+        description="A larger paragraph-sized chunk arrives every 1000ms — closer to a real LLM that streams complete sentences. Same continuation behaviour: typewriter advances through the new content without restarting."
+        [code]="bigCode"
+      >
+        <div class="flex w-full flex-col gap-3">
+          <div class="flex gap-2">
+            <button
+              hlmBtn
+              variant="default"
+              size="sm"
+              type="button"
+              [disabled]="bigStreaming()"
+              (click)="startBigStreaming()"
+            >
+              {{ bigStreaming() ? 'Streaming…' : 'Start streaming' }}
+            </button>
+            <button
+              hlmBtn
+              variant="outline"
+              size="sm"
+              type="button"
+              [disabled]="bigStreaming()"
+              (click)="resetBigStreaming()"
+            >
+              Reset
+            </button>
+          </div>
+          <pk-response-stream
+            class="text-base leading-relaxed"
+            [textStream]="bigText()"
+            mode="typewriter"
+            [speed]="80"
+          />
+        </div>
+      </app-doc-example>
+
       <app-doc-install component="response-stream" />
       <app-doc-api [sections]="api" />
     </app-doc-page>
@@ -77,11 +151,73 @@ export class ResponseStreamDemo {
     'A response stream lets you reveal generated text incrementally. The component takes a string, a mode, and a speed; it handles the rendering frames for you.';
   protected readonly twText = signal(this.canned);
   protected readonly fadeText = signal(this.canned);
+  protected readonly liveText = signal('');
+  protected readonly streaming = signal(false);
+  protected readonly bigText = signal('');
+  protected readonly bigStreaming = signal(false);
+
+  private readonly liveChunks = [
+    'Streaming responses ',
+    'arrive in pieces ',
+    'over the network. ',
+    'Each chunk extends ',
+    'the previous content, ',
+    'so the renderer should ',
+    'continue typing — ',
+    'not restart from the top.',
+  ];
+
+  private readonly bigChunks = [
+    'When a model streams a long answer, the chunks tend to be paragraph-sized rather than per-token. ',
+    'Each chunk arrives as a single update to the bound signal, but the typewriter should keep advancing through the new tail without flashing back to the start. ',
+    'This example pushes a fresh paragraph every second so you can watch the renderer absorb the new tail and keep typing through it. ',
+    'After the third chunk lands, the animation reaches the end of the message and emits (completed). The component then stays idle, ready for more if it arrives.',
+  ];
 
   protected restart(which: 'tw' | 'fade'): void {
     const target = which === 'tw' ? this.twText : this.fadeText;
     target.set('');
     setTimeout(() => target.set(this.canned), 50);
+  }
+
+  protected resetStreaming(): void {
+    this.liveText.set('');
+  }
+
+  protected startStreaming(): void {
+    this.liveText.set('');
+    this.streaming.set(true);
+    let i = 0;
+    const tick = (): void => {
+      if (i >= this.liveChunks.length) {
+        this.streaming.set(false);
+        return;
+      }
+      this.liveText.update((v) => v + this.liveChunks[i]);
+      i++;
+      setTimeout(tick, 150);
+    };
+    setTimeout(tick, 150);
+  }
+
+  protected resetBigStreaming(): void {
+    this.bigText.set('');
+  }
+
+  protected startBigStreaming(): void {
+    this.bigText.set('');
+    this.bigStreaming.set(true);
+    let i = 0;
+    const tick = (): void => {
+      if (i >= this.bigChunks.length) {
+        this.bigStreaming.set(false);
+        return;
+      }
+      this.bigText.update((v) => v + this.bigChunks[i]);
+      i++;
+      setTimeout(tick, 1000);
+    };
+    setTimeout(tick, 1000);
   }
 
   protected readonly twCode = `<pk-response-stream
@@ -94,5 +230,33 @@ export class ResponseStreamDemo {
   [textStream]="text"
   mode="fade"
   [speed]="40"
+/>`;
+
+  protected readonly liveCode = `// Consumer signal updated as chunks arrive
+const text = signal('');
+
+function appendChunk(chunk: string) {
+  text.update(v => v + chunk);
+}
+
+// Template
+<pk-response-stream
+  [textStream]="text()"
+  mode="typewriter"
+  [speed]="60"
+/>`;
+
+  protected readonly bigCode = `// Paragraph-sized chunk every 1000ms
+const text = signal('');
+
+function appendParagraph(chunk: string) {
+  text.update(v => v + chunk);
+}
+
+// Template — higher speed keeps the catch-up visible at 1s pacing
+<pk-response-stream
+  [textStream]="text()"
+  mode="typewriter"
+  [speed]="80"
 />`;
 }

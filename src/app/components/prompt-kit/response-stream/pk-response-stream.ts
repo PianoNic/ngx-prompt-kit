@@ -62,6 +62,10 @@ export class PkResponseStream {
   protected readonly segments = signal<Segment[]>([]);
   private rafId: number | null = null;
   private lastEmittedComplete = '';
+  /** The text we're animating toward. Updated live when textStream changes. */
+  private targetText = '';
+  /** How many characters we've revealed so far. The tick advances this. */
+  private displayedIndex = 0;
 
   protected readonly fadeDurationMs = computed(() => {
     const fd = this.fadeDuration();
@@ -115,19 +119,51 @@ export class PkResponseStream {
   }
 
   private start(text: string): void {
-    this.cancel();
-    this.displayedText.set('');
-    this.segments.set([]);
-    if (!text) return;
+    // Empty string — reset everything, idle.
+    if (!text) {
+      this.cancel();
+      this.displayedText.set('');
+      this.segments.set([]);
+      this.targetText = '';
+      this.displayedIndex = 0;
+      return;
+    }
 
+    const displayed = this.displayedText();
+
+    // Diverged: new text doesn't start with what we've already revealed.
+    // Reset and animate from scratch. (Also catches the truncation case
+    // where the consumer passes a shorter string than what's on screen.)
+    if (!text.startsWith(displayed)) {
+      this.cancel();
+      this.displayedText.set('');
+      this.segments.set([]);
+      this.displayedIndex = 0;
+    }
+
+    // Prefix extension (or fresh start after the reset above): update the
+    // target. The running tick — if any — reads targetText each frame and
+    // will keep going past the old length without restarting.
+    this.targetText = text;
+
+    // SSR path — no animation, just settle.
     if (!this.isBrowser) {
       this.displayedText.set(text);
       this.updateSegments(text);
+      this.displayedIndex = text.length;
       this.markComplete(text);
       return;
     }
 
-    let index = 0;
+    // Already animating — the live tick will pick up the new targetText.
+    if (this.rafId !== null) return;
+
+    // Otherwise (idle, animation finished or just reset) kick off a loop
+    // from wherever displayedIndex left off.
+    this.runTickLoop();
+  }
+
+  private runTickLoop(): void {
     let lastFrameTime = 0;
     const tick = (timestamp: number): void => {
       const delay = this.getProcessingDelay();
@@ -137,20 +173,26 @@ export class PkResponseStream {
       }
       lastFrameTime = timestamp;
 
-      if (index >= text.length) {
-        this.markComplete(text);
+      const target = this.targetText;
+
+      // Caught up to current target — idle, but stay ready for more.
+      if (this.displayedIndex >= target.length) {
+        this.rafId = null;
+        this.markComplete(target);
         return;
       }
+
       const chunk = this.getChunkSize();
-      const end = Math.min(index + chunk, text.length);
-      const next = text.slice(0, end);
+      this.displayedIndex = Math.min(this.displayedIndex + chunk, target.length);
+      const next = target.slice(0, this.displayedIndex);
       this.displayedText.set(next);
       if (this.mode() === 'fade') this.updateSegments(next);
-      index = end;
-      if (end < text.length) {
+
+      if (this.displayedIndex < target.length) {
         this.rafId = requestAnimationFrame(tick);
       } else {
-        this.markComplete(text);
+        this.rafId = null;
+        this.markComplete(target);
       }
     };
     this.rafId = requestAnimationFrame(tick);
