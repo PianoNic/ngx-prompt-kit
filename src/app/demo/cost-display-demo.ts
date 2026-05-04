@@ -90,34 +90,50 @@ import { PkCostDisplayImports } from 'ngx-prompt-kit/cost-display';
 
       <app-doc-example
         title="With cost limit"
-        description="Set [costLimit] to drive the same four-tier color state as token-counter (75/90/100%). (overLimit) emits once on each crossing."
+        description="Set [costLimit] to drive the four-tier color state — muted under 75%, amber 75–90%, destructive 90–100%, bold destructive past 100%. (overLimit) emits once per crossing."
         [code]="limitCode"
       >
-        <div class="flex flex-col items-start gap-3">
-          <span class="text-muted-foreground text-xs uppercase tracking-wider">Under limit</span>
-          <pk-cost-display
-            [inputTokens]="200_000"
-            [outputTokens]="50_000"
-            [inputPricePer1M]="2.50"
-            [outputPricePer1M]="10.00"
-            [costLimit]="2.00"
-          />
-          <span class="text-muted-foreground mt-2 text-xs uppercase tracking-wider">Near limit</span>
-          <pk-cost-display
-            [inputTokens]="500_000"
-            [outputTokens]="100_000"
-            [inputPricePer1M]="2.50"
-            [outputPricePer1M]="10.00"
-            [costLimit]="2.50"
-          />
-          <span class="text-muted-foreground mt-2 text-xs uppercase tracking-wider">Over limit</span>
-          <pk-cost-display
-            [inputTokens]="800_000"
-            [outputTokens]="200_000"
-            [inputPricePer1M]="2.50"
-            [outputPricePer1M]="10.00"
-            [costLimit]="2.50"
-          />
+        <div class="grid w-full grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="flex flex-col gap-1">
+            <span class="text-muted-foreground text-xs uppercase tracking-wider">Normal · 50%</span>
+            <pk-cost-display
+              [inputTokens]="200_000"
+              [outputTokens]="75_000"
+              [inputPricePer1M]="2.50"
+              [outputPricePer1M]="10.00"
+              [costLimit]="2.50"
+            />
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-muted-foreground text-xs uppercase tracking-wider">Warn · 80%</span>
+            <pk-cost-display
+              [inputTokens]="400_000"
+              [outputTokens]="100_000"
+              [inputPricePer1M]="2.50"
+              [outputPricePer1M]="10.00"
+              [costLimit]="2.50"
+            />
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-muted-foreground text-xs uppercase tracking-wider">Danger · 95%</span>
+            <pk-cost-display
+              [inputTokens]="500_000"
+              [outputTokens]="112_500"
+              [inputPricePer1M]="2.50"
+              [outputPricePer1M]="10.00"
+              [costLimit]="2.50"
+            />
+          </div>
+          <div class="flex flex-col gap-1">
+            <span class="text-muted-foreground text-xs uppercase tracking-wider">Over · 105%</span>
+            <pk-cost-display
+              [inputTokens]="500_000"
+              [outputTokens]="137_500"
+              [inputPricePer1M]="2.50"
+              [outputPricePer1M]="10.00"
+              [costLimit]="2.50"
+            />
+          </div>
         </div>
       </app-doc-example>
 
