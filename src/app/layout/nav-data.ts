@@ -60,6 +60,7 @@ export const NAV: NavGroup[] = [
       { label: 'Thinking Bar', path: '/components/thinking-bar' },
       { label: 'Token Counter', path: '/components/token-counter', badge: 'New' },
       { label: 'Tool', path: '/components/tool' },
+      { label: 'Usage Card', path: '/components/usage-card', badge: 'New' },
     ],
   },
 ];

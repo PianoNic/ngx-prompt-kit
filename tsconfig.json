@@ -103,7 +103,8 @@
       "ngx-prompt-kit/branch-nav": ["./src/app/components/prompt-kit/branch-nav"],
       "ngx-prompt-kit/model-picker": ["./src/app/components/prompt-kit/model-picker"],
       "ngx-prompt-kit/model-list": ["./src/app/components/prompt-kit/model-list"],
-      "ngx-prompt-kit/model-browser": ["./src/app/components/prompt-kit/model-browser"]
+      "ngx-prompt-kit/model-browser": ["./src/app/components/prompt-kit/model-browser"],
+      "ngx-prompt-kit/usage-card": ["./src/app/components/prompt-kit/usage-card"]
     }
   },
   "angularCompilerOptions": {

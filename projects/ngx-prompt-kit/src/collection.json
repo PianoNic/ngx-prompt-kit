@@ -171,6 +171,11 @@
       "factory": "./tool/index#tool",
       "schema": "./tool/schema.json"
     },
+    "usage-card": {
+      "description": "Add the usage-card component (ngx-prompt-kit original).",
+      "factory": "./usage-card/index#usageCard",
+      "schema": "./usage-card/schema.json"
+    },
     "utils": {
       "description": "Add the cn() utility (auto-installed by other components).",
       "factory": "./utils/index#utils",

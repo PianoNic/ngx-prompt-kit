@@ -54,6 +54,11 @@ export const routes: Routes = [
           import('./demo/model-browser-demo').then((m) => m.ModelBrowserDemo),
       },
       {
+        path: 'components/usage-card',
+        loadComponent: () =>
+          import('./demo/usage-card-demo').then((m) => m.UsageCardDemo),
+      },
+      {
         path: 'components/markdown',
         loadComponent: () => import('./demo/markdown-demo').then((m) => m.MarkdownDemo),
       },
