@@ -16,6 +16,11 @@
       "factory": "./attachment-preview/index#attachmentPreview",
       "schema": "./attachment-preview/schema.json"
     },
+    "branch-nav": {
+      "description": "Add the branch-nav component (ngx-prompt-kit original).",
+      "factory": "./branch-nav/index#branchNav",
+      "schema": "./branch-nav/schema.json"
+    },
     "chain-of-thought": {
       "description": "Add the chain-of-thought component.",
       "factory": "./chain-of-thought/index#chainOfThought",

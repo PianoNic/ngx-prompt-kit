@@ -29,6 +29,7 @@ export const NAV: NavGroup[] = [
     links: [
       { label: 'Approval', path: '/components/approval', badge: 'New' },
       { label: 'Attachment Preview', path: '/components/attachment-preview', badge: 'New' },
+      { label: 'Branch Nav', path: '/components/branch-nav', badge: 'New' },
       { label: 'Chain Of Thought', path: '/components/chain-of-thought' },
       { label: 'Chat Container', path: '/components/chat-container' },
       { label: 'Chat Empty', path: '/components/chat-empty', badge: 'New' },

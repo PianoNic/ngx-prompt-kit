@@ -21,6 +21,10 @@ export const routes: Routes = [
         data: { title: 'Full Chat' },
       },
       {
+        path: 'components/branch-nav',
+        loadComponent: () => import('./demo/branch-nav-demo').then((m) => m.BranchNavDemo),
+      },
+      {
         path: 'components/message',
         loadComponent: () => import('./demo/message-demo').then((m) => m.MessageDemo),
       },

@@ -50,6 +50,7 @@ const HELM_REQUIREMENTS: Record<string, string[]> = {
   approval: ['button', 'card', 'badge'],
   'attachment-preview': ['button'],
   'message-actions-bar': ['button', 'tooltip'],
+  'branch-nav': ['button'],
 };
 
 function resolveProjectName(
