@@ -21,7 +21,7 @@ export interface ChatEmptySuggestion {
   },
   template: `
     <div class="flex flex-col items-center text-center">
-      <h2 class="text-foreground text-2xl font-semibold tracking-tight">{{ title() }}</h2>
+      <h2 class="text-foreground text-3xl font-medium tracking-tight">{{ title() }}</h2>
       @if (subtitle(); as s) {
         <p class="text-muted-foreground mt-2 max-w-md text-sm">{{ s }}</p>
       }
@@ -33,7 +33,7 @@ export interface ChatEmptySuggestion {
           <button
             type="button"
             (click)="suggestionPicked.emit(s)"
-            class="text-left transition-transform hover:-translate-y-0.5"
+            class="text-left"
           >
             <div hlmCard class="hover:bg-accent h-full transition-colors">
               <div hlmCardContent class="flex flex-col gap-2">
