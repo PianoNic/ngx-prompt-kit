@@ -4,6 +4,8 @@ export type ModelTier = 'fast' | 'balanced' | 'smart';
 export interface Model {
   id: string;
   name: string;
+  /** Image source (URL or data URI) for a model/provider logo. Renders 16×16 left of the name. */
+  iconUrl?: string;
   provider?: string;
   tagline?: string;
   tier?: ModelTier;

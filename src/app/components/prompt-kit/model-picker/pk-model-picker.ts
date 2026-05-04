@@ -39,6 +39,13 @@ import { formatModelPrice, type Model, type ModelTier } from './pk-model-types';
     >
       <span class="flex items-center gap-2">
         @if (selected(); as s) {
+          @if (s.iconUrl; as src) {
+            <img
+              [src]="src"
+              [alt]="s.name + ' icon'"
+              class="h-4 w-4 shrink-0 rounded-sm object-contain"
+            />
+          }
           <span class="text-foreground">{{ s.name }}</span>
           @if (!compact() && s.tier; as t) {
             <span hlmBadge [class]="tierBadgeClass(t)">{{ t }}</span>
@@ -61,9 +68,18 @@ import { formatModelPrice, type Model, type ModelTier } from './pk-model-types';
             class="flex-col items-start gap-0.5 py-2"
           >
             <div class="flex w-full items-center justify-between gap-2">
-              <span class="flex items-center gap-2">
+              <span class="flex min-w-0 items-center gap-2">
                 @if (m.id === selectedId()) {
-                  <ng-icon hlm size="xs" name="lucideCheck" class="text-primary" />
+                  <ng-icon hlm size="xs" name="lucideCheck" class="text-primary shrink-0" />
+                } @else {
+                  <span class="w-3 shrink-0" aria-hidden="true"></span>
+                }
+                @if (m.iconUrl; as src) {
+                  <img
+                    [src]="src"
+                    [alt]="m.name + ' icon'"
+                    class="h-4 w-4 shrink-0 rounded-sm object-contain"
+                  />
                 }
                 <span class="text-foreground font-medium">{{ m.name }}</span>
                 @if (m.provider; as p) {
@@ -75,10 +91,10 @@ import { formatModelPrice, type Model, type ModelTier } from './pk-model-types';
               }
             </div>
             @if (m.tagline; as t) {
-              <span class="text-muted-foreground pl-5 text-xs">{{ t }}</span>
+              <span class="text-muted-foreground pl-8 text-xs">{{ t }}</span>
             }
             @if (priceLine(m); as price) {
-              <span class="text-muted-foreground pl-5 text-xs tabular-nums">{{ price }}</span>
+              <span class="text-muted-foreground pl-8 text-xs tabular-nums">{{ price }}</span>
             }
           </button>
         }
