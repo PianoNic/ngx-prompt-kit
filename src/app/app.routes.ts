@@ -30,6 +30,11 @@ export const routes: Routes = [
           import('./demo/message-edit-demo').then((m) => m.MessageEditDemo),
       },
       {
+        path: 'components/message-actions-bar',
+        loadComponent: () =>
+          import('./demo/message-actions-bar-demo').then((m) => m.MessageActionsBarDemo),
+      },
+      {
         path: 'components/markdown',
         loadComponent: () => import('./demo/markdown-demo').then((m) => m.MarkdownDemo),
       },

@@ -49,6 +49,7 @@ const HELM_REQUIREMENTS: Record<string, string[]> = {
   'message-edit': ['button', 'textarea', 'dropdown-menu'],
   approval: ['button', 'card', 'badge'],
   'attachment-preview': ['button'],
+  'message-actions-bar': ['button', 'tooltip'],
 };
 
 function resolveProjectName(

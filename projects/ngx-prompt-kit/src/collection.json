@@ -76,6 +76,11 @@
       "factory": "./message/index#message",
       "schema": "./message/schema.json"
     },
+    "message-actions-bar": {
+      "description": "Add the message-actions-bar component (ngx-prompt-kit original).",
+      "factory": "./message-actions-bar/index#messageActionsBar",
+      "schema": "./message-actions-bar/schema.json"
+    },
     "message-edit": {
       "description": "Add the message-edit component (ngx-prompt-kit original).",
       "factory": "./message-edit/index#messageEdit",
