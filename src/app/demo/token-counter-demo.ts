@@ -23,7 +23,7 @@ import { PkTokenCounterImports } from 'ngx-prompt-kit/token-counter';
     <app-doc-page
       title="Token Counter"
       [original]="true"
-      description="Inline character / token counter for a prompt input. Six display modes — compact, detailed, progress, remaining, hidden, footer — and a four-tier threshold borrowed from Claude Code and Cursor."
+      description="Inline character / token counter for a prompt input. Six display modes — compact, detailed, progress, remaining, hidden, footer — and a four-tier threshold inspired by IDE-style token meters."
     >
       <app-doc-example
         title="Compact, no limit"
@@ -96,7 +96,7 @@ import { PkTokenCounterImports } from 'ngx-prompt-kit/token-counter';
 
       <app-doc-example
         title="Progress mode — threshold trio"
-        description="Static side-by-side comparison of the three colored states. Use this mode when you want a permanent visual budget indicator (Claude Code / Cursor pattern)."
+        description="Static side-by-side comparison of the three colored states. Use this mode when you want a permanent visual budget indicator (IDE-style budget pattern)."
         [code]="progressCode"
       >
         <div class="flex w-full flex-col gap-6">
