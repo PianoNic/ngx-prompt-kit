@@ -123,24 +123,26 @@ import {
         @if (s.description; as d) {
           <p class="text-muted-foreground mt-3 text-sm leading-relaxed">{{ d }}</p>
         }
-        @if (priceLine(s); as price) {
-          <div
-            class="border-border mt-4 flex items-center justify-between gap-3 border-t pt-3 text-sm"
-          >
-            <span class="text-muted-foreground">Pricing</span>
-            <span class="text-foreground tabular-nums">{{ price }}</span>
-          </div>
-        }
-        @if (s.metrics?.length) {
-          @for (metric of s.metrics; track metric.label) {
+        <div class="mt-4 flex flex-col">
+          @if (priceLine(s); as price) {
             <div
               class="border-border flex items-center justify-between gap-3 border-t py-3 text-sm"
             >
-              <span class="text-muted-foreground">{{ metric.label }}</span>
-              <span class="text-foreground tabular-nums">{{ metric.value }}</span>
+              <span class="text-muted-foreground">Pricing</span>
+              <span class="text-foreground tabular-nums">{{ price }}</span>
             </div>
           }
-        }
+          @if (s.metrics?.length) {
+            @for (metric of s.metrics; track metric.label) {
+              <div
+                class="border-border flex items-center justify-between gap-3 border-t py-3 text-sm"
+              >
+                <span class="text-muted-foreground">{{ metric.label }}</span>
+                <span class="text-foreground tabular-nums">{{ metric.value }}</span>
+              </div>
+            }
+          }
+        </div>
         @if (selectable()) {
           <button
             type="button"
