@@ -37,7 +37,7 @@ export class PkCodeBlockCode {
    */
   public readonly theme = input<string>('auto');
   public readonly lightTheme = input<string>('github-light');
-  public readonly darkTheme = input<string>('github-dark');
+  public readonly darkTheme = input<string>('dark-plus');
   public readonly class = input<string>('');
 
   private readonly sanitizer = inject(DomSanitizer);
