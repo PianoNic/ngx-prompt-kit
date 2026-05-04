@@ -1,24 +1,272 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  DestroyRef,
+  effect,
+  ElementRef,
+  inject,
+  input,
+  PLATFORM_ID,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { DomSanitizer, type SafeHtml } from '@angular/platform-browser';
-import { marked } from 'marked';
+import { Marked, type Tokens } from 'marked';
+// Types come from @types/katex (auto-installed by the schematic).
+
+export type MathInlineDelimiter = '$' | '\\(' | 'both';
+export type MathBlockDelimiter = '$$' | '\\[' | 'both';
+export type MermaidThemeMode = 'auto' | 'default' | 'dark';
+
+interface KatexDelimiter {
+  left: string;
+  right: string;
+  display: boolean;
+}
 
 @Component({
   selector: 'pk-markdown',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `<div [class]="class()" [innerHTML]="html()"></div>`,
+  template: `<div #content [class]="class()" [innerHTML]="html()"></div>`,
 })
 export class PkMarkdown {
   public readonly content = input<string>('');
   public readonly class = input<string>('');
+  public readonly enableMath = input<boolean>(false);
+  public readonly enableDiagrams = input<boolean>(false);
+  public readonly mathInlineDelimiter = input<MathInlineDelimiter>('$');
+  public readonly mathBlockDelimiter = input<MathBlockDelimiter>('$$');
+  /**
+   * 'auto' detects dark mode via the .dark class on document.documentElement
+   * (Tailwind v4 / Spartan default). For consumers with bespoke theme
+   * management, pass 'default' or 'dark' explicitly.
+   */
+  public readonly mermaidTheme = input<MermaidThemeMode>('auto');
 
+  private readonly platformId = inject(PLATFORM_ID);
   private readonly sanitizer = inject(DomSanitizer);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly contentEl = viewChild<ElementRef<HTMLDivElement>>('content');
+  private renderTimer: ReturnType<typeof setTimeout> | null = null;
+  private renderSeq = 0;
+  /**
+   * Bumped whenever the host theme toggles (via MutationObserver on the
+   * documentElement class attribute). Tracked by the enhancement effect so
+   * Mermaid re-renders with the new theme. KaTeX uses color:inherit so
+   * adapts without re-rendering, but the re-trigger is harmless.
+   */
+  private readonly themeRev = signal(0);
+
+  private readonly md = computed<Marked>(() => {
+    const m = new Marked({ breaks: true, gfm: true });
+    if (this.enableDiagrams()) {
+      m.use({
+        renderer: {
+          code(token: Tokens.Code): string | false {
+            if (token.lang === 'mermaid') {
+              const source = token.text;
+              const id = `pk-mermaid-${djb2(source)}`;
+              const escaped = escapeHtml(source);
+              return `<div class="pk-mermaid-container" data-mermaid-id="${id}" data-mermaid-source="${escaped}">${escaped}</div>`;
+            }
+            return false;
+          },
+        },
+      });
+    }
+    return m;
+  });
 
   protected readonly html = computed<SafeHtml>(() => {
-    const parsed = marked.parse(this.content(), {
-      async: false,
-      breaks: true,
-      gfm: true,
-    }) as string;
+    const parsed = this.md().parse(this.content(), { async: false }) as string;
     return this.sanitizer.bypassSecurityTrustHtml(parsed);
   });
+
+  private readonly delimiters = computed<KatexDelimiter[]>(() => {
+    const out: KatexDelimiter[] = [];
+    const block = this.mathBlockDelimiter();
+    const inline = this.mathInlineDelimiter();
+    // Block delimiters first so $$ matches before single $
+    if (block === '$$' || block === 'both') {
+      out.push({ left: '$$', right: '$$', display: true });
+    }
+    if (block === '\\[' || block === 'both') {
+      out.push({ left: '\\[', right: '\\]', display: true });
+    }
+    if (inline === '$' || inline === 'both') {
+      out.push({ left: '$', right: '$', display: false });
+    }
+    if (inline === '\\(' || inline === 'both') {
+      out.push({ left: '\\(', right: '\\)', display: false });
+    }
+    return out;
+  });
+
+  constructor() {
+    // Content / flag effect — debounced so streamed markdown doesn't try to
+    // render partial math like "$x^" before the closing delimiter arrives.
+    effect(() => {
+      this.html();
+      this.enableMath();
+      this.enableDiagrams();
+      this.mathInlineDelimiter();
+      this.mathBlockDelimiter();
+      this.mermaidTheme();
+
+      if (!isPlatformBrowser(this.platformId)) return;
+      if (!this.enableMath() && !this.enableDiagrams()) return;
+
+      if (this.renderTimer) clearTimeout(this.renderTimer);
+      this.renderTimer = setTimeout(() => this.runEnhancements(), 300);
+    });
+
+    // Theme effect — content is settled when this fires (theme toggled by
+    // user gesture, not mid-stream), so skip the debounce. Diagrams only;
+    // KaTeX uses color:inherit and adapts without re-rendering.
+    let firstThemeRun = true;
+    effect(() => {
+      this.themeRev();
+      if (firstThemeRun) {
+        firstThemeRun = false;
+        return;
+      }
+      if (!isPlatformBrowser(this.platformId)) return;
+      if (!this.enableDiagrams()) return;
+      const el = this.contentEl()?.nativeElement;
+      if (!el) return;
+      queueMicrotask(() => this.applyDiagrams(el));
+    });
+
+    // Watch documentElement.class for theme toggles. Same default detection
+    // path as resolvedMermaidTheme — when the .dark class flips, bump
+    // themeRev so the theme effect re-runs immediately.
+    if (isPlatformBrowser(this.platformId)) {
+      const observer = new MutationObserver(() => {
+        this.themeRev.update((v) => v + 1);
+      });
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class'],
+      });
+      this.destroyRef.onDestroy(() => observer.disconnect());
+    }
+  }
+
+  private async runEnhancements(): Promise<void> {
+    const el = this.contentEl()?.nativeElement;
+    if (!el) return;
+    if (this.enableMath()) {
+      await this.applyMath(el);
+    }
+    if (this.enableDiagrams()) {
+      await this.applyDiagrams(el);
+    }
+  }
+
+  private async applyMath(el: HTMLElement): Promise<void> {
+    try {
+      // Lazy-load: KaTeX (~280KB) only enters the bundle when enableMath is true.
+      // KaTeX styles must be added separately to the consumer's angular.json
+      // styles array or imported in the global stylesheet:
+      //   "styles": ["node_modules/katex/dist/katex.min.css", ...]
+      // Without the stylesheet, math renders unstyled (no fonts, no layout).
+      const { default: renderMathInElement } = await import('katex/contrib/auto-render');
+      renderMathInElement(el, {
+        delimiters: this.delimiters(),
+        throwOnError: false, // bad LaTeX renders as source text, not as an error
+      });
+    } catch {
+      // KaTeX missing or failed; leave content as the raw markdown source
+    }
+  }
+
+  private async applyDiagrams(el: HTMLElement): Promise<void> {
+    const containers = el.querySelectorAll<HTMLElement>('.pk-mermaid-container');
+    if (containers.length === 0) return;
+    try {
+      // Lazy-load: Mermaid (~600KB) only enters the bundle when enableDiagrams is true
+      const { default: mermaid } = await import('mermaid');
+      mermaid.initialize({
+        // securityLevel:'strict' is non-negotiable — disables click handlers,
+        // links, and HTML labels that LLM-generated Mermaid sometimes includes.
+        securityLevel: 'strict',
+        startOnLoad: false,
+        theme: this.resolvedMermaidTheme(),
+      });
+      for (const container of Array.from(containers)) {
+        const source = decodeHtml(container.getAttribute('data-mermaid-source') ?? '');
+        if (!source) continue;
+        // Fresh id per render call. Stable-id caching collides with re-render
+        // (Mermaid's render() injects a temp element under the id; second call
+        // with the same id finds the prior SVG still in the DOM and errors).
+        // Re-render reactivity matters more than the caching optimization
+        // because theme toggles need to repaint the diagram.
+        const id = `pk-mermaid-${djb2(source)}-${++this.renderSeq}`;
+        try {
+          const { svg } = await mermaid.render(id, source);
+          // Parse the SVG string into a real DOM tree via DOMParser, then
+          // swap children. Layered protection:
+          //  (1) securityLevel:'strict' (above) sanitizes Mermaid's output
+          //      and blocks click handlers/links/HTML labels;
+          //  (2) DOMParser builds an XML tree from a known-shape SVG payload
+          //      rather than treating the string as raw HTML — script tags
+          //      embedded in image/svg+xml are inert by spec;
+          //  (3) source string is treated as opaque renderer input, never
+          //      concatenated into a template;
+          //  (4) on render failure (catch branch), the source is shown as
+          //      textContent in a code block — never injected as HTML.
+          const doc = new DOMParser().parseFromString(svg, 'image/svg+xml');
+          const root = doc.documentElement;
+          if (root && root.nodeName.toLowerCase() === 'svg') {
+            container.replaceChildren(root);
+          }
+        } catch {
+          const fallback = document.createElement('pre');
+          const code = document.createElement('code');
+          code.className = 'language-mermaid';
+          code.textContent = source;
+          fallback.appendChild(code);
+          container.replaceWith(fallback);
+        }
+      }
+    } catch {
+      // Mermaid missing or failed to load; containers stay as escaped source text
+    }
+  }
+
+  private resolvedMermaidTheme(): 'default' | 'dark' {
+    const t = this.mermaidTheme();
+    if (t !== 'auto') return t;
+    if (!isPlatformBrowser(this.platformId)) return 'default';
+    return document.documentElement.classList.contains('dark') ? 'dark' : 'default';
+  }
+}
+
+/** djb2 hash — stable per-source-content id so identical diagrams share the same id and aren't re-rendered. */
+function djb2(str: string): string {
+  let hash = 5381;
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) + hash) ^ str.charCodeAt(i);
+  }
+  return (hash >>> 0).toString(36);
+}
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function decodeHtml(s: string): string {
+  return s
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, '&');
 }
