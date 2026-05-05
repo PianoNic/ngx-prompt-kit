@@ -3,12 +3,18 @@ import { FormsModule } from '@angular/forms';
 import { provideIcons } from '@ng-icons/core';
 import {
   lucideArrowUp,
+  lucideChevronsUpDown,
+  lucideCopy,
   lucideLogOut,
   lucideMic,
   lucidePaperclip,
+  lucidePencil,
   lucidePlus,
+  lucideRefreshCw,
   lucideSearch,
   lucideSettings,
+  lucideThumbsDown,
+  lucideThumbsUp,
   lucideUserRound,
   lucideX,
 } from '@ng-icons/lucide';
@@ -40,7 +46,6 @@ import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
 import { PkResponseStream } from 'ngx-prompt-kit/response-stream';
 import { PkScrollButton } from 'ngx-prompt-kit/scroll-button';
 import { PkTokenCounter } from 'ngx-prompt-kit/token-counter';
-import { PkUsageCardImports } from 'ngx-prompt-kit/usage-card';
 
 interface ChatMessage {
   id: string;
@@ -82,17 +87,22 @@ const SAMPLE_ATTACHMENT_IMAGE =
     PkResponseStream,
     PkScrollButton,
     PkTokenCounter,
-    PkUsageCardImports,
   ],
   providers: [
     provideIcons({
       lucideArrowUp,
+      lucideChevronsUpDown,
+      lucideCopy,
       lucideLogOut,
       lucideMic,
       lucidePaperclip,
+      lucidePencil,
       lucidePlus,
+      lucideRefreshCw,
       lucideSearch,
       lucideSettings,
+      lucideThumbsDown,
+      lucideThumbsUp,
       lucideUserRound,
       lucideX,
     }),
@@ -168,16 +178,24 @@ const SAMPLE_ATTACHMENT_IMAGE =
             [hlmDropdownMenuTrigger]="userMenu"
             side="top"
             align="start"
-            class="hover:bg-muted focus-visible:ring-ring w-full rounded-md p-2 text-left transition-colors focus-visible:outline-none focus-visible:ring-2"
+            class="hover:bg-muted focus-visible:ring-ring flex w-full items-center gap-3 rounded-md p-2 text-left transition-colors focus-visible:outline-none focus-visible:ring-2"
             aria-label="Account menu"
           >
-            <pk-usage-card
-              display="inline"
-              [used]="usageUsed()"
-              [limit]="50000"
-              [avatar]="userAvatar"
-              name="Niclas"
-              sublabel="Pro plan"
+            <img
+              [src]="userAvatar"
+              alt=""
+              aria-hidden="true"
+              class="h-8 w-8 shrink-0 rounded-full object-cover"
+            />
+            <div class="flex min-w-0 flex-1 flex-col">
+              <span class="text-foreground truncate text-sm font-medium">Niclas</span>
+              <span class="text-muted-foreground truncate text-xs">Pro plan</span>
+            </div>
+            <ng-icon
+              hlm
+              size="xs"
+              name="lucideChevronsUpDown"
+              class="text-muted-foreground shrink-0"
             />
           </button>
           <ng-template #userMenu>
@@ -440,7 +458,6 @@ export class FullChat {
     },
   ]);
   protected readonly isStreaming = signal(false);
-  protected readonly usageUsed = signal(12_400);
   protected readonly thumbsActive = signal<Record<string, boolean>>({});
 
   protected readonly userActions = DEFAULT_USER_ACTIONS;
@@ -624,7 +641,6 @@ Effects re-run on every dependency change but don't memoize. Computed signals me
     }));
     this.inputValue.set('');
     this.stagedAttachments.set([]);
-    this.usageUsed.update((n) => Math.min(50_000, n + Math.ceil(text.length / 4)));
     this.simulateAssistantReply(convoId);
   }
 
@@ -643,7 +659,6 @@ Effects re-run on every dependency change but don't memoize. Computed signals me
         ...map,
         [convoId]: [...(map[convoId] ?? []), reply],
       }));
-      this.usageUsed.update((n) => Math.min(50_000, n + 120));
       this.isStreaming.set(false);
     }, 600);
   }
