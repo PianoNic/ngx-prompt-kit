@@ -48,6 +48,12 @@ Distributed via Angular schematics: `ng add` and `ng generate` copy source into 
 ng add ngx-prompt-kit
 ```
 
+## 🆕 New in v21.0.7
+
+- `usage-card` — persistent session/account-level usage indicator with
+  three display modes (ring, inline, card). Threshold colors at 75/90/100%
+  with an opt-out monochrome mode for informational use.
+
 ## 🆕 New in v21.0.6
 
 Seven components closing the agent-UI toolkit gaps:
@@ -123,6 +129,7 @@ Components land at `<sourceRoot>/app/components/prompt-kit/<name>/`. The `cn()` 
 | `thinking-bar`        | icon                           | —          |
 | `token-counter` 🆕    | —                              | —          |
 | `tool`                | icon                           | —          |
+| `usage-card` 🆕       | card, button, tooltip          | —          |
 
 🆕 = ngx-prompt-kit original (not in upstream prompt-kit)
 
