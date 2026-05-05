@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { provideIcons } from '@ng-icons/core';
 import {
@@ -46,6 +46,7 @@ import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
 import { PkResponseStream } from 'ngx-prompt-kit/response-stream';
 import { PkScrollButton } from 'ngx-prompt-kit/scroll-button';
 import { PkTokenCounter } from 'ngx-prompt-kit/token-counter';
+import { ScriptedLlmService } from '../services/scripted-llm.service';
 
 interface ChatMessage {
   id: string;
@@ -373,11 +374,7 @@ const SAMPLE_ATTACHMENT_IMAGE =
   `,
 })
 export class FullChat {
-  protected readonly userAvatar =
-    'data:image/svg+xml;utf8,' +
-    encodeURIComponent(
-      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0ea5e9"/><stop offset="1" stop-color="#10b981"/></linearGradient></defs><rect width="40" height="40" fill="url(#g)"/></svg>`,
-    );
+  protected readonly userAvatar = 'https://avatars.githubusercontent.com/u/79938743?v=4';
 
   protected readonly models: Model[] = [
     {
@@ -461,6 +458,7 @@ export class FullChat {
   protected readonly thumbsActive = signal<Record<string, boolean>>({});
 
   protected readonly userActions = DEFAULT_USER_ACTIONS;
+  private readonly scripted = inject(ScriptedLlmService);
 
   protected assistantActionsFor(messageId: string): readonly MessageAction[] {
     const active = this.thumbsActive()[messageId] === true;
@@ -647,13 +645,14 @@ Effects re-run on every dependency change but don't memoize. Computed signals me
   private simulateAssistantReply(convoId: string): void {
     this.isStreaming.set(true);
     const replyId = `${convoId}-a-${Date.now()}`;
+    const lastUserText = this.lastUserMessageIn(convoId);
+    const replyText = this.scripted.reply(lastUserText);
     setTimeout(() => {
       const reply: ChatMessage = {
         id: replyId,
         role: 'assistant',
         streaming: true,
-        content:
-          "Mocked reply — this showcase doesn't call a real model. In production you'd push token chunks into pk-response-stream's textStream signal as they arrive from your backend; the typewriter animation here is driven by that same component.",
+        content: replyText,
       };
       this.threadsByConvo.update((map) => ({
         ...map,
@@ -661,6 +660,14 @@ Effects re-run on every dependency change but don't memoize. Computed signals me
       }));
       this.isStreaming.set(false);
     }, 600);
+  }
+
+  private lastUserMessageIn(convoId: string): string {
+    const thread = this.threadsByConvo()[convoId] ?? [];
+    for (let i = thread.length - 1; i >= 0; i--) {
+      if (thread[i].role === 'user') return thread[i].content;
+    }
+    return '';
   }
 
   protected onStreamCompleted(messageId: string): void {
