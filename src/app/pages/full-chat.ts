@@ -99,7 +99,7 @@ const SAMPLE_ATTACHMENT_IMAGE =
   ],
   template: `
     <div
-      class="border-border bg-background mx-auto flex h-[calc(100vh-7rem)] max-w-6xl flex-col overflow-hidden rounded-lg border md:flex-row"
+      class="border-border bg-background mx-auto flex h-[calc(100vh-7.5rem)] max-w-6xl flex-col overflow-hidden rounded-lg border md:flex-row"
     >
       <!-- Conversation sidebar -->
       <aside
