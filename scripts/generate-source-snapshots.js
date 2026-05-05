@@ -9,8 +9,7 @@ const ROOT = path.resolve(__dirname, '..');
 const TARGETS = [
   {
     sources: [
-      { id: 'fullChat', path: 'src/app/pages/full-chat.ts' },
-      { id: 'scriptedLlm', path: 'src/app/services/scripted-llm.service.ts' },
+      { id: 'fullChatHtml', path: 'src/app/pages/full-chat.html' },
     ],
     out: 'src/app/pages/full-chat.source.ts',
   },

@@ -80,7 +80,7 @@ import { ThemeToggle } from './theme-toggle';
         <app-theme-toggle />
       </header>
 
-      <div class="md:grid md:grid-cols-[16rem_1fr]">
+      <div class="md:grid md:grid-cols-[16rem_minmax(0,1fr)]">
         <aside
           class="border-border sticky top-14 hidden h-[calc(100vh-3.5rem)] border-r md:block"
         >
