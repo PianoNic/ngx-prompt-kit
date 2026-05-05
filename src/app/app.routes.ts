@@ -17,8 +17,7 @@ export const routes: Routes = [
       },
       {
         path: 'showcase/full-chat',
-        loadComponent: () => import('./pages/coming-soon').then((m) => m.ComingSoon),
-        data: { title: 'Full Chat' },
+        loadComponent: () => import('./pages/full-chat').then((m) => m.FullChat),
       },
       {
         path: 'components/branch-nav',
