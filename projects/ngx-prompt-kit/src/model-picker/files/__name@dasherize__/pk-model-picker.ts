@@ -40,7 +40,7 @@ import { formatModelPrice, type Model, type ModelTier } from './pk-model-types';
       <span class="flex items-center gap-2">
         @if (selected(); as s) {
           @if (s.iconUrl; as src) {
-            <img [src]="src" [alt]="s.name + ' icon'" class="h-4 w-4 shrink-0 rounded-sm object-contain" />
+            <img [src]="src" [alt]="s.name + ' icon'" class="h-4 w-4 shrink-0 rounded-sm object-contain dark:invert" />
           }
           <span class="text-foreground">{{ s.name }}</span>
           @if (!compact() && s.tier; as t) {
@@ -71,7 +71,7 @@ import { formatModelPrice, type Model, type ModelTier } from './pk-model-types';
                   <span class="w-3 shrink-0" aria-hidden="true"></span>
                 }
                 @if (m.iconUrl; as src) {
-                  <img [src]="src" [alt]="m.name + ' icon'" class="h-4 w-4 shrink-0 rounded-sm object-contain" />
+                  <img [src]="src" [alt]="m.name + ' icon'" class="h-4 w-4 shrink-0 rounded-sm object-contain dark:invert" />
                 }
                 <span class="text-foreground font-medium">{{ m.name }}</span>
                 @if (m.provider; as p) {

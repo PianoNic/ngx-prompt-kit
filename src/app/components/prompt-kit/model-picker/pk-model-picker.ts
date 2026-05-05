@@ -43,7 +43,7 @@ import { formatModelPrice, type Model, type ModelTier } from './pk-model-types';
             <img
               [src]="src"
               [alt]="s.name + ' icon'"
-              class="h-4 w-4 shrink-0 rounded-sm object-contain"
+              class="h-4 w-4 shrink-0 rounded-sm object-contain dark:invert"
             />
           }
           <span class="text-foreground">{{ s.name }}</span>
@@ -78,7 +78,7 @@ import { formatModelPrice, type Model, type ModelTier } from './pk-model-types';
                   <img
                     [src]="src"
                     [alt]="m.name + ' icon'"
-                    class="h-4 w-4 shrink-0 rounded-sm object-contain"
+                    class="h-4 w-4 shrink-0 rounded-sm object-contain dark:invert"
                   />
                 }
                 <span class="text-foreground font-medium">{{ m.name }}</span>
