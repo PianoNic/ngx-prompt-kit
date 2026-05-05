@@ -189,7 +189,7 @@ const SAMPLE_ATTACHMENT_IMAGE =
               class="h-8 w-8 shrink-0 rounded-full object-cover"
             />
             <div class="flex min-w-0 flex-1 flex-col">
-              <span class="text-foreground truncate text-sm font-medium">Niclas</span>
+              <span class="text-foreground truncate text-sm font-medium">PianoNic</span>
               <span class="text-muted-foreground truncate text-xs">Pro plan</span>
             </div>
             <ng-icon
