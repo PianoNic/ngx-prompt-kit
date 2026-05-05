@@ -1,13 +1,16 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { provideIcons } from '@ng-icons/core';
 import {
+  lucideArrowUp,
   lucideLogOut,
   lucideMic,
   lucidePaperclip,
   lucidePlus,
-  lucideSendHorizontal,
+  lucideSearch,
   lucideSettings,
   lucideUserRound,
+  lucideX,
 } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
 import {
@@ -34,6 +37,7 @@ import {
 import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit';
 import { type Model, PkModelPickerImports } from 'ngx-prompt-kit/model-picker';
 import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
+import { PkResponseStream } from 'ngx-prompt-kit/response-stream';
 import { PkScrollButton } from 'ngx-prompt-kit/scroll-button';
 import { PkTokenCounter } from 'ngx-prompt-kit/token-counter';
 import { PkUsageCardImports } from 'ngx-prompt-kit/usage-card';
@@ -43,6 +47,7 @@ interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;
   markdown?: boolean;
+  streaming?: boolean;
   attachments?: Attachment[];
 }
 
@@ -58,6 +63,7 @@ const SAMPLE_ATTACHMENT_IMAGE =
   selector: 'app-full-chat',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
+    FormsModule,
     HlmButton,
     HlmDropdownMenu,
     HlmDropdownMenuItem,
@@ -73,19 +79,22 @@ const SAMPLE_ATTACHMENT_IMAGE =
     PkMessageEditImports,
     PkModelPickerImports,
     PkPromptInputImports,
+    PkResponseStream,
     PkScrollButton,
     PkTokenCounter,
     PkUsageCardImports,
   ],
   providers: [
     provideIcons({
+      lucideArrowUp,
       lucideLogOut,
       lucideMic,
       lucidePaperclip,
       lucidePlus,
-      lucideSendHorizontal,
+      lucideSearch,
       lucideSettings,
       lucideUserRound,
+      lucideX,
     }),
   ],
   template: `
@@ -109,14 +118,50 @@ const SAMPLE_ATTACHMENT_IMAGE =
             <ng-icon hlm size="xs" name="lucidePlus" />
           </button>
         </div>
-        <pk-conversation-list
-          [conversations]="conversations()"
-          [activeId]="selectedConvoId()"
-          (selected)="selectedConvoId.set($event)"
-          (renamed)="onRename($event)"
-          (deleted)="onDelete($event)"
-          class="min-h-0 flex-1"
-        />
+        <div class="border-border border-b px-2 py-2">
+          <div
+            class="bg-muted/40 focus-within:ring-ring flex items-center gap-2 rounded-md px-2 focus-within:ring-2"
+          >
+            <ng-icon
+              hlm
+              size="xs"
+              name="lucideSearch"
+              class="text-muted-foreground shrink-0"
+            />
+            <input
+              type="search"
+              [(ngModel)]="searchQueryInput"
+              (ngModelChange)="searchQuery.set($event)"
+              placeholder="Search chats..."
+              aria-label="Search conversations"
+              class="text-foreground placeholder:text-muted-foreground h-8 w-full bg-transparent text-sm outline-none"
+            />
+            @if (searchQuery().length > 0) {
+              <button
+                type="button"
+                aria-label="Clear search"
+                class="text-muted-foreground hover:text-foreground shrink-0"
+                (click)="clearSearch()"
+              >
+                <ng-icon hlm size="xs" name="lucideX" />
+              </button>
+            }
+          </div>
+        </div>
+        @if (filteredConversations().length === 0) {
+          <p class="text-muted-foreground flex-1 px-3 py-6 text-center text-xs">
+            No conversations match "{{ searchQuery() }}"
+          </p>
+        } @else {
+          <pk-conversation-list
+            [conversations]="filteredConversations()"
+            [activeId]="selectedConvoId()"
+            (selected)="selectedConvoId.set($event)"
+            (renamed)="onRename($event)"
+            (deleted)="onDelete($event)"
+            class="min-h-0 flex-1"
+          />
+        }
         <div class="border-border border-t p-2">
           <button
             type="button"
@@ -208,16 +253,29 @@ const SAMPLE_ATTACHMENT_IMAGE =
                 <div class="group flex max-w-[85%] flex-col gap-1 self-start">
                   <pk-message>
                     <pk-message-avatar src="" alt="Assistant" fallback="AI" />
-                    <pk-message-content
-                      [markdown]="m.markdown === true"
-                      [content]="m.content"
-                    />
+                    @if (m.streaming) {
+                      <pk-message-content>
+                        <pk-response-stream
+                          mode="typewriter"
+                          [speed]="60"
+                          [textStream]="m.content"
+                          (completed)="onStreamCompleted(m.id)"
+                        />
+                      </pk-message-content>
+                    } @else {
+                      <pk-message-content
+                        [markdown]="m.markdown === true"
+                        [content]="m.content"
+                      />
+                    }
                   </pk-message>
-                  <pk-message-actions-bar
-                    class="ml-11"
-                    [actions]="assistantActionsFor(m.id)"
-                    (actionPicked)="onAssistantAction($event, m)"
-                  />
+                  @if (!m.streaming) {
+                    <pk-message-actions-bar
+                      class="ml-11"
+                      [actions]="assistantActionsFor(m.id)"
+                      (actionPicked)="onAssistantAction($event, m)"
+                    />
+                  }
                 </div>
               }
             }
@@ -281,11 +339,12 @@ const SAMPLE_ATTACHMENT_IMAGE =
                   hlmBtn
                   size="icon-sm"
                   type="button"
+                  class="rounded-full"
                   aria-label="Send message"
                   [disabled]="!canSend()"
                   (click)="send()"
                 >
-                  <ng-icon hlm size="xs" name="lucideSendHorizontal" />
+                  <ng-icon hlm size="xs" name="lucideArrowUp" />
                 </button>
               </pk-prompt-input-action>
             </pk-prompt-input-actions>
@@ -472,6 +531,25 @@ Effects re-run on every dependency change but don't memoize. Computed signals me
     return this.threadsByConvo()[id] ?? [];
   });
 
+  protected readonly searchQuery = signal('');
+  protected searchQueryInput = '';
+
+  protected readonly filteredConversations = computed(() => {
+    const q = this.searchQuery().trim().toLowerCase();
+    const all = this.conversations();
+    if (!q) return all;
+    return all.filter(
+      (c) =>
+        c.title.toLowerCase().includes(q) ||
+        (c.preview ?? '').toLowerCase().includes(q),
+    );
+  });
+
+  protected clearSearch(): void {
+    this.searchQuery.set('');
+    this.searchQueryInput = '';
+  }
+
   protected readonly currentConvoTitle = computed(() => {
     const id = this.selectedConvoId();
     return this.conversations().find((c) => c.id === id)?.title ?? '';
@@ -552,12 +630,14 @@ Effects re-run on every dependency change but don't memoize. Computed signals me
 
   private simulateAssistantReply(convoId: string): void {
     this.isStreaming.set(true);
+    const replyId = `${convoId}-a-${Date.now()}`;
     setTimeout(() => {
       const reply: ChatMessage = {
-        id: `${convoId}-a-${Date.now()}`,
+        id: replyId,
         role: 'assistant',
+        streaming: true,
         content:
-          "Mocked reply — this showcase doesn't call a real model. In a production app you'd stream chunks into pk-response-stream's textStream signal here.",
+          "Mocked reply — this showcase doesn't call a real model. In production you'd push token chunks into pk-response-stream's textStream signal as they arrive from your backend; the typewriter animation here is driven by that same component.",
       };
       this.threadsByConvo.update((map) => ({
         ...map,
@@ -565,7 +645,17 @@ Effects re-run on every dependency change but don't memoize. Computed signals me
       }));
       this.usageUsed.update((n) => Math.min(50_000, n + 120));
       this.isStreaming.set(false);
-    }, 1200);
+    }, 600);
+  }
+
+  protected onStreamCompleted(messageId: string): void {
+    this.threadsByConvo.update((map) => {
+      const next: Record<string, ChatMessage[]> = {};
+      for (const [k, list] of Object.entries(map)) {
+        next[k] = list.map((m) => (m.id === messageId ? { ...m, streaming: false } : m));
+      }
+      return next;
+    });
   }
 
   protected onMessageSaved(id: string, newContent: string): void {
