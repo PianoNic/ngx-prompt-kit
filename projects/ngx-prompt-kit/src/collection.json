@@ -6,6 +6,11 @@
       "factory": "./ng-add/index#ngAdd",
       "schema": "./ng-add/schema.json"
     },
+    "init": {
+      "description": "Configure where ngx-prompt-kit components are installed (writes to components.json).",
+      "factory": "./init/index#init",
+      "schema": "./init/schema.json"
+    },
     "approval": {
       "description": "Add the approval component (ngx-prompt-kit original).",
       "factory": "./approval/index#approval",
