@@ -11,7 +11,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "build:lib": "node -e \"require('node:fs').rmSync('dist/ngx-prompt-kit',{recursive:true,force:true})\" && tsc -p projects/ngx-prompt-kit/tsconfig.json && bun run build:lib:assets",
-    "build:lib:assets": "node scripts/copy-schematic-assets.js",
+    "build:lib:assets": "copyfiles -u 3 \"projects/ngx-prompt-kit/src/collection.json\" \"projects/ngx-prompt-kit/src/**/schema.json\" \"projects/ngx-prompt-kit/src/**/files/**/*\" dist/ngx-prompt-kit/schematics && copyfiles -u 2 \"projects/ngx-prompt-kit/package.json\" \"projects/ngx-prompt-kit/README.md\" dist/ngx-prompt-kit",
     "format": "prettier --write \"**/*.{ts,html,scss,css,md}\""
   },
   "private": true,
@@ -45,6 +45,7 @@
     "@angular/compiler-cli": "^21.2.0",
     "@spartan-ng/cli": "^0.0.1-alpha.683",
     "@tailwindcss/postcss": "^4.1.12",
+    "copyfiles": "^2.4.1",
     "jsdom": "^28.0.0",
     "ng-packagr": "^21.2.0",
     "postcss": "^8.5.3",
