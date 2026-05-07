@@ -7,13 +7,14 @@
     "project": {
       "type": "string",
       "description": "The Angular project to add the component to.",
-      "$default": { "$source": "projectName" }
+      "$default": {
+        "$source": "projectName"
+      }
     },
     "path": {
       "type": "string",
       "format": "path",
-      "description": "Path inside the project's sourceRoot. Defaults to app/components/prompt-kit.",
-      "visible": false
+      "description": "Path where the component is generated. Defaults to libs/prompt-kit."
     }
   },
   "required": []

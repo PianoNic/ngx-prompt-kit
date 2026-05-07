@@ -14,8 +14,8 @@ import {
   url,
 } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
-import { buildDefaultPath, getWorkspace } from '@schematics/angular/utility/workspace';
-import { join, posix } from 'path';
+import { getWorkspace } from '@schematics/angular/utility/workspace';
+import { join } from 'path';
 
 export interface ComponentSchema {
   project?: string;
@@ -81,9 +81,7 @@ export function buildComponent(spec: ComponentSpec): (opts: ComponentSchema) => 
         throw new SchematicsException(`Project "${projectName}" not found.`);
       }
 
-      const defaultPath = buildDefaultPath(project as never);
-      const targetPath =
-        options.path ?? posix.join(defaultPath, 'components', 'prompt-kit');
+      const targetPath = options.path ?? 'libs/prompt-kit';
 
       const helmReqs = HELM_REQUIREMENTS[spec.name];
       if (helmReqs) {
@@ -123,7 +121,10 @@ export function buildComponent(spec: ComponentSpec): (opts: ComponentSchema) => 
       const rules: Rule[] = [];
       if (spec.needsUtils) {
         rules.push(
-          externalSchematic('ngx-prompt-kit', 'utils', { project: projectName }),
+          externalSchematic('ngx-prompt-kit', 'utils', {
+            project: projectName,
+            path: targetPath,
+          }),
         );
       }
       rules.push(mergeWith(templateSource, MergeStrategy.Overwrite));
