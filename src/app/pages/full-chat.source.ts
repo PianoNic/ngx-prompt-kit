@@ -93,7 +93,7 @@ export const FULL_CHAT_HTML_SOURCE = `<hlm-tabs tab="preview" class="mx-auto fle
             </div>
             <ng-icon
               hlm
-              size="xs"
+              size="sm"
               name="lucideChevronsUpDown"
               class="text-muted-foreground shrink-0"
             />
