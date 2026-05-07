@@ -8,9 +8,9 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/ngx-prompt-kit"><img src="https://img.shields.io/npm/v/ngx-prompt-kit?color=c87941" alt="npm version"/></a>
-  <a href="https://github.com/PianoNic/ngx-prompt-kit/blob/master/LICENSE"><img src="https://img.shields.io/github/license/PianoNic/ngx-prompt-kit?color=c87941"/></a>
-  <a href="https://www.npmjs.com/package/ngx-prompt-kit"><img src="https://img.shields.io/npm/dm/ngx-prompt-kit?color=c87941" alt="npm downloads"/></a>
+  <a href="https://www.npmjs.com/package/ngx-prompt-kit"><img src="https://img.shields.io/npm/v/ngx-prompt-kit?color=white" alt="npm version"/></a>
+  <a href="https://github.com/PianoNic/ngx-prompt-kit/blob/master/LICENSE"><img src="https://img.shields.io/github/license/PianoNic/ngx-prompt-kit?color=white"/></a>
+  <a href="https://www.npmjs.com/package/ngx-prompt-kit"><img src="https://img.shields.io/npm/dm/ngx-prompt-kit?color=white" alt="npm downloads"/></a>
 </p>
 
 <p align="center">
