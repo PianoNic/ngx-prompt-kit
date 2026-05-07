@@ -11,6 +11,11 @@
       "factory": "./init/index#init",
       "schema": "./init/schema.json"
     },
+    "ui": {
+      "description": "Pick multiple components from a checklist and install them in one go.",
+      "factory": "./ui/index#ui",
+      "schema": "./ui/schema.json"
+    },
     "approval": {
       "description": "Add the approval component (ngx-prompt-kit original).",
       "factory": "./approval/index#approval",

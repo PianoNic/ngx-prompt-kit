@@ -66,6 +66,13 @@ ng generate ngx-prompt-kit:markdown
 
 Components land at `libs/prompt-kit/<name>/` by default. Override per command with `--path=<dir>` or set a workspace-wide path via `ng generate ngx-prompt-kit:init`. The `cn()` utility lands alongside automatically.
 
+### Bulk install
+
+```bash
+ng generate ngx-prompt-kit:ui                                       # interactive checklist
+ng generate ngx-prompt-kit:ui --components=message,prompt-input     # non-interactive
+```
+
 | Component           | Helm dependencies   | Other deps |
 |---------------------|---------------------|------------|
 | `chain-of-thought`  | icon                | —          |
