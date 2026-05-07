@@ -121,7 +121,10 @@ export function buildComponent(spec: ComponentSpec): (opts: ComponentSchema) => 
       const rules: Rule[] = [];
       if (spec.needsUtils) {
         rules.push(
-          externalSchematic('ngx-prompt-kit', 'utils', { project: projectName }),
+          externalSchematic('ngx-prompt-kit', 'utils', {
+            project: projectName,
+            path: targetPath,
+          }),
         );
       }
       rules.push(mergeWith(templateSource, MergeStrategy.Overwrite));
