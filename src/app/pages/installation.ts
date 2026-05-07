@@ -139,6 +139,41 @@ import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
       </section>
 
       <section class="mt-10">
+        <h2 class="text-xl font-semibold tracking-tight">Configure install path</h2>
+        <p class="text-muted-foreground mt-2 text-sm leading-relaxed">
+          Optional but recommended. Picks where component sources land and persists it to
+          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs">components.json</code>
+          so subsequent generates don't ask. Skip this and components will use the
+          default
+          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs">libs/prompt-kit</code>.
+        </p>
+        <div class="mt-3">
+          <hlm-tabs tab="ng">
+            <hlm-tabs-list variant="line">
+              <button hlmTabsTrigger="bun">Bun</button>
+              <button hlmTabsTrigger="npm">npm</button>
+              <button hlmTabsTrigger="ng">ng</button>
+            </hlm-tabs-list>
+            <div hlmTabsContent="bun" class="mt-3">
+              <pk-code-block>
+                <pk-code-block-code [code]="initBun" language="bash" />
+              </pk-code-block>
+            </div>
+            <div hlmTabsContent="npm" class="mt-3">
+              <pk-code-block>
+                <pk-code-block-code [code]="initNpm" language="bash" />
+              </pk-code-block>
+            </div>
+            <div hlmTabsContent="ng" class="mt-3">
+              <pk-code-block>
+                <pk-code-block-code [code]="initNg" language="bash" />
+              </pk-code-block>
+            </div>
+          </hlm-tabs>
+        </div>
+      </section>
+
+      <section class="mt-10">
         <h2 class="text-xl font-semibold tracking-tight">Add components</h2>
         <p class="text-muted-foreground mt-2 text-sm leading-relaxed">
           Generate any component into your project. The
@@ -178,9 +213,15 @@ import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
         <p class="text-muted-foreground mt-3 text-sm leading-relaxed">
           Components land at
           <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs"
-            >&lt;sourceRoot&gt;/app/components/prompt-kit/&lt;name&gt;/</code
+            >libs/prompt-kit/&lt;name&gt;/</code
           >
-          by default.
+          by default. Override per command with
+          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs"
+            >--path</code
+          >, or set a workspace-wide path with
+          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs"
+            >ng g ngx-prompt-kit:init</code
+          >.
         </p>
       </section>
 
@@ -218,6 +259,10 @@ ng g @spartan-ng/cli:ui`;
   protected readonly ngAddNpm = `npx ng add ngx-prompt-kit`;
   protected readonly ngAddNg = `ng add ngx-prompt-kit`;
 
+  protected readonly initBun = `bun x ng generate ngx-prompt-kit:init`;
+  protected readonly initNpm = `npx ng generate ngx-prompt-kit:init`;
+  protected readonly initNg = `ng generate ngx-prompt-kit:init`;
+
   protected readonly ngGenerateBun = `bun x ng generate ngx-prompt-kit:message
 bun x ng generate ngx-prompt-kit:prompt-input
 bun x ng generate ngx-prompt-kit:markdown
@@ -234,7 +279,7 @@ ng generate ngx-prompt-kit:markdown
 # ...etc.`;
 
   protected readonly usage = `import { Component, signal } from '@angular/core';
-import { PkPromptInputImports } from './components/prompt-kit/prompt-input';
+import { PkPromptInputImports } from 'libs/prompt-kit/prompt-input';
 
 @Component({
   selector: 'app-chat',

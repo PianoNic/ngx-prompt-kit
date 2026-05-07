@@ -48,6 +48,14 @@ Distributed via Angular schematics: `ng add` and `ng generate` copy source into 
 ng add ngx-prompt-kit
 ```
 
+## Configure install path (optional)
+
+```bash
+ng generate ngx-prompt-kit:init
+```
+
+Prompts for an install path and persists it to `components.json` under `promptKit.componentsPath`. Skip this step and components default to `libs/prompt-kit`.
+
 ## Add components
 
 ```bash
@@ -56,7 +64,7 @@ ng generate ngx-prompt-kit:prompt-input
 ng generate ngx-prompt-kit:markdown
 ```
 
-Components land at `<sourceRoot>/app/components/prompt-kit/<name>/`. The `cn()` utility lands alongside automatically.
+Components land at `libs/prompt-kit/<name>/` by default. Override per command with `--path=<dir>` or set a workspace-wide path via `ng generate ngx-prompt-kit:init`. The `cn()` utility lands alongside automatically.
 
 | Component           | Helm dependencies   | Other deps |
 |---------------------|---------------------|------------|
@@ -91,7 +99,7 @@ ng g @spartan-ng/cli:ui
 
 ```typescript
 import { Component, signal } from '@angular/core';
-import { PkPromptInputImports } from './components/prompt-kit/prompt-input';
+import { PkPromptInputImports } from 'libs/prompt-kit/prompt-input';
 
 @Component({
   selector: 'app-chat',

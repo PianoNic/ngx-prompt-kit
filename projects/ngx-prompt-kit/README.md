@@ -8,9 +8,9 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/ngx-prompt-kit"><img src="https://img.shields.io/npm/v/ngx-prompt-kit?color=c87941" alt="npm version"/></a>
-  <a href="https://github.com/PianoNic/ngx-prompt-kit/blob/master/LICENSE"><img src="https://img.shields.io/github/license/PianoNic/ngx-prompt-kit?color=c87941"/></a>
-  <a href="https://www.npmjs.com/package/ngx-prompt-kit"><img src="https://img.shields.io/npm/dm/ngx-prompt-kit?color=c87941" alt="npm downloads"/></a>
+  <a href="https://www.npmjs.com/package/ngx-prompt-kit"><img src="https://img.shields.io/npm/v/ngx-prompt-kit?color=white" alt="npm version"/></a>
+  <a href="https://github.com/PianoNic/ngx-prompt-kit/blob/master/LICENSE"><img src="https://img.shields.io/github/license/PianoNic/ngx-prompt-kit?color=white"/></a>
+  <a href="https://www.npmjs.com/package/ngx-prompt-kit"><img src="https://img.shields.io/npm/dm/ngx-prompt-kit?color=white" alt="npm downloads"/></a>
 </p>
 
 <p align="center">
@@ -19,22 +19,21 @@
 
 ## About
 
-Port of [ibelick/prompt-kit](https://github.com/ibelick/prompt-kit) to Angular. 20 components for building AI chat UIs — message threads, prompt input, streaming responses, markdown rendering, code blocks, and more.
+Port of [ibelick/prompt-kit](https://github.com/ibelick/prompt-kit) to Angular. Components for building AI chat UIs — message threads, prompt input, streaming responses, markdown rendering, code blocks, and more.
 
 Distributed via Angular schematics: `ng add` and `ng generate` copy source into your project, where you own and edit the code. No runtime dependency on this package after generation.
 
 ## Features
 
-- **20 components** - Full parity with the React lineup (jsx-preview omitted)
-- **Schematic-based** - Source lands in your project, no version-pinning hell
-- **Spartan UI native** - Composes with the helm primitives you already use
-- **Signal-based** - `input()`, `output()`, `model()`, `viewChild()` throughout
-- **OnPush by default** - Every component uses `ChangeDetectionStrategy.OnPush`
-- **SSR-safe** - All browser APIs guarded with `isPlatformBrowser` / `afterNextRender`
-- **Tailwind v4** - Utility-first styling, no CSS-in-JS
-- **Accessible** - ARIA labels, keyboard navigation, focus management
-- **Standalone** - No NgModules, just import and use
-- **Tree-shakeable** - Add only the components you use
+- **Schematic-based** — Source lands in your project, no version-pinning hell
+- **Spartan UI native** — Composes with the helm primitives you already use
+- **Signal-based** — `input()`, `output()`, `model()`, `viewChild()` throughout
+- **OnPush by default** — Every component uses `ChangeDetectionStrategy.OnPush`
+- **SSR-safe** — All browser APIs guarded with `isPlatformBrowser` / `afterNextRender`
+- **Tailwind v4** — Utility-first styling, no CSS-in-JS
+- **Accessible** — ARIA labels, keyboard navigation, focus management
+- **Standalone** — No NgModules, just import and use
+- **Tree-shakeable** — Add only the components you use
 
 ## Prerequisites
 
@@ -48,41 +47,13 @@ Distributed via Angular schematics: `ng add` and `ng generate` copy source into 
 ng add ngx-prompt-kit
 ```
 
-## 🆕 New in v21.0.7
+## Configure install path (optional)
 
-- `usage-card` — persistent session/account-level usage indicator with
-  three display modes (ring, inline, card). Threshold colors at 75/90/100%
-  with an opt-out monochrome mode for informational use.
+```bash
+ng generate ngx-prompt-kit:init
+```
 
-## 🆕 New in v21.0.6
-
-Seven components closing the agent-UI toolkit gaps:
-
-- `approval` — action approval card for tool execution
-- `attachment-preview` — chip row for staged attachments above the input
-- `message-actions-bar` — standard action toolbar below messages
-- `branch-nav` — sibling-message version navigation
-- `model-picker` — dropdown model selector
-- `model-list` — Open WebUI / Ollama-style searchable list
-- `model-browser` — OpenRouter-style split-pane picker with detail pane
-
-Plus polish to existing components:
-
-- `pk-response-stream` continues typing on text-extension updates instead
-  of restarting the animation
-- `pk-code-block` auto-detects dark theme via `documentElement.class`
-  and defaults its dark theme to `dark-plus` (VS Code Dark Modern syntax)
-
-## 🆕 New in v21.0.3
-
-Components new to ngx-prompt-kit (not part of the upstream React library):
-
-- `conversation-list` — chat history sidebar with date grouping
-- `token-counter` — character/token display for input
-- `stream-controls` — stop while streaming, regenerate after
-- `chat-empty` — landing state with suggestion grid
-- `cost-display` — locale-aware running cost for an LLM exchange
-- `message-edit` — inline edit for user messages
+Prompts for an install path and persists it to `components.json` under `promptKit.componentsPath`. Skip this step and components default to `libs/prompt-kit`.
 
 ## Add components
 
@@ -92,46 +63,7 @@ ng generate ngx-prompt-kit:prompt-input
 ng generate ngx-prompt-kit:markdown
 ```
 
-Components land at `<sourceRoot>/app/components/prompt-kit/<name>/`. The `cn()` utility lands alongside automatically.
-
-| Component                | Helm dependencies                  | Other deps      |
-|--------------------------|------------------------------------|-----------------|
-| `approval` 🆕            | button, card, badge                | —               |
-| `attachment-preview` 🆕  | button                             | —               |
-| `branch-nav` 🆕          | button                             | —               |
-| `chain-of-thought`       | icon                               | —               |
-| `chat-container`         | —                                  | —               |
-| `chat-empty` 🆕          | card                               | —               |
-| `code-block`             | —                                  | shiki           |
-| `conversation-list` 🆕   | button, separator, dropdown-menu   | —               |
-| `cost-display` 🆕        | —                                  | —               |
-| `feedback-bar`           | icon                               | —               |
-| `file-upload`            | —                                  | —               |
-| `image`                  | —                                  | —               |
-| `loader`                 | —                                  | —               |
-| `markdown`               | —                                  | marked, katex, mermaid |
-| `message`                | avatar, tooltip                    | —               |
-| `message-actions-bar` 🆕 | button, tooltip                    | —               |
-| `message-edit` 🆕        | button, textarea, dropdown-menu    | —               |
-| `model-browser` 🆕       | badge                              | —               |
-| `model-list` 🆕          | —                                  | —               |
-| `model-picker` 🆕        | button, dropdown-menu, badge       | —               |
-| `prompt-input`           | textarea, tooltip                  | —               |
-| `prompt-suggestion`      | button                             | —               |
-| `reasoning`              | —                                  | —               |
-| `response-stream`        | —                                  | —               |
-| `scroll-button`       | button                         | —          |
-| `source`              | hover-card                     | —          |
-| `steps`               | icon                           | —          |
-| `stream-controls` 🆕   | button                         | —          |
-| `system-message`      | button, icon                   | —          |
-| `text-shimmer`        | —                              | —          |
-| `thinking-bar`        | icon                           | —          |
-| `token-counter` 🆕    | —                              | —          |
-| `tool`                | icon                           | —          |
-| `usage-card` 🆕       | card, button, tooltip          | —          |
-
-🆕 = ngx-prompt-kit original (not in upstream prompt-kit)
+Components land at `libs/prompt-kit/<name>/` by default. Override per command with `--path=<dir>` or set a workspace-wide path via `ng generate ngx-prompt-kit:init`. The `cn()` utility lands alongside automatically.
 
 Helm prerequisites must be installed separately via Spartan's CLI:
 
@@ -143,7 +75,7 @@ ng g @spartan-ng/cli:ui
 
 ```typescript
 import { Component, signal } from '@angular/core';
-import { PkPromptInputImports } from './components/prompt-kit/prompt-input';
+import { PkPromptInputImports } from 'libs/prompt-kit/prompt-input';
 
 @Component({
   selector: 'app-chat',
@@ -169,7 +101,7 @@ See the [live demo](https://ngx-prompt-kit.pianonic.ch) for every component with
 - Re-running a component schematic overwrites the existing files. If you've customized them, commit your changes first.
 - You own the generated source — edit freely. Updates to this package won't push changes to your code.
 - `image` uses Angular's `NgOptimizedImage` directive when given a real `src` URL; falls back to a native `<img>` for base64/blob payloads.
-- `cost-display` does **not** bundle model pricing tables — those drift constantly (GPT-4o was $5/1M six months ago, $2.50/1M now). Pass `inputPricePer1M` / `outputPricePer1M` from your own source of truth. Currency conversion is also out of scope: convert before passing in if your API charges in one currency and you display in another.
+- `cost-display` does **not** bundle model pricing tables — those drift constantly. Pass `inputPricePer1M` / `outputPricePer1M` from your own source of truth.
 
 ## Credit
 
