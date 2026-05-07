@@ -1,15 +1,30 @@
 {
   "name": "ngx-prompt-kit",
-  "version": "21.0.7",
+  "version": "21.0.8",
   "description": "Angular components for AI chat interfaces. Schematic-based — bring your own Spartan UI.",
-  "keywords": ["angular", "ai", "chat", "llm", "spartan", "schematics", "components"],
+  "keywords": [
+    "angular",
+    "ai",
+    "chat",
+    "llm",
+    "spartan",
+    "schematics",
+    "components"
+  ],
   "license": "MIT",
   "author": "PianoNic",
-  "repository": { "type": "git", "url": "https://github.com/PianoNic/ngx-prompt-kit.git" },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PianoNic/ngx-prompt-kit.git"
+  },
   "homepage": "https://ngx-prompt-kit.pianonic.ch",
-  "bugs": { "url": "https://github.com/PianoNic/ngx-prompt-kit/issues" },
+  "bugs": {
+    "url": "https://github.com/PianoNic/ngx-prompt-kit/issues"
+  },
   "schematics": "./schematics/collection.json",
-  "ng-add": { "save": "devDependencies" },
+  "ng-add": {
+    "save": "devDependencies"
+  },
   "dependencies": {
     "@angular-devkit/core": "^21.0.0",
     "@angular-devkit/schematics": "^21.0.0",
