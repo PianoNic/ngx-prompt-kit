@@ -1,7 +1,6 @@
 import { strings } from '@angular-devkit/core';
 import {
   apply,
-  applyTemplates,
   chain,
   externalSchematic,
   MergeStrategy,
@@ -10,6 +9,7 @@ import {
   Rule,
   SchematicContext,
   SchematicsException,
+  template,
   Tree,
   url,
 } from '@angular-devkit/schematics';
@@ -115,7 +115,7 @@ export function buildComponent(spec: ComponentSpec): (opts: ComponentSchema) => 
       }
 
       const templateSource = apply(url(`../${spec.name}/files`), [
-        applyTemplates({ ...strings, name: spec.name }),
+        template({ ...strings, name: spec.name }),
         move(targetPath),
       ]);
 
