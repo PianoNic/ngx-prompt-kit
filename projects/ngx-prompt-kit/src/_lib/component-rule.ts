@@ -16,6 +16,7 @@ import {
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { getWorkspace } from '@schematics/angular/utility/workspace';
 import { join } from 'path';
+import { resolveComponentPath } from './config';
 
 export interface ComponentSchema {
   project?: string;
@@ -81,7 +82,7 @@ export function buildComponent(spec: ComponentSpec): (opts: ComponentSchema) => 
         throw new SchematicsException(`Project "${projectName}" not found.`);
       }
 
-      const targetPath = options.path ?? 'libs/prompt-kit';
+      const targetPath = resolveComponentPath(tree, options.path);
 
       const helmReqs = HELM_REQUIREMENTS[spec.name];
       if (helmReqs) {

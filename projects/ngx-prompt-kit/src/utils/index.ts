@@ -6,8 +6,10 @@ import {
   move,
   Rule,
   template,
+  Tree,
   url,
 } from '@angular-devkit/schematics';
+import { resolveComponentPath } from '../_lib/config';
 
 export interface UtilsSchema {
   project?: string;
@@ -15,8 +17,8 @@ export interface UtilsSchema {
 }
 
 export function utils(options: UtilsSchema): Rule {
-  return () => {
-    const targetPath = options.path ?? 'libs/prompt-kit';
+  return (tree: Tree) => {
+    const targetPath = resolveComponentPath(tree, options.path);
     const tpl = apply(url(`../utils/files`), [
       template({ ...strings, name: 'utils' }),
       move(targetPath),

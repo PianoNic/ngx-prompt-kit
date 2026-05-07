@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "PromptKitInitSchema",
+  "title": "Initialize ngx-prompt-kit",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string",
+      "format": "path",
+      "description": "Where ngx-prompt-kit components will be installed.",
+      "default": "libs/prompt-kit",
+      "x-prompt": "Where should ngx-prompt-kit components be installed?"
+    }
+  },
+  "required": []
+}
