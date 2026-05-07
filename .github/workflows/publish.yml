@@ -17,6 +17,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Sync lib version with release tag
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           TAG="${{ github.event.release.tag_name }}"
           VERSION="${TAG#v}"
@@ -27,8 +29,10 @@ jobs:
           else
             echo "Bumping $PKG from $CURRENT to $VERSION"
             node -e "const fs=require('fs');const f='$PKG';const p=JSON.parse(fs.readFileSync(f));p.version='$VERSION';fs.writeFileSync(f, JSON.stringify(p, null, 2) + '\n');"
-            git config user.name "${{ github.event.release.author.login }}"
-            git config user.email "${{ github.event.release.author.login }}@users.noreply.github.com"
+            OWNER="${{ github.repository_owner }}"
+            OWNER_ID=$(gh api "users/$OWNER" --jq '.id')
+            git config user.name "$OWNER"
+            git config user.email "${OWNER_ID}+${OWNER}@users.noreply.github.com"
             git add "$PKG"
             git commit -m "chore(release): bump ngx-prompt-kit to $VERSION"
             git push origin master
