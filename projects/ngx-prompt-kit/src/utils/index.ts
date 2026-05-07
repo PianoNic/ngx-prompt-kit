@@ -1,11 +1,11 @@
 import { strings } from '@angular-devkit/core';
 import {
   apply,
+  applyTemplates,
   MergeStrategy,
   mergeWith,
   move,
   Rule,
-  template,
   Tree,
   url,
 } from '@angular-devkit/schematics';
@@ -20,7 +20,7 @@ export function utils(options: UtilsSchema): Rule {
   return (tree: Tree) => {
     const targetPath = resolveComponentPath(tree, options.path);
     const tpl = apply(url(`../utils/files`), [
-      template({ ...strings, name: 'utils' }),
+      applyTemplates({ ...strings, name: 'utils' }),
       move(targetPath),
     ]);
     return mergeWith(tpl, MergeStrategy.AllowCreationConflict);
