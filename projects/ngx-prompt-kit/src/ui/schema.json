@@ -1,0 +1,208 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "PromptKitUiSchema",
+  "title": "Install ngx-prompt-kit components",
+  "type": "object",
+  "properties": {
+    "components": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "approval",
+          "attachment-preview",
+          "branch-nav",
+          "chain-of-thought",
+          "chat-container",
+          "chat-empty",
+          "code-block",
+          "conversation-list",
+          "cost-display",
+          "feedback-bar",
+          "file-upload",
+          "image",
+          "loader",
+          "markdown",
+          "message",
+          "message-actions-bar",
+          "message-edit",
+          "model-browser",
+          "model-list",
+          "model-picker",
+          "prompt-input",
+          "prompt-suggestion",
+          "reasoning",
+          "response-stream",
+          "scroll-button",
+          "source",
+          "steps",
+          "stream-controls",
+          "system-message",
+          "text-shimmer",
+          "thinking-bar",
+          "token-counter",
+          "tool",
+          "usage-card"
+        ]
+      },
+      "description": "Components to install. Comma-separate from CLI or pick interactively.",
+      "x-prompt": {
+        "message": "Which components do you want to install?",
+        "type": "list",
+        "multiselect": true,
+        "items": [
+          {
+            "value": "approval",
+            "label": "approval"
+          },
+          {
+            "value": "attachment-preview",
+            "label": "attachment-preview"
+          },
+          {
+            "value": "branch-nav",
+            "label": "branch-nav"
+          },
+          {
+            "value": "chain-of-thought",
+            "label": "chain-of-thought"
+          },
+          {
+            "value": "chat-container",
+            "label": "chat-container"
+          },
+          {
+            "value": "chat-empty",
+            "label": "chat-empty"
+          },
+          {
+            "value": "code-block",
+            "label": "code-block"
+          },
+          {
+            "value": "conversation-list",
+            "label": "conversation-list"
+          },
+          {
+            "value": "cost-display",
+            "label": "cost-display"
+          },
+          {
+            "value": "feedback-bar",
+            "label": "feedback-bar"
+          },
+          {
+            "value": "file-upload",
+            "label": "file-upload"
+          },
+          {
+            "value": "image",
+            "label": "image"
+          },
+          {
+            "value": "loader",
+            "label": "loader"
+          },
+          {
+            "value": "markdown",
+            "label": "markdown"
+          },
+          {
+            "value": "message",
+            "label": "message"
+          },
+          {
+            "value": "message-actions-bar",
+            "label": "message-actions-bar"
+          },
+          {
+            "value": "message-edit",
+            "label": "message-edit"
+          },
+          {
+            "value": "model-browser",
+            "label": "model-browser"
+          },
+          {
+            "value": "model-list",
+            "label": "model-list"
+          },
+          {
+            "value": "model-picker",
+            "label": "model-picker"
+          },
+          {
+            "value": "prompt-input",
+            "label": "prompt-input"
+          },
+          {
+            "value": "prompt-suggestion",
+            "label": "prompt-suggestion"
+          },
+          {
+            "value": "reasoning",
+            "label": "reasoning"
+          },
+          {
+            "value": "response-stream",
+            "label": "response-stream"
+          },
+          {
+            "value": "scroll-button",
+            "label": "scroll-button"
+          },
+          {
+            "value": "source",
+            "label": "source"
+          },
+          {
+            "value": "steps",
+            "label": "steps"
+          },
+          {
+            "value": "stream-controls",
+            "label": "stream-controls"
+          },
+          {
+            "value": "system-message",
+            "label": "system-message"
+          },
+          {
+            "value": "text-shimmer",
+            "label": "text-shimmer"
+          },
+          {
+            "value": "thinking-bar",
+            "label": "thinking-bar"
+          },
+          {
+            "value": "token-counter",
+            "label": "token-counter"
+          },
+          {
+            "value": "tool",
+            "label": "tool"
+          },
+          {
+            "value": "usage-card",
+            "label": "usage-card"
+          }
+        ]
+      }
+    },
+    "path": {
+      "type": "string",
+      "format": "path",
+      "description": "Override install path. Defaults to components.json or libs/prompt-kit."
+    },
+    "project": {
+      "type": "string",
+      "description": "The Angular project to add components to.",
+      "$default": {
+        "$source": "projectName"
+      }
+    }
+  },
+  "required": []
+}

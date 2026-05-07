@@ -226,6 +226,46 @@ import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
       </section>
 
       <section class="mt-10">
+        <h2 class="text-xl font-semibold tracking-tight">Bulk install (interactive)</h2>
+        <p class="text-muted-foreground mt-2 text-sm leading-relaxed">
+          Pick multiple components from a checklist instead of generating each one manually.
+          The
+          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs">cn()</code>
+          utility and any component dependencies are still installed automatically.
+        </p>
+        <div class="mt-3">
+          <hlm-tabs tab="ng">
+            <hlm-tabs-list variant="line">
+              <button hlmTabsTrigger="bun">Bun</button>
+              <button hlmTabsTrigger="npm">npm</button>
+              <button hlmTabsTrigger="ng">ng</button>
+            </hlm-tabs-list>
+            <div hlmTabsContent="bun" class="mt-3">
+              <pk-code-block>
+                <pk-code-block-code [code]="uiBun" language="bash" />
+              </pk-code-block>
+            </div>
+            <div hlmTabsContent="npm" class="mt-3">
+              <pk-code-block>
+                <pk-code-block-code [code]="uiNpm" language="bash" />
+              </pk-code-block>
+            </div>
+            <div hlmTabsContent="ng" class="mt-3">
+              <pk-code-block>
+                <pk-code-block-code [code]="uiNg" language="bash" />
+              </pk-code-block>
+            </div>
+          </hlm-tabs>
+        </div>
+        <p class="text-muted-foreground mt-3 text-sm leading-relaxed">
+          Skip the prompt with
+          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs"
+            >--components=message,prompt-input,markdown</code
+          >.
+        </p>
+      </section>
+
+      <section class="mt-10">
         <h2 class="text-xl font-semibold tracking-tight">Usage</h2>
         <p class="text-muted-foreground mt-2 text-sm leading-relaxed">
           Import the component into a standalone Angular component and use it:
@@ -262,6 +302,10 @@ ng g @spartan-ng/cli:ui`;
   protected readonly initBun = `bun x ng generate ngx-prompt-kit:init`;
   protected readonly initNpm = `npx ng generate ngx-prompt-kit:init`;
   protected readonly initNg = `ng generate ngx-prompt-kit:init`;
+
+  protected readonly uiBun = `bun x ng generate ngx-prompt-kit:ui`;
+  protected readonly uiNpm = `npx ng generate ngx-prompt-kit:ui`;
+  protected readonly uiNg = `ng generate ngx-prompt-kit:ui`;
 
   protected readonly ngGenerateBun = `bun x ng generate ngx-prompt-kit:message
 bun x ng generate ngx-prompt-kit:prompt-input
