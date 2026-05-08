@@ -4,8 +4,10 @@
   "scripts": {
     "ng": "ng",
     "gen:sources": "node scripts/generate-source-snapshots.js",
-    "prestart": "bun run gen:sources",
-    "prebuild": "bun run gen:sources",
+    "gen:sitemap": "node scripts/generate-sitemap.js",
+    "gen:seo": "bun run gen:sources && bun run gen:sitemap",
+    "prestart": "bun run gen:seo",
+    "prebuild": "bun run gen:seo",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
