@@ -106,4 +106,9 @@ export const BLOCKS: readonly BlockMeta[] = [
     title: 'Regenerate variants',
     description: 'Tone presets via prompt-suggestion chips swap the assistant message in place.',
   },
+  {
+    slug: 'ai-plan',
+    title: 'AI-driven plan',
+    description: 'Agent emits a pk-todo-list, ticks items off as it executes, auto-collapses on done.',
+  },
 ];

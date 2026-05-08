@@ -102,6 +102,10 @@ export const routes: Routes = [
           import('./blocks/regenerate-variants').then((m) => m.RegenerateVariantsBlock),
       },
       {
+        path: 'blocks/ai-plan',
+        loadComponent: () => import('./blocks/ai-plan').then((m) => m.AiPlanBlock),
+      },
+      {
         path: 'showcase/full-chat',
         loadComponent: () => import('./pages/full-chat').then((m) => m.FullChat),
       },
