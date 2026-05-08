@@ -176,6 +176,11 @@
       "factory": "./token-counter/index#tokenCounter",
       "schema": "./token-counter/schema.json"
     },
+    "todo-list": {
+      "description": "Add the todo-list component (ngx-prompt-kit original).",
+      "factory": "./todo-list/index#todoList",
+      "schema": "./todo-list/schema.json"
+    },
     "tool": {
       "description": "Add the tool component.",
       "factory": "./tool/index#tool",

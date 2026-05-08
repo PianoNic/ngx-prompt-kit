@@ -53,6 +53,7 @@ const HELM_REQUIREMENTS: Record<string, string[]> = {
   'message-actions-bar': ['button', 'tooltip'],
   'branch-nav': ['button'],
   'model-picker': ['button', 'dropdown-menu', 'badge'],
+  'todo-list': ['icon'],
 };
 
 function resolveProjectName(

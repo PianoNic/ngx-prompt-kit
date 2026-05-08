@@ -1,18 +1,15 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import {
-  lucideCheck,
-  lucideCircle,
   lucideKey,
   lucideRocket,
   lucideUserPlus,
 } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { PkChatEmptyImports, type ChatEmptySuggestion } from 'ngx-prompt-kit/chat-empty';
-import { PkStepsImports } from 'ngx-prompt-kit/steps';
+import { PkTodoListImports, type PkTodoItem } from 'ngx-prompt-kit/todo-list';
 
 @Component({
   selector: 'app-block-setup-tour',
@@ -21,19 +18,16 @@ import { PkStepsImports } from 'ngx-prompt-kit/steps';
     BlockPage,
     DocExample,
     HlmButton,
-    HlmIconImports,
     PkChatEmptyImports,
-    PkStepsImports,
+    PkTodoListImports,
   ],
-  providers: [
-    provideIcons({ lucideCheck, lucideCircle, lucideKey, lucideRocket, lucideUserPlus }),
-  ],
+  providers: [provideIcons({ lucideKey, lucideRocket, lucideUserPlus })],
   template: `
     <app-block-page
       title="Onboarding tour"
-      description="First-run experience for an AI app: hero with task suggestions and a progress timeline showing what's done and what's still to do. Click any task to mark it complete."
+      description="First-run experience for an AI app: hero with task suggestions and a pk-todo-list checklist. Click any task to mark it complete; the list auto-collapses when everything is done. The same component works for AI-driven todo plans — model emits items, toggles them as it works."
     >
-      <app-doc-example title="Hero + checklist" [code]="code">
+      <app-doc-example title="Hero + checklist with auto-collapse" [code]="code">
         <div class="flex w-full flex-col gap-6">
           <pk-chat-empty
             title="Welcome to ngx-prompt-kit"
@@ -43,37 +37,12 @@ import { PkStepsImports } from 'ngx-prompt-kit/steps';
           />
 
           <div class="mx-auto w-full max-w-md">
-            <pk-steps>
-              <pk-steps-trigger [leftIcon]="true">
-                <ng-icon
-                  leftIcon
-                  hlm
-                  size="xs"
-                  [name]="allDone() ? 'lucideCheck' : 'lucideCircle'"
-                />
-                <span>{{ doneCount() }} of {{ tasks.length }} setup tasks complete</span>
-              </pk-steps-trigger>
-              <pk-steps-content>
-                @for (t of tasks; track t.id) {
-                  <pk-steps-item>
-                    <button
-                      type="button"
-                      class="hover:bg-muted -mx-1 flex w-[calc(100%+0.5rem)] items-center justify-between rounded px-1 py-0.5 text-left"
-                      (click)="toggle(t.id)"
-                    >
-                      <span [class.line-through]="completed().has(t.id)">{{ t.label }}</span>
-                      <ng-icon
-                        hlm
-                        size="xs"
-                        [class.text-primary]="completed().has(t.id)"
-                        [class.text-muted-foreground]="!completed().has(t.id)"
-                        [name]="completed().has(t.id) ? 'lucideCheck' : 'lucideCircle'"
-                      />
-                    </button>
-                  </pk-steps-item>
-                }
-              </pk-steps-content>
-            </pk-steps>
+            <pk-todo-list
+              title="setup tasks"
+              [items]="items()"
+              (toggled)="onToggle($event)"
+              (allCompleted)="onAllDone()"
+            />
 
             @if (allDone()) {
               <div class="mt-4 flex justify-center">
@@ -87,11 +56,12 @@ import { PkStepsImports } from 'ngx-prompt-kit/steps';
   `,
 })
 export class SetupTourBlock {
-  protected readonly tasks = [
+  protected readonly items = signal<PkTodoItem[]>([
     { id: 'auth', label: 'Add your API key' },
     { id: 'pick', label: 'Pick a default model' },
-    { id: 'invite', label: 'Invite a teammate (optional)' },
-  ];
+    { id: 'invite', label: 'Invite a teammate', optional: true },
+  ]);
+  protected readonly allDone = signal(false);
 
   protected readonly suggestions: ChatEmptySuggestion[] = [
     { label: 'Add your API key', icon: 'lucideKey', prompt: 'auth' },
@@ -99,68 +69,62 @@ export class SetupTourBlock {
     { label: 'Invite a teammate', icon: 'lucideUserPlus', prompt: 'invite' },
   ];
 
-  protected readonly completed = signal(new Set<string>());
-
-  protected readonly doneCount = computed(() => this.completed().size);
-  protected readonly allDone = computed(() => this.doneCount() === this.tasks.length);
-
-  protected toggle(id: string): void {
-    this.completed.update((s) => {
-      const next = new Set(s);
-      next.has(id) ? next.delete(id) : next.add(id);
-      return next;
-    });
+  protected onToggle(item: PkTodoItem): void {
+    this.items.update((list) =>
+      list.map((it) => (it.id === item.id ? { ...it, done: !it.done } : it)),
+    );
   }
 
   protected onPick(s: ChatEmptySuggestion): void {
-    if (s.prompt) this.toggle(s.prompt);
+    if (s.prompt) {
+      this.items.update((list) =>
+        list.map((it) => (it.id === s.prompt ? { ...it, done: !it.done } : it)),
+      );
+    }
+  }
+
+  protected onAllDone(): void {
+    this.allDone.set(true);
   }
 
   protected reset(): void {
-    this.completed.set(new Set());
+    this.allDone.set(false);
+    this.items.update((list) => list.map((it) => ({ ...it, done: false })));
   }
 
   protected readonly code = `<pk-chat-empty
   title="Welcome to ngx-prompt-kit"
   subtitle="Three quick steps to get you streaming."
-  [suggestions]="setupSuggestions"
+  [suggestions]="suggestions"
   (suggestionPicked)="onPick($event)"
 />
 
-<pk-steps>
-  <pk-steps-trigger [leftIcon]="true">
-    <ng-icon leftIcon hlm size="xs"
-             [name]="allDone() ? 'lucideCheck' : 'lucideCircle'" />
-    <span>{{ doneCount() }} of {{ tasks.length }} setup tasks complete</span>
-  </pk-steps-trigger>
-  <pk-steps-content>
-    @for (t of tasks; track t.id) {
-      <pk-steps-item>
-        <button type="button" (click)="toggle(t.id)">
-          <span [class.line-through]="completed().has(t.id)">{{ t.label }}</span>
-          <ng-icon hlm size="xs"
-                   [name]="completed().has(t.id) ? 'lucideCheck' : 'lucideCircle'" />
-        </button>
-      </pk-steps-item>
-    }
-  </pk-steps-content>
-</pk-steps>
+<pk-todo-list
+  title="setup tasks"
+  [items]="items()"
+  (toggled)="onToggle($event)"
+  (allCompleted)="onAllDone()"
+/>
+
+@if (allDone()) {
+  <button hlmBtn type="button" (click)="reset()">Run again</button>
+}
 
 // Component
-protected readonly tasks = [
+protected readonly items = signal<PkTodoItem[]>([
   { id: 'auth', label: 'Add your API key' },
   { id: 'pick', label: 'Pick a default model' },
-  { id: 'invite', label: 'Invite a teammate (optional)' },
-];
-protected readonly completed = signal(new Set<string>());
-protected readonly doneCount = computed(() => this.completed().size);
-protected readonly allDone = computed(() => this.doneCount() === this.tasks.length);
+  { id: 'invite', label: 'Invite a teammate', optional: true },
+]);
 
-protected toggle(id: string): void {
-  this.completed.update(s => {
-    const next = new Set(s);
-    next.has(id) ? next.delete(id) : next.add(id);
-    return next;
-  });
-}`;
+// Toggle handler — works for both clicks and AI-driven updates
+protected onToggle(item: PkTodoItem): void {
+  this.items.update(list =>
+    list.map(it => it.id === item.id ? { ...it, done: !it.done } : it)
+  );
+}
+
+// Auto-collapses when allDone hits 100% (autoCollapseWhenDone defaults to true).
+// (allCompleted) emits once on the rising edge — wire it to a redirect, a
+// confetti burst, or in an agent context to "next step" branching.`;
 }
