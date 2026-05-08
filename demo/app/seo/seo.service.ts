@@ -6,6 +6,14 @@ import { filter } from 'rxjs/operators';
 import { SITE, metaForUrl } from './seo-data';
 
 /**
+ * The SSR/prerender bootstrap calls App's constructor before the router has
+ * settled on a real URL — we apply tags from `router.url` which is `'/'` at
+ * that point. That is fine for /, but on prerender the build harness re-runs
+ * the renderer per discovered route, so each emitted HTML still carries the
+ * matching <head>.
+ */
+
+/**
  * Listens to router navigation and rewrites the document <head> for the
  * active route — title, description, Open Graph, Twitter cards, canonical.
  * Pulls all values from the shared metaForUrl() map so the sitemap and the
