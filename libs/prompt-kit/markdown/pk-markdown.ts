@@ -130,8 +130,9 @@ export class PkMarkdown {
     });
 
     // Theme effect — content is settled when this fires (theme toggled by
-    // user gesture, not mid-stream), so skip the debounce. Diagrams only;
-    // KaTeX uses color:inherit and adapts without re-rendering.
+    // user gesture, not mid-stream), so skip the debounce. Re-highlights
+    // code blocks against the new theme, and re-renders diagrams when
+    // enabled. KaTeX uses color:inherit and adapts without re-rendering.
     let firstThemeRun = true;
     effect(() => {
       this.themeRev();
@@ -140,10 +141,12 @@ export class PkMarkdown {
         return;
       }
       if (!isPlatformBrowser(this.platformId)) return;
-      if (!this.enableDiagrams()) return;
       const el = this.contentEl()?.nativeElement;
       if (!el) return;
-      queueMicrotask(() => this.applyDiagrams(el));
+      queueMicrotask(() => this.rehighlightCodeBlocks(el));
+      if (this.enableDiagrams()) {
+        queueMicrotask(() => this.applyDiagrams(el));
+      }
     });
 
     // Watch documentElement.class for theme toggles. Same default detection
@@ -194,6 +197,10 @@ export class PkMarkdown {
 
         const wrapper = buildCodeBlockShell(lang);
         wrapper.dataset['enhanced'] = 'true';
+        // Store the source so the theme effect can re-highlight on dark/light
+        // toggle without re-parsing the markdown.
+        wrapper.dataset['codeSource'] = code;
+        wrapper.dataset['codeLang'] = lang;
 
         const body = wrapper.querySelector<HTMLElement>('.pk-code-body');
         if (body) {
@@ -223,6 +230,42 @@ export class PkMarkdown {
       }
     } catch {
       // Shiki missing or failed; fenced blocks stay as the escaped <pre><code> fallback
+    }
+  }
+
+  /**
+   * Re-highlight already-enhanced code blocks against the current theme.
+   * Cheaper than re-parsing the markdown — just reads the source from the
+   * dataset and swaps the highlighted <pre> in the body.
+   */
+  private async rehighlightCodeBlocks(el: HTMLElement): Promise<void> {
+    const blocks = el.querySelectorAll<HTMLElement>(
+      '.pk-code-block[data-enhanced="true"]',
+    );
+    if (blocks.length === 0) return;
+    try {
+      const { codeToHtml } = await import('shiki');
+      const isDark =
+        isPlatformBrowser(this.platformId) &&
+        document.documentElement.classList.contains('dark');
+      const theme = isDark ? 'dark-plus' : 'github-light';
+
+      for (const block of Array.from(blocks)) {
+        const code = block.dataset['codeSource'] ?? '';
+        const lang = block.dataset['codeLang'] ?? 'text';
+        const body = block.querySelector<HTMLElement>('.pk-code-body');
+        if (!body) continue;
+        try {
+          const html = await codeToHtml(code, { lang, theme });
+          const parsed = new DOMParser().parseFromString(html, 'text/html');
+          const pre = parsed.body.querySelector('pre');
+          if (pre) body.replaceChildren(pre);
+        } catch {
+          // unknown lang or shiki failure — leave the existing render in place
+        }
+      }
+    } catch {
+      // shiki failed to load; existing renders stay
     }
   }
 
