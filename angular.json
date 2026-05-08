@@ -17,6 +17,8 @@
           "builder": "@angular/build:application",
           "options": {
             "browser": "demo/main.ts",
+            "server": "demo/main.server.ts",
+            "outputMode": "static",
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
