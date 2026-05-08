@@ -1,6 +1,6 @@
 # <p align="center">ngx-prompt-kit</p>
 <p align="center">
-  <img src="https://raw.githubusercontent.com/PianoNic/ngx-prompt-kit/master/public/icon.svg" width="120" alt="ngx-prompt-kit logo">
+  <img src="https://raw.githubusercontent.com/PianoNic/ngx-prompt-kit/master/assets/icon.svg" width="120" alt="ngx-prompt-kit logo">
 </p>
 
 <p align="center">
