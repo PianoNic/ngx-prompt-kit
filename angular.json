@@ -21,7 +21,7 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "demo/public"
               }
             ],
             "styles": ["demo/styles.css", "node_modules/katex/dist/katex.min.css"]
