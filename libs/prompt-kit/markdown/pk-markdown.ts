@@ -61,21 +61,29 @@ export class PkMarkdown {
 
   private readonly md = computed<Marked>(() => {
     const m = new Marked({ breaks: true, gfm: true });
-    if (this.enableDiagrams()) {
-      m.use({
-        renderer: {
-          code(token: Tokens.Code): string | false {
-            if (token.lang === 'mermaid') {
-              const source = token.text;
-              const id = `pk-mermaid-${djb2(source)}`;
-              const escaped = escapeHtml(source);
-              return `<div class="pk-mermaid-container" data-mermaid-id="${id}" data-mermaid-source="${escaped}">${escaped}</div>`;
-            }
-            return false;
-          },
+    const enableDiagrams = this.enableDiagrams();
+    m.use({
+      renderer: {
+        code(token: Tokens.Code): string | false {
+          // Mermaid takes priority when enabled — emits its own placeholder
+          // that applyDiagrams() turns into an SVG.
+          if (enableDiagrams && token.lang === 'mermaid') {
+            const source = token.text;
+            const id = `pk-mermaid-${djb2(source)}`;
+            const escaped = escapeHtml(source);
+            return `<div class="pk-mermaid-container" data-mermaid-id="${id}" data-mermaid-source="${escaped}">${escaped}</div>`;
+          }
+          // Every other fenced block becomes a placeholder that
+          // applyCodeBlocks() upgrades to a Shiki-highlighted block with a
+          // language tag and a Copy button. The inner pre/code is the
+          // fallback shown until Shiki finishes loading (or if it fails).
+          const lang = (token.lang || 'text').trim() || 'text';
+          const langAttr = escapeHtml(lang);
+          const escaped = escapeHtml(token.text);
+          return `<div class="pk-code-container" data-code-lang="${langAttr}"><pre><code class="language-${langAttr}">${escaped}</code></pre></div>`;
         },
-      });
-    }
+      },
+    });
     return m;
   });
 
@@ -116,15 +124,15 @@ export class PkMarkdown {
       this.mermaidTheme();
 
       if (!isPlatformBrowser(this.platformId)) return;
-      if (!this.enableMath() && !this.enableDiagrams()) return;
 
       if (this.renderTimer) clearTimeout(this.renderTimer);
       this.renderTimer = setTimeout(() => this.runEnhancements(), 300);
     });
 
     // Theme effect — content is settled when this fires (theme toggled by
-    // user gesture, not mid-stream), so skip the debounce. Diagrams only;
-    // KaTeX uses color:inherit and adapts without re-rendering.
+    // user gesture, not mid-stream), so skip the debounce. Re-highlights
+    // code blocks against the new theme, and re-renders diagrams when
+    // enabled. KaTeX uses color:inherit and adapts without re-rendering.
     let firstThemeRun = true;
     effect(() => {
       this.themeRev();
@@ -133,10 +141,12 @@ export class PkMarkdown {
         return;
       }
       if (!isPlatformBrowser(this.platformId)) return;
-      if (!this.enableDiagrams()) return;
       const el = this.contentEl()?.nativeElement;
       if (!el) return;
-      queueMicrotask(() => this.applyDiagrams(el));
+      queueMicrotask(() => this.rehighlightCodeBlocks(el));
+      if (this.enableDiagrams()) {
+        queueMicrotask(() => this.applyDiagrams(el));
+      }
     });
 
     // Watch documentElement.class for theme toggles. Same default detection
@@ -157,11 +167,105 @@ export class PkMarkdown {
   private async runEnhancements(): Promise<void> {
     const el = this.contentEl()?.nativeElement;
     if (!el) return;
+    // Code blocks first — Shiki only loads when the rendered HTML actually
+    // contains fenced blocks, so prose-only content stays light.
+    await this.applyCodeBlocks(el);
     if (this.enableMath()) {
       await this.applyMath(el);
     }
     if (this.enableDiagrams()) {
       await this.applyDiagrams(el);
+    }
+  }
+
+  private async applyCodeBlocks(el: HTMLElement): Promise<void> {
+    const containers = el.querySelectorAll<HTMLElement>('.pk-code-container');
+    if (containers.length === 0) return;
+    try {
+      // Lazy-load: Shiki (~250KB) only enters the bundle when content has fenced blocks
+      const { codeToHtml } = await import('shiki');
+      const isDark =
+        isPlatformBrowser(this.platformId) &&
+        document.documentElement.classList.contains('dark');
+      const theme = isDark ? 'dark-plus' : 'github-light';
+
+      for (const container of Array.from(containers)) {
+        if (container.dataset['enhanced'] === 'true') continue;
+        const codeEl = container.querySelector('code');
+        const code = codeEl?.textContent ?? '';
+        const lang = container.dataset['codeLang'] || 'text';
+
+        const wrapper = buildCodeBlockShell(lang);
+        wrapper.dataset['enhanced'] = 'true';
+        // Store the source so the theme effect can re-highlight on dark/light
+        // toggle without re-parsing the markdown.
+        wrapper.dataset['codeSource'] = code;
+        wrapper.dataset['codeLang'] = lang;
+
+        const body = wrapper.querySelector<HTMLElement>('.pk-code-body');
+        if (body) {
+          let parsed: Document;
+          try {
+            const html = await codeToHtml(code, { lang, theme });
+            parsed = new DOMParser().parseFromString(html, 'text/html');
+          } catch {
+            // Plain fallback — build a <pre><code>{textContent}</code></pre>.
+            // No innerHTML; textContent escapes for us.
+            const pre = document.createElement('pre');
+            const codeNode = document.createElement('code');
+            codeNode.textContent = code;
+            pre.appendChild(codeNode);
+            body.appendChild(pre);
+            attachCopyHandler(wrapper, code);
+            container.replaceWith(wrapper);
+            continue;
+          }
+          // Shiki returns a single <pre> wrapper. Move it into the body.
+          const pre = parsed.body.querySelector('pre');
+          if (pre) body.appendChild(pre);
+        }
+
+        attachCopyHandler(wrapper, code);
+        container.replaceWith(wrapper);
+      }
+    } catch {
+      // Shiki missing or failed; fenced blocks stay as the escaped <pre><code> fallback
+    }
+  }
+
+  /**
+   * Re-highlight already-enhanced code blocks against the current theme.
+   * Cheaper than re-parsing the markdown — just reads the source from the
+   * dataset and swaps the highlighted <pre> in the body.
+   */
+  private async rehighlightCodeBlocks(el: HTMLElement): Promise<void> {
+    const blocks = el.querySelectorAll<HTMLElement>(
+      '.pk-code-block[data-enhanced="true"]',
+    );
+    if (blocks.length === 0) return;
+    try {
+      const { codeToHtml } = await import('shiki');
+      const isDark =
+        isPlatformBrowser(this.platformId) &&
+        document.documentElement.classList.contains('dark');
+      const theme = isDark ? 'dark-plus' : 'github-light';
+
+      for (const block of Array.from(blocks)) {
+        const code = block.dataset['codeSource'] ?? '';
+        const lang = block.dataset['codeLang'] ?? 'text';
+        const body = block.querySelector<HTMLElement>('.pk-code-body');
+        if (!body) continue;
+        try {
+          const html = await codeToHtml(code, { lang, theme });
+          const parsed = new DOMParser().parseFromString(html, 'text/html');
+          const pre = parsed.body.querySelector('pre');
+          if (pre) body.replaceChildren(pre);
+        } catch {
+          // unknown lang or shiki failure — leave the existing render in place
+        }
+      }
+    } catch {
+      // shiki failed to load; existing renders stay
     }
   }
 
@@ -260,6 +364,56 @@ function escapeHtml(s: string): string {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
+}
+
+/**
+ * Build the static chrome (header bar + body container) for an enhanced
+ * fenced-code block. Built with DOM APIs only so we never pass user-supplied
+ * text through innerHTML.
+ */
+function buildCodeBlockShell(lang: string): HTMLDivElement {
+  const wrapper = document.createElement('div');
+  wrapper.className =
+    'pk-code-block border-border bg-background my-3 overflow-hidden rounded-md border';
+
+  const header = document.createElement('div');
+  header.className =
+    'border-border bg-muted/40 text-muted-foreground flex items-center justify-between border-b px-3 py-1.5 text-[11px]';
+
+  const langSpan = document.createElement('span');
+  langSpan.className = 'font-mono uppercase tracking-wider';
+  langSpan.textContent = lang;
+  header.appendChild(langSpan);
+
+  const copyBtn = document.createElement('button');
+  copyBtn.type = 'button';
+  copyBtn.className =
+    'pk-code-copy hover:text-foreground inline-flex items-center gap-1 transition-colors';
+  copyBtn.textContent = 'Copy';
+  header.appendChild(copyBtn);
+
+  const body = document.createElement('div');
+  body.className =
+    'pk-code-body w-full overflow-x-auto text-[13px] [&>pre]:!m-0 [&>pre]:!bg-transparent [&>pre]:px-4 [&>pre]:py-3';
+
+  wrapper.appendChild(header);
+  wrapper.appendChild(body);
+  return wrapper;
+}
+
+function attachCopyHandler(wrapper: HTMLElement, code: string): void {
+  const btn = wrapper.querySelector<HTMLButtonElement>('.pk-code-copy');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    const writer = navigator.clipboard?.writeText(code);
+    if (!writer) return;
+    void writer.then(() => {
+      btn.textContent = 'Copied';
+      setTimeout(() => {
+        btn.textContent = 'Copy';
+      }, 1500);
+    });
+  });
 }
 
 function decodeHtml(s: string): string {

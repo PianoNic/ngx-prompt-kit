@@ -12,6 +12,7 @@ import {
   output,
   signal,
 } from '@angular/core';
+import { PkMarkdown } from '../markdown/pk-markdown';
 import { cn } from '../utils/cn';
 
 export type PkResponseStreamMode = 'typewriter' | 'fade';
@@ -26,8 +27,14 @@ interface Segment {
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   styleUrl: './pk-response-stream.css',
+  imports: [PkMarkdown],
   template: `
-    @if (mode() === 'typewriter') {
+    @if (markdown()) {
+      <!-- Markdown rendering re-parses the partial source on each tick.
+           Fade mode is not supported here — the per-segment animation can't
+           wrap individual nodes once the markdown turns into a tree. -->
+      <pk-markdown [class]="class()" [content]="displayedText()" />
+    } @else if (mode() === 'typewriter') {
       <div [class]="class()">{{ displayedText() }}</div>
     } @else {
       <div [class]="class()" [style.--pk-fade-duration]="fadeDurationMs() + 'ms'">
@@ -52,6 +59,12 @@ export class PkResponseStream {
   public readonly fadeDuration = input<number | undefined>(undefined);
   public readonly segmentDelay = input<number | undefined>(undefined);
   public readonly characterChunkSize = input<number | undefined>(undefined);
+  /**
+   * Render the revealed slice as markdown via pk-markdown. Forces typewriter
+   * cadence — fade mode is incompatible because markdown produces a node tree
+   * that can't be split into per-word fade segments.
+   */
+  public readonly markdown = input<boolean>(false);
   public readonly class = input<string>('');
   public readonly completed = output<void>();
 

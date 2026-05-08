@@ -34,7 +34,7 @@ export class PkPromptInput implements PromptInputState {
 
   protected readonly computedClass = computed(() =>
     cn(
-      'border-input bg-background cursor-text rounded-3xl border p-2 shadow-xs block',
+      'border-input bg-background cursor-text rounded-3xl border px-4 py-3 shadow-xs block min-w-0 overflow-hidden',
       this.disabled() && 'cursor-not-allowed opacity-60',
       this.class(),
     ),

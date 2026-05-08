@@ -12,8 +12,94 @@ export const routes: Routes = [
       },
       {
         path: 'blocks',
-        loadComponent: () => import('./pages/coming-soon').then((m) => m.ComingSoon),
-        data: { title: 'Blocks' },
+        loadComponent: () => import('./blocks/blocks-index').then((m) => m.BlocksIndex),
+      },
+      {
+        path: 'blocks/empty-state',
+        loadComponent: () => import('./blocks/empty-state').then((m) => m.EmptyStateBlock),
+      },
+      {
+        path: 'blocks/streaming-message',
+        loadComponent: () =>
+          import('./blocks/streaming-message').then((m) => m.StreamingMessageBlock),
+      },
+      {
+        path: 'blocks/tool-approval',
+        loadComponent: () => import('./blocks/tool-approval').then((m) => m.ToolApprovalBlock),
+      },
+      {
+        path: 'blocks/reasoning-pane',
+        loadComponent: () => import('./blocks/reasoning-pane').then((m) => m.ReasoningPaneBlock),
+      },
+      {
+        path: 'blocks/branch-edit',
+        loadComponent: () => import('./blocks/branch-edit').then((m) => m.BranchEditBlock),
+      },
+      {
+        path: 'blocks/attachment-compose',
+        loadComponent: () =>
+          import('./blocks/attachment-compose').then((m) => m.AttachmentComposeBlock),
+      },
+      {
+        path: 'blocks/sidebar-header',
+        loadComponent: () => import('./blocks/sidebar-header').then((m) => m.SidebarHeaderBlock),
+      },
+      {
+        path: 'blocks/source-citations',
+        loadComponent: () =>
+          import('./blocks/source-citations').then((m) => m.SourceCitationsBlock),
+      },
+      {
+        path: 'blocks/cost-meter',
+        loadComponent: () => import('./blocks/cost-meter').then((m) => m.CostMeterBlock),
+      },
+      {
+        path: 'blocks/system-retry',
+        loadComponent: () => import('./blocks/system-retry').then((m) => m.SystemRetryBlock),
+      },
+      {
+        path: 'blocks/chat-thread',
+        loadComponent: () => import('./blocks/chat-thread').then((m) => m.ChatThreadBlock),
+      },
+      {
+        path: 'blocks/model-marketplace',
+        loadComponent: () =>
+          import('./blocks/model-marketplace').then((m) => m.ModelMarketplaceBlock),
+      },
+      {
+        path: 'blocks/image-result',
+        loadComponent: () => import('./blocks/image-result').then((m) => m.ImageResultBlock),
+      },
+      {
+        path: 'blocks/voice-input',
+        loadComponent: () => import('./blocks/voice-input').then((m) => m.VoiceInputBlock),
+      },
+      {
+        path: 'blocks/code-review',
+        loadComponent: () => import('./blocks/code-review').then((m) => m.CodeReviewBlock),
+      },
+      {
+        path: 'blocks/setup-tour',
+        loadComponent: () => import('./blocks/setup-tour').then((m) => m.SetupTourBlock),
+      },
+      {
+        path: 'blocks/agent-task',
+        loadComponent: () => import('./blocks/agent-task').then((m) => m.AgentTaskBlock),
+      },
+      {
+        path: 'blocks/notification-stack',
+        loadComponent: () =>
+          import('./blocks/notification-stack').then((m) => m.NotificationStackBlock),
+      },
+      {
+        path: 'blocks/markdown-showcase',
+        loadComponent: () =>
+          import('./blocks/markdown-showcase').then((m) => m.MarkdownShowcaseBlock),
+      },
+      {
+        path: 'blocks/regenerate-variants',
+        loadComponent: () =>
+          import('./blocks/regenerate-variants').then((m) => m.RegenerateVariantsBlock),
       },
       {
         path: 'showcase/full-chat',
