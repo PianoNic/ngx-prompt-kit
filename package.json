@@ -10,8 +10,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build:lib": "node -e \"require('node:fs').rmSync('dist/ngx-prompt-kit',{recursive:true,force:true})\" && tsc -p projects/ngx-prompt-kit/tsconfig.json && bun run build:lib:assets",
-    "build:lib:assets": "copyfiles -u 3 \"projects/ngx-prompt-kit/src/collection.json\" \"projects/ngx-prompt-kit/src/**/schema.json\" \"projects/ngx-prompt-kit/src/**/files/**/*\" dist/ngx-prompt-kit/schematics && copyfiles -u 2 \"projects/ngx-prompt-kit/package.json\" \"projects/ngx-prompt-kit/README.md\" dist/ngx-prompt-kit",
+    "build:lib": "node -e \"require('node:fs').rmSync('dist/ngx-prompt-kit',{recursive:true,force:true})\" && tsc -p src/library/tsconfig.json && bun run build:lib:assets",
+    "build:lib:assets": "copyfiles -u 3 \"src/library/src/collection.json\" \"src/library/src/**/schema.json\" \"src/library/src/**/files/**/*\" dist/ngx-prompt-kit/schematics && copyfiles -u 2 \"src/library/package.json\" \"src/library/README.md\" dist/ngx-prompt-kit",
     "format": "prettier --write \"**/*.{ts,html,scss,css,md}\""
   },
   "private": true,
