@@ -10,7 +10,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build:lib": "node -e \"require('node:fs').rmSync('dist/ngx-prompt-kit',{recursive:true,force:true})\" && tsc -p projects/ngx-prompt-kit/tsconfig.json && bun run build:lib:assets",
+    "build:lib": "node -e \"require('node:fs').rmSync('dist/ngx-prompt-kit',{recursive:true,force:true})\" && tsc -p src/library/tsconfig.json && bun run build:lib:assets",
     "build:lib:assets": "node scripts/copy-schematic-assets.js",
     "format": "prettier --write \"**/*.{ts,html,scss,css,md}\""
   },

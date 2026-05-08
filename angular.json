@@ -10,13 +10,13 @@
       "projectType": "application",
       "schematics": {},
       "root": "",
-      "sourceRoot": "src",
+      "sourceRoot": "demo",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "browser": "src/main.ts",
+            "browser": "demo/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
@@ -24,7 +24,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.css", "node_modules/katex/dist/katex.min.css"]
+            "styles": ["demo/styles.css", "node_modules/katex/dist/katex.min.css"]
           },
           "configurations": {
             "production": {
