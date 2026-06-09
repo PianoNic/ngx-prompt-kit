@@ -125,6 +125,49 @@ import { PkResponseStream } from 'ngx-prompt-kit/response-stream';
         </div>
       </app-doc-example>
 
+      <app-doc-example
+        title="Adaptive pacing + finished handshake"
+        description="adaptive scales the reveal speed with the backlog: it types character-by-character while caught up with the stream and accelerates when chunks arrive faster than the reveal. Set done when the source stream ends and the component emits finished exactly once after the last character is revealed — the moment to swap in your final rendering (e.g. markdown) without cutting the animation short."
+        [code]="adaptiveCode"
+      >
+        <div class="flex w-full flex-col gap-3">
+          <div class="flex gap-2">
+            <button
+              hlmBtn
+              variant="default"
+              size="sm"
+              type="button"
+              [disabled]="adaptiveStreaming()"
+              (click)="startAdaptive()"
+            >
+              {{ adaptiveStreaming() ? 'Streaming…' : 'Start streaming' }}
+            </button>
+            <button
+              hlmBtn
+              variant="outline"
+              size="sm"
+              type="button"
+              [disabled]="adaptiveStreaming()"
+              (click)="resetAdaptive()"
+            >
+              Reset
+            </button>
+          </div>
+          @if (adaptiveFinished()) {
+            <p class="text-base leading-relaxed">{{ adaptiveText() }}</p>
+            <p class="text-muted-foreground text-sm">finished fired — swapped to the final static rendering.</p>
+          } @else {
+            <pk-response-stream
+              class="text-base leading-relaxed"
+              [textStream]="adaptiveText()"
+              [adaptive]="true"
+              [done]="adaptiveDone()"
+              (finished)="adaptiveFinished.set(true)"
+            />
+          }
+        </div>
+      </app-doc-example>
+
       <app-doc-install component="response-stream" />
       <app-doc-api [sections]="api" />
     </app-doc-page>
@@ -138,10 +181,32 @@ export class ResponseStreamDemo {
         { name: 'textStream', type: 'string', default: "''", description: 'The full text to reveal incrementally.' },
         { name: 'mode', type: '"typewriter" | "fade"', default: '"typewriter"', description: 'Reveal style.' },
         { name: 'speed', type: 'number', default: '20', description: '1–100. Higher = faster.' },
+        {
+          name: 'adaptive',
+          type: 'boolean',
+          default: 'false',
+          description:
+            'Scale reveal speed with the backlog: types character-by-character while caught up, accelerates when the stream outpaces the reveal, never dumps.',
+        },
+        {
+          name: 'done',
+          type: 'boolean',
+          default: 'false',
+          description: 'Tell the component the source stream has ended. Enables the finished output.',
+        },
         { name: 'fadeDuration', type: 'number', description: 'Override per-segment fade duration in ms.' },
         { name: 'segmentDelay', type: 'number', description: 'Override per-segment delay in ms.' },
         { name: 'characterChunkSize', type: 'number', description: 'Override characters revealed per frame.' },
-        { name: 'completed', type: 'output<void>', description: 'Fires when the stream finishes.' },
+        {
+          name: 'completed',
+          type: 'output<void>',
+          description: 'Fires each time the reveal catches up with the current textStream value.',
+        },
+        {
+          name: 'finished',
+          type: 'output<void>',
+          description: 'Fires exactly once when done is true and every received character has been revealed.',
+        },
         { name: 'class', type: 'string', description: 'Extra classes for the wrapper.' },
       ],
     },
@@ -155,6 +220,10 @@ export class ResponseStreamDemo {
   protected readonly streaming = signal(false);
   protected readonly bigText = signal('');
   protected readonly bigStreaming = signal(false);
+  protected readonly adaptiveText = signal('');
+  protected readonly adaptiveStreaming = signal(false);
+  protected readonly adaptiveDone = signal(false);
+  protected readonly adaptiveFinished = signal(false);
 
   private readonly liveChunks = [
     'Streaming responses ',
@@ -220,6 +289,29 @@ export class ResponseStreamDemo {
     setTimeout(tick, 1000);
   }
 
+  protected resetAdaptive(): void {
+    this.adaptiveText.set('');
+    this.adaptiveDone.set(false);
+    this.adaptiveFinished.set(false);
+  }
+
+  protected startAdaptive(): void {
+    this.resetAdaptive();
+    this.adaptiveStreaming.set(true);
+    let i = 0;
+    const tick = (): void => {
+      if (i >= this.bigChunks.length) {
+        this.adaptiveStreaming.set(false);
+        this.adaptiveDone.set(true);
+        return;
+      }
+      this.adaptiveText.update((v) => v + this.bigChunks[i]);
+      i++;
+      setTimeout(tick, 400);
+    };
+    setTimeout(tick, 400);
+  }
+
   protected readonly twCode = `<pk-response-stream
   [textStream]="text"
   mode="typewriter"
@@ -259,4 +351,24 @@ function appendParagraph(chunk: string) {
   mode="typewriter"
   [speed]="80"
 />`;
+
+  protected readonly adaptiveCode = `// Consumer accumulates chunks and flags the end of the stream
+const text = signal('');
+const done = signal(false);
+const finished = signal(false);
+
+// On each SSE/WebSocket chunk: text.update(v => v + chunk)
+// When the stream ends:        done.set(true)
+
+// Template — swap to the final rendering once \`finished\` fires
+@if (finished()) {
+  <div [innerHTML]="renderedMarkdown()"></div>
+} @else {
+  <pk-response-stream
+    [textStream]="text()"
+    [adaptive]="true"
+    [done]="done()"
+    (finished)="finished.set(true)"
+  />
+}`;
 }
