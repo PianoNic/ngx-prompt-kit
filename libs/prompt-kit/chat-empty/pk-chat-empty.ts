@@ -28,12 +28,15 @@ export interface ChatEmptySuggestion {
     </div>
 
     @if (suggestions().length > 0) {
-      <div class="mt-8 grid w-full max-w-3xl grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <!-- Flex-wrap with justify-center so 1-4 cards sit centered without
+           a stranded empty column. Sizing matches the previous 1/2/4-col
+           grid at the same breakpoints. -->
+      <div class="mt-8 flex w-full max-w-3xl flex-wrap justify-center gap-3">
         @for (s of suggestions(); track s.label) {
           <button
             type="button"
             (click)="suggestionPicked.emit(s)"
-            class="text-left"
+            class="basis-full text-left sm:basis-[calc(50%-0.375rem)] lg:basis-[170px]"
           >
             <div hlmCard class="hover:bg-accent h-full transition-colors">
               <div hlmCardContent class="flex flex-col gap-2">

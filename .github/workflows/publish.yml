@@ -22,7 +22,7 @@ jobs:
         run: |
           TAG="${{ github.event.release.tag_name }}"
           VERSION="${TAG#v}"
-          PKG="projects/ngx-prompt-kit/package.json"
+          PKG="src/library/package.json"
           CURRENT=$(node -p "require('./$PKG').version")
           if [ "$CURRENT" = "$VERSION" ]; then
             echo "Lib version already $VERSION, no bump needed."
@@ -34,7 +34,7 @@ jobs:
             git config user.name "$OWNER"
             git config user.email "${OWNER_ID}+${OWNER}@users.noreply.github.com"
             git add "$PKG"
-            git commit -m "chore(release): bump ngx-prompt-kit to $VERSION"
+            git commit -m "bump ngx-prompt-kit to $VERSION"
             git push origin master
           fi
 
