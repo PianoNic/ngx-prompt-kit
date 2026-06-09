@@ -49,11 +49,25 @@ export class PkResponseStream {
   public readonly textStream = input<string>('');
   public readonly mode = input<PkResponseStreamMode>('typewriter');
   public readonly speed = input<number>(20);
+  /**
+   * Adapt the reveal rate to the incoming throughput: crawl when caught up
+   * with the stream, accelerate when the backlog grows, so the animation
+   * never falls unboundedly behind a fast model.
+   */
+  public readonly adaptive = input<boolean>(false);
+  /**
+   * Tell the component the source stream has ended. Once `done` is true and
+   * every received character has been revealed, `finished` emits exactly once.
+   * Lets the consumer keep the animated view alive until the reveal catches up,
+   * then swap to its final rendering without cutting the animation short.
+   */
+  public readonly done = input<boolean>(false);
   public readonly fadeDuration = input<number | undefined>(undefined);
   public readonly segmentDelay = input<number | undefined>(undefined);
   public readonly characterChunkSize = input<number | undefined>(undefined);
   public readonly class = input<string>('');
   public readonly completed = output<void>();
+  public readonly finished = output<void>();
 
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   private readonly destroyRef = inject(DestroyRef);
@@ -62,6 +76,7 @@ export class PkResponseStream {
   protected readonly segments = signal<Segment[]>([]);
   private rafId: number | null = null;
   private lastEmittedComplete = '';
+  private finishedEmitted = false;
   /** The text we're animating toward. Updated live when textStream changes. */
   private targetText = '';
   /** How many characters we've revealed so far. The tick advances this. */
@@ -86,6 +101,11 @@ export class PkResponseStream {
       const text = this.textStream();
       this.start(text);
     });
+    // Covers done flipping true after the animation already caught up —
+    // markComplete() has already run and will not run again.
+    effect(() => {
+      if (this.done()) this.maybeEmitFinished();
+    });
     this.destroyRef.onDestroy(() => this.cancel());
   }
 
@@ -103,6 +123,15 @@ export class PkResponseStream {
   private getChunkSize(): number {
     const cs = this.characterChunkSize();
     if (typeof cs === 'number') return Math.max(1, cs);
+    if (this.adaptive()) {
+      // Chars per tick scale with how far the reveal lags behind the stream
+      // (targeting a ~4s drain of the current backlog), with a 1-char floor so
+      // the tail always types character by character and a cap so even huge
+      // responses still visibly write instead of dumping.
+      const backlog = this.targetText.length - this.displayedIndex;
+      const drainMs = 4000;
+      return Math.min(12, Math.max(1, Math.round((backlog * this.getProcessingDelay()) / drainMs)));
+    }
     const s = Math.min(100, Math.max(1, this.speed()));
     if (this.mode() === 'typewriter') {
       if (s < 25) return 1;
@@ -126,6 +155,7 @@ export class PkResponseStream {
       this.segments.set([]);
       this.targetText = '';
       this.displayedIndex = 0;
+      this.finishedEmitted = false;
       return;
     }
 
@@ -211,5 +241,13 @@ export class PkResponseStream {
       this.lastEmittedComplete = text;
       this.completed.emit();
     }
+    this.maybeEmitFinished();
+  }
+
+  private maybeEmitFinished(): void {
+    if (this.finishedEmitted || !this.done()) return;
+    if (this.displayedIndex < this.targetText.length) return;
+    this.finishedEmitted = true;
+    this.finished.emit();
   }
 }
