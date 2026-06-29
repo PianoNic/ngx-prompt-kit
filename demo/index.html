@@ -6,6 +6,21 @@
   <meta name="description" content="Angular components for AI chat interfaces. Composes with Spartan UI. Distributed via schematics — own the source.">
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+
+  <!-- Apply the persisted/system theme before first paint to avoid a light→dark
+       flash (FOUC). Mirrors ThemeService's key and system-preference logic. -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('ngx-prompt-kit-theme');
+        var theme =
+          stored || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        if (theme === 'dark') document.documentElement.classList.add('dark');
+      } catch (e) {}
+    })();
+  </script>
+
   <meta name="theme-color" content="#0A0A0A" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#FAFAFA" media="(prefers-color-scheme: dark)">
   <meta name="author" content="PianoNic">
