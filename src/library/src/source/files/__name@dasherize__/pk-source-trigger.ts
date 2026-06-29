@@ -16,13 +16,7 @@ import { SOURCE_STATE } from './source.state';
       [class]="computedClass()"
     >
       @if (showFavicon()) {
-        <img
-          [src]="favicon()"
-          alt="favicon"
-          width="14"
-          height="14"
-          class="size-3.5 rounded-full"
-        />
+        <img [src]="favicon()" alt="favicon" width="14" height="14" class="size-3.5 rounded-full" />
       }
       <span class="truncate tabular-nums text-center font-normal">{{ resolvedLabel() }}</span>
     </a>

@@ -101,7 +101,7 @@ export class BranchEditBlock {
 
   protected readonly branches = [
     'signal() holds writable state; computed() derives a read-only value from one or more signals and re-evaluates lazily when its dependencies change.',
-    "computed() caches its last result and only recomputes when one of the signals it reads from changes. Reading the computed value twice in a row hits the cache.",
+    'computed() caches its last result and only recomputes when one of the signals it reads from changes. Reading the computed value twice in a row hits the cache.',
     'Think of signal() as a writable cell and computed() as a formula in a spreadsheet — the formula updates automatically when the cells it reads change.',
   ];
 

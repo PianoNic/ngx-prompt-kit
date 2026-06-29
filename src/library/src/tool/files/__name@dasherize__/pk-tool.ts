@@ -34,11 +34,7 @@ import {
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { cn } from '../utils/cn';
 
-export type ToolState =
-  | 'input-streaming'
-  | 'input-available'
-  | 'output-available'
-  | 'output-error';
+export type ToolState = 'input-streaming' | 'input-available' | 'output-available' | 'output-error';
 
 export interface ToolPart {
   type: string;
@@ -130,7 +126,9 @@ const BADGE: Record<ToolState, BadgeStyle> = {
             @if (toolPart().output; as out) {
               <div>
                 <h4 class="text-muted-foreground mb-2 text-sm font-medium">Output</h4>
-                <div class="bg-background max-h-60 overflow-auto rounded border p-2 font-mono text-sm">
+                <div
+                  class="bg-background max-h-60 overflow-auto rounded border p-2 font-mono text-sm"
+                >
                   <pre class="whitespace-pre-wrap">{{ formatValue(out) }}</pre>
                 </div>
               </div>
@@ -139,7 +137,9 @@ const BADGE: Record<ToolState, BadgeStyle> = {
             @if (toolPart().state === 'output-error' && toolPart().errorText) {
               <div>
                 <h4 class="mb-2 text-sm font-medium text-red-500">Error</h4>
-                <div class="bg-background rounded border border-red-200 p-2 text-sm dark:border-red-950 dark:bg-red-900/20">
+                <div
+                  class="bg-background rounded border border-red-200 p-2 text-sm dark:border-red-950 dark:bg-red-900/20"
+                >
                   {{ toolPart().errorText }}
                 </div>
               </div>
@@ -200,8 +200,8 @@ export class PkTool implements AfterViewInit {
     cn('border-border mt-3 overflow-hidden rounded-lg border', this.class()),
   );
 
-  protected readonly contentWrapperClass = computed(() =>
-    'overflow-hidden transition-[max-height] duration-150 ease-out',
+  protected readonly contentWrapperClass = computed(
+    () => 'overflow-hidden transition-[max-height] duration-150 ease-out',
   );
 
   protected readonly iconName = computed(() => {

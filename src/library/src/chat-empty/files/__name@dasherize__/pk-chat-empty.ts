@@ -31,9 +31,7 @@ export interface ChatEmptySuggestion {
       <!-- Flex-wrap with justify-center so 1-4 cards sit centered without
            a stranded empty column. Sizing matches the previous 1/2/4-col
            grid at the same breakpoints. -->
-      <div
-        class="mt-8 flex w-full max-w-3xl flex-wrap justify-center gap-3"
-      >
+      <div class="mt-8 flex w-full max-w-3xl flex-wrap justify-center gap-3">
         @for (s of suggestions(); track s.label) {
           <button
             type="button"

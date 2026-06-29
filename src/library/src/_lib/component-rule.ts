@@ -66,9 +66,7 @@ function resolveProjectName(
   // Fallback: first project in the workspace (Angular 17+ removed defaultProject).
   const first = workspace.projects.keys().next();
   if (first.done) {
-    throw new SchematicsException(
-      'No Angular project specified and none found in angular.json.',
-    );
+    throw new SchematicsException('No Angular project specified and none found in angular.json.');
   }
   return first.value;
 }
@@ -87,9 +85,7 @@ export function buildComponent(spec: ComponentSpec): (opts: ComponentSchema) => 
 
       const helmReqs = HELM_REQUIREMENTS[spec.name];
       if (helmReqs) {
-        context.logger.info(
-          `ℹ  ${spec.name} requires Spartan helm: ${helmReqs.join(', ')}`,
-        );
+        context.logger.info(`ℹ  ${spec.name} requires Spartan helm: ${helmReqs.join(', ')}`);
         context.logger.info(
           `   Install with: ng g @spartan-ng/cli:ui   (select ${helmReqs.join(', ')})`,
         );

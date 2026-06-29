@@ -67,12 +67,8 @@ const TEXT_SIZE: Record<LoaderSize, string> = {
                   (size() === 'sm' ? '10px' : size() === 'lg' ? '14px' : '12px')
                 "
                 [style.transform]="'rotate(' + i * 30 + 'deg)'"
-                [style.height]="
-                  size() === 'sm' ? '6px' : size() === 'lg' ? '10px' : '8px'
-                "
-                [style.width]="
-                  size() === 'sm' ? '1.5px' : size() === 'lg' ? '2.5px' : '2px'
-                "
+                [style.height]="size() === 'sm' ? '6px' : size() === 'lg' ? '10px' : '8px'"
+                [style.width]="size() === 'sm' ? '1.5px' : size() === 'lg' ? '2.5px' : '2px'"
                 [style.opacity]="0"
                 [style.animation]="'spinner-fade 1.2s linear infinite'"
                 [style.animationDelay]="i * 0.1 + 's'"
@@ -91,9 +87,7 @@ const TEXT_SIZE: Record<LoaderSize, string> = {
       }
       @case ('pulse-dot') {
         <div
-          [class]="
-            cn('bg-primary rounded-full', pulseDotSize(), class())
-          "
+          [class]="cn('bg-primary rounded-full', pulseDotSize(), class())"
           [style.animation]="'pulse-dot 1.2s ease-in-out infinite'"
         ></div>
       }
@@ -161,16 +155,8 @@ const TEXT_SIZE: Record<LoaderSize, string> = {
       }
       @case ('text-shimmer') {
         <div
-          [class]="
-            cn(
-              'bg-clip-text font-medium text-transparent',
-              TEXT_SIZE[size()],
-              class()
-            )
-          "
-          [style.background-image]="
-            'linear-gradient(to right, var(--muted-foreground) 40%, var(--foreground) 60%, var(--muted-foreground) 80%)'
-          "
+          [class]="cn('bg-clip-text font-medium text-transparent', TEXT_SIZE[size()], class())"
+          [style.background-image]="'linear-gradient(to right, var(--muted-foreground) 40%, var(--foreground) 60%, var(--muted-foreground) 80%)'"
           [style.background-size]="'200% auto'"
           [style.-webkit-background-clip]="'text'"
           [style.animation]="'shimmer 4s infinite linear'"
@@ -187,9 +173,7 @@ const TEXT_SIZE: Record<LoaderSize, string> = {
             @for (i of three; track i) {
               <span
                 class="text-primary"
-                [style.animation]="
-                  'loading-dots 1.4s infinite ' + (0.2 + i * 0.2) + 's'
-                "
+                [style.animation]="'loading-dots 1.4s infinite ' + (0.2 + i * 0.2) + 's'"
                 >.</span
               >
             }

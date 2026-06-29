@@ -11,10 +11,7 @@ import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { PkMessageImports } from 'ngx-prompt-kit/message';
 import { PkResponseStream } from 'ngx-prompt-kit/response-stream';
-import {
-  PkStreamControlsImports,
-  type StreamControlsState,
-} from 'ngx-prompt-kit/stream-controls';
+import { PkStreamControlsImports, type StreamControlsState } from 'ngx-prompt-kit/stream-controls';
 
 const FULL_RESPONSE = `Sure — here's a small \`computed()\` example.
 
@@ -65,11 +62,7 @@ Want me to show \`effect()\` next?`;
           </pk-message>
 
           <div class="ml-11 flex">
-            <pk-stream-controls
-              [state]="state()"
-              (stop)="stop()"
-              (regenerate)="start()"
-            />
+            <pk-stream-controls [state]="state()" (stop)="stop()" (regenerate)="start()" />
           </div>
         </div>
       </app-doc-example>

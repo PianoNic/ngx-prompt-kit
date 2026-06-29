@@ -11,7 +11,5 @@ import { cn } from '../utils/cn';
 })
 export class PkPromptInputActions {
   public readonly class = input<string>('');
-  protected readonly computedClass = computed(() =>
-    cn('flex items-center gap-2', this.class()),
-  );
+  protected readonly computedClass = computed(() => cn('flex items-center gap-2', this.class()));
 }

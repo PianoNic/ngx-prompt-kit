@@ -46,15 +46,10 @@ export class PkTextShimmer {
   public readonly spread = input<number>(20);
   public readonly class = input<string>('');
 
-  private readonly clampedSpread = computed(() =>
-    Math.min(Math.max(this.spread(), 5), 45),
-  );
+  private readonly clampedSpread = computed(() => Math.min(Math.max(this.spread(), 5), 45));
 
   protected readonly computedClass = computed(() =>
-    cn(
-      'inline-block bg-clip-text font-medium text-transparent',
-      this.class(),
-    ),
+    cn('inline-block bg-clip-text font-medium text-transparent', this.class()),
   );
 
   protected readonly backgroundImage = computed(() => {
@@ -62,7 +57,5 @@ export class PkTextShimmer {
     return `linear-gradient(to right, var(--muted-foreground) ${50 - s}%, var(--foreground) 50%, var(--muted-foreground) ${50 + s}%)`;
   });
 
-  protected readonly animation = computed(
-    () => `shimmer ${this.duration()}s infinite linear`,
-  );
+  protected readonly animation = computed(() => `shimmer ${this.duration()}s infinite linear`);
 }

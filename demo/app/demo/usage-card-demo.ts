@@ -194,15 +194,56 @@ export class UsageCardDemo {
           description:
             'ring: SVG arc wrapping the avatar (most compact). inline: sidebar header row with bar + readout. card: standalone hlm-card with label, bar, count, optional top-up.',
         },
-        { name: 'avatar', type: 'string?', description: 'Image URL or data URI; falls back to initials.' },
-        { name: 'name', type: 'string?', description: 'Display name. Drives initials fallback when avatar is absent.' },
-        { name: 'sublabel', type: 'string?', description: 'Smaller muted line under name — plan tier, reset window, etc.' },
-        { name: 'label', type: 'string', default: '"Usage"', description: 'Used in card mode header, tooltip, and aria-label.' },
-        { name: 'unit', type: 'string', default: '"tokens"', description: 'Trailing unit when the bar is hidden (limit unset).' },
-        { name: 'showPercentage', type: 'boolean', default: 'true', description: 'Append "· N%" to the readout.' },
-        { name: 'locale', type: 'string?', description: 'BCP-47 locale for Intl.NumberFormat. Defaults to runtime locale.' },
-        { name: 'ringSize', type: 'number', default: '40', description: 'Ring + avatar diameter in px (ring mode only).' },
-        { name: 'ringStroke', type: 'number', default: '2.5', description: 'Ring stroke width in px (ring mode only).' },
+        {
+          name: 'avatar',
+          type: 'string?',
+          description: 'Image URL or data URI; falls back to initials.',
+        },
+        {
+          name: 'name',
+          type: 'string?',
+          description: 'Display name. Drives initials fallback when avatar is absent.',
+        },
+        {
+          name: 'sublabel',
+          type: 'string?',
+          description: 'Smaller muted line under name — plan tier, reset window, etc.',
+        },
+        {
+          name: 'label',
+          type: 'string',
+          default: '"Usage"',
+          description: 'Used in card mode header, tooltip, and aria-label.',
+        },
+        {
+          name: 'unit',
+          type: 'string',
+          default: '"tokens"',
+          description: 'Trailing unit when the bar is hidden (limit unset).',
+        },
+        {
+          name: 'showPercentage',
+          type: 'boolean',
+          default: 'true',
+          description: 'Append "· N%" to the readout.',
+        },
+        {
+          name: 'locale',
+          type: 'string?',
+          description: 'BCP-47 locale for Intl.NumberFormat. Defaults to runtime locale.',
+        },
+        {
+          name: 'ringSize',
+          type: 'number',
+          default: '40',
+          description: 'Ring + avatar diameter in px (ring mode only).',
+        },
+        {
+          name: 'ringStroke',
+          type: 'number',
+          default: '2.5',
+          description: 'Ring stroke width in px (ring mode only).',
+        },
         {
           name: 'topUpLabel',
           type: 'string | null',
@@ -219,7 +260,8 @@ export class UsageCardDemo {
         {
           name: 'topUpClicked',
           type: '() => void',
-          description: 'Fires when the Top-up button is clicked. Only emits if topUpLabel is set (button is rendered).',
+          description:
+            'Fires when the Top-up button is clicked. Only emits if topUpLabel is set (button is rendered).',
         },
       ],
     },

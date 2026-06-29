@@ -21,7 +21,14 @@ import { PkResponseStream } from 'ngx-prompt-kit/response-stream';
         [code]="twCode"
       >
         <div class="w-full">
-          <button hlmBtn variant="outline" size="sm" type="button" class="mb-4" (click)="restart('tw')">
+          <button
+            hlmBtn
+            variant="outline"
+            size="sm"
+            type="button"
+            class="mb-4"
+            (click)="restart('tw')"
+          >
             Restart
           </button>
           <pk-response-stream
@@ -39,7 +46,14 @@ import { PkResponseStream } from 'ngx-prompt-kit/response-stream';
         [code]="fadeCode"
       >
         <div class="w-full">
-          <button hlmBtn variant="outline" size="sm" type="button" class="mb-4" (click)="restart('fade')">
+          <button
+            hlmBtn
+            variant="outline"
+            size="sm"
+            type="button"
+            class="mb-4"
+            (click)="restart('fade')"
+          >
             Restart
           </button>
           <pk-response-stream
@@ -155,7 +169,9 @@ import { PkResponseStream } from 'ngx-prompt-kit/response-stream';
           </div>
           @if (adaptiveFinished()) {
             <p class="text-base leading-relaxed">{{ adaptiveText() }}</p>
-            <p class="text-muted-foreground text-sm">finished fired — swapped to the final static rendering.</p>
+            <p class="text-muted-foreground text-sm">
+              finished fired — swapped to the final static rendering.
+            </p>
           } @else {
             <pk-response-stream
               class="text-base leading-relaxed"
@@ -178,8 +194,18 @@ export class ResponseStreamDemo {
     {
       name: 'PkResponseStream',
       props: [
-        { name: 'textStream', type: 'string', default: "''", description: 'The full text to reveal incrementally.' },
-        { name: 'mode', type: '"typewriter" | "fade"', default: '"typewriter"', description: 'Reveal style.' },
+        {
+          name: 'textStream',
+          type: 'string',
+          default: "''",
+          description: 'The full text to reveal incrementally.',
+        },
+        {
+          name: 'mode',
+          type: '"typewriter" | "fade"',
+          default: '"typewriter"',
+          description: 'Reveal style.',
+        },
         { name: 'speed', type: 'number', default: '20', description: '1–100. Higher = faster.' },
         {
           name: 'adaptive',
@@ -192,11 +218,20 @@ export class ResponseStreamDemo {
           name: 'done',
           type: 'boolean',
           default: 'false',
-          description: 'Tell the component the source stream has ended. Enables the finished output.',
+          description:
+            'Tell the component the source stream has ended. Enables the finished output.',
         },
-        { name: 'fadeDuration', type: 'number', description: 'Override per-segment fade duration in ms.' },
+        {
+          name: 'fadeDuration',
+          type: 'number',
+          description: 'Override per-segment fade duration in ms.',
+        },
         { name: 'segmentDelay', type: 'number', description: 'Override per-segment delay in ms.' },
-        { name: 'characterChunkSize', type: 'number', description: 'Override characters revealed per frame.' },
+        {
+          name: 'characterChunkSize',
+          type: 'number',
+          description: 'Override characters revealed per frame.',
+        },
         {
           name: 'completed',
           type: 'output<void>',
@@ -205,7 +240,8 @@ export class ResponseStreamDemo {
         {
           name: 'finished',
           type: 'output<void>',
-          description: 'Fires exactly once when done is true and every received character has been revealed.',
+          description:
+            'Fires exactly once when done is true and every received character has been revealed.',
         },
         { name: 'class', type: 'string', description: 'Extra classes for the wrapper.' },
       ],

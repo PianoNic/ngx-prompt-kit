@@ -1,12 +1,5 @@
 // ngx-prompt-kit original — not part of ibelick/prompt-kit
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  effect,
-  input,
-  output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, input, output } from '@angular/core';
 import { cn } from '../utils/cn';
 
 export type CostDisplayMode = 'compact' | 'detailed' | 'session-summary';
@@ -32,7 +25,10 @@ type ThresholdState = 'normal' | 'warn' | 'danger' | 'over';
     } @else {
       <span [class]="primaryClass()">{{ formattedTotal() }}</span>
       @if (effectiveBreakdown()) {
-        <span class="text-muted-foreground ml-1 tabular-nums" [class.text-xs]="display() !== 'detailed'">
+        <span
+          class="text-muted-foreground ml-1 tabular-nums"
+          [class.text-xs]="display() !== 'detailed'"
+        >
           {{ breakdownText() }}
         </span>
       }
