@@ -119,8 +119,7 @@ export const routes: Routes = [
       },
       {
         path: 'components/message-edit',
-        loadComponent: () =>
-          import('./demo/message-edit-demo').then((m) => m.MessageEditDemo),
+        loadComponent: () => import('./demo/message-edit-demo').then((m) => m.MessageEditDemo),
       },
       {
         path: 'components/message-actions-bar',
@@ -129,23 +128,19 @@ export const routes: Routes = [
       },
       {
         path: 'components/model-picker',
-        loadComponent: () =>
-          import('./demo/model-picker-demo').then((m) => m.ModelPickerDemo),
+        loadComponent: () => import('./demo/model-picker-demo').then((m) => m.ModelPickerDemo),
       },
       {
         path: 'components/model-list',
-        loadComponent: () =>
-          import('./demo/model-list-demo').then((m) => m.ModelListDemo),
+        loadComponent: () => import('./demo/model-list-demo').then((m) => m.ModelListDemo),
       },
       {
         path: 'components/model-browser',
-        loadComponent: () =>
-          import('./demo/model-browser-demo').then((m) => m.ModelBrowserDemo),
+        loadComponent: () => import('./demo/model-browser-demo').then((m) => m.ModelBrowserDemo),
       },
       {
         path: 'components/usage-card',
-        loadComponent: () =>
-          import('./demo/usage-card-demo').then((m) => m.UsageCardDemo),
+        loadComponent: () => import('./demo/usage-card-demo').then((m) => m.UsageCardDemo),
       },
       {
         path: 'components/markdown',
@@ -157,8 +152,7 @@ export const routes: Routes = [
       },
       {
         path: 'components/prompt-input',
-        loadComponent: () =>
-          import('./demo/prompt-input-demo').then((m) => m.PromptInputDemo),
+        loadComponent: () => import('./demo/prompt-input-demo').then((m) => m.PromptInputDemo),
       },
       {
         path: 'components/response-stream',
@@ -171,8 +165,7 @@ export const routes: Routes = [
       },
       {
         path: 'components/chat-container',
-        loadComponent: () =>
-          import('./demo/chat-container-demo').then((m) => m.ChatContainerDemo),
+        loadComponent: () => import('./demo/chat-container-demo').then((m) => m.ChatContainerDemo),
       },
       {
         path: 'components/chat-empty',
@@ -185,13 +178,11 @@ export const routes: Routes = [
       },
       {
         path: 'components/cost-display',
-        loadComponent: () =>
-          import('./demo/cost-display-demo').then((m) => m.CostDisplayDemo),
+        loadComponent: () => import('./demo/cost-display-demo').then((m) => m.CostDisplayDemo),
       },
       {
         path: 'components/scroll-button',
-        loadComponent: () =>
-          import('./demo/chat-container-demo').then((m) => m.ChatContainerDemo),
+        loadComponent: () => import('./demo/chat-container-demo').then((m) => m.ChatContainerDemo),
       },
       {
         path: 'components/prompt-suggestion',
@@ -200,8 +191,7 @@ export const routes: Routes = [
       },
       {
         path: 'components/file-upload',
-        loadComponent: () =>
-          import('./demo/file-upload-demo').then((m) => m.FileUploadDemo),
+        loadComponent: () => import('./demo/file-upload-demo').then((m) => m.FileUploadDemo),
       },
       {
         path: 'components/reasoning',
@@ -217,13 +207,11 @@ export const routes: Routes = [
       },
       {
         path: 'components/token-counter',
-        loadComponent: () =>
-          import('./demo/token-counter-demo').then((m) => m.TokenCounterDemo),
+        loadComponent: () => import('./demo/token-counter-demo').then((m) => m.TokenCounterDemo),
       },
       {
         path: 'components/system-message',
-        loadComponent: () =>
-          import('./demo/system-message-demo').then((m) => m.SystemMessageDemo),
+        loadComponent: () => import('./demo/system-message-demo').then((m) => m.SystemMessageDemo),
       },
       {
         path: 'components/steps',
@@ -244,8 +232,7 @@ export const routes: Routes = [
       },
       {
         path: 'components/feedback-bar',
-        loadComponent: () =>
-          import('./demo/feedback-bar-demo').then((m) => m.FeedbackBarDemo),
+        loadComponent: () => import('./demo/feedback-bar-demo').then((m) => m.FeedbackBarDemo),
       },
       {
         path: 'components/approval',
@@ -267,4 +254,5 @@ export const routes: Routes = [
       },
     ],
   },
+  { path: '**', redirectTo: '' },
 ];
