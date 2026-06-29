@@ -49,7 +49,7 @@ const fmt = new Intl.NumberFormat();
       } @else {
         <span [class]="textClass()">{{ primaryText() }}</span>
         @if (secondaryText(); as s) {
-          <span class="text-muted-foreground ml-1 tabular-nums" [class.text-xs]="display() !== 'footer'" [class.text-\[10px\]]="display() === 'footer'">{{ s }}</span>
+          <span class="text-muted-foreground ml-1 tabular-nums" [class.text-xs]="display() !== 'footer'" [class.text-[10px]]="display() === 'footer'">{{ s }}</span>
         }
       }
     }
