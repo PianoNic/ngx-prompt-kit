@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "PromptKitStreamingMessageSchema",
+  "title": "Add the streaming-message helper",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "The Angular project to add the helper to.",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "path": {
+      "type": "string",
+      "format": "path",
+      "description": "Path where the helper is generated. Defaults to libs/prompt-kit."
+    }
+  },
+  "required": []
+}

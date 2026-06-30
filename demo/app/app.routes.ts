@@ -260,6 +260,11 @@ export const routes: Routes = [
         path: 'utilities/streaming',
         loadComponent: () => import('./demo/streaming-demo').then((m) => m.StreamingDemo),
       },
+      {
+        path: 'utilities/streaming-message',
+        loadComponent: () =>
+          import('./demo/streaming-message-demo').then((m) => m.StreamingMessageDemo),
+      },
     ],
   },
   { path: '**', redirectTo: '' },

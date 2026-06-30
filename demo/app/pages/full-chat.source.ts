@@ -12,9 +12,7 @@ export const FULL_CHAT_HTML_SOURCE = `<hlm-tabs tab="preview" class="mx-auto fle
       class="border-border bg-background flex h-full flex-col overflow-hidden rounded-lg border md:flex-row"
     >
       <!-- Conversation sidebar -->
-      <aside
-        class="border-border hidden h-full min-h-0 w-64 shrink-0 flex-col border-r md:flex"
-      >
+      <aside class="border-border hidden h-full min-h-0 w-64 shrink-0 flex-col border-r md:flex">
         <div class="border-border flex items-center justify-between border-b px-3 py-2">
           <span class="text-foreground text-sm font-medium">Conversations</span>
           <button
@@ -32,12 +30,7 @@ export const FULL_CHAT_HTML_SOURCE = `<hlm-tabs tab="preview" class="mx-auto fle
           <div
             class="bg-muted/40 focus-within:ring-ring flex items-center gap-2 rounded-md px-2 focus-within:ring-2"
           >
-            <ng-icon
-              hlm
-              size="xs"
-              name="lucideSearch"
-              class="text-muted-foreground shrink-0"
-            />
+            <ng-icon hlm size="xs" name="lucideSearch" class="text-muted-foreground shrink-0" />
             <input
               type="search"
               [(ngModel)]="searchQueryInput"
@@ -127,11 +120,7 @@ export const FULL_CHAT_HTML_SOURCE = `<hlm-tabs tab="preview" class="mx-auto fle
       <section class="flex h-full min-h-0 min-w-0 flex-1 flex-col">
         <!-- Header -->
         <header class="border-border flex items-center justify-between gap-3 border-b px-4 py-2">
-          <pk-model-picker
-            [compact]="true"
-            [models]="models"
-            [(selectedId)]="selectedModelId"
-          />
+          <pk-model-picker [compact]="true" [models]="models" [(selectedId)]="selectedModelId" />
           <span class="text-muted-foreground truncate text-xs">
             {{ currentConvoTitle() }}
           </span>
@@ -181,10 +170,7 @@ export const FULL_CHAT_HTML_SOURCE = `<hlm-tabs tab="preview" class="mx-auto fle
                         />
                       </pk-message-content>
                     } @else {
-                      <pk-message-content
-                        [markdown]="m.markdown === true"
-                        [content]="m.content"
-                      />
+                      <pk-message-content [markdown]="m.markdown === true" [content]="m.content" />
                     }
                   </pk-message>
                   @if (!m.streaming) {

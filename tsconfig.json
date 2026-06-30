@@ -72,6 +72,7 @@
       "@spartan-ng/helm/utils": ["./libs/ui/utils/src/index.ts"],
       "ngx-prompt-kit/utils": ["./libs/prompt-kit/utils"],
       "ngx-prompt-kit/streaming": ["./libs/prompt-kit/streaming"],
+      "ngx-prompt-kit/streaming-message": ["./libs/prompt-kit/streaming-message"],
       "ngx-prompt-kit/message": ["./libs/prompt-kit/message"],
       "ngx-prompt-kit/markdown": ["./libs/prompt-kit/markdown"],
       "ngx-prompt-kit/code-block": ["./libs/prompt-kit/code-block"],
