@@ -28,6 +28,9 @@ export interface ComponentSpec {
   name: string;
   /** Chain the `utils` schematic before laying down templates. */
   needsUtils?: boolean;
+  /** Other ngx-prompt-kit components this one composes; their schematics are
+   *  chained first so the imported siblings exist in the consumer's project. */
+  needsComponents?: string[];
   /** Extra runtime npm deps to add to the consumer's package.json. */
   extraDeps?: Record<string, string>;
 }
@@ -120,6 +123,14 @@ export function buildComponent(spec: ComponentSpec): (opts: ComponentSchema) => 
       if (spec.needsUtils) {
         rules.push(
           externalSchematic('ngx-prompt-kit', 'utils', {
+            project: projectName,
+            path: targetPath,
+          }),
+        );
+      }
+      for (const dep of spec.needsComponents ?? []) {
+        rules.push(
+          externalSchematic('ngx-prompt-kit', dep, {
             project: projectName,
             path: targetPath,
           }),
