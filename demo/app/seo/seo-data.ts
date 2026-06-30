@@ -77,6 +77,7 @@ export const ALL_PAGE_PATHS: readonly string[] = [
   ...Object.keys(COMPONENT_TITLES).map((slug) => `/components/${slug}`),
   '/utilities/streaming',
   '/utilities/streaming-message',
+  '/utilities/http-error',
 ];
 
 /**
@@ -160,6 +161,17 @@ export function metaForUrl(url: string): PageMeta {
       title: `Streaming Message helper · ${SITE.name}`,
       description:
         'createStreamingMessage() for ngx-prompt-kit — a signal-based controller that coordinates the pk-response-stream reveal handshake (append, done, finished→commit). Schematic command included.',
+      path,
+      changefreq: 'monthly',
+      priority: 0.6,
+    };
+  }
+
+  if (path === '/utilities/http-error') {
+    return {
+      title: `HTTP Error helper · ${SITE.name}`,
+      description:
+        'describeHttpError() for ngx-prompt-kit — maps HttpErrorResponse status codes to friendly, user-facing messages with optional per-status overrides. Schematic command included.',
       path,
       changefreq: 'monthly',
       priority: 0.6,

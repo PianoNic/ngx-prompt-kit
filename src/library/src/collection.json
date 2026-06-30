@@ -71,6 +71,11 @@
       "factory": "./file-upload/index#fileUpload",
       "schema": "./file-upload/schema.json"
     },
+    "http-error": {
+      "description": "Add the describeHttpError() utility (ngx-prompt-kit original).",
+      "factory": "./http-error/index#httpError",
+      "schema": "./http-error/schema.json"
+    },
     "image": {
       "description": "Add the image component.",
       "factory": "./image/index#image",

@@ -69,6 +69,7 @@ export const NAV: NavGroup[] = [
     links: [
       { label: 'Streaming (SSE)', path: '/utilities/streaming', badge: 'New' },
       { label: 'Streaming Message', path: '/utilities/streaming-message', badge: 'New' },
+      { label: 'HTTP Error', path: '/utilities/http-error', badge: 'New' },
     ],
   },
 ];

@@ -265,6 +265,10 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./demo/streaming-message-demo').then((m) => m.StreamingMessageDemo),
       },
+      {
+        path: 'utilities/http-error',
+        loadComponent: () => import('./demo/http-error-demo').then((m) => m.HttpErrorDemo),
+      },
     ],
   },
   { path: '**', redirectTo: '' },
