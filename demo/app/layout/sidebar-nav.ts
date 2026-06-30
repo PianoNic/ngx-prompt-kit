@@ -11,9 +11,7 @@ import { NAV } from './nav-data';
       <nav class="flex flex-col gap-6 p-4 text-sm">
         @for (group of nav; track group.heading) {
           <div>
-            <p
-              class="text-muted-foreground mb-2 px-2 text-xs font-medium uppercase tracking-wider"
-            >
+            <p class="text-muted-foreground mb-2 px-2 text-xs font-medium uppercase tracking-wider">
               {{ group.heading }}
             </p>
             <ul class="flex flex-col gap-0.5">

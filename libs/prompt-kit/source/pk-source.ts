@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  forwardRef,
-  input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, forwardRef, input } from '@angular/core';
 import { BrnHoverCardContentService } from '@spartan-ng/brain/hover-card';
 import { HlmHoverCard } from '@spartan-ng/helm/hover-card';
 import { SOURCE_STATE, type SourceState } from './source.state';

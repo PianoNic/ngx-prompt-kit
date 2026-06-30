@@ -51,9 +51,7 @@ export function ui(options: UiSchema): Rule {
     context.logger.info('');
 
     return chain(
-      requested.map((name) =>
-        externalSchematic('ngx-prompt-kit', name, { ...passthrough }),
-      ),
+      requested.map((name) => externalSchematic('ngx-prompt-kit', name, { ...passthrough })),
     );
   };
 }

@@ -7,4 +7,8 @@ export * from './pk-file-upload-trigger';
 export * from './pk-file-upload-content';
 export * from './file-upload.state';
 
-export const PkFileUploadImports = [PkFileUpload, PkFileUploadTrigger, PkFileUploadContent] as const;
+export const PkFileUploadImports = [
+  PkFileUpload,
+  PkFileUploadTrigger,
+  PkFileUploadContent,
+] as const;

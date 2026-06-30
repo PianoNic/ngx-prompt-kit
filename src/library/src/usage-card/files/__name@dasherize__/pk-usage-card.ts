@@ -174,7 +174,9 @@ type ThresholdState = 'normal' | 'warn' | 'over';
             @if (hasLimit()) {
               <span [class]="numberClass()">{{ readout() }}</span>
             } @else {
-              <span class="text-foreground text-xs tabular-nums">{{ formatNumber(used()) }} {{ unit() }}</span>
+              <span class="text-foreground text-xs tabular-nums"
+                >{{ formatNumber(used()) }} {{ unit() }}</span
+              >
             }
           </div>
           @if (hasLimit()) {
@@ -309,9 +311,7 @@ export class PkUsageCard {
   protected readonly readout = computed(() => {
     const used = this.formatNumber(this.used());
     const limit = this.formatNumber(this.limit() ?? 0);
-    const pct = this.showPercentage()
-      ? ` · ${Math.round(this.percent())}%`
-      : '';
+    const pct = this.showPercentage() ? ` · ${Math.round(this.percent())}%` : '';
     return `${used} / ${limit}${pct}`;
   });
 

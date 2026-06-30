@@ -32,10 +32,7 @@ import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit
       >
         <div class="flex w-full flex-col gap-4">
           <pk-message class="justify-end">
-            <pk-message-edit
-              [content]="overlayContent()"
-              (saved)="overlayContent.set($event)"
-            >
+            <pk-message-edit [content]="overlayContent()" (saved)="overlayContent.set($event)">
               <pk-message-content
                 class="bg-primary text-primary-foreground"
                 [content]="overlayContent()"
@@ -161,8 +158,8 @@ import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit
           </div>
           <p class="text-muted-foreground text-center text-xs">
             The button above is rendered by the consumer, not by pk-message-edit. It calls
-            <span class="text-foreground font-mono">editor.startEdit()</span> on the component
-            via a viewChild reference.
+            <span class="text-foreground font-mono">editor.startEdit()</span> on the component via a
+            viewChild reference.
           </p>
         </div>
       </app-doc-example>
@@ -207,7 +204,8 @@ export class MessageEditDemo {
           name: 'editable',
           type: 'boolean',
           default: 'true',
-          description: 'Gates the trigger affordance. When false, the projected content is read-only.',
+          description:
+            'Gates the trigger affordance. When false, the projected content is read-only.',
         },
         {
           name: 'editTrigger',

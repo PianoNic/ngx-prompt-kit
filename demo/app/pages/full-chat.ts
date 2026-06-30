@@ -30,10 +30,7 @@ import { HlmTabsImports } from '@spartan-ng/helm/tabs';
 import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
 import { type Attachment, PkAttachmentPreviewImports } from 'ngx-prompt-kit/attachment-preview';
 import { PkChatContainerImports } from 'ngx-prompt-kit/chat-container';
-import {
-  type Conversation,
-  PkConversationListImports,
-} from 'ngx-prompt-kit/conversation-list';
+import { type Conversation, PkConversationListImports } from 'ngx-prompt-kit/conversation-list';
 import { PkLoader } from 'ngx-prompt-kit/loader';
 import { PkMessageImports } from 'ngx-prompt-kit/message';
 import {
@@ -205,9 +202,7 @@ export class FullChat {
 
   protected assistantActionsFor(messageId: string): readonly MessageAction[] {
     const active = this.thumbsActive()[messageId] === true;
-    return DEFAULT_ASSISTANT_ACTIONS.map((a) =>
-      a.id === 'thumbs-up' ? { ...a, active } : a,
-    );
+    return DEFAULT_ASSISTANT_ACTIONS.map((a) => (a.id === 'thumbs-up' ? { ...a, active } : a));
   }
 
   private readonly threadsByConvo = signal<Record<string, ChatMessage[]>>({
@@ -222,7 +217,7 @@ export class FullChat {
         id: 'c1-2',
         role: 'assistant',
         content:
-          "Clean grouping for v21.0.6 → v21.0.7. Features: seven new originals (approval, attachment-preview, message-actions-bar, branch-nav, model-picker, model-list, model-browser) plus usage-card with three display modes in v21.0.7. Fixes: prompt-input dark-mode textarea backdrop, model-browser detail-pane spacing. Chores: code-block now defaults darkTheme to dark-plus, router scrolls to top on navigation. Want me to draft the GitHub release body in the same shape?",
+          'Clean grouping for v21.0.6 → v21.0.7. Features: seven new originals (approval, attachment-preview, message-actions-bar, branch-nav, model-picker, model-list, model-browser) plus usage-card with three display modes in v21.0.7. Fixes: prompt-input dark-mode textarea backdrop, model-browser detail-pane spacing. Chores: code-block now defaults darkTheme to dark-plus, router scrolls to top on navigation. Want me to draft the GitHub release body in the same shape?',
       },
       {
         id: 'c1-3',
@@ -259,7 +254,8 @@ Effects re-run on every dependency change but don't memoize. Computed signals me
       {
         id: 'c3-1',
         role: 'user',
-        content: 'What\'s the safest path to migrate the auth middleware off the old session cookie?',
+        content:
+          "What's the safest path to migrate the auth middleware off the old session cookie?",
       },
       {
         id: 'c3-2',
@@ -297,9 +293,7 @@ Effects re-run on every dependency change but don't memoize. Computed signals me
     const all = this.conversations();
     if (!q) return all;
     return all.filter(
-      (c) =>
-        c.title.toLowerCase().includes(q) ||
-        (c.preview ?? '').toLowerCase().includes(q),
+      (c) => c.title.toLowerCase().includes(q) || (c.preview ?? '').toLowerCase().includes(q),
     );
   });
 
@@ -428,9 +422,7 @@ Effects re-run on every dependency change but don't memoize. Computed signals me
     if (!convoId) return;
     this.threadsByConvo.update((map) => ({
       ...map,
-      [convoId]: (map[convoId] ?? []).map((m) =>
-        m.id === id ? { ...m, content: newContent } : m,
-      ),
+      [convoId]: (map[convoId] ?? []).map((m) => (m.id === id ? { ...m, content: newContent } : m)),
     }));
   }
 

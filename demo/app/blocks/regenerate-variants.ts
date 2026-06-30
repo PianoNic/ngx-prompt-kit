@@ -16,13 +16,7 @@ interface Variant {
 @Component({
   selector: 'app-block-regenerate-variants',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    BlockPage,
-    DocExample,
-    HlmIconImports,
-    PkMessageImports,
-    PkPromptSuggestion,
-  ],
+  imports: [BlockPage, DocExample, HlmIconImports, PkMessageImports, PkPromptSuggestion],
   providers: [provideIcons({ lucideRefreshCw })],
   template: `
     <app-block-page
@@ -72,33 +66,28 @@ export class RegenerateVariantsBlock {
     {
       id: 'concise',
       label: 'Concise',
-      text:
-        '**SemVer** signals breakage: a major bump means you have to read the release notes; minor and patch should be drop-in.',
+      text: '**SemVer** signals breakage: a major bump means you have to read the release notes; minor and patch should be drop-in.',
     },
     {
       id: 'eli5',
-      label: 'Explain like I\'m 5',
-      text:
-        "Imagine your favourite toy's instructions had a number. If only the last number changed, the instructions still work. If the **first** number changed, the toy might be totally different — read the new instructions!",
+      label: "Explain like I'm 5",
+      text: "Imagine your favourite toy's instructions had a number. If only the last number changed, the instructions still work. If the **first** number changed, the toy might be totally different — read the new instructions!",
     },
     {
       id: 'technical',
       label: 'Technical',
-      text:
-        'SemVer 2.0 splits a release into `MAJOR.MINOR.PATCH`. Major increments encode source-incompatible changes; minor adds backward-compatible API surface; patch fixes bugs without altering the public contract. Tooling (npm, cargo, go modules) leans on this to choose safe upgrades during dependency resolution.',
+      text: 'SemVer 2.0 splits a release into `MAJOR.MINOR.PATCH`. Major increments encode source-incompatible changes; minor adds backward-compatible API surface; patch fixes bugs without altering the public contract. Tooling (npm, cargo, go modules) leans on this to choose safe upgrades during dependency resolution.',
     },
     {
       id: 'formal',
       label: 'Formal',
-      text:
-        'Semantic versioning provides a deterministic mechanism for communicating the nature of a release to downstream consumers. By segmenting the version into three independently-incremented integers, it allows automated dependency managers to reason about API compatibility without inspecting the changelog.',
+      text: 'Semantic versioning provides a deterministic mechanism for communicating the nature of a release to downstream consumers. By segmenting the version into three independently-incremented integers, it allows automated dependency managers to reason about API compatibility without inspecting the changelog.',
     },
   ];
 
   protected readonly currentId = signal<string>('concise');
   protected readonly current = computed(
-    () =>
-      this.variants.find((v) => v.id === this.currentId()) ?? this.variants[0],
+    () => this.variants.find((v) => v.id === this.currentId()) ?? this.variants[0],
   );
 
   protected readonly code = `<pk-message>

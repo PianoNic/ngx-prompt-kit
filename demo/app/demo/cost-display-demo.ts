@@ -24,8 +24,8 @@ import { PkCostDisplayImports } from 'ngx-prompt-kit/cost-display';
           locale="en-US"
           [inputTokens]="1243"
           [outputTokens]="892"
-          [inputPricePer1M]="2.50"
-          [outputPricePer1M]="10.00"
+          [inputPricePer1M]="2.5"
+          [outputPricePer1M]="10.0"
         />
       </app-doc-example>
 
@@ -40,8 +40,8 @@ import { PkCostDisplayImports } from 'ngx-prompt-kit/cost-display';
           locale="de-DE"
           [inputTokens]="1243"
           [outputTokens]="892"
-          [inputPricePer1M]="2.30"
-          [outputPricePer1M]="9.20"
+          [inputPricePer1M]="2.3"
+          [outputPricePer1M]="9.2"
         />
       </app-doc-example>
 
@@ -57,8 +57,8 @@ import { PkCostDisplayImports } from 'ngx-prompt-kit/cost-display';
           [costPrecision]="2"
           [inputTokens]="42_000"
           [outputTokens]="18_000"
-          [inputPricePer1M]="2.20"
-          [outputPricePer1M]="8.80"
+          [inputPricePer1M]="2.2"
+          [outputPricePer1M]="8.8"
         />
       </app-doc-example>
 
@@ -99,9 +99,9 @@ import { PkCostDisplayImports } from 'ngx-prompt-kit/cost-display';
             <pk-cost-display
               [inputTokens]="200_000"
               [outputTokens]="75_000"
-              [inputPricePer1M]="2.50"
-              [outputPricePer1M]="10.00"
-              [costLimit]="2.50"
+              [inputPricePer1M]="2.5"
+              [outputPricePer1M]="10.0"
+              [costLimit]="2.5"
             />
           </div>
           <div class="flex flex-col gap-1">
@@ -109,9 +109,9 @@ import { PkCostDisplayImports } from 'ngx-prompt-kit/cost-display';
             <pk-cost-display
               [inputTokens]="400_000"
               [outputTokens]="100_000"
-              [inputPricePer1M]="2.50"
-              [outputPricePer1M]="10.00"
-              [costLimit]="2.50"
+              [inputPricePer1M]="2.5"
+              [outputPricePer1M]="10.0"
+              [costLimit]="2.5"
             />
           </div>
           <div class="flex flex-col gap-1">
@@ -119,9 +119,9 @@ import { PkCostDisplayImports } from 'ngx-prompt-kit/cost-display';
             <pk-cost-display
               [inputTokens]="500_000"
               [outputTokens]="112_500"
-              [inputPricePer1M]="2.50"
-              [outputPricePer1M]="10.00"
-              [costLimit]="2.50"
+              [inputPricePer1M]="2.5"
+              [outputPricePer1M]="10.0"
+              [costLimit]="2.5"
             />
           </div>
           <div class="flex flex-col gap-1">
@@ -129,9 +129,9 @@ import { PkCostDisplayImports } from 'ngx-prompt-kit/cost-display';
             <pk-cost-display
               [inputTokens]="500_000"
               [outputTokens]="137_500"
-              [inputPricePer1M]="2.50"
-              [outputPricePer1M]="10.00"
-              [costLimit]="2.50"
+              [inputPricePer1M]="2.5"
+              [outputPricePer1M]="10.0"
+              [costLimit]="2.5"
             />
           </div>
         </div>
@@ -147,8 +147,18 @@ export class CostDisplayDemo {
     {
       name: 'PkCostDisplay',
       props: [
-        { name: 'inputTokens', type: 'number', default: '0', description: 'Prompt/input tokens consumed.' },
-        { name: 'outputTokens', type: 'number', default: '0', description: 'Completion/output tokens consumed.' },
+        {
+          name: 'inputTokens',
+          type: 'number',
+          default: '0',
+          description: 'Prompt/input tokens consumed.',
+        },
+        {
+          name: 'outputTokens',
+          type: 'number',
+          default: '0',
+          description: 'Completion/output tokens consumed.',
+        },
         {
           name: 'inputPricePer1M',
           type: 'number | null',

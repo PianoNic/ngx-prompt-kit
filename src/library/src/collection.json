@@ -71,6 +71,11 @@
       "factory": "./file-upload/index#fileUpload",
       "schema": "./file-upload/schema.json"
     },
+    "http-error": {
+      "description": "Add the describeHttpError() utility (ngx-prompt-kit original).",
+      "factory": "./http-error/index#httpError",
+      "schema": "./http-error/schema.json"
+    },
     "image": {
       "description": "Add the image component.",
       "factory": "./image/index#image",
@@ -156,6 +161,16 @@
       "factory": "./stream-controls/index#streamControls",
       "schema": "./stream-controls/schema.json"
     },
+    "streaming": {
+      "description": "Add the SSE streaming utility (ngx-prompt-kit original).",
+      "factory": "./streaming/index#streaming",
+      "schema": "./streaming/schema.json"
+    },
+    "streaming-message": {
+      "description": "Add the streaming-message helper (ngx-prompt-kit original).",
+      "factory": "./streaming-message/index#streamingMessage",
+      "schema": "./streaming-message/schema.json"
+    },
     "system-message": {
       "description": "Add the system-message component.",
       "factory": "./system-message/index#systemMessage",
@@ -185,6 +200,11 @@
       "description": "Add the tool component.",
       "factory": "./tool/index#tool",
       "schema": "./tool/schema.json"
+    },
+    "tool-steps": {
+      "description": "Add the tool-steps component (ngx-prompt-kit original).",
+      "factory": "./tool-steps/index#toolSteps",
+      "schema": "./tool-steps/schema.json"
     },
     "usage-card": {
       "description": "Add the usage-card component (ngx-prompt-kit original).",

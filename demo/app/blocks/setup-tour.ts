@@ -1,10 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import {
-  lucideKey,
-  lucideRocket,
-  lucideUserPlus,
-} from '@ng-icons/lucide';
+import { lucideKey, lucideRocket, lucideUserPlus } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
@@ -14,13 +10,7 @@ import { PkTodoListImports, type PkTodoItem } from 'ngx-prompt-kit/todo-list';
 @Component({
   selector: 'app-block-setup-tour',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    BlockPage,
-    DocExample,
-    HlmButton,
-    PkChatEmptyImports,
-    PkTodoListImports,
-  ],
+  imports: [BlockPage, DocExample, HlmButton, PkChatEmptyImports, PkTodoListImports],
   providers: [provideIcons({ lucideKey, lucideRocket, lucideUserPlus })],
   template: `
     <app-block-page

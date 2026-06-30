@@ -1,11 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import {
-  lucideArrowUp,
-  lucidePaperclip,
-  lucideUpload,
-  lucideX,
-} from '@ng-icons/lucide';
+import { lucideArrowUp, lucidePaperclip, lucideUpload, lucideX } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { DocApi, type ApiSection } from '../layout/doc-api';
@@ -28,9 +23,7 @@ import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
     PkFileUploadImports,
     PkPromptInputImports,
   ],
-  providers: [
-    provideIcons({ lucideArrowUp, lucidePaperclip, lucideUpload, lucideX }),
-  ],
+  providers: [provideIcons({ lucideArrowUp, lucidePaperclip, lucideUpload, lucideX })],
   template: `
     <app-doc-page
       title="File Upload"
@@ -41,11 +34,7 @@ import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
         description="Drop a file anywhere on the page or click the paperclip. Submitted files clear after a fake 2-second send."
         [code]="composedCode"
       >
-        <pk-file-upload
-          #fu
-          accept=".jpg,.jpeg,.png,.pdf,.docx"
-          (filesAdded)="addFiles($event)"
-        >
+        <pk-file-upload #fu accept=".jpg,.jpeg,.png,.pdf,.docx" (filesAdded)="addFiles($event)">
           <pk-prompt-input
             class="w-full max-w-sm block"
             [(value)]="input"
@@ -110,13 +99,13 @@ import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
 
           <pk-file-upload-content>
             <div class="flex min-h-[200px] w-full items-center justify-center backdrop-blur-sm">
-              <div class="bg-background/90 border-border m-4 w-full max-w-md rounded-lg border p-8 shadow-lg">
+              <div
+                class="bg-background/90 border-border m-4 w-full max-w-md rounded-lg border p-8 shadow-lg"
+              >
                 <div class="mb-4 flex justify-center">
                   <ng-icon hlm size="lg" name="lucideUpload" class="text-muted-foreground" />
                 </div>
-                <h3 class="mb-2 text-center text-base font-medium">
-                  Drop files to upload
-                </h3>
+                <h3 class="mb-2 text-center text-base font-medium">Drop files to upload</h3>
                 <p class="text-muted-foreground text-center text-sm">
                   Release to add files to your message
                 </p>
@@ -136,11 +125,33 @@ export class FileUploadDemo {
     {
       name: 'PkFileUpload',
       props: [
-        { name: 'multiple', type: 'boolean', default: 'true', description: 'Allow selecting multiple files at once.' },
-        { name: 'accept', type: 'string', description: 'Standard accept attribute (e.g. ".jpg,.png").' },
-        { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable the picker and ignore drops.' },
-        { name: 'filesAdded', type: 'output<File[]>', description: 'Fires when files are picked or dropped.' },
-        { name: 'openPicker()', type: '() => void', description: 'Programmatically open the native file picker.' },
+        {
+          name: 'multiple',
+          type: 'boolean',
+          default: 'true',
+          description: 'Allow selecting multiple files at once.',
+        },
+        {
+          name: 'accept',
+          type: 'string',
+          description: 'Standard accept attribute (e.g. ".jpg,.png").',
+        },
+        {
+          name: 'disabled',
+          type: 'boolean',
+          default: 'false',
+          description: 'Disable the picker and ignore drops.',
+        },
+        {
+          name: 'filesAdded',
+          type: 'output<File[]>',
+          description: 'Fires when files are picked or dropped.',
+        },
+        {
+          name: 'openPicker()',
+          type: '() => void',
+          description: 'Programmatically open the native file picker.',
+        },
       ],
     },
     {

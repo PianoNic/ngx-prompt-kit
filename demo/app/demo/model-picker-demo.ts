@@ -41,11 +41,7 @@ import { PkModelPickerImports, type Model } from 'ngx-prompt-kit/model-picker';
       >
         <div class="flex w-full items-center gap-2">
           <span class="text-muted-foreground text-sm">Active model:</span>
-          <pk-model-picker
-            [compact]="true"
-            [models]="models"
-            [(selectedId)]="compactSelectedId"
-          />
+          <pk-model-picker [compact]="true" [models]="models" [(selectedId)]="compactSelectedId" />
         </div>
       </app-doc-example>
 
@@ -54,10 +50,7 @@ import { PkModelPickerImports, type Model } from 'ngx-prompt-kit/model-picker';
         description="Set disabled: true on a Model entry to grey it out. (changed) does not fire and selectedId does not update if the user clicks it."
         [code]="disabledCode"
       >
-        <pk-model-picker
-          [models]="modelsWithDisabled"
-          [(selectedId)]="disabledExampleSelectedId"
-        />
+        <pk-model-picker [models]="modelsWithDisabled" [(selectedId)]="disabledExampleSelectedId" />
       </app-doc-example>
 
       <app-doc-install component="model-picker" />
@@ -134,7 +127,8 @@ export class ModelPickerDemo {
           name: 'selectedId',
           type: 'string | null',
           default: 'null',
-          description: 'Two-way bindable via [(selectedId)]. Component reflects the selection in the trigger; consumer drives any side effects.',
+          description:
+            'Two-way bindable via [(selectedId)]. Component reflects the selection in the trigger; consumer drives any side effects.',
         },
         {
           name: 'placeholder',
@@ -146,7 +140,8 @@ export class ModelPickerDemo {
           name: 'compact',
           type: 'boolean',
           default: 'false',
-          description: 'Smaller trigger; drops the tier badge from the trigger button. The dropdown is unaffected.',
+          description:
+            'Smaller trigger; drops the tier badge from the trigger button. The dropdown is unaffected.',
         },
         {
           name: 'locale',
@@ -162,7 +157,11 @@ export class ModelPickerDemo {
         { name: 'id', type: 'string', description: 'Stable identifier (required).' },
         { name: 'name', type: 'string', description: 'Display name (required).' },
         { name: 'provider', type: 'string?', description: 'Small muted suffix in the dropdown.' },
-        { name: 'tagline', type: 'string?', description: 'One-line description below the name in the dropdown.' },
+        {
+          name: 'tagline',
+          type: 'string?',
+          description: 'One-line description below the name in the dropdown.',
+        },
         {
           name: 'tier',
           type: '"fast" | "balanced" | "smart" | undefined',
@@ -171,7 +170,8 @@ export class ModelPickerDemo {
         {
           name: 'inputPricePer1M / outputPricePer1M',
           type: 'number?',
-          description: 'Per-million-token pricing in `currency`. Both must be set for the price line to render.',
+          description:
+            'Per-million-token pricing in `currency`. Both must be set for the price line to render.',
         },
         {
           name: 'currency',
@@ -179,7 +179,11 @@ export class ModelPickerDemo {
           default: '"USD"',
           description: 'ISO 4217 code; passed to Intl.NumberFormat with the resolved locale.',
         },
-        { name: 'disabled', type: 'boolean?', description: 'Greys the item out and suppresses (changed).' },
+        {
+          name: 'disabled',
+          type: 'boolean?',
+          description: 'Greys the item out and suppresses (changed).',
+        },
       ],
     },
     {

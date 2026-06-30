@@ -30,14 +30,7 @@ const PLAN: PlannedTodo[] = [
 @Component({
   selector: 'app-block-ai-plan',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    BlockPage,
-    DocExample,
-    HlmButton,
-    PkSystemMessage,
-    PkThinkingBar,
-    PkTodoListImports,
-  ],
+  imports: [BlockPage, DocExample, HlmButton, PkSystemMessage, PkThinkingBar, PkTodoListImports],
   template: `
     <app-block-page
       title="AI-driven plan"
@@ -76,9 +69,7 @@ const PLAN: PlannedTodo[] = [
               Reset
             </button>
             @if (state() === 'idle' && items().length > 0) {
-              <button hlmBtn size="sm" type="button" (click)="run()">
-                Run agent
-              </button>
+              <button hlmBtn size="sm" type="button" (click)="run()">Run agent</button>
             }
           </div>
         </div>

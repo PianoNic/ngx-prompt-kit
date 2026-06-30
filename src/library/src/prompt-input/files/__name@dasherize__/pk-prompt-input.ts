@@ -19,9 +19,7 @@ import { PROMPT_INPUT_STATE, type PromptInputState } from './prompt-input.state'
     '[class]': 'computedClass()',
     '(click)': 'onClick()',
   },
-  providers: [
-    { provide: PROMPT_INPUT_STATE, useExisting: forwardRef(() => PkPromptInput) },
-  ],
+  providers: [{ provide: PROMPT_INPUT_STATE, useExisting: forwardRef(() => PkPromptInput) }],
   template: `<ng-content />`,
 })
 export class PkPromptInput implements PromptInputState {

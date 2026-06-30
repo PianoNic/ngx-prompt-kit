@@ -26,28 +26,29 @@ import { cn } from '../utils/cn';
 
 export type SystemMessageVariant = 'action' | 'error' | 'warning';
 
-const variants = cva(
-  'flex flex-row items-center gap-3 rounded-[12px] border py-2 pr-2 pl-3',
-  {
-    variants: {
-      variant: {
-        action: 'text-zinc-700 dark:text-zinc-300',
-        error: 'text-red-700 dark:text-red-800',
-        warning: 'text-amber-700 dark:text-amber-700',
-      },
-      fill: { true: 'bg-background', false: '' },
+const variants = cva('flex flex-row items-center gap-3 rounded-[12px] border py-2 pr-2 pl-3', {
+  variants: {
+    variant: {
+      action: 'text-zinc-700 dark:text-zinc-300',
+      error: 'text-red-700 dark:text-red-800',
+      warning: 'text-amber-700 dark:text-amber-700',
     },
-    compoundVariants: [
-      { variant: 'action', fill: true, class: 'bg-zinc-100 dark:bg-zinc-900 border-transparent' },
-      { variant: 'error', fill: true, class: 'bg-red-100 dark:bg-red-900/20 border-transparent' },
-      { variant: 'warning', fill: true, class: 'bg-amber-100 dark:bg-amber-900/20 border-transparent' },
-      { variant: 'action', fill: false, class: 'border-zinc-200 dark:border-zinc-800' },
-      { variant: 'error', fill: false, class: 'border-red-600 dark:border-red-900' },
-      { variant: 'warning', fill: false, class: 'border-amber-600 dark:border-amber-900' },
-    ],
-    defaultVariants: { variant: 'action', fill: false },
+    fill: { true: 'bg-background', false: '' },
   },
-);
+  compoundVariants: [
+    { variant: 'action', fill: true, class: 'bg-zinc-100 dark:bg-zinc-900 border-transparent' },
+    { variant: 'error', fill: true, class: 'bg-red-100 dark:bg-red-900/20 border-transparent' },
+    {
+      variant: 'warning',
+      fill: true,
+      class: 'bg-amber-100 dark:bg-amber-900/20 border-transparent',
+    },
+    { variant: 'action', fill: false, class: 'border-zinc-200 dark:border-zinc-800' },
+    { variant: 'error', fill: false, class: 'border-red-600 dark:border-red-900' },
+    { variant: 'warning', fill: false, class: 'border-amber-600 dark:border-amber-900' },
+  ],
+  defaultVariants: { variant: 'action', fill: false },
+});
 
 @Component({
   selector: 'pk-system-message',
@@ -64,7 +65,9 @@ const variants = cva(
         }
         <div class="flex min-w-0 flex-1 items-center" [class.gap-3]="icon()">
           <div class="text-sm">
-            @if (text(); as t) { {{ t }} }
+            @if (text(); as t) {
+              {{ t }}
+            }
             <ng-content />
           </div>
         </div>

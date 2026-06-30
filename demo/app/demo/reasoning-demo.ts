@@ -114,8 +114,17 @@ export class ReasoningDemo {
     {
       name: 'PkReasoning',
       props: [
-        { name: 'open', type: 'model<boolean>', description: 'Two-way bound open state. Leave unbound for uncontrolled.' },
-        { name: 'isStreaming', type: 'boolean', default: 'false', description: 'Auto-opens while true; auto-closes when it flips back to false.' },
+        {
+          name: 'open',
+          type: 'model<boolean>',
+          description: 'Two-way bound open state. Leave unbound for uncontrolled.',
+        },
+        {
+          name: 'isStreaming',
+          type: 'boolean',
+          default: 'false',
+          description: 'Auto-opens while true; auto-closes when it flips back to false.',
+        },
         { name: 'class', type: 'string', description: 'Extra classes for the wrapper.' },
       ],
     },
@@ -128,14 +137,31 @@ export class ReasoningDemo {
     {
       name: 'PkReasoningContent',
       props: [
-        { name: 'content', type: 'string', description: 'The body text. Optional — projected ng-content also supported.' },
-        { name: 'markdown', type: 'boolean', default: 'false', description: 'Render content as markdown via pk-markdown.' },
-        { name: 'class', type: 'string', description: 'Extra classes for the outer collapsing wrapper.' },
-        { name: 'contentClass', type: 'string', description: 'Extra classes for the inner content (use this for borders / padding so they collapse with the panel).' },
+        {
+          name: 'content',
+          type: 'string',
+          description: 'The body text. Optional — projected ng-content also supported.',
+        },
+        {
+          name: 'markdown',
+          type: 'boolean',
+          default: 'false',
+          description: 'Render content as markdown via pk-markdown.',
+        },
+        {
+          name: 'class',
+          type: 'string',
+          description: 'Extra classes for the outer collapsing wrapper.',
+        },
+        {
+          name: 'contentClass',
+          type: 'string',
+          description:
+            'Extra classes for the inner content (use this for borders / padding so they collapse with the panel).',
+        },
       ],
     },
   ];
-
 
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   private readonly destroyRef = inject(DestroyRef);
