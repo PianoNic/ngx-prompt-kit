@@ -51,9 +51,24 @@ export class TextShimmerDemo {
     {
       name: 'PkTextShimmer',
       props: [
-        { name: 'text', type: 'string', default: "''", description: 'Text content (alternative: project via ng-content).' },
-        { name: 'duration', type: 'number', default: '4', description: 'Animation period in seconds.' },
-        { name: 'spread', type: 'number', default: '20', description: 'Gradient stop spread, clamped to 5..45.' },
+        {
+          name: 'text',
+          type: 'string',
+          default: "''",
+          description: 'Text content (alternative: project via ng-content).',
+        },
+        {
+          name: 'duration',
+          type: 'number',
+          default: '4',
+          description: 'Animation period in seconds.',
+        },
+        {
+          name: 'spread',
+          type: 'number',
+          default: '20',
+          description: 'Gradient stop spread, clamped to 5..45.',
+        },
         { name: 'class', type: 'string', description: 'Extra classes for the host span.' },
       ],
     },

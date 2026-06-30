@@ -73,16 +73,35 @@ export class StepsDemo {
     {
       name: 'PkSteps',
       props: [
-        { name: 'open', type: 'model<boolean>', description: 'Two-way bound open state. Leave unbound for uncontrolled.' },
-        { name: 'defaultOpen', type: 'boolean', default: 'true', description: 'Initial state when uncontrolled.' },
+        {
+          name: 'open',
+          type: 'model<boolean>',
+          description: 'Two-way bound open state. Leave unbound for uncontrolled.',
+        },
+        {
+          name: 'defaultOpen',
+          type: 'boolean',
+          default: 'true',
+          description: 'Initial state when uncontrolled.',
+        },
         { name: 'class', type: 'string', description: 'Extra classes for the wrapper.' },
       ],
     },
     {
       name: 'PkStepsTrigger',
       props: [
-        { name: 'leftIcon', type: 'boolean', default: 'false', description: 'Reserve space for a left-icon slot (project via [leftIcon] attribute).' },
-        { name: 'swapIconOnHover', type: 'boolean', default: 'true', description: 'Swap leftIcon for the chevron on hover.' },
+        {
+          name: 'leftIcon',
+          type: 'boolean',
+          default: 'false',
+          description: 'Reserve space for a left-icon slot (project via [leftIcon] attribute).',
+        },
+        {
+          name: 'swapIconOnHover',
+          type: 'boolean',
+          default: 'true',
+          description: 'Swap leftIcon for the chevron on hover.',
+        },
         { name: 'class', type: 'string', description: 'Extra classes for the trigger button.' },
       ],
     },
@@ -94,9 +113,7 @@ export class StepsDemo {
     },
     {
       name: 'PkStepsItem',
-      props: [
-        { name: 'class', type: 'string', description: 'Extra classes for the item.' },
-      ],
+      props: [{ name: 'class', type: 'string', description: 'Extra classes for the item.' }],
     },
   ];
 }

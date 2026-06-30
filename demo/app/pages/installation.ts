@@ -12,9 +12,8 @@ import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
       <header class="mb-10">
         <h1 class="text-3xl font-semibold tracking-tight">Installation</h1>
         <p class="text-muted-foreground mt-2 max-w-2xl text-base leading-relaxed">
-          Get ngx-prompt-kit wired into an Angular workspace. Components are
-          distributed via schematics — the source lands in your project where you
-          own it.
+          Get ngx-prompt-kit wired into an Angular workspace. Components are distributed via
+          schematics — the source lands in your project where you own it.
         </p>
       </header>
 
@@ -68,8 +67,8 @@ import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
       <section class="mt-10">
         <h2 class="text-xl font-semibold tracking-tight">Install Spartan UI</h2>
         <p class="text-muted-foreground mt-2 text-sm leading-relaxed">
-          ngx-prompt-kit composes Spartan UI helm primitives. Install and initialize
-          Spartan in your workspace first:
+          ngx-prompt-kit composes Spartan UI helm primitives. Install and initialize Spartan in your
+          workspace first:
         </p>
         <div class="mt-3">
           <hlm-tabs tab="ng">
@@ -97,20 +96,28 @@ import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
         </div>
         <p class="text-muted-foreground mt-3 text-sm leading-relaxed">
           When prompted, select at minimum these helm components:
-          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs">avatar</code>,
-          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs">button</code>,
-          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs">textarea</code>,
-          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs">tooltip</code>.
+          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs">avatar</code
+          >,
+          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs">button</code
+          >,
+          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs"
+            >textarea</code
+          >,
+          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs">tooltip</code
+          >.
         </p>
       </section>
 
       <section class="mt-10">
         <h2 class="text-xl font-semibold tracking-tight">Add ngx-prompt-kit</h2>
         <p class="text-muted-foreground mt-2 text-sm leading-relaxed">
-          One-time bootstrap. Patches the universal runtime deps
-          (<code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs">clsx</code>,
-          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs">tailwind-merge</code>)
-          and warns if Spartan isn't detected.
+          One-time bootstrap. Patches the universal runtime deps (<code
+            class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs"
+            >clsx</code
+          >,
+          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs"
+            >tailwind-merge</code
+          >) and warns if Spartan isn't detected.
         </p>
         <div class="mt-3">
           <hlm-tabs tab="ng">
@@ -142,10 +149,13 @@ import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
         <h2 class="text-xl font-semibold tracking-tight">Configure install path</h2>
         <p class="text-muted-foreground mt-2 text-sm leading-relaxed">
           Optional but recommended. Picks where component sources land and persists it to
-          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs">components.json</code>
-          so subsequent generates don't ask. Skip this and components will use the
-          default
-          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs">libs/prompt-kit</code>.
+          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs"
+            >components.json</code
+          >
+          so subsequent generates don't ask. Skip this and components will use the default
+          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs"
+            >libs/prompt-kit</code
+          >.
         </p>
         <div class="mt-3">
           <hlm-tabs tab="ng">
@@ -178,12 +188,14 @@ import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
         <p class="text-muted-foreground mt-2 text-sm leading-relaxed">
           Generate any component into your project. The
           <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs">cn()</code>
-          utility lands alongside automatically. Component-specific deps
-          (e.g. <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs">marked</code>
+          utility lands alongside automatically. Component-specific deps (e.g.
+          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs">marked</code>
           for markdown,
           <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs">shiki</code>
           for code-block) are added to your
-          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs">package.json</code>
+          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs"
+            >package.json</code
+          >
           when needed.
         </p>
         <div class="mt-3">
@@ -216,8 +228,7 @@ import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
             >libs/prompt-kit/&lt;name&gt;/</code
           >
           by default. Override per command with
-          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs"
-            >--path</code
+          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs">--path</code
           >, or set a workspace-wide path with
           <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs"
             >ng g ngx-prompt-kit:init</code
@@ -228,8 +239,7 @@ import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
       <section class="mt-10">
         <h2 class="text-xl font-semibold tracking-tight">Bulk install (interactive)</h2>
         <p class="text-muted-foreground mt-2 text-sm leading-relaxed">
-          Pick multiple components from a checklist instead of generating each one manually.
-          The
+          Pick multiple components from a checklist instead of generating each one manually. The
           <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs">cn()</code>
           utility and any component dependencies are still installed automatically.
         </p>

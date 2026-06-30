@@ -1,11 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import {
-  lucideCode,
-  lucideFileText,
-  lucideLightbulb,
-  lucidePencilLine,
-} from '@ng-icons/lucide';
+import { lucideCode, lucideFileText, lucideLightbulb, lucidePencilLine } from '@ng-icons/lucide';
 import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
@@ -16,9 +11,7 @@ import { PkChatEmptyImports, type ChatEmptySuggestion } from 'ngx-prompt-kit/cha
   selector: 'app-chat-empty-demo',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [DocPage, DocExample, DocInstall, DocApi, PkChatEmptyImports],
-  providers: [
-    provideIcons({ lucideCode, lucideFileText, lucideLightbulb, lucidePencilLine }),
-  ],
+  providers: [provideIcons({ lucideCode, lucideFileText, lucideLightbulb, lucidePencilLine })],
   template: `
     <app-doc-page
       title="Chat Empty"
@@ -47,10 +40,7 @@ import { PkChatEmptyImports, type ChatEmptySuggestion } from 'ngx-prompt-kit/cha
         description="Omit suggestions for a minimal landing — useful when prompts are surfaced elsewhere (e.g. via prompt-suggestion chips above the input)."
         [code]="heroOnlyCode"
       >
-        <pk-chat-empty
-          title="Welcome back."
-          subtitle="What are we shipping today?"
-        />
+        <pk-chat-empty title="Welcome back." subtitle="What are we shipping today?" />
       </app-doc-example>
 
       <app-doc-install component="chat-empty" />
@@ -119,7 +109,8 @@ export class ChatEmptyDemo {
         {
           name: 'suggestionPicked',
           type: '(s: ChatEmptySuggestion) => void',
-          description: 'Fires when a suggestion card is clicked. Use s.prompt to prefill the input.',
+          description:
+            'Fires when a suggestion card is clicked. Use s.prompt to prefill the input.',
         },
       ],
     },

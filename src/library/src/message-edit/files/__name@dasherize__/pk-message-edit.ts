@@ -59,16 +59,8 @@ export type MessageEditTrigger =
           aria-label="Edit message"
         ></textarea>
         <div class="flex items-center justify-end gap-2">
-          <button hlmBtn variant="ghost" size="sm" type="button" (click)="cancel()">
-            Cancel
-          </button>
-          <button
-            hlmBtn
-            size="sm"
-            type="button"
-            [disabled]="!canSave()"
-            (click)="save()"
-          >
+          <button hlmBtn variant="ghost" size="sm" type="button" (click)="cancel()">Cancel</button>
+          <button hlmBtn size="sm" type="button" [disabled]="!canSave()" (click)="save()">
             Save
           </button>
         </div>

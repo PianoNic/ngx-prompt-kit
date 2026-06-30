@@ -94,8 +94,8 @@ The cycle is between \`refreshSession\` and \`verifyToken\`. Extracting the toke
                 </pk-chain-of-thought-trigger>
                 <pk-chain-of-thought-content>
                   <pk-chain-of-thought-item>
-                    Recommend extracting the token-refresh path into a separate module so the
-                    cycle is broken at the import boundary.
+                    Recommend extracting the token-refresh path into a separate module so the cycle
+                    is broken at the import boundary.
                   </pk-chain-of-thought-item>
                 </pk-chain-of-thought-content>
               </pk-chain-of-thought-step>

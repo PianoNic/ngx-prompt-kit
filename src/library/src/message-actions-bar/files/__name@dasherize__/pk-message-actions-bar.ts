@@ -55,7 +55,8 @@ export class PkMessageActionsBar {
 
   protected buttonClass(action: MessageAction): string {
     const active = action.active === true ? 'bg-accent text-primary' : '';
-    const variant = action.variant === 'destructive' ? 'text-destructive hover:text-destructive' : '';
+    const variant =
+      action.variant === 'destructive' ? 'text-destructive hover:text-destructive' : '';
     return cn(active, variant);
   }
 }

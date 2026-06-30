@@ -256,6 +256,11 @@ export const routes: Routes = [
         path: 'components/tool-steps',
         loadComponent: () => import('./demo/tool-steps-demo').then((m) => m.ToolStepsDemo),
       },
+      {
+        path: 'utilities/streaming',
+        loadComponent: () => import('./demo/streaming-demo').then((m) => m.StreamingDemo),
+      },
     ],
   },
+  { path: '**', redirectTo: '' },
 ];

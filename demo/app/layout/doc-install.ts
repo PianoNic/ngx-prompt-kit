@@ -22,7 +22,5 @@ import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
 })
 export class DocInstall {
   public readonly component = input.required<string>();
-  protected readonly cmd = computed(
-    () => `ng generate ngx-prompt-kit:${this.component()}`,
-  );
+  protected readonly cmd = computed(() => `ng generate ngx-prompt-kit:${this.component()}`);
 }

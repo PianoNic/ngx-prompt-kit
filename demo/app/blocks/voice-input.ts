@@ -13,14 +13,7 @@ type State = 'idle' | 'recording' | 'transcribing';
 @Component({
   selector: 'app-block-voice-input',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    BlockPage,
-    DocExample,
-    HlmButton,
-    HlmIconImports,
-    PkPromptInputImports,
-    PkTextShimmer,
-  ],
+  imports: [BlockPage, DocExample, HlmButton, HlmIconImports, PkPromptInputImports, PkTextShimmer],
   providers: [provideIcons({ lucideArrowUp, lucideMic, lucideSquare })],
   template: `
     <app-block-page
@@ -100,7 +93,7 @@ export class VoiceInputBlock {
   private finishRecording(): void {
     this.state.set('transcribing');
     setTimeout(() => {
-      this.value.set('Walk me through last week\'s deploy regressions.');
+      this.value.set("Walk me through last week's deploy regressions.");
       this.state.set('idle');
     }, 1100);
   }

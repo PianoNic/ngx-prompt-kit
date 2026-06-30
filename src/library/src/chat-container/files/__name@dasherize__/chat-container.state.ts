@@ -5,6 +5,4 @@ export interface ChatContainerState {
   scrollToBottom: (behavior?: ScrollBehavior) => void;
 }
 
-export const CHAT_CONTAINER_STATE = new InjectionToken<ChatContainerState>(
-  'CHAT_CONTAINER_STATE',
-);
+export const CHAT_CONTAINER_STATE = new InjectionToken<ChatContainerState>('CHAT_CONTAINER_STATE');

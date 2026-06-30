@@ -58,9 +58,25 @@ export class LoaderDemo {
     {
       name: 'PkLoader',
       props: [
-        { name: 'variant', type: 'LoaderVariant', default: '"circular"', description: 'circular | classic | pulse | pulse-dot | dots | typing | wave | bars | terminal | text-blink | text-shimmer | loading-dots' },
-        { name: 'size', type: '"sm" | "md" | "lg"', default: '"md"', description: 'Visual size for variants with a fixed footprint.' },
-        { name: 'text', type: 'string', default: '"Thinking"', description: 'Label for text-* variants.' },
+        {
+          name: 'variant',
+          type: 'LoaderVariant',
+          default: '"circular"',
+          description:
+            'circular | classic | pulse | pulse-dot | dots | typing | wave | bars | terminal | text-blink | text-shimmer | loading-dots',
+        },
+        {
+          name: 'size',
+          type: '"sm" | "md" | "lg"',
+          default: '"md"',
+          description: 'Visual size for variants with a fixed footprint.',
+        },
+        {
+          name: 'text',
+          type: 'string',
+          default: '"Thinking"',
+          description: 'Label for text-* variants.',
+        },
         { name: 'class', type: 'string', description: 'Extra classes for the wrapper.' },
       ],
     },

@@ -9,12 +9,7 @@ import {
   lucidePlus,
 } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
-import {
-  HlmCard,
-  HlmCardDescription,
-  HlmCardHeader,
-  HlmCardTitle,
-} from '@spartan-ng/helm/card';
+import { HlmCard, HlmCardDescription, HlmCardHeader, HlmCardTitle } from '@spartan-ng/helm/card';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
 import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
@@ -38,7 +33,9 @@ interface Feature {
     PkCodeBlockImports,
     PkPromptInputImports,
   ],
-  providers: [provideIcons({ lucidePlus, lucideGlobe, lucideEllipsis, lucideArrowUp, lucideCoffee })],
+  providers: [
+    provideIcons({ lucidePlus, lucideGlobe, lucideEllipsis, lucideArrowUp, lucideCoffee }),
+  ],
   template: `
     <div class="mx-auto max-w-4xl py-4 md:py-12">
       <section class="text-center">
@@ -49,13 +46,15 @@ interface Feature {
           AI chat components for Angular.
         </h1>
         <p class="text-muted-foreground mx-auto mt-4 max-w-2xl text-lg">
-          Standalone, signal-based components for building AI interfaces. Composes
-          with Spartan UI. Distributed via schematics — the source lives in your
-          project, not in a black-box dependency.
+          Standalone, signal-based components for building AI interfaces. Composes with Spartan UI.
+          Distributed via schematics — the source lives in your project, not in a black-box
+          dependency.
         </p>
         <div class="mt-7 flex flex-wrap items-center justify-center gap-3">
           <a hlmBtn routerLink="/installation" type="button">Get started</a>
-          <a hlmBtn variant="outline" routerLink="/showcase/full-chat" type="button">See it in action</a>
+          <a hlmBtn variant="outline" routerLink="/showcase/full-chat" type="button"
+            >See it in action</a
+          >
         </div>
       </section>
 
@@ -65,24 +64,51 @@ interface Feature {
           <pk-prompt-input-actions class="mt-2 justify-between">
             <div class="flex items-center gap-1">
               <pk-prompt-input-action tooltip="Attach files">
-                <button hlmBtn variant="ghost" size="icon-sm" type="button" class="rounded-full" aria-label="Attach files">
+                <button
+                  hlmBtn
+                  variant="ghost"
+                  size="icon-sm"
+                  type="button"
+                  class="rounded-full"
+                  aria-label="Attach files"
+                >
                   <ng-icon hlm size="sm" name="lucidePlus" />
                 </button>
               </pk-prompt-input-action>
               <pk-prompt-input-action tooltip="Search the web">
-                <button hlmBtn variant="outline" size="sm" type="button" class="rounded-full gap-1.5">
+                <button
+                  hlmBtn
+                  variant="outline"
+                  size="sm"
+                  type="button"
+                  class="rounded-full gap-1.5"
+                >
                   <ng-icon hlm size="xs" name="lucideGlobe" />
                   Search
                 </button>
               </pk-prompt-input-action>
               <pk-prompt-input-action tooltip="More tools">
-                <button hlmBtn variant="ghost" size="icon-sm" type="button" class="rounded-full" aria-label="More tools">
+                <button
+                  hlmBtn
+                  variant="ghost"
+                  size="icon-sm"
+                  type="button"
+                  class="rounded-full"
+                  aria-label="More tools"
+                >
                   <ng-icon hlm size="sm" name="lucideEllipsis" />
                 </button>
               </pk-prompt-input-action>
             </div>
             <pk-prompt-input-action tooltip="Send message">
-              <button hlmBtn size="icon-sm" type="button" class="rounded-full" (click)="onHeroSubmit()" aria-label="Send">
+              <button
+                hlmBtn
+                size="icon-sm"
+                type="button"
+                class="rounded-full"
+                (click)="onHeroSubmit()"
+                aria-label="Send"
+              >
                 <ng-icon hlm size="xs" name="lucideArrowUp" />
               </button>
             </pk-prompt-input-action>
@@ -124,12 +150,29 @@ interface Feature {
         <div class="flex flex-wrap items-center justify-between gap-4">
           <p>
             Original React implementation by
-            <a href="https://github.com/ibelick" target="_blank" rel="noopener noreferrer" class="text-foreground underline-offset-4 hover:underline">Julien Thibeaut (ibelick)</a>.
-            MIT licensed.
+            <a
+              href="https://github.com/ibelick"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-foreground underline-offset-4 hover:underline"
+              >Julien Thibeaut (ibelick)</a
+            >. MIT licensed.
           </p>
           <div class="flex items-center gap-4">
-            <a href="https://github.com/PianoNic/ngx-prompt-kit" target="_blank" rel="noopener noreferrer" class="hover:text-foreground">GitHub</a>
-            <a href="https://www.npmjs.com/package/ngx-prompt-kit" target="_blank" rel="noopener noreferrer" class="hover:text-foreground">npm</a>
+            <a
+              href="https://github.com/PianoNic/ngx-prompt-kit"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-foreground"
+              >GitHub</a
+            >
+            <a
+              href="https://www.npmjs.com/package/ngx-prompt-kit"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-foreground"
+              >npm</a
+            >
             <a
               href="https://buymeacoffee.com/PianoNic"
               target="_blank"
