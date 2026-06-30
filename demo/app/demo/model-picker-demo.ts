@@ -53,6 +53,21 @@ import { PkModelPickerImports, type Model } from 'ngx-prompt-kit/model-picker';
         <pk-model-picker [models]="modelsWithDisabled" [(selectedId)]="disabledExampleSelectedId" />
       </app-doc-example>
 
+      <app-doc-example
+        title="Searchable (long lists)"
+        description="Set [searchable]='true' to add a filter box at the top of the menu — filters by name, provider, and tagline. Ideal for long catalogs like OpenRouter where a flat dropdown is unwieldy."
+        [code]="searchableCode"
+      >
+        <div class="flex w-full flex-col items-start gap-3" data-testid="searchable-picker">
+          <pk-model-picker
+            [searchable]="true"
+            [models]="manyModels"
+            [(selectedId)]="searchSelectedId"
+            searchPlaceholder="Search models..."
+          />
+        </div>
+      </app-doc-example>
+
       <app-doc-install component="model-picker" />
       <app-doc-api [sections]="api" />
     </app-doc-page>
@@ -62,6 +77,7 @@ export class ModelPickerDemo {
   protected readonly selectedId = signal<string | null>('balanced');
   protected readonly compactSelectedId = signal<string | null>('fast');
   protected readonly disabledExampleSelectedId = signal<string | null>('available');
+  protected readonly searchSelectedId = signal<string | null>('gpt-4o');
   protected readonly lastChange = signal<string | null>(null);
 
   protected readonly models: Model[] = [
@@ -95,6 +111,18 @@ export class ModelPickerDemo {
       outputPricePer1M: 75.0,
       currency: 'USD',
     },
+  ];
+
+  protected readonly manyModels: Model[] = [
+    { id: 'gpt-4o', name: 'GPT-4o', provider: 'OpenAI', tier: 'smart' },
+    { id: 'gpt-4o-mini', name: 'GPT-4o mini', provider: 'OpenAI', tier: 'fast' },
+    { id: 'claude-opus', name: 'Claude Opus', provider: 'Anthropic', tier: 'smart' },
+    { id: 'claude-sonnet', name: 'Claude Sonnet', provider: 'Anthropic', tier: 'balanced' },
+    { id: 'claude-haiku', name: 'Claude Haiku', provider: 'Anthropic', tier: 'fast' },
+    { id: 'gemini-pro', name: 'Gemini 2.5 Pro', provider: 'Google', tier: 'smart' },
+    { id: 'gemini-flash', name: 'Gemini 2.5 Flash', provider: 'Google', tier: 'fast' },
+    { id: 'llama-70b', name: 'Llama 3.3 70B', provider: 'Meta', tier: 'balanced' },
+    { id: 'mistral-large', name: 'Mistral Large', provider: 'Mistral', tier: 'balanced' },
   ];
 
   protected readonly modelsWithDisabled: Model[] = [
@@ -147,6 +175,19 @@ export class ModelPickerDemo {
           name: 'locale',
           type: 'string | undefined',
           description: 'BCP-47 locale for the price formatter. Defaults to runtime locale.',
+        },
+        {
+          name: 'searchable',
+          type: 'boolean',
+          default: 'false',
+          description:
+            'Adds a filter box at the top of the menu (filters by name/provider/tagline).',
+        },
+        {
+          name: 'searchPlaceholder',
+          type: 'string',
+          default: '"Search models"',
+          description: 'Placeholder for the search box when searchable is on.',
         },
         { name: 'class', type: 'string', description: 'Extra classes for the host.' },
       ],
@@ -223,4 +264,11 @@ export class ModelPickerDemo {
 ];
 
 <pk-model-picker [models]="models" [(selectedId)]="selectedId" />`;
+
+  protected readonly searchableCode = `<pk-model-picker
+  [searchable]="true"
+  [models]="models"
+  [(selectedId)]="selectedId"
+  searchPlaceholder="Search models..."
+/>`;
 }
