@@ -38,7 +38,8 @@ import { PkChainOfThoughtImports } from 'ngx-prompt-kit/chain-of-thought';
             <pk-chain-of-thought-content>
               <pk-chain-of-thought-item>
                 Visited 14 functions, found one cycle in the auth middleware between
-                <code class="font-mono text-xs">refreshSession</code> and <code class="font-mono text-xs">verifyToken</code>.
+                <code class="font-mono text-xs">refreshSession</code> and
+                <code class="font-mono text-xs">verifyToken</code>.
               </pk-chain-of-thought-item>
             </pk-chain-of-thought-content>
           </pk-chain-of-thought-step>
@@ -81,8 +82,8 @@ import { PkChainOfThoughtImports } from 'ngx-prompt-kit/chain-of-thought';
             </pk-chain-of-thought-trigger>
             <pk-chain-of-thought-content>
               <pk-chain-of-thought-item>
-                Hot path: ResizeObserver re-measure on every step toggle. Batched into a single
-                rAF dispatch.
+                Hot path: ResizeObserver re-measure on every step toggle. Batched into a single rAF
+                dispatch.
               </pk-chain-of-thought-item>
             </pk-chain-of-thought-content>
           </pk-chain-of-thought-step>
@@ -139,23 +140,46 @@ export class ChainOfThoughtDemo {
   protected readonly api: ApiSection[] = [
     {
       name: 'PkChainOfThought',
-      props: [
-        { name: 'class', type: 'string', description: 'Extra classes for the wrapper.' },
-      ],
+      props: [{ name: 'class', type: 'string', description: 'Extra classes for the wrapper.' }],
     },
     {
       name: 'PkChainOfThoughtStep',
       props: [
-        { name: 'open', type: 'model<boolean>', description: 'Two-way bound open state. Leave unbound for uncontrolled.' },
-        { name: 'defaultOpen', type: 'boolean', default: 'false', description: 'Initial expanded state when uncontrolled.' },
-        { name: 'last', type: 'boolean', default: 'false', description: 'Marks the final step so the connecting line stops here.' },
+        {
+          name: 'open',
+          type: 'model<boolean>',
+          description: 'Two-way bound open state. Leave unbound for uncontrolled.',
+        },
+        {
+          name: 'defaultOpen',
+          type: 'boolean',
+          default: 'false',
+          description: 'Initial expanded state when uncontrolled.',
+        },
+        {
+          name: 'last',
+          type: 'boolean',
+          default: 'false',
+          description: 'Marks the final step so the connecting line stops here.',
+        },
       ],
     },
     {
       name: 'PkChainOfThoughtTrigger',
       props: [
-        { name: 'leftIcon', type: 'boolean', default: 'false', description: 'Reserve a left-icon slot. Project the icon via the [leftIcon] attribute (e.g. <ng-icon leftIcon hlm name="lucideSearch" />).' },
-        { name: 'swapIconOnHover', type: 'boolean', default: 'true', description: 'Swap leftIcon for the chevron on hover.' },
+        {
+          name: 'leftIcon',
+          type: 'boolean',
+          default: 'false',
+          description:
+            'Reserve a left-icon slot. Project the icon via the [leftIcon] attribute (e.g. <ng-icon leftIcon hlm name="lucideSearch" />).',
+        },
+        {
+          name: 'swapIconOnHover',
+          type: 'boolean',
+          default: 'true',
+          description: 'Swap leftIcon for the chevron on hover.',
+        },
         { name: 'class', type: 'string', description: 'Extra classes for the trigger.' },
       ],
     },
@@ -167,9 +191,7 @@ export class ChainOfThoughtDemo {
     },
     {
       name: 'PkChainOfThoughtItem',
-      props: [
-        { name: 'class', type: 'string', description: 'Extra classes for the item.' },
-      ],
+      props: [{ name: 'class', type: 'string', description: 'Extra classes for the item.' }],
     },
   ];
 }

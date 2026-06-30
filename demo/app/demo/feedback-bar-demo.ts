@@ -33,7 +33,11 @@ import { PkFeedbackBar } from 'ngx-prompt-kit/feedback-bar';
         } @else {
           <p class="text-muted-foreground text-sm">
             Closed.
-            <button class="text-foreground underline underline-offset-4" type="button" (click)="visible1.set(true)">
+            <button
+              class="text-foreground underline underline-offset-4"
+              type="button"
+              (click)="visible1.set(true)"
+            >
               Show again
             </button>
           </p>
@@ -57,7 +61,11 @@ import { PkFeedbackBar } from 'ngx-prompt-kit/feedback-bar';
         } @else {
           <p class="text-muted-foreground text-sm">
             Closed.
-            <button class="text-foreground underline underline-offset-4" type="button" (click)="visible2.set(true)">
+            <button
+              class="text-foreground underline underline-offset-4"
+              type="button"
+              (click)="visible2.set(true)"
+            >
               Show again
             </button>
           </p>
@@ -106,7 +114,11 @@ export class FeedbackBarDemo {
         { name: 'notHelpful', type: 'output<void>', description: 'Fires on thumbs-down click.' },
         { name: 'closed', type: 'output<void>', description: 'Fires on the X close click.' },
         { name: 'class', type: 'string', description: 'Extra classes for the wrapper.' },
-        { name: '[icon] slot', type: 'ng-content', description: 'Project a leading icon (any element with the icon attribute).' },
+        {
+          name: '[icon] slot',
+          type: 'ng-content',
+          description: 'Project a leading icon (any element with the icon attribute).',
+        },
       ],
     },
   ];

@@ -83,8 +83,7 @@ export class ModelMarketplaceBlock {
       iconUrl: ICON('gemini'),
       provider: 'Google',
       group: 'Frontier',
-      description:
-        "Google's frontier model with native 2M context. Strong on long-document tasks.",
+      description: "Google's frontier model with native 2M context. Strong on long-document tasks.",
       inputPricePer1M: 2.5,
       outputPricePer1M: 10.0,
       currency: 'USD',
@@ -114,7 +113,7 @@ export class ModelMarketplaceBlock {
       iconUrl: ICON('meta'),
       provider: 'Meta',
       group: 'Open Source',
-      description: 'Meta\'s flagship open weights, strong on instruction following.',
+      description: "Meta's flagship open weights, strong on instruction following.",
       inputPricePer1M: 1.2,
       outputPricePer1M: 4.8,
       currency: 'USD',

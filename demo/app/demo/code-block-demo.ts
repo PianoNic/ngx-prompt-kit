@@ -20,7 +20,9 @@ import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
         [code]="withHeaderCode"
       >
         <pk-code-block class="w-full max-w-2xl">
-          <pk-code-block-group class="border-border border-b px-4 py-2 text-xs text-muted-foreground">
+          <pk-code-block-group
+            class="border-border border-b px-4 py-2 text-xs text-muted-foreground"
+          >
             <span class="font-mono">greeter.ts</span>
             <span class="uppercase tracking-wider">typescript</span>
           </pk-code-block-group>
@@ -53,16 +55,24 @@ export class CodeBlockDemo {
     },
     {
       name: 'PkCodeBlockGroup',
-      props: [
-        { name: 'class', type: 'string', description: 'Extra classes for the header row.' },
-      ],
+      props: [{ name: 'class', type: 'string', description: 'Extra classes for the header row.' }],
     },
     {
       name: 'PkCodeBlockCode',
       props: [
         { name: 'code', type: 'string', default: "''", description: 'The source to highlight.' },
-        { name: 'language', type: 'string', default: "'tsx'", description: 'Shiki language identifier.' },
-        { name: 'theme', type: 'string', default: "'github-light'", description: 'Shiki theme name.' },
+        {
+          name: 'language',
+          type: 'string',
+          default: "'tsx'",
+          description: 'Shiki language identifier.',
+        },
+        {
+          name: 'theme',
+          type: 'string',
+          default: "'github-light'",
+          description: 'Shiki theme name.',
+        },
         { name: 'class', type: 'string', description: 'Extra classes for the code container.' },
       ],
     },

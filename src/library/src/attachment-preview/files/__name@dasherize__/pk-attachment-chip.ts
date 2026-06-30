@@ -1,13 +1,7 @@
 // ngx-prompt-kit original — not part of ibelick/prompt-kit
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import {
-  lucideImage,
-  lucideMusic,
-  lucidePaperclip,
-  lucideVideo,
-  lucideX,
-} from '@ng-icons/lucide';
+import { lucideImage, lucideMusic, lucidePaperclip, lucideVideo, lucideX } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { cn } from '../utils/cn';
@@ -17,9 +11,7 @@ import { type Attachment, formatAttachmentSize } from './pk-attachment-types';
   selector: 'pk-attachment-chip',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [HlmButton, HlmIconImports],
-  providers: [
-    provideIcons({ lucideImage, lucideMusic, lucidePaperclip, lucideVideo, lucideX }),
-  ],
+  providers: [provideIcons({ lucideImage, lucideMusic, lucidePaperclip, lucideVideo, lucideX })],
   host: {
     '[class]': 'hostClass()',
   },

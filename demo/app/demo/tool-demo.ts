@@ -113,8 +113,17 @@ export class ToolDemo {
     {
       name: 'PkTool',
       props: [
-        { name: 'toolPart', type: 'ToolPart', description: 'Required. { type, state, input?, output?, toolCallId?, errorText? }' },
-        { name: 'defaultOpen', type: 'boolean', default: 'false', description: 'Initial expanded state.' },
+        {
+          name: 'toolPart',
+          type: 'ToolPart',
+          description: 'Required. { type, state, input?, output?, toolCallId?, errorText? }',
+        },
+        {
+          name: 'defaultOpen',
+          type: 'boolean',
+          default: 'false',
+          description: 'Initial expanded state.',
+        },
         { name: 'class', type: 'string', description: 'Extra classes for the wrapper.' },
       ],
     },
@@ -122,11 +131,32 @@ export class ToolDemo {
       name: 'ToolPart',
       props: [
         { name: 'type', type: 'string', description: 'Tool name (e.g. "fetch_weather").' },
-        { name: 'state', type: 'ToolState', description: '"input-streaming" | "input-available" | "output-available" | "output-error"' },
-        { name: 'input', type: 'Record<string, unknown>', description: 'Arguments. Pretty-printed in the Input section when present.' },
-        { name: 'output', type: 'Record<string, unknown>', description: 'Result. JSON-stringified in the Output section.' },
-        { name: 'errorText', type: 'string', description: 'Error message (only shown for state=output-error).' },
-        { name: 'toolCallId', type: 'string', description: 'Call ID, displayed at the bottom in monospace.' },
+        {
+          name: 'state',
+          type: 'ToolState',
+          description:
+            '"input-streaming" | "input-available" | "output-available" | "output-error"',
+        },
+        {
+          name: 'input',
+          type: 'Record<string, unknown>',
+          description: 'Arguments. Pretty-printed in the Input section when present.',
+        },
+        {
+          name: 'output',
+          type: 'Record<string, unknown>',
+          description: 'Result. JSON-stringified in the Output section.',
+        },
+        {
+          name: 'errorText',
+          type: 'string',
+          description: 'Error message (only shown for state=output-error).',
+        },
+        {
+          name: 'toolCallId',
+          type: 'string',
+          description: 'Call ID, displayed at the bottom in monospace.',
+        },
       ],
     },
   ];

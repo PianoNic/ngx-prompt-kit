@@ -17,13 +17,7 @@ import { SOURCE_STATE } from './source.state';
         class="flex flex-col gap-2 p-3"
       >
         <div class="flex items-center gap-1.5">
-          <img
-            [src]="favicon()"
-            alt="favicon"
-            class="size-4 rounded-full"
-            width="16"
-            height="16"
-          />
+          <img [src]="favicon()" alt="favicon" class="size-4 rounded-full" width="16" height="16" />
           <div class="text-primary truncate text-sm">{{ shortDomain() }}</div>
         </div>
         <div class="line-clamp-2 text-sm font-medium">{{ title() }}</div>

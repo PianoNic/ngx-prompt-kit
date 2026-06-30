@@ -6,6 +6,4 @@ import { RenderMode, ServerRoute } from '@angular/ssr';
  * the wildcard discovers them via the Router config and emits one HTML
  * file per route under dist/demo/browser/.
  */
-export const serverRoutes: ServerRoute[] = [
-  { path: '**', renderMode: RenderMode.Prerender },
-];
+export const serverRoutes: ServerRoute[] = [{ path: '**', renderMode: RenderMode.Prerender }];

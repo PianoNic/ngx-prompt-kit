@@ -23,7 +23,9 @@ import { BLOCKS } from './blocks-data';
             [routerLink]="['/blocks', b.slug]"
             class="group border-border bg-background hover:border-primary/40 hover:bg-muted/40 flex flex-col overflow-hidden rounded-lg border transition-colors"
           >
-            <div class="border-border flex aspect-[16/9] w-full items-center justify-center overflow-hidden border-b bg-white p-3 dark:bg-black">
+            <div
+              class="border-border flex aspect-[16/9] w-full items-center justify-center overflow-hidden border-b bg-white p-3 dark:bg-black"
+            >
               <!-- One thumbnail per theme; the .dark class flip on documentElement
                    swaps which one is visible. Tailwind's dark: variant ships zero JS. -->
               <img

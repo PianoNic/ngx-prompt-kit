@@ -128,7 +128,12 @@ export class ModelListDemo {
 
   protected readonly shortList: Model[] = [
     { id: 'gpt-5', name: 'GPT-5', iconUrl: ICON('openai'), provider: 'OpenAI' },
-    { id: 'claude-opus', name: 'Claude Opus 4.7', iconUrl: ICON('anthropic'), provider: 'Anthropic' },
+    {
+      id: 'claude-opus',
+      name: 'Claude Opus 4.7',
+      iconUrl: ICON('anthropic'),
+      provider: 'Anthropic',
+    },
     { id: 'gemini-pro', name: 'Gemini 2.5 Pro', iconUrl: ICON('gemini'), provider: 'Google' },
   ];
 
@@ -163,10 +168,26 @@ export class ModelListDemo {
       props: [
         { name: 'id', type: 'string', description: 'Stable identifier (required).' },
         { name: 'name', type: 'string', description: 'Display name (required).' },
-        { name: 'iconUrl', type: 'string?', description: 'Logo image source. Falls back to initials when absent.' },
-        { name: 'provider', type: 'string?', description: 'Searchable but not displayed in this layout.' },
-        { name: 'tagline', type: 'string?', description: 'Inline metadata — parameter size, context length, etc.' },
-        { name: 'disabled', type: 'boolean?', description: 'Greys the row out and suppresses (changed).' },
+        {
+          name: 'iconUrl',
+          type: 'string?',
+          description: 'Logo image source. Falls back to initials when absent.',
+        },
+        {
+          name: 'provider',
+          type: 'string?',
+          description: 'Searchable but not displayed in this layout.',
+        },
+        {
+          name: 'tagline',
+          type: 'string?',
+          description: 'Inline metadata — parameter size, context length, etc.',
+        },
+        {
+          name: 'disabled',
+          type: 'boolean?',
+          description: 'Greys the row out and suppresses (changed).',
+        },
       ],
     },
     {

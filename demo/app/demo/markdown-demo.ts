@@ -27,18 +27,15 @@ import { PkMarkdown } from 'ngx-prompt-kit/markdown';
         description="A mid-stream chunk where the assistant hasn't finished writing the bullet list yet."
         [code]="partialCode"
       >
-        <pk-markdown
-          class="prose prose-sm dark:prose-invert w-full"
-          [content]="partial"
-        />
+        <pk-markdown class="prose prose-sm dark:prose-invert w-full" [content]="partial" />
       </app-doc-example>
 
       <p class="text-muted-foreground text-xs italic">
-        Math and diagram rendering are opt-in via [enableMath] and [enableDiagrams].
-        KaTeX (~280 KB) and Mermaid (~600 KB) lazy-load only when these flags are
-        true — the default markdown bundle stays light. KaTeX additionally requires
-        its stylesheet (<code class="font-mono">node_modules/katex/dist/katex.min.css</code>)
-        in your <code class="font-mono">angular.json</code> styles array.
+        Math and diagram rendering are opt-in via [enableMath] and [enableDiagrams]. KaTeX (~280 KB)
+        and Mermaid (~600 KB) lazy-load only when these flags are true — the default markdown bundle
+        stays light. KaTeX additionally requires its stylesheet (<code class="font-mono"
+          >node_modules/katex/dist/katex.min.css</code
+        >) in your <code class="font-mono">angular.json</code> styles array.
       </p>
 
       <app-doc-example
@@ -88,19 +85,26 @@ export class MarkdownDemo {
     {
       name: 'PkMarkdown',
       props: [
-        { name: 'content', type: 'string', default: "''", description: 'The markdown source to render.' },
+        {
+          name: 'content',
+          type: 'string',
+          default: "''",
+          description: 'The markdown source to render.',
+        },
         { name: 'class', type: 'string', description: 'Extra classes for the rendered container.' },
         {
           name: 'enableMath',
           type: 'boolean',
           default: 'false',
-          description: 'Lazy-load KaTeX and render LaTeX math. Requires katex.min.css in your global styles.',
+          description:
+            'Lazy-load KaTeX and render LaTeX math. Requires katex.min.css in your global styles.',
         },
         {
           name: 'enableDiagrams',
           type: 'boolean',
           default: 'false',
-          description: 'Lazy-load Mermaid and render ```mermaid blocks. Mermaid initializes with securityLevel:strict.',
+          description:
+            'Lazy-load Mermaid and render ```mermaid blocks. Mermaid initializes with securityLevel:strict.',
         },
         {
           name: 'mathInlineDelimiter',
@@ -118,7 +122,8 @@ export class MarkdownDemo {
           name: 'mermaidTheme',
           type: '"auto" | "default" | "dark"',
           default: '"auto"',
-          description: 'Mermaid theme. "auto" detects via the .dark class on documentElement; pass explicitly for bespoke theme management.',
+          description:
+            'Mermaid theme. "auto" detects via the .dark class on documentElement; pass explicitly for bespoke theme management.',
         },
       ],
     },

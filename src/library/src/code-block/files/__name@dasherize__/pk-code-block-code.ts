@@ -72,7 +72,9 @@ export class PkCodeBlockCode {
       this.themeRev();
       if (!this.isBrowser) return;
       if (!code) {
-        this.highlightedHtml.set(this.sanitizer.bypassSecurityTrustHtml('<pre><code></code></pre>'));
+        this.highlightedHtml.set(
+          this.sanitizer.bypassSecurityTrustHtml('<pre><code></code></pre>'),
+        );
         return;
       }
       try {

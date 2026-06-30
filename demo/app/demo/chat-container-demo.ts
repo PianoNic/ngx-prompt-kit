@@ -32,7 +32,14 @@ import { PkScrollButton } from 'ngx-prompt-kit/scroll-button';
         [code]="autoScrollCode"
       >
         <div class="w-full max-w-2xl">
-          <button hlmBtn variant="outline" size="sm" type="button" class="mb-3" (click)="addMessage()">
+          <button
+            hlmBtn
+            variant="outline"
+            size="sm"
+            type="button"
+            class="mb-3"
+            (click)="addMessage()"
+          >
             Add message
           </button>
           <div class="border-border h-[360px] rounded-lg border">
@@ -65,8 +72,16 @@ export class ChatContainerDemo {
       name: 'PkChatContainerRoot',
       props: [
         { name: 'class', type: 'string', description: 'Extra classes for the scroll container.' },
-        { name: 'isAtBottom', type: 'Signal<boolean>', description: 'Read-only signal exposed via CHAT_CONTAINER_STATE.' },
-        { name: 'scrollToBottom()', type: '(behavior?: ScrollBehavior) => void', description: 'Method to programmatically scroll to bottom.' },
+        {
+          name: 'isAtBottom',
+          type: 'Signal<boolean>',
+          description: 'Read-only signal exposed via CHAT_CONTAINER_STATE.',
+        },
+        {
+          name: 'scrollToBottom()',
+          type: '(behavior?: ScrollBehavior) => void',
+          description: 'Method to programmatically scroll to bottom.',
+        },
       ],
     },
     {
@@ -78,7 +93,11 @@ export class ChatContainerDemo {
     {
       name: 'PkChatContainerScrollAnchor',
       props: [
-        { name: 'class', type: 'string', description: 'Extra classes for the 1-pixel anchor element.' },
+        {
+          name: 'class',
+          type: 'string',
+          description: 'Extra classes for the 1-pixel anchor element.',
+        },
       ],
     },
   ];
@@ -91,10 +110,7 @@ export class ChatContainerDemo {
   );
   protected addMessage(): void {
     const list = this.messages();
-    this.messages.set([
-      ...list,
-      { id: list.length, text: `Message ${list.length + 1}` },
-    ]);
+    this.messages.set([...list, { id: list.length, text: `Message ${list.length + 1}` }]);
   }
 
   protected readonly autoScrollCode = `<pk-chat-container-root class="relative h-[360px] p-4">

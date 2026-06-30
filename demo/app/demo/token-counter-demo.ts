@@ -62,11 +62,7 @@ import { PkTokenCounterImports } from 'ngx-prompt-kit/token-counter';
             } @else {
               <span></span>
             }
-            <pk-token-counter
-              [text]="text2()"
-              [limit]="200"
-              (overLimit)="onOverLimit($event)"
-            />
+            <pk-token-counter [text]="text2()" [limit]="200" (overLimit)="onOverLimit($event)" />
           </div>
         </div>
       </app-doc-example>
@@ -84,12 +80,7 @@ import { PkTokenCounterImports } from 'ngx-prompt-kit/token-counter';
             (input)="text3.set($any($event.target).value)"
           ></textarea>
           <div class="flex justify-end">
-            <pk-token-counter
-              display="detailed"
-              mode="both"
-              [text]="text3()"
-              [limit]="4000"
-            />
+            <pk-token-counter display="detailed" mode="both" [text]="text3()" [limit]="4000" />
           </div>
         </div>
       </app-doc-example>
@@ -105,11 +96,15 @@ import { PkTokenCounterImports } from 'ngx-prompt-kit/token-counter';
             <pk-token-counter display="progress" [text]="filler30()" [limit]="200" />
           </div>
           <div>
-            <p class="text-muted-foreground mb-2 text-xs uppercase tracking-wider">Near limit · 85%</p>
+            <p class="text-muted-foreground mb-2 text-xs uppercase tracking-wider">
+              Near limit · 85%
+            </p>
             <pk-token-counter display="progress" [text]="filler85()" [limit]="200" />
           </div>
           <div>
-            <p class="text-muted-foreground mb-2 text-xs uppercase tracking-wider">Over limit · 105%</p>
+            <p class="text-muted-foreground mb-2 text-xs uppercase tracking-wider">
+              Over limit · 105%
+            </p>
             <pk-token-counter display="progress" [text]="filler105()" [limit]="200" />
           </div>
         </div>
