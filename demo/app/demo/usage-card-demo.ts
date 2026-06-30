@@ -173,7 +173,6 @@ export class UsageCardDemo {
 
   protected onTopUp(): void {
     this.lastEvent.set('topUpClicked');
-    console.log('[usage-card demo] top-up requested');
   }
 
   protected readonly api: ApiSection[] = [

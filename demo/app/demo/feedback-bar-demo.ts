@@ -90,8 +90,6 @@ export class FeedbackBarDemo {
 
   protected onAction(label: string): void {
     this.lastEvent.set(label);
-    // eslint-disable-next-line no-console
-    console.log('[feedback-bar]', label);
   }
 
   protected readonly basicCode = `<pk-feedback-bar
