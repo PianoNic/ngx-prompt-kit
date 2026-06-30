@@ -1,7 +1,15 @@
 // ngx-prompt-kit original — not part of ibelick/prompt-kit
-import { ChangeDetectionStrategy, Component, computed, input, model, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+  model,
+  output,
+  signal,
+} from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import { lucideCheck, lucideChevronDown } from '@ng-icons/lucide';
+import { lucideCheck, lucideChevronDown, lucideSearch } from '@ng-icons/lucide';
 import { HlmBadge } from '@spartan-ng/helm/badge';
 import { HlmButton } from '@spartan-ng/helm/button';
 import {
@@ -24,7 +32,7 @@ import { formatModelPrice, type Model, type ModelTier } from './pk-model-types';
     HlmDropdownMenuTrigger,
     HlmIconImports,
   ],
-  providers: [provideIcons({ lucideCheck, lucideChevronDown })],
+  providers: [provideIcons({ lucideCheck, lucideChevronDown, lucideSearch })],
   host: {
     '[class]': 'hostClass()',
   },
@@ -40,7 +48,11 @@ import { formatModelPrice, type Model, type ModelTier } from './pk-model-types';
       <span class="flex items-center gap-2">
         @if (selected(); as s) {
           @if (s.iconUrl; as src) {
-            <img [src]="src" [alt]="s.name + ' icon'" class="h-4 w-4 shrink-0 rounded-sm object-contain dark:invert" />
+            <img
+              [src]="src"
+              [alt]="s.name + ' icon'"
+              class="h-4 w-4 shrink-0 rounded-sm object-contain dark:invert"
+            />
           }
           <span class="text-foreground">{{ s.name }}</span>
           @if (!compact() && s.tier; as t) {
@@ -55,7 +67,24 @@ import { formatModelPrice, type Model, type ModelTier } from './pk-model-types';
 
     <ng-template #menu>
       <hlm-dropdown-menu class="min-w-[280px]">
-        @for (m of models(); track m.id) {
+        @if (searchable()) {
+          <div
+            class="border-border flex items-center gap-2 border-b px-3 py-2"
+            (click)="$event.stopPropagation()"
+          >
+            <ng-icon hlm size="xs" name="lucideSearch" class="text-muted-foreground shrink-0" />
+            <input
+              type="text"
+              [value]="query()"
+              (input)="onSearch($event)"
+              (keydown)="$event.stopPropagation()"
+              [placeholder]="searchPlaceholder()"
+              class="text-foreground placeholder:text-muted-foreground w-full bg-transparent text-sm outline-none"
+              aria-label="Search models"
+            />
+          </div>
+        }
+        @for (m of filtered(); track m.id) {
           <button
             hlmDropdownMenuItem
             type="button"
@@ -71,7 +100,11 @@ import { formatModelPrice, type Model, type ModelTier } from './pk-model-types';
                   <span class="w-3 shrink-0" aria-hidden="true"></span>
                 }
                 @if (m.iconUrl; as src) {
-                  <img [src]="src" [alt]="m.name + ' icon'" class="h-4 w-4 shrink-0 rounded-sm object-contain dark:invert" />
+                  <img
+                    [src]="src"
+                    [alt]="m.name + ' icon'"
+                    class="h-4 w-4 shrink-0 rounded-sm object-contain dark:invert"
+                  />
                 }
                 <span class="text-foreground font-medium">{{ m.name }}</span>
                 @if (m.provider; as p) {
@@ -90,6 +123,11 @@ import { formatModelPrice, type Model, type ModelTier } from './pk-model-types';
             }
           </button>
         }
+        @if (searchable() && filtered().length === 0) {
+          <p class="text-muted-foreground px-3 py-6 text-center text-xs">
+            No models match "{{ query() }}".
+          </p>
+        }
       </hlm-dropdown-menu>
     </ng-template>
   `,
@@ -100,9 +138,14 @@ export class PkModelPicker {
   public readonly placeholder = input<string>('Select model');
   public readonly compact = input<boolean>(false);
   public readonly locale = input<string | undefined>(undefined);
+  /** Show a filter box at the top of the menu (for long model lists). */
+  public readonly searchable = input<boolean>(false);
+  public readonly searchPlaceholder = input<string>('Search models');
   public readonly class = input<string>('');
 
   public readonly changed = output<Model>();
+
+  protected readonly query = signal('');
 
   protected readonly hostClass = computed(() => cn('inline-block', this.class()));
 
@@ -111,6 +154,19 @@ export class PkModelPicker {
     if (!id) return null;
     return this.models().find((m) => m.id === id) ?? null;
   });
+
+  protected readonly filtered = computed<readonly Model[]>(() => {
+    const q = this.query().trim().toLowerCase();
+    const all = this.models();
+    if (!q || !this.searchable()) return all;
+    return all.filter((m) =>
+      `${m.name} ${m.provider ?? ''} ${m.tagline ?? ''}`.toLowerCase().includes(q),
+    );
+  });
+
+  protected onSearch(event: Event): void {
+    this.query.set((event.target as HTMLInputElement).value);
+  }
 
   protected pick(m: Model): void {
     if (m.disabled === true) return;

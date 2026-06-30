@@ -41,11 +41,7 @@ import { PkModelPickerImports, type Model } from 'ngx-prompt-kit/model-picker';
       >
         <div class="flex w-full items-center gap-2">
           <span class="text-muted-foreground text-sm">Active model:</span>
-          <pk-model-picker
-            [compact]="true"
-            [models]="models"
-            [(selectedId)]="compactSelectedId"
-          />
+          <pk-model-picker [compact]="true" [models]="models" [(selectedId)]="compactSelectedId" />
         </div>
       </app-doc-example>
 
@@ -54,10 +50,22 @@ import { PkModelPickerImports, type Model } from 'ngx-prompt-kit/model-picker';
         description="Set disabled: true on a Model entry to grey it out. (changed) does not fire and selectedId does not update if the user clicks it."
         [code]="disabledCode"
       >
-        <pk-model-picker
-          [models]="modelsWithDisabled"
-          [(selectedId)]="disabledExampleSelectedId"
-        />
+        <pk-model-picker [models]="modelsWithDisabled" [(selectedId)]="disabledExampleSelectedId" />
+      </app-doc-example>
+
+      <app-doc-example
+        title="Searchable (long lists)"
+        description="Set [searchable]='true' to add a filter box at the top of the menu — filters by name, provider, and tagline. Ideal for long catalogs like OpenRouter where a flat dropdown is unwieldy."
+        [code]="searchableCode"
+      >
+        <div class="flex w-full flex-col items-start gap-3" data-testid="searchable-picker">
+          <pk-model-picker
+            [searchable]="true"
+            [models]="manyModels"
+            [(selectedId)]="searchSelectedId"
+            searchPlaceholder="Search models..."
+          />
+        </div>
       </app-doc-example>
 
       <app-doc-install component="model-picker" />
@@ -69,6 +77,7 @@ export class ModelPickerDemo {
   protected readonly selectedId = signal<string | null>('balanced');
   protected readonly compactSelectedId = signal<string | null>('fast');
   protected readonly disabledExampleSelectedId = signal<string | null>('available');
+  protected readonly searchSelectedId = signal<string | null>('gpt-4o');
   protected readonly lastChange = signal<string | null>(null);
 
   protected readonly models: Model[] = [
@@ -104,6 +113,18 @@ export class ModelPickerDemo {
     },
   ];
 
+  protected readonly manyModels: Model[] = [
+    { id: 'gpt-4o', name: 'GPT-4o', provider: 'OpenAI', tier: 'smart' },
+    { id: 'gpt-4o-mini', name: 'GPT-4o mini', provider: 'OpenAI', tier: 'fast' },
+    { id: 'claude-opus', name: 'Claude Opus', provider: 'Anthropic', tier: 'smart' },
+    { id: 'claude-sonnet', name: 'Claude Sonnet', provider: 'Anthropic', tier: 'balanced' },
+    { id: 'claude-haiku', name: 'Claude Haiku', provider: 'Anthropic', tier: 'fast' },
+    { id: 'gemini-pro', name: 'Gemini 2.5 Pro', provider: 'Google', tier: 'smart' },
+    { id: 'gemini-flash', name: 'Gemini 2.5 Flash', provider: 'Google', tier: 'fast' },
+    { id: 'llama-70b', name: 'Llama 3.3 70B', provider: 'Meta', tier: 'balanced' },
+    { id: 'mistral-large', name: 'Mistral Large', provider: 'Mistral', tier: 'balanced' },
+  ];
+
   protected readonly modelsWithDisabled: Model[] = [
     {
       id: 'available',
@@ -134,7 +155,8 @@ export class ModelPickerDemo {
           name: 'selectedId',
           type: 'string | null',
           default: 'null',
-          description: 'Two-way bindable via [(selectedId)]. Component reflects the selection in the trigger; consumer drives any side effects.',
+          description:
+            'Two-way bindable via [(selectedId)]. Component reflects the selection in the trigger; consumer drives any side effects.',
         },
         {
           name: 'placeholder',
@@ -146,12 +168,26 @@ export class ModelPickerDemo {
           name: 'compact',
           type: 'boolean',
           default: 'false',
-          description: 'Smaller trigger; drops the tier badge from the trigger button. The dropdown is unaffected.',
+          description:
+            'Smaller trigger; drops the tier badge from the trigger button. The dropdown is unaffected.',
         },
         {
           name: 'locale',
           type: 'string | undefined',
           description: 'BCP-47 locale for the price formatter. Defaults to runtime locale.',
+        },
+        {
+          name: 'searchable',
+          type: 'boolean',
+          default: 'false',
+          description:
+            'Adds a filter box at the top of the menu (filters by name/provider/tagline).',
+        },
+        {
+          name: 'searchPlaceholder',
+          type: 'string',
+          default: '"Search models"',
+          description: 'Placeholder for the search box when searchable is on.',
         },
         { name: 'class', type: 'string', description: 'Extra classes for the host.' },
       ],
@@ -162,7 +198,11 @@ export class ModelPickerDemo {
         { name: 'id', type: 'string', description: 'Stable identifier (required).' },
         { name: 'name', type: 'string', description: 'Display name (required).' },
         { name: 'provider', type: 'string?', description: 'Small muted suffix in the dropdown.' },
-        { name: 'tagline', type: 'string?', description: 'One-line description below the name in the dropdown.' },
+        {
+          name: 'tagline',
+          type: 'string?',
+          description: 'One-line description below the name in the dropdown.',
+        },
         {
           name: 'tier',
           type: '"fast" | "balanced" | "smart" | undefined',
@@ -171,7 +211,8 @@ export class ModelPickerDemo {
         {
           name: 'inputPricePer1M / outputPricePer1M',
           type: 'number?',
-          description: 'Per-million-token pricing in `currency`. Both must be set for the price line to render.',
+          description:
+            'Per-million-token pricing in `currency`. Both must be set for the price line to render.',
         },
         {
           name: 'currency',
@@ -179,7 +220,11 @@ export class ModelPickerDemo {
           default: '"USD"',
           description: 'ISO 4217 code; passed to Intl.NumberFormat with the resolved locale.',
         },
-        { name: 'disabled', type: 'boolean?', description: 'Greys the item out and suppresses (changed).' },
+        {
+          name: 'disabled',
+          type: 'boolean?',
+          description: 'Greys the item out and suppresses (changed).',
+        },
       ],
     },
     {
@@ -219,4 +264,11 @@ export class ModelPickerDemo {
 ];
 
 <pk-model-picker [models]="models" [(selectedId)]="selectedId" />`;
+
+  protected readonly searchableCode = `<pk-model-picker
+  [searchable]="true"
+  [models]="models"
+  [(selectedId)]="selectedId"
+  searchPlaceholder="Search models..."
+/>`;
 }
