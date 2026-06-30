@@ -122,8 +122,16 @@ export class ApprovalDemo {
       name: 'PkApproval',
       props: [
         { name: 'title', type: 'string', description: 'The action being requested (required).' },
-        { name: 'description', type: 'string | undefined', description: 'Optional context shown beneath the title.' },
-        { name: 'action', type: 'string | undefined', description: 'Verb shown in the badge — e.g. "execute", "send", "delete".' },
+        {
+          name: 'description',
+          type: 'string | undefined',
+          description: 'Optional context shown beneath the title.',
+        },
+        {
+          name: 'action',
+          type: 'string | undefined',
+          description: 'Verb shown in the badge — e.g. "execute", "send", "delete".',
+        },
         {
           name: 'severity',
           type: '"info" | "warning" | "destructive"',
@@ -134,15 +142,27 @@ export class ApprovalDemo {
           name: 'parameters',
           type: 'readonly ApprovalParameter[]',
           default: '[]',
-          description: 'Label/value rows shown beneath the description. Each: { label, value, truncate? }.',
+          description:
+            'Label/value rows shown beneath the description. Each: { label, value, truncate? }.',
         },
-        { name: 'approveLabel', type: 'string', default: '"Approve"', description: 'Approve button label.' },
-        { name: 'rejectLabel', type: 'string', default: '"Reject"', description: 'Reject button label.' },
+        {
+          name: 'approveLabel',
+          type: 'string',
+          default: '"Approve"',
+          description: 'Approve button label.',
+        },
+        {
+          name: 'rejectLabel',
+          type: 'string',
+          default: '"Reject"',
+          description: 'Reject button label.',
+        },
         {
           name: 'pending',
           type: 'boolean',
           default: 'false',
-          description: 'Disables both buttons and shows a spinner on Approve while an async action is in flight.',
+          description:
+            'Disables both buttons and shows a spinner on Approve while an async action is in flight.',
         },
         { name: 'class', type: 'string', description: 'Extra classes for the host.' },
       ],
@@ -151,15 +171,32 @@ export class ApprovalDemo {
       name: 'PkApprovalParameter',
       props: [
         { name: 'label', type: 'string', description: 'Parameter name (required).' },
-        { name: 'value', type: 'string', description: 'Parameter value, rendered in monospace (required).' },
-        { name: 'truncate', type: 'boolean', default: 'true', description: 'Truncate long values with ellipsis.' },
+        {
+          name: 'value',
+          type: 'string',
+          description: 'Parameter value, rendered in monospace (required).',
+        },
+        {
+          name: 'truncate',
+          type: 'boolean',
+          default: 'true',
+          description: 'Truncate long values with ellipsis.',
+        },
       ],
     },
     {
       name: 'Outputs',
       props: [
-        { name: 'approved', type: '() => void', description: 'Approve clicked, or Enter pressed while focused.' },
-        { name: 'rejected', type: '() => void', description: 'Reject clicked, or Esc pressed while focused.' },
+        {
+          name: 'approved',
+          type: '() => void',
+          description: 'Approve clicked, or Enter pressed while focused.',
+        },
+        {
+          name: 'rejected',
+          type: '() => void',
+          description: 'Reject clicked, or Esc pressed while focused.',
+        },
       ],
     },
   ];

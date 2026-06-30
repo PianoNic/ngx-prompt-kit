@@ -94,10 +94,27 @@ export class ImageDemo {
       name: 'PkImage',
       props: [
         { name: 'alt', type: 'string', description: 'Alt text (required).' },
-        { name: 'src', type: 'string', description: 'Regular image URL — uses NgOptimizedImage. Width and height required.' },
-        { name: 'base64', type: 'string', description: 'Base64 payload (renders as data: URL via plain img).' },
-        { name: 'uint8Array', type: 'Uint8Array', description: 'Binary payload (rendered as a blob: URL, revoked on destroy).' },
-        { name: 'mediaType', type: 'string', default: "'image/png'", description: 'MIME type for base64 / blob payloads.' },
+        {
+          name: 'src',
+          type: 'string',
+          description: 'Regular image URL — uses NgOptimizedImage. Width and height required.',
+        },
+        {
+          name: 'base64',
+          type: 'string',
+          description: 'Base64 payload (renders as data: URL via plain img).',
+        },
+        {
+          name: 'uint8Array',
+          type: 'Uint8Array',
+          description: 'Binary payload (rendered as a blob: URL, revoked on destroy).',
+        },
+        {
+          name: 'mediaType',
+          type: 'string',
+          default: "'image/png'",
+          description: 'MIME type for base64 / blob payloads.',
+        },
         { name: 'width', type: 'number', description: 'Required when src is set.' },
         { name: 'height', type: 'number', description: 'Required when src is set.' },
         { name: 'class', type: 'string', description: 'Extra classes for the img / placeholder.' },

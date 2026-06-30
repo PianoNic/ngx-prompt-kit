@@ -253,9 +253,23 @@ export const routes: Routes = [
         loadComponent: () => import('./demo/tool-demo').then((m) => m.ToolDemo),
       },
       {
+        path: 'components/tool-steps',
+        loadComponent: () => import('./demo/tool-steps-demo').then((m) => m.ToolStepsDemo),
+      },
+      {
+        path: 'utilities/streaming',
+        loadComponent: () => import('./demo/streaming-demo').then((m) => m.StreamingDemo),
+      },
+      {
+        path: 'utilities/streaming-message',
+        loadComponent: () =>
+          import('./demo/streaming-message-demo').then((m) => m.StreamingMessageDemo),
+      },
+      {
         path: 'utilities/http-error',
         loadComponent: () => import('./demo/http-error-demo').then((m) => m.HttpErrorDemo),
       },
     ],
   },
+  { path: '**', redirectTo: '' },
 ];

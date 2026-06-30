@@ -9,7 +9,8 @@ export const BLOCKS: readonly BlockMeta[] = [
   {
     slug: 'empty-state',
     title: 'Empty-state onboarding',
-    description: 'First-message experience: hero, suggestion grid, and prompt input wired together.',
+    description:
+      'First-message experience: hero, suggestion grid, and prompt input wired together.',
   },
   {
     slug: 'streaming-message',
@@ -24,7 +25,8 @@ export const BLOCKS: readonly BlockMeta[] = [
   {
     slug: 'reasoning-pane',
     title: 'Reasoning / thinking pane',
-    description: '"Show your work" pattern: a thinking bar collapses into a chain-of-thought timeline.',
+    description:
+      '"Show your work" pattern: a thinking bar collapses into a chain-of-thought timeline.',
   },
   {
     slug: 'branch-edit',
@@ -64,7 +66,8 @@ export const BLOCKS: readonly BlockMeta[] = [
   {
     slug: 'model-marketplace',
     title: 'Model marketplace',
-    description: 'OpenRouter-style split-pane model picker with search, filters, and pricing detail.',
+    description:
+      'OpenRouter-style split-pane model picker with search, filters, and pricing detail.',
   },
   {
     slug: 'image-result',
@@ -109,6 +112,7 @@ export const BLOCKS: readonly BlockMeta[] = [
   {
     slug: 'ai-plan',
     title: 'AI-driven plan',
-    description: 'Agent emits a pk-todo-list, ticks items off as it executes, auto-collapses on done.',
+    description:
+      'Agent emits a pk-todo-list, ticks items off as it executes, auto-collapses on done.',
   },
 ];

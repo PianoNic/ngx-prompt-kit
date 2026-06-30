@@ -12,7 +12,15 @@ import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
 @Component({
   selector: 'app-prompt-input-demo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DocPage, DocExample, DocInstall, DocApi, HlmButton, HlmIconImports, PkPromptInputImports],
+  imports: [
+    DocPage,
+    DocExample,
+    DocInstall,
+    DocApi,
+    HlmButton,
+    HlmIconImports,
+    PkPromptInputImports,
+  ],
   providers: [provideIcons({ lucideArrowUp, lucideMic, lucidePaperclip })],
   template: `
     <app-doc-page
@@ -29,7 +37,14 @@ import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
             <pk-prompt-input-textarea placeholder="Type a message..." />
             <pk-prompt-input-actions class="mt-2 justify-end gap-1">
               <pk-prompt-input-action tooltip="Send">
-                <button hlmBtn size="icon-sm" type="button" class="rounded-full" (click)="onSubmit()" aria-label="Send">
+                <button
+                  hlmBtn
+                  size="icon-sm"
+                  type="button"
+                  class="rounded-full"
+                  (click)="onSubmit()"
+                  aria-label="Send"
+                >
                   <ng-icon hlm size="xs" name="lucideArrowUp" />
                 </button>
               </pk-prompt-input-action>
@@ -81,33 +96,70 @@ export class PromptInputDemo {
     {
       name: 'PkPromptInput',
       props: [
-        { name: 'value', type: 'model<string>', default: "''", description: 'Two-way bound text value.' },
-        { name: 'isLoading', type: 'boolean', default: 'false', description: 'Disables submit and shows the loading state.' },
-        { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the input entirely.' },
-        { name: 'maxHeight', type: 'number | string', default: '240', description: 'Cap on the autosizing textarea height.' },
-        { name: 'submitted', type: 'output<void>', description: 'Fires on Enter (without Shift) or programmatic submit().' },
+        {
+          name: 'value',
+          type: 'model<string>',
+          default: "''",
+          description: 'Two-way bound text value.',
+        },
+        {
+          name: 'isLoading',
+          type: 'boolean',
+          default: 'false',
+          description: 'Disables submit and shows the loading state.',
+        },
+        {
+          name: 'disabled',
+          type: 'boolean',
+          default: 'false',
+          description: 'Disables the input entirely.',
+        },
+        {
+          name: 'maxHeight',
+          type: 'number | string',
+          default: '240',
+          description: 'Cap on the autosizing textarea height.',
+        },
+        {
+          name: 'submitted',
+          type: 'output<void>',
+          description: 'Fires on Enter (without Shift) or programmatic submit().',
+        },
         { name: 'class', type: 'string', description: 'Extra classes for the wrapper.' },
       ],
     },
     {
       name: 'PkPromptInputTextarea',
       props: [
-        { name: 'placeholder', type: 'string', default: "''", description: 'Native textarea placeholder.' },
-        { name: 'disableAutosize', type: 'boolean', default: 'false', description: 'Skip auto height adjustment.' },
+        {
+          name: 'placeholder',
+          type: 'string',
+          default: "''",
+          description: 'Native textarea placeholder.',
+        },
+        {
+          name: 'disableAutosize',
+          type: 'boolean',
+          default: 'false',
+          description: 'Skip auto height adjustment.',
+        },
         { name: 'class', type: 'string', description: 'Extra classes for the textarea.' },
       ],
     },
     {
       name: 'PkPromptInputActions',
-      props: [
-        { name: 'class', type: 'string', description: 'Extra classes for the action row.' },
-      ],
+      props: [{ name: 'class', type: 'string', description: 'Extra classes for the action row.' }],
     },
     {
       name: 'PkPromptInputAction',
       props: [
         { name: 'tooltip', type: 'string', description: 'Tooltip label (required).' },
-        { name: 'side', type: '"top" | "bottom" | "left" | "right"', default: '"top"', description: 'Tooltip placement.' },
+        {
+          name: 'side',
+          type: '"top" | "bottom" | "left" | "right"',
+          default: '"top"',
+          description: 'Tooltip placement.',
+        },
         { name: 'class', type: 'string', description: 'Extra classes for the tooltip content.' },
       ],
     },

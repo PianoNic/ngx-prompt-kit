@@ -3,10 +3,7 @@ import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
-import {
-  PkStreamControlsImports,
-  type StreamControlsState,
-} from 'ngx-prompt-kit/stream-controls';
+import { PkStreamControlsImports, type StreamControlsState } from 'ngx-prompt-kit/stream-controls';
 
 @Component({
   selector: 'app-stream-controls-demo',
@@ -89,8 +86,7 @@ export class StreamControlsDemo {
           name: 'canRegenerate',
           type: 'boolean',
           default: 'true',
-          description:
-            'When false, the idle state renders nothing instead of a Regenerate button.',
+          description: 'When false, the idle state renders nothing instead of a Regenerate button.',
         },
         { name: 'class', type: 'string', description: 'Extra classes for the host.' },
       ],
@@ -106,8 +102,7 @@ export class StreamControlsDemo {
         {
           name: 'regenerate',
           type: '() => void',
-          description:
-            'Fires when Regenerate or Try again is clicked (state="idle" or "error").',
+          description: 'Fires when Regenerate or Try again is clicked (state="idle" or "error").',
         },
       ],
     },

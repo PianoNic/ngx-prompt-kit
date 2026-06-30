@@ -42,8 +42,7 @@ export function ngAdd(_options: NgAddOptions): Rule {
 
     if (!_options.skipHelmCheck) {
       const hasSpartan =
-        pkg.dependencies?.['@spartan-ng/brain'] ||
-        pkg.devDependencies?.['@spartan-ng/brain'];
+        pkg.dependencies?.['@spartan-ng/brain'] || pkg.devDependencies?.['@spartan-ng/brain'];
       if (!hasSpartan) {
         context.logger.warn('⚠  @spartan-ng/brain not found in package.json.');
         context.logger.warn(REQUIRED_HELM_HINT);

@@ -1,12 +1,5 @@
 // ngx-prompt-kit original — not part of ibelick/prompt-kit
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  effect,
-  input,
-  output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, input, output } from '@angular/core';
 import { cn } from '../utils/cn';
 
 export type TokenCounterMode = 'chars' | 'tokens' | 'both';
@@ -49,7 +42,12 @@ const fmt = new Intl.NumberFormat();
       } @else {
         <span [class]="textClass()">{{ primaryText() }}</span>
         @if (secondaryText(); as s) {
-          <span class="text-muted-foreground ml-1 tabular-nums" [class.text-xs]="display() !== 'footer'" [class.text-\[10px\]]="display() === 'footer'">{{ s }}</span>
+          <span
+            class="text-muted-foreground ml-1 tabular-nums"
+            [class.text-xs]="display() !== 'footer'"
+            [class.text-[10px]]="display() === 'footer'"
+            >{{ s }}</span
+          >
         }
       }
     }

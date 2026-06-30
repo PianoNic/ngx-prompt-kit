@@ -1,10 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
-import {
-  PkConversationListImports,
-  type Conversation,
-} from 'ngx-prompt-kit/conversation-list';
+import { PkConversationListImports, type Conversation } from 'ngx-prompt-kit/conversation-list';
 import { PkModelPickerImports, type Model } from 'ngx-prompt-kit/model-picker';
 import { PkUsageCardImports } from 'ngx-prompt-kit/usage-card';
 

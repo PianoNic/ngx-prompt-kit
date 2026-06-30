@@ -43,11 +43,7 @@ import {
       @if (filters().length > 0) {
         <div class="border-border flex flex-wrap gap-1.5 border-b px-3 py-2">
           @for (f of filters(); track f.id) {
-            <button
-              type="button"
-              (click)="toggleFilter(f.id)"
-              [class]="filterChipClass(f)"
-            >
+            <button type="button" (click)="toggleFilter(f.id)" [class]="filterChipClass(f)">
               {{ f.label }}
             </button>
           }
@@ -56,7 +52,9 @@ import {
       <div class="flex flex-1 flex-col overflow-y-auto py-1">
         @for (group of grouped(); track group.label) {
           @if (group.label) {
-            <p class="text-muted-foreground px-3 pt-3 pb-1 text-xs font-medium uppercase tracking-wider">
+            <p
+              class="text-muted-foreground px-3 pt-3 pb-1 text-xs font-medium uppercase tracking-wider"
+            >
               {{ group.label }}
             </p>
           }
@@ -127,14 +125,18 @@ import {
         }
         <div class="mt-4 flex flex-col">
           @if (priceLine(s); as price) {
-            <div class="border-border flex items-center justify-between gap-3 border-t py-3 text-sm">
+            <div
+              class="border-border flex items-center justify-between gap-3 border-t py-3 text-sm"
+            >
               <span class="text-muted-foreground">Pricing</span>
               <span class="text-foreground tabular-nums">{{ price }}</span>
             </div>
           }
           @if (s.metrics?.length) {
             @for (metric of s.metrics; track metric.label) {
-              <div class="border-border flex items-center justify-between gap-3 border-t py-3 text-sm">
+              <div
+                class="border-border flex items-center justify-between gap-3 border-t py-3 text-sm"
+              >
                 <span class="text-muted-foreground">{{ metric.label }}</span>
                 <span class="text-foreground tabular-nums">{{ metric.value }}</span>
               </div>
@@ -180,7 +182,12 @@ export class PkModelBrowser {
   );
 
   protected readonly activeFilterIds = computed(
-    () => new Set(this.filters().filter((f) => f.active === true).map((f) => f.id)),
+    () =>
+      new Set(
+        this.filters()
+          .filter((f) => f.active === true)
+          .map((f) => f.id),
+      ),
   );
 
   protected readonly filtered = computed<readonly BrowserModel[]>(() => {
@@ -204,16 +211,18 @@ export class PkModelBrowser {
     });
   });
 
-  protected readonly grouped = computed<ReadonlyArray<{ label: string; items: BrowserModel[] }>>(() => {
-    const list = this.filtered();
-    const grouped = new Map<string, BrowserModel[]>();
-    for (const m of list) {
-      const key = m.group ?? '';
-      if (!grouped.has(key)) grouped.set(key, []);
-      grouped.get(key)!.push(m);
-    }
-    return Array.from(grouped.entries()).map(([label, items]) => ({ label, items }));
-  });
+  protected readonly grouped = computed<ReadonlyArray<{ label: string; items: BrowserModel[] }>>(
+    () => {
+      const list = this.filtered();
+      const grouped = new Map<string, BrowserModel[]>();
+      for (const m of list) {
+        const key = m.group ?? '';
+        if (!grouped.has(key)) grouped.set(key, []);
+        grouped.get(key)!.push(m);
+      }
+      return Array.from(grouped.entries()).map(([label, items]) => ({ label, items }));
+    },
+  );
 
   protected readonly selected = computed<BrowserModel | null>(() => {
     const id = this.selectedId();
@@ -226,9 +235,7 @@ export class PkModelBrowser {
   }
 
   protected toggleFilter(id: string): void {
-    this.filters.update((list) =>
-      list.map((f) => (f.id === id ? { ...f, active: !f.active } : f)),
-    );
+    this.filters.update((list) => list.map((f) => (f.id === id ? { ...f, active: !f.active } : f)));
   }
 
   protected select(m: BrowserModel): void {

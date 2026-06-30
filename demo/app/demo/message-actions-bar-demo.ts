@@ -161,7 +161,12 @@ export class MessageActionsBarDemo {
   protected readonly customActions = computed<MessageAction[]>(() => [
     { id: 'copy', label: 'Copy', icon: 'lucideCopy' },
     { id: 'regenerate', label: 'Regenerate', icon: 'lucideRefreshCw' },
-    { id: 'thumbs-up', label: 'Good response', icon: 'lucideThumbsUp', active: this.thumbsUpActive() },
+    {
+      id: 'thumbs-up',
+      label: 'Good response',
+      icon: 'lucideThumbsUp',
+      active: this.thumbsUpActive(),
+    },
     { id: 'thumbs-down', label: 'Bad response', icon: 'lucideThumbsDown' },
     { id: 'bookmark', label: 'Save', icon: 'lucideBookmark', active: this.bookmarkActive() },
     { id: 'share', label: 'Share', icon: 'lucideShare2' },
@@ -183,12 +188,17 @@ export class MessageActionsBarDemo {
     {
       name: 'PkMessageActionsBar',
       props: [
-        { name: 'actions', type: 'readonly MessageAction[]', description: 'Buttons to render (required).' },
+        {
+          name: 'actions',
+          type: 'readonly MessageAction[]',
+          description: 'Buttons to render (required).',
+        },
         {
           name: 'visible',
           type: '"hover" | "always"',
           default: '"hover"',
-          description: 'hover: opacity-0 with group-hover/group-focus-within reveal — consumer wraps the message + bar in a group div. always: no transition.',
+          description:
+            'hover: opacity-0 with group-hover/group-focus-within reveal — consumer wraps the message + bar in a group div. always: no transition.',
         },
         {
           name: 'orientation',
@@ -202,25 +212,60 @@ export class MessageActionsBarDemo {
     {
       name: 'MessageAction interface',
       props: [
-        { name: 'id', type: 'string', description: 'Stable identifier — track-by + emitted from (actionPicked).' },
+        {
+          name: 'id',
+          type: 'string',
+          description: 'Stable identifier — track-by + emitted from (actionPicked).',
+        },
         { name: 'label', type: 'string', description: 'Tooltip text + aria-label.' },
-        { name: 'icon', type: 'string', description: 'Lucide icon name; consumer must register via provideIcons().' },
-        { name: 'variant', type: '"default" | "destructive"', default: '"default"', description: 'destructive paints the icon red.' },
-        { name: 'disabled', type: 'boolean', default: 'false', description: 'Greys the button and prevents (actionPicked).' },
-        { name: 'active', type: 'boolean', default: 'false', description: 'Lights the button with bg-accent + text-primary; sets aria-pressed="true".' },
+        {
+          name: 'icon',
+          type: 'string',
+          description: 'Lucide icon name; consumer must register via provideIcons().',
+        },
+        {
+          name: 'variant',
+          type: '"default" | "destructive"',
+          default: '"default"',
+          description: 'destructive paints the icon red.',
+        },
+        {
+          name: 'disabled',
+          type: 'boolean',
+          default: 'false',
+          description: 'Greys the button and prevents (actionPicked).',
+        },
+        {
+          name: 'active',
+          type: 'boolean',
+          default: 'false',
+          description: 'Lights the button with bg-accent + text-primary; sets aria-pressed="true".',
+        },
       ],
     },
     {
       name: 'Outputs',
       props: [
-        { name: 'actionPicked', type: '(action: MessageAction) => void', description: 'The picked action (full object, not just id).' },
+        {
+          name: 'actionPicked',
+          type: '(action: MessageAction) => void',
+          description: 'The picked action (full object, not just id).',
+        },
       ],
     },
     {
       name: 'Exports',
       props: [
-        { name: 'DEFAULT_ASSISTANT_ACTIONS', type: 'readonly MessageAction[]', description: 'copy, regenerate, thumbs-up, thumbs-down.' },
-        { name: 'DEFAULT_USER_ACTIONS', type: 'readonly MessageAction[]', description: 'copy, edit.' },
+        {
+          name: 'DEFAULT_ASSISTANT_ACTIONS',
+          type: 'readonly MessageAction[]',
+          description: 'copy, regenerate, thumbs-up, thumbs-down.',
+        },
+        {
+          name: 'DEFAULT_USER_ACTIONS',
+          type: 'readonly MessageAction[]',
+          description: 'copy, edit.',
+        },
       ],
     },
   ];

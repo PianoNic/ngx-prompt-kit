@@ -1,4 +1,5 @@
 # <p align="center">ngx-prompt-kit</p>
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/PianoNic/ngx-prompt-kit/master/assets/icon.svg" width="120" alt="ngx-prompt-kit logo">
 </p>
@@ -73,28 +74,28 @@ ng generate ngx-prompt-kit:ui                                       # interactiv
 ng generate ngx-prompt-kit:ui --components=message,prompt-input     # non-interactive
 ```
 
-| Component           | Helm dependencies   | Other deps |
-|---------------------|---------------------|------------|
-| `chain-of-thought`  | icon                | —          |
-| `chat-container`    | —                   | —          |
-| `code-block`        | —                   | shiki      |
-| `feedback-bar`      | icon                | —          |
-| `file-upload`       | —                   | —          |
-| `image`             | —                   | —          |
-| `loader`            | —                   | —          |
-| `markdown`          | —                   | marked     |
-| `message`           | avatar, tooltip     | —          |
-| `prompt-input`      | textarea, tooltip   | —          |
-| `prompt-suggestion` | button              | —          |
-| `reasoning`         | —                   | —          |
-| `response-stream`   | —                   | —          |
-| `scroll-button`     | button              | —          |
-| `source`            | hover-card          | —          |
-| `steps`             | icon                | —          |
-| `system-message`    | button, icon        | —          |
-| `text-shimmer`      | —                   | —          |
-| `thinking-bar`      | icon                | —          |
-| `tool`              | icon                | —          |
+| Component           | Helm dependencies | Other deps |
+| ------------------- | ----------------- | ---------- |
+| `chain-of-thought`  | icon              | —          |
+| `chat-container`    | —                 | —          |
+| `code-block`        | —                 | shiki      |
+| `feedback-bar`      | icon              | —          |
+| `file-upload`       | —                 | —          |
+| `image`             | —                 | —          |
+| `loader`            | —                 | —          |
+| `markdown`          | —                 | marked     |
+| `message`           | avatar, tooltip   | —          |
+| `prompt-input`      | textarea, tooltip | —          |
+| `prompt-suggestion` | button            | —          |
+| `reasoning`         | —                 | —          |
+| `response-stream`   | —                 | —          |
+| `scroll-button`     | button            | —          |
+| `source`            | hover-card        | —          |
+| `steps`             | icon              | —          |
+| `system-message`    | button, icon      | —          |
+| `text-shimmer`      | —                 | —          |
+| `thinking-bar`      | icon              | —          |
+| `tool`              | icon              | —          |
 
 Helm prerequisites must be installed separately via Spartan's CLI:
 

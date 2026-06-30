@@ -84,9 +84,7 @@ export class ToolApprovalBlock {
     'Deleted 12 branches via git push --delete',
   ];
 
-  protected readonly completedSteps = computed(() =>
-    this.steps.slice(0, this.stepIndex()),
-  );
+  protected readonly completedSteps = computed(() => this.steps.slice(0, this.stepIndex()));
 
   protected readonly runningTool = computed<ToolPart>(() => ({
     type: 'cleanup_stale_branches',

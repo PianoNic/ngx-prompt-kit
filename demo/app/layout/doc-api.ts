@@ -39,7 +39,10 @@ export interface ApiSection {
                     <tr hlmTr>
                       <td hlmTd class="font-mono text-xs">{{ p.name }}</td>
                       <td hlmTd>
-                        <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs">{{ p.type }}</code>
+                        <code
+                          class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs"
+                          >{{ p.type }}</code
+                        >
                       </td>
                       <td hlmTd class="text-muted-foreground font-mono text-xs">
                         {{ p.default ?? '—' }}

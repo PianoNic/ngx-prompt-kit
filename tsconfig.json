@@ -71,6 +71,8 @@
       "@spartan-ng/helm/typography": ["./libs/ui/typography/src/index.ts"],
       "@spartan-ng/helm/utils": ["./libs/ui/utils/src/index.ts"],
       "ngx-prompt-kit/utils": ["./libs/prompt-kit/utils"],
+      "ngx-prompt-kit/streaming": ["./libs/prompt-kit/streaming"],
+      "ngx-prompt-kit/streaming-message": ["./libs/prompt-kit/streaming-message"],
       "ngx-prompt-kit/http-error": ["./libs/prompt-kit/http-error"],
       "ngx-prompt-kit/message": ["./libs/prompt-kit/message"],
       "ngx-prompt-kit/markdown": ["./libs/prompt-kit/markdown"],
@@ -106,7 +108,8 @@
       "ngx-prompt-kit/model-list": ["./libs/prompt-kit/model-list"],
       "ngx-prompt-kit/model-browser": ["./libs/prompt-kit/model-browser"],
       "ngx-prompt-kit/usage-card": ["./libs/prompt-kit/usage-card"],
-      "ngx-prompt-kit/todo-list": ["./libs/prompt-kit/todo-list"]
+      "ngx-prompt-kit/todo-list": ["./libs/prompt-kit/todo-list"],
+      "ngx-prompt-kit/tool-steps": ["./libs/prompt-kit/tool-steps"]
     }
   },
   "angularCompilerOptions": {

@@ -28,6 +28,9 @@ export interface ComponentSpec {
   name: string;
   /** Chain the `utils` schematic before laying down templates. */
   needsUtils?: boolean;
+  /** Other ngx-prompt-kit components this one composes; their schematics are
+   *  chained first so the imported siblings exist in the consumer's project. */
+  needsComponents?: string[];
   /** Extra runtime npm deps to add to the consumer's package.json. */
   extraDeps?: Record<string, string>;
 }
@@ -66,9 +69,7 @@ function resolveProjectName(
   // Fallback: first project in the workspace (Angular 17+ removed defaultProject).
   const first = workspace.projects.keys().next();
   if (first.done) {
-    throw new SchematicsException(
-      'No Angular project specified and none found in angular.json.',
-    );
+    throw new SchematicsException('No Angular project specified and none found in angular.json.');
   }
   return first.value;
 }
@@ -87,9 +88,7 @@ export function buildComponent(spec: ComponentSpec): (opts: ComponentSchema) => 
 
       const helmReqs = HELM_REQUIREMENTS[spec.name];
       if (helmReqs) {
-        context.logger.info(
-          `ℹ  ${spec.name} requires Spartan helm: ${helmReqs.join(', ')}`,
-        );
+        context.logger.info(`ℹ  ${spec.name} requires Spartan helm: ${helmReqs.join(', ')}`);
         context.logger.info(
           `   Install with: ng g @spartan-ng/cli:ui   (select ${helmReqs.join(', ')})`,
         );
@@ -124,6 +123,14 @@ export function buildComponent(spec: ComponentSpec): (opts: ComponentSchema) => 
       if (spec.needsUtils) {
         rules.push(
           externalSchematic('ngx-prompt-kit', 'utils', {
+            project: projectName,
+            path: targetPath,
+          }),
+        );
+      }
+      for (const dep of spec.needsComponents ?? []) {
+        rules.push(
+          externalSchematic('ngx-prompt-kit', dep, {
             project: projectName,
             path: targetPath,
           }),
