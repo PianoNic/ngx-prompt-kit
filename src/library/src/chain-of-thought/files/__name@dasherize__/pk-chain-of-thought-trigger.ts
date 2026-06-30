@@ -20,10 +20,7 @@ import { CHAIN_OF_THOUGHT_STEP_STATE } from './chain-of-thought.state';
       <div class="flex items-center gap-2">
         @if (leftIcon()) {
           <span class="relative inline-flex size-4 items-center justify-center">
-            <span
-              class="transition-opacity"
-              [class.group-hover:opacity-0]="swapIconOnHover()"
-            >
+            <span class="transition-opacity" [class.group-hover:opacity-0]="swapIconOnHover()">
               <ng-content select="[leftIcon]" />
             </span>
             @if (swapIconOnHover()) {

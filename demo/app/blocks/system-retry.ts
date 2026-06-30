@@ -10,13 +10,7 @@ type Phase = 'error' | 'recovering' | 'recovered';
 @Component({
   selector: 'app-block-system-retry',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    BlockPage,
-    DocExample,
-    PkFeedbackBar,
-    PkStreamControlsImports,
-    PkSystemMessage,
-  ],
+  imports: [BlockPage, DocExample, PkFeedbackBar, PkStreamControlsImports, PkSystemMessage],
   template: `
     <app-block-page
       title="System notice + retry"

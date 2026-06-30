@@ -67,7 +67,9 @@ export class PkBranchNav {
   protected readonly atEnd = computed(() => this.current() >= this.total());
 
   protected readonly label = computed(() =>
-    this.compact() ? `${this.current()} / ${this.total()}` : `Branch ${this.current()} of ${this.total()}`,
+    this.compact()
+      ? `${this.current()} / ${this.total()}`
+      : `Branch ${this.current()} of ${this.total()}`,
   );
 
   protected prev(): void {

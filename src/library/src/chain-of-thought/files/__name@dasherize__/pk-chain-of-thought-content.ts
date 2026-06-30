@@ -20,19 +20,10 @@ import { CHAIN_OF_THOUGHT_STEP_STATE } from './chain-of-thought.state';
   selector: 'pk-chain-of-thought-content',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div
-      [class]="wrapperClass()"
-      [style.maxHeight]="state.isOpen() ? maxHeightPx() + 'px' : '0px'"
-    >
+    <div [class]="wrapperClass()" [style.maxHeight]="state.isOpen() ? maxHeightPx() + 'px' : '0px'">
       <div #inner class="grid grid-cols-[min-content_minmax(0,1fr)] gap-x-4">
-        <div
-          class="bg-primary/20 ml-1.75 h-full w-px"
-          [class.hidden]="state.isLast()"
-        ></div>
-        <div
-          class="ml-1.75 h-full w-px bg-transparent"
-          [class.hidden]="!state.isLast()"
-        ></div>
+        <div class="bg-primary/20 ml-1.75 h-full w-px" [class.hidden]="state.isLast()"></div>
+        <div class="ml-1.75 h-full w-px bg-transparent" [class.hidden]="!state.isLast()"></div>
         <div class="mt-2 space-y-2"><ng-content /></div>
       </div>
     </div>

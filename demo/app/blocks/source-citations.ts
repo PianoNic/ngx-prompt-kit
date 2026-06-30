@@ -58,11 +58,15 @@ import { PkSourceImports } from 'ngx-prompt-kit/source';
               </p>
 
               <div class="border-border flex flex-col gap-2 border-t pt-3">
-                <span class="text-muted-foreground text-[10px] font-medium uppercase tracking-wider">
+                <span
+                  class="text-muted-foreground text-[10px] font-medium uppercase tracking-wider"
+                >
                   Sources
                 </span>
                 <div class="flex flex-wrap gap-2">
-                  <pk-source href="https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world">
+                  <pk-source
+                    href="https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world"
+                  >
                     <pk-source-trigger [showFavicon]="true" label="wikipedia.org" />
                     <pk-source-content
                       title="HNSW — Wikipedia"

@@ -20,7 +20,8 @@ import { PkSourceImports } from 'ngx-prompt-kit/source';
         [code]="basicCode"
       >
         <p class="text-sm">
-          Vector databases use approximate nearest neighbor search to scale to millions of embeddings
+          Vector databases use approximate nearest neighbor search to scale to millions of
+          embeddings
           <pk-source href="https://en.wikipedia.org/wiki/Nearest_neighbor_search">
             <pk-source-trigger label="1" />
             <pk-source-content
@@ -81,14 +82,27 @@ export class SourceDemo {
     {
       name: 'PkSource',
       props: [
-        { name: 'href', type: 'string', description: 'Required URL. The hostname is auto-extracted as the default label.' },
+        {
+          name: 'href',
+          type: 'string',
+          description: 'Required URL. The hostname is auto-extracted as the default label.',
+        },
       ],
     },
     {
       name: 'PkSourceTrigger',
       props: [
-        { name: 'label', type: 'string | number', description: 'Override the default (domain) label.' },
-        { name: 'showFavicon', type: 'boolean', default: 'false', description: 'Show the site favicon next to the label.' },
+        {
+          name: 'label',
+          type: 'string | number',
+          description: 'Override the default (domain) label.',
+        },
+        {
+          name: 'showFavicon',
+          type: 'boolean',
+          default: 'false',
+          description: 'Show the site favicon next to the label.',
+        },
         { name: 'class', type: 'string', description: 'Extra classes for the chip.' },
       ],
     },

@@ -71,15 +71,13 @@ export class ChatThreadBlock {
     {
       id: 2,
       role: 'assistant',
-      text:
-        '**Synchronous reads** and **automatic dependency tracking**. With a `BehaviorSubject` you have to subscribe (or call `.value`) and rebuild your own derived state. With `signal()` you just read it inside another reactive primitive and the framework wires up the graph.',
+      text: '**Synchronous reads** and **automatic dependency tracking**. With a `BehaviorSubject` you have to subscribe (or call `.value`) and rebuild your own derived state. With `signal()` you just read it inside another reactive primitive and the framework wires up the graph.',
     },
     { id: 3, role: 'user', text: 'And computed()?' },
     {
       id: 4,
       role: 'assistant',
-      text:
-        '`computed()` is the read-only sibling. It memoises the last result and only re-runs when one of its source signals changes — perfect for cheaply-derived view state.',
+      text: '`computed()` is the read-only sibling. It memoises the last result and only re-runs when one of its source signals changes — perfect for cheaply-derived view state.',
     },
   ];
 

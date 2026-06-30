@@ -3,10 +3,7 @@ import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
-import {
-  PkAttachmentPreviewImports,
-  type Attachment,
-} from 'ngx-prompt-kit/attachment-preview';
+import { PkAttachmentPreviewImports, type Attachment } from 'ngx-prompt-kit/attachment-preview';
 
 const SAMPLE_IMAGE =
   'data:image/svg+xml;utf8,' +
@@ -156,7 +153,8 @@ export class AttachmentPreviewDemo {
           name: 'maxVisible',
           type: 'number',
           default: '0',
-          description: 'When > 0, only the first N chips render and the surplus collapses into a "+N more" pill. 0 shows all.',
+          description:
+            'When > 0, only the first N chips render and the surplus collapses into a "+N more" pill. 0 shows all.',
         },
         {
           name: 'removable',
@@ -175,9 +173,22 @@ export class AttachmentPreviewDemo {
     {
       name: 'PkAttachmentChip',
       props: [
-        { name: 'attachment', type: 'Attachment', description: 'Single attachment to render (required).' },
-        { name: 'removable', type: 'boolean', default: 'true', description: 'Show the remove button.' },
-        { name: 'locale', type: 'string | undefined', description: 'Forwarded to the byte size formatter.' },
+        {
+          name: 'attachment',
+          type: 'Attachment',
+          description: 'Single attachment to render (required).',
+        },
+        {
+          name: 'removable',
+          type: 'boolean',
+          default: 'true',
+          description: 'Show the remove button.',
+        },
+        {
+          name: 'locale',
+          type: 'string | undefined',
+          description: 'Forwarded to the byte size formatter.',
+        },
       ],
     },
     {

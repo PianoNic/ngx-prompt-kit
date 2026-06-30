@@ -22,7 +22,10 @@ import { PkSystemMessage } from 'ngx-prompt-kit/system-message';
         <div class="flex w-full max-w-xl flex-col gap-3">
           <pk-system-message text="Connected to model gpt-4o." variant="action" />
           <pk-system-message text="Rate limit reached. Try again in 30s." variant="error" />
-          <pk-system-message text="Some tool calls were skipped due to permissions." variant="warning" />
+          <pk-system-message
+            text="Some tool calls were skipped due to permissions."
+            variant="warning"
+          />
         </div>
       </app-doc-example>
 
@@ -84,12 +87,41 @@ export class SystemMessageDemo {
     {
       name: 'PkSystemMessage',
       props: [
-        { name: 'text', type: 'string', default: "''", description: 'Main label (or project via ng-content).' },
-        { name: 'variant', type: '"action" | "error" | "warning"', default: '"action"', description: 'Color treatment.' },
-        { name: 'fill', type: 'boolean', default: 'false', description: 'Solid tinted background instead of a border.' },
-        { name: 'icon', type: 'boolean', default: 'true', description: 'Show the default lucide icon for the variant.' },
-        { name: 'ctaLabel', type: 'string', default: "''", description: 'When set, renders a Spartan button on the right.' },
-        { name: 'ctaClicked', type: 'output<void>', description: 'Fires when the CTA button is clicked.' },
+        {
+          name: 'text',
+          type: 'string',
+          default: "''",
+          description: 'Main label (or project via ng-content).',
+        },
+        {
+          name: 'variant',
+          type: '"action" | "error" | "warning"',
+          default: '"action"',
+          description: 'Color treatment.',
+        },
+        {
+          name: 'fill',
+          type: 'boolean',
+          default: 'false',
+          description: 'Solid tinted background instead of a border.',
+        },
+        {
+          name: 'icon',
+          type: 'boolean',
+          default: 'true',
+          description: 'Show the default lucide icon for the variant.',
+        },
+        {
+          name: 'ctaLabel',
+          type: 'string',
+          default: "''",
+          description: 'When set, renders a Spartan button on the right.',
+        },
+        {
+          name: 'ctaClicked',
+          type: 'output<void>',
+          description: 'Fires when the CTA button is clicked.',
+        },
         { name: 'class', type: 'string', description: 'Extra classes for the wrapper.' },
       ],
     },

@@ -68,11 +68,7 @@ import { ThemeToggle } from './theme-toggle';
           </hlm-sheet-content>
         </hlm-sheet>
 
-        <a
-          routerLink="/"
-          class="font-semibold tracking-tight"
-          aria-label="ngx-prompt-kit home"
-        >
+        <a routerLink="/" class="font-semibold tracking-tight" aria-label="ngx-prompt-kit home">
           <span>ngx-prompt-kit</span>
         </a>
 
@@ -81,9 +77,7 @@ import { ThemeToggle } from './theme-toggle';
       </header>
 
       <div class="md:grid md:grid-cols-[16rem_minmax(0,1fr)]">
-        <aside
-          class="border-border sticky top-14 hidden h-[calc(100vh-3.5rem)] border-r md:block"
-        >
+        <aside class="border-border sticky top-14 hidden h-[calc(100vh-3.5rem)] border-r md:block">
           <app-sidebar-nav />
         </aside>
 

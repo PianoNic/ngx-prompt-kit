@@ -14,7 +14,11 @@ import { PkPromptSuggestion } from 'ngx-prompt-kit/prompt-suggestion';
       title="Prompt Suggestion"
       description="Clickable prompt chips. Two modes: pill (no highlight) and inline list (with substring highlight against a query)."
     >
-      <app-doc-example title="Pill chips" description="Default style — outline buttons in a row." [code]="pillsCode">
+      <app-doc-example
+        title="Pill chips"
+        description="Default style — outline buttons in a row."
+        [code]="pillsCode"
+      >
         <div class="flex w-full max-w-2xl flex-wrap gap-2">
           @for (s of suggestions; track s) {
             <pk-prompt-suggestion [content]="s" (clicked)="picked.set(s)" />
@@ -63,9 +67,23 @@ export class PromptSuggestionDemo {
       name: 'PkPromptSuggestion',
       props: [
         { name: 'content', type: 'string', default: "''", description: 'The suggestion text.' },
-        { name: 'highlight', type: 'string', default: "''", description: 'When non-empty, switches to inline list mode and highlights this substring inside content.' },
-        { name: 'variant', type: 'ButtonVariants["variant"]', description: 'Override the underlying hlmBtn variant.' },
-        { name: 'size', type: 'ButtonVariants["size"]', description: 'Override the underlying hlmBtn size.' },
+        {
+          name: 'highlight',
+          type: 'string',
+          default: "''",
+          description:
+            'When non-empty, switches to inline list mode and highlights this substring inside content.',
+        },
+        {
+          name: 'variant',
+          type: 'ButtonVariants["variant"]',
+          description: 'Override the underlying hlmBtn variant.',
+        },
+        {
+          name: 'size',
+          type: 'ButtonVariants["size"]',
+          description: 'Override the underlying hlmBtn size.',
+        },
         { name: 'clicked', type: 'output<void>', description: 'Fires when the chip is clicked.' },
         { name: 'class', type: 'string', description: 'Extra classes for the button.' },
       ],

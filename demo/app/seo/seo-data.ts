@@ -63,6 +63,7 @@ const COMPONENT_TITLES: Readonly<Record<string, string>> = {
   'todo-list': 'Todo List',
   'token-counter': 'Token Counter',
   tool: 'Tool',
+  'tool-steps': 'Tool Steps',
   'usage-card': 'Usage Card',
 };
 
@@ -74,6 +75,9 @@ export const ALL_PAGE_PATHS: readonly string[] = [
   ...BLOCKS.map((b) => `/blocks/${b.slug}`),
   '/showcase/full-chat',
   ...Object.keys(COMPONENT_TITLES).map((slug) => `/components/${slug}`),
+  '/utilities/streaming',
+  '/utilities/streaming-message',
+  '/utilities/http-error',
 ];
 
 /**
@@ -138,6 +142,39 @@ export function metaForUrl(url: string): PageMeta {
       path,
       changefreq: 'monthly',
       priority: 0.8,
+    };
+  }
+
+  if (path === '/utilities/streaming') {
+    return {
+      title: `Streaming (SSE) utility · ${SITE.name}`,
+      description:
+        'SSE streaming helpers for ngx-prompt-kit — consumeSseFrames() and readSseHttpEvents() turn an Angular HttpClient event stream into per-frame callbacks for AI chat. Schematic command included.',
+      path,
+      changefreq: 'monthly',
+      priority: 0.6,
+    };
+  }
+
+  if (path === '/utilities/streaming-message') {
+    return {
+      title: `Streaming Message helper · ${SITE.name}`,
+      description:
+        'createStreamingMessage() for ngx-prompt-kit — a signal-based controller that coordinates the pk-response-stream reveal handshake (append, done, finished→commit). Schematic command included.',
+      path,
+      changefreq: 'monthly',
+      priority: 0.6,
+    };
+  }
+
+  if (path === '/utilities/http-error') {
+    return {
+      title: `HTTP Error helper · ${SITE.name}`,
+      description:
+        'describeHttpError() for ngx-prompt-kit — maps HttpErrorResponse status codes to friendly, user-facing messages with optional per-status overrides. Schematic command included.',
+      path,
+      changefreq: 'monthly',
+      priority: 0.6,
     };
   }
 

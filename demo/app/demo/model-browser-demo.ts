@@ -142,8 +142,7 @@ export class ModelBrowserDemo {
       iconUrl: ICON('mistral'),
       provider: 'Mistral',
       group: 'Open Source',
-      description:
-        "Mistral's flagship open model with strong tool-use performance. Apache 2.0.",
+      description: "Mistral's flagship open model with strong tool-use performance. Apache 2.0.",
       inputPricePer1M: 2.0,
       outputPricePer1M: 6.0,
       currency: 'USD',
@@ -181,18 +180,24 @@ export class ModelBrowserDemo {
     {
       name: 'PkModelBrowser',
       props: [
-        { name: 'models', type: 'readonly BrowserModel[]', description: 'The browseable models (required).' },
+        {
+          name: 'models',
+          type: 'readonly BrowserModel[]',
+          description: 'The browseable models (required).',
+        },
         {
           name: 'selectedId',
           type: 'string | null',
           default: 'null',
-          description: 'Two-way bindable via [(selectedId)]. Selecting a row updates this; (changed) only fires on confirm.',
+          description:
+            'Two-way bindable via [(selectedId)]. Selecting a row updates this; (changed) only fires on confirm.',
         },
         {
           name: 'filters',
           type: 'readonly BrowserFilter[]',
           default: '[]',
-          description: "Two-way bindable via [(filters)]. Active filter ids are matched against each model's group.",
+          description:
+            "Two-way bindable via [(filters)]. Active filter ids are matched against each model's group.",
         },
         {
           name: 'searchPlaceholder',
@@ -228,11 +233,32 @@ export class ModelBrowserDemo {
         { name: 'iconUrl', type: 'string?', description: 'Logo source; falls back to initials.' },
         { name: 'provider', type: 'string?', description: 'Small muted line beneath the name.' },
         { name: 'description', type: 'string?', description: 'Long-form text in the detail pane.' },
-        { name: 'group', type: 'string?', description: 'Category label — list groups by this and filter ids match against it.' },
-        { name: 'inputPricePer1M / outputPricePer1M', type: 'number?', description: 'Both required for the price metric to render.' },
-        { name: 'currency', type: 'string?', default: '"USD"', description: 'ISO 4217 code; passed to Intl.NumberFormat.' },
-        { name: 'metrics', type: 'ReadonlyArray<{ label, value }>?', description: 'Free-form key/value rows in the detail pane.' },
-        { name: 'disabled', type: 'boolean?', description: 'Greys the row and suppresses (changed).' },
+        {
+          name: 'group',
+          type: 'string?',
+          description: 'Category label — list groups by this and filter ids match against it.',
+        },
+        {
+          name: 'inputPricePer1M / outputPricePer1M',
+          type: 'number?',
+          description: 'Both required for the price metric to render.',
+        },
+        {
+          name: 'currency',
+          type: 'string?',
+          default: '"USD"',
+          description: 'ISO 4217 code; passed to Intl.NumberFormat.',
+        },
+        {
+          name: 'metrics',
+          type: 'ReadonlyArray<{ label, value }>?',
+          description: 'Free-form key/value rows in the detail pane.',
+        },
+        {
+          name: 'disabled',
+          type: 'boolean?',
+          description: 'Greys the row and suppresses (changed).',
+        },
       ],
     },
     {
@@ -241,7 +267,8 @@ export class ModelBrowserDemo {
         {
           name: 'changed',
           type: '(model: BrowserModel) => void',
-          description: 'Fires when the consumer confirms via the action button (selectable=true) — not on row click.',
+          description:
+            'Fires when the consumer confirms via the action button (selectable=true) — not on row click.',
         },
       ],
     },

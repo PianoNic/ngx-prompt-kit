@@ -14,7 +14,8 @@
     "test": "ng test",
     "build:lib": "node -e \"require('node:fs').rmSync('dist/ngx-prompt-kit',{recursive:true,force:true})\" && tsc -p src/library/tsconfig.json && bun run build:lib:assets",
     "build:lib:assets": "copyfiles -u 3 \"src/library/src/collection.json\" \"src/library/src/**/schema.json\" \"src/library/src/**/files/**/*\" dist/ngx-prompt-kit/schematics && copyfiles -u 2 \"src/library/package.json\" \"src/library/README.md\" dist/ngx-prompt-kit",
-    "format": "prettier --write \"**/*.{ts,html,scss,css,md}\""
+    "format": "prettier --write \"**/*.{ts,html,scss,css,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,html,scss,css,md}\""
   },
   "private": true,
   "packageManager": "bun@1.3.5",
