@@ -156,6 +156,11 @@
       "factory": "./stream-controls/index#streamControls",
       "schema": "./stream-controls/schema.json"
     },
+    "streaming-message": {
+      "description": "Add the streaming-message helper (ngx-prompt-kit original).",
+      "factory": "./streaming-message/index#streamingMessage",
+      "schema": "./streaming-message/schema.json"
+    },
     "system-message": {
       "description": "Add the system-message component.",
       "factory": "./system-message/index#systemMessage",

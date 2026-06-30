@@ -63,4 +63,8 @@ export const NAV: NavGroup[] = [
       { label: 'Usage Card', path: '/components/usage-card', badge: 'New' },
     ],
   },
+  {
+    heading: 'Utilities',
+    links: [{ label: 'Streaming Message', path: '/utilities/streaming-message', badge: 'New' }],
+  },
 ];
