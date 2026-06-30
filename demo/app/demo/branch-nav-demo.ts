@@ -61,7 +61,9 @@ import { PkBranchNavImports } from 'ngx-prompt-kit/branch-nav';
       >
         <div class="flex w-full flex-col items-center gap-2">
           <pk-branch-nav [current]="1" [total]="1" />
-          <p class="text-muted-foreground text-xs italic">(component intentionally renders nothing)</p>
+          <p class="text-muted-foreground text-xs italic">
+            (component intentionally renders nothing)
+          </p>
         </div>
       </app-doc-example>
 
@@ -89,7 +91,11 @@ export class BranchNavDemo {
       name: 'PkBranchNav',
       props: [
         { name: 'current', type: 'number', description: '1-indexed current branch (required).' },
-        { name: 'total', type: 'number', description: 'Total branch count. Component renders nothing when total ≤ 1.' },
+        {
+          name: 'total',
+          type: 'number',
+          description: 'Total branch count. Component renders nothing when total ≤ 1.',
+        },
         {
           name: 'compact',
           type: 'boolean',
@@ -105,7 +111,8 @@ export class BranchNavDemo {
         {
           name: 'changed',
           type: '(next: number) => void',
-          description: 'Fires when the user navigates. 1-indexed. Consumer updates current to reflect.',
+          description:
+            'Fires when the user navigates. 1-indexed. Consumer updates current to reflect.',
         },
       ],
     },

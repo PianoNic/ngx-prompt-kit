@@ -72,9 +72,6 @@ export class PkFeedbackBar {
   public readonly closed = output<void>();
 
   protected readonly computedClass = computed(() =>
-    cn(
-      'bg-background border-border inline-flex rounded-[12px] border text-sm',
-      this.class(),
-    ),
+    cn('bg-background border-border inline-flex rounded-[12px] border text-sm', this.class()),
   );
 }

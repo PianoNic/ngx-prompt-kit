@@ -69,7 +69,8 @@ export class ConversationListDemo {
     {
       id: '2',
       title: 'Signal vs computed primer for the new Angular reactivity model',
-      preview: 'Writable state vs derived read-only values, lazy evaluation, and dependency tracking semantics',
+      preview:
+        'Writable state vs derived read-only values, lazy evaluation, and dependency tracking semantics',
       updatedAt: new Date(now - 8 * 60 * 60 * 1000),
     },
     {
@@ -142,21 +143,38 @@ export class ConversationListDemo {
     {
       name: 'PkConversationItem',
       props: [
-        { name: 'conversation', type: 'Conversation', description: 'The conversation to render (required).' },
-        { name: 'isActive', type: 'boolean', default: 'false', description: 'Highlight as the active row.' },
+        {
+          name: 'conversation',
+          type: 'Conversation',
+          description: 'The conversation to render (required).',
+        },
+        {
+          name: 'isActive',
+          type: 'boolean',
+          default: 'false',
+          description: 'Highlight as the active row.',
+        },
         { name: 'class', type: 'string', description: 'Extra classes for the row.' },
       ],
     },
     {
       name: 'Outputs (both)',
       props: [
-        { name: 'selected', type: '(id: string) => void', description: 'Fires when a row is clicked.' },
+        {
+          name: 'selected',
+          type: '(id: string) => void',
+          description: 'Fires when a row is clicked.',
+        },
         {
           name: 'renamed',
           type: '({ id, title }) => void',
           description: 'Fires after the inline rename input commits a non-empty, changed value.',
         },
-        { name: 'deleted', type: '(id: string) => void', description: 'Fires when the Delete action is chosen.' },
+        {
+          name: 'deleted',
+          type: '(id: string) => void',
+          description: 'Fires when the Delete action is chosen.',
+        },
       ],
     },
   ];

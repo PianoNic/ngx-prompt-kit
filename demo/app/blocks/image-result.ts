@@ -34,8 +34,8 @@ const ART_OCEAN =
             <pk-message-avatar src="" alt="Assistant" fallback="AI" />
             <div class="flex min-w-0 flex-1 flex-col gap-3">
               <p class="text-sm leading-relaxed">
-                Here are four variants — each runs the same prompt through a different seed.
-                Click any image to upscale.
+                Here are four variants — each runs the same prompt through a different seed. Click
+                any image to upscale.
               </p>
               <div class="grid grid-cols-2 gap-2">
                 <pk-image

@@ -1,7 +1,13 @@
 import { ApplicationConfig } from '@angular/core';
-import { provideRouter, withComponentInputBinding, withInMemoryScrolling } from '@angular/router';
+import {
+  provideRouter,
+  withComponentInputBinding,
+  withInMemoryScrolling,
+  withNavigationErrorHandler,
+} from '@angular/router';
 
 import { routes } from './app.routes';
+import { reloadOnChunkLoadError } from './lazy-chunk-error-handler';
 
 /**
  * Platform-neutral providers used by both browser bootstrap and SSR/prerender.
@@ -17,6 +23,7 @@ export const appConfig: ApplicationConfig = {
         scrollPositionRestoration: 'top',
         anchorScrolling: 'enabled',
       }),
+      withNavigationErrorHandler(reloadOnChunkLoadError),
     ),
   ],
 };

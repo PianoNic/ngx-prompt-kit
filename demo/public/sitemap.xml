@@ -296,7 +296,17 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://ngx-prompt-kit.pianonic.ch/components/tool-steps</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://ngx-prompt-kit.pianonic.ch/components/usage-card</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://ngx-prompt-kit.pianonic.ch/utilities/streaming</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

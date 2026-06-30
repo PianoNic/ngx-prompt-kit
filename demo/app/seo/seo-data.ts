@@ -63,6 +63,7 @@ const COMPONENT_TITLES: Readonly<Record<string, string>> = {
   'todo-list': 'Todo List',
   'token-counter': 'Token Counter',
   tool: 'Tool',
+  'tool-steps': 'Tool Steps',
   'usage-card': 'Usage Card',
 };
 
@@ -74,6 +75,7 @@ export const ALL_PAGE_PATHS: readonly string[] = [
   ...BLOCKS.map((b) => `/blocks/${b.slug}`),
   '/showcase/full-chat',
   ...Object.keys(COMPONENT_TITLES).map((slug) => `/components/${slug}`),
+  '/utilities/streaming',
   '/utilities/streaming-message',
 ];
 
@@ -139,6 +141,17 @@ export function metaForUrl(url: string): PageMeta {
       path,
       changefreq: 'monthly',
       priority: 0.8,
+    };
+  }
+
+  if (path === '/utilities/streaming') {
+    return {
+      title: `Streaming (SSE) utility · ${SITE.name}`,
+      description:
+        'SSE streaming helpers for ngx-prompt-kit — consumeSseFrames() and readSseHttpEvents() turn an Angular HttpClient event stream into per-frame callbacks for AI chat. Schematic command included.',
+      path,
+      changefreq: 'monthly',
+      priority: 0.6,
     };
   }
 

@@ -60,11 +60,15 @@ export const NAV: NavGroup[] = [
       { label: 'Thinking Bar', path: '/components/thinking-bar' },
       { label: 'Token Counter', path: '/components/token-counter', badge: 'New' },
       { label: 'Tool', path: '/components/tool' },
+      { label: 'Tool Steps', path: '/components/tool-steps', badge: 'New' },
       { label: 'Usage Card', path: '/components/usage-card', badge: 'New' },
     ],
   },
   {
     heading: 'Utilities',
-    links: [{ label: 'Streaming Message', path: '/utilities/streaming-message', badge: 'New' }],
+    links: [
+      { label: 'Streaming (SSE)', path: '/utilities/streaming', badge: 'New' },
+      { label: 'Streaming Message', path: '/utilities/streaming-message', badge: 'New' },
+    ],
   },
 ];

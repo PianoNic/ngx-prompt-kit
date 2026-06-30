@@ -14,10 +14,7 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { PkChainOfThoughtImports } from 'ngx-prompt-kit/chain-of-thought';
-import {
-  PkStreamControlsImports,
-  type StreamControlsState,
-} from 'ngx-prompt-kit/stream-controls';
+import { PkStreamControlsImports, type StreamControlsState } from 'ngx-prompt-kit/stream-controls';
 import { PkThinkingBar } from 'ngx-prompt-kit/thinking-bar';
 import { PkTool, type ToolPart } from 'ngx-prompt-kit/tool';
 
@@ -76,11 +73,7 @@ interface PhaseEntry {
           <pk-tool [toolPart]="currentTool()" [defaultOpen]="true" />
 
           <div class="flex justify-end">
-            <pk-stream-controls
-              [state]="state()"
-              (stop)="stop()"
-              (regenerate)="start()"
-            />
+            <pk-stream-controls [state]="state()" (stop)="stop()" (regenerate)="start()" />
           </div>
         </div>
       </app-doc-example>
@@ -104,7 +97,8 @@ export class AgentTaskBlock {
     {
       trigger: 'Building the deletion plan',
       iconName: 'lucideHammer',
-      detail: 'Filtered against tag references and protected-branch rules. Final candidate set: 12.',
+      detail:
+        'Filtered against tag references and protected-branch rules. Final candidate set: 12.',
     },
     {
       trigger: 'Pushing branch deletions',
@@ -113,9 +107,7 @@ export class AgentTaskBlock {
     },
   ];
 
-  protected readonly visiblePhases = computed(() =>
-    this.phases.slice(0, this.phaseIdx()),
-  );
+  protected readonly visiblePhases = computed(() => this.phases.slice(0, this.phaseIdx()));
 
   protected readonly currentTrigger = computed(
     () => this.phases[this.phaseIdx()]?.trigger ?? 'Working…',

@@ -185,8 +185,7 @@ export class PkMarkdown {
       // Lazy-load: Shiki (~250KB) only enters the bundle when content has fenced blocks
       const { codeToHtml } = await import('shiki');
       const isDark =
-        isPlatformBrowser(this.platformId) &&
-        document.documentElement.classList.contains('dark');
+        isPlatformBrowser(this.platformId) && document.documentElement.classList.contains('dark');
       const theme = isDark ? 'dark-plus' : 'github-light';
 
       for (const container of Array.from(containers)) {
@@ -236,15 +235,12 @@ export class PkMarkdown {
    * dataset and swaps the highlighted <pre> in the body.
    */
   private async rehighlightCodeBlocks(el: HTMLElement): Promise<void> {
-    const blocks = el.querySelectorAll<HTMLElement>(
-      '.pk-code-block[data-enhanced="true"]',
-    );
+    const blocks = el.querySelectorAll<HTMLElement>('.pk-code-block[data-enhanced="true"]');
     if (blocks.length === 0) return;
     try {
       const { codeToHtml } = await import('shiki');
       const isDark =
-        isPlatformBrowser(this.platformId) &&
-        document.documentElement.classList.contains('dark');
+        isPlatformBrowser(this.platformId) && document.documentElement.classList.contains('dark');
       const theme = isDark ? 'dark-plus' : 'github-light';
 
       for (const block of Array.from(blocks)) {

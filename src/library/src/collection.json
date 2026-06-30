@@ -156,6 +156,11 @@
       "factory": "./stream-controls/index#streamControls",
       "schema": "./stream-controls/schema.json"
     },
+    "streaming": {
+      "description": "Add the SSE streaming utility (ngx-prompt-kit original).",
+      "factory": "./streaming/index#streaming",
+      "schema": "./streaming/schema.json"
+    },
     "streaming-message": {
       "description": "Add the streaming-message helper (ngx-prompt-kit original).",
       "factory": "./streaming-message/index#streamingMessage",
@@ -190,6 +195,11 @@
       "description": "Add the tool component.",
       "factory": "./tool/index#tool",
       "schema": "./tool/schema.json"
+    },
+    "tool-steps": {
+      "description": "Add the tool-steps component (ngx-prompt-kit original).",
+      "factory": "./tool-steps/index#toolSteps",
+      "schema": "./tool-steps/schema.json"
     },
     "usage-card": {
       "description": "Add the usage-card component (ngx-prompt-kit original).",

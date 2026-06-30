@@ -11,7 +11,5 @@ import { cn } from '../utils/cn';
 })
 export class PkChatContainerContent {
   public readonly class = input<string>('');
-  protected readonly computedClass = computed(() =>
-    cn('flex w-full flex-col', this.class()),
-  );
+  protected readonly computedClass = computed(() => cn('flex w-full flex-col', this.class()));
 }

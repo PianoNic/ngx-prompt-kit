@@ -106,7 +106,13 @@ Want me to group by author next time?"
                 </button>
               </pk-message-action>
               <pk-message-action tooltip="Bad response">
-                <button hlmBtn variant="ghost" size="icon-sm" type="button" aria-label="Thumbs down">
+                <button
+                  hlmBtn
+                  variant="ghost"
+                  size="icon-sm"
+                  type="button"
+                  aria-label="Thumbs down"
+                >
                   <ng-icon hlm size="xs" name="lucideThumbsDown" />
                 </button>
               </pk-message-action>
@@ -140,23 +146,43 @@ export class MessageDemo {
     {
       name: 'PkMessageContent',
       props: [
-        { name: 'content', type: 'string', description: 'The text content. Optional — you can also project markup via ng-content.' },
-        { name: 'markdown', type: 'boolean', default: 'false', description: 'Render content as markdown via pk-markdown.' },
+        {
+          name: 'content',
+          type: 'string',
+          description: 'The text content. Optional — you can also project markup via ng-content.',
+        },
+        {
+          name: 'markdown',
+          type: 'boolean',
+          default: 'false',
+          description: 'Render content as markdown via pk-markdown.',
+        },
         { name: 'class', type: 'string', description: 'Extra classes for the bubble.' },
       ],
     },
     {
       name: 'PkMessageActions',
-      props: [
-        { name: 'class', type: 'string', description: 'Extra classes for the action row.' },
-      ],
+      props: [{ name: 'class', type: 'string', description: 'Extra classes for the action row.' }],
     },
     {
       name: 'PkMessageAction',
       props: [
-        { name: 'tooltip', type: 'string', description: 'Tooltip label shown on hover (required).' },
-        { name: 'side', type: '"top" | "bottom" | "left" | "right"', default: '"top"', description: 'Tooltip placement.' },
-        { name: 'class', type: 'string', description: 'Extra classes applied to the tooltip content.' },
+        {
+          name: 'tooltip',
+          type: 'string',
+          description: 'Tooltip label shown on hover (required).',
+        },
+        {
+          name: 'side',
+          type: '"top" | "bottom" | "left" | "right"',
+          default: '"top"',
+          description: 'Tooltip placement.',
+        },
+        {
+          name: 'class',
+          type: 'string',
+          description: 'Extra classes applied to the tooltip content.',
+        },
       ],
     },
   ];

@@ -5,10 +5,7 @@ import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
-import {
-  PkAttachmentPreviewImports,
-  type Attachment,
-} from 'ngx-prompt-kit/attachment-preview';
+import { PkAttachmentPreviewImports, type Attachment } from 'ngx-prompt-kit/attachment-preview';
 import { PkFileUploadImports } from 'ngx-prompt-kit/file-upload';
 import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
 
@@ -45,17 +42,10 @@ const SAMPLE_THUMB =
         >
           <div class="mx-auto flex w-full max-w-xl flex-col gap-3">
             @if (attachments().length) {
-              <pk-attachment-preview
-                [attachments]="attachments()"
-                (removed)="onRemove($event)"
-              />
+              <pk-attachment-preview [attachments]="attachments()" (removed)="onRemove($event)" />
             }
 
-            <pk-prompt-input
-              [(value)]="value"
-              [isLoading]="isSending()"
-              (submitted)="onSubmit()"
-            >
+            <pk-prompt-input [(value)]="value" [isLoading]="isSending()" (submitted)="onSubmit()">
               <pk-prompt-input-textarea
                 placeholder="Describe what you want or drop files anywhere..."
               />

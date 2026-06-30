@@ -9,11 +9,7 @@ import {
   signal,
 } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
-import {
-  lucideChevronDown,
-  lucideCircle,
-  lucideCircleCheck,
-} from '@ng-icons/lucide';
+import { lucideChevronDown, lucideCircle, lucideCircleCheck } from '@ng-icons/lucide';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { cn } from '../utils/cn';
 
@@ -88,7 +84,8 @@ export interface PkTodoItem {
                   [class.line-through]="item.done"
                   [class.text-muted-foreground]="item.done"
                 >
-                  {{ item.label }}@if (item.optional) {
+                  {{ item.label }}
+                  @if (item.optional) {
                     <span class="text-muted-foreground"> (optional)</span>
                   }
                 </span>
@@ -125,9 +122,7 @@ export class PkTodoList {
   );
 
   protected readonly total = computed(() => this.items().length);
-  protected readonly doneCount = computed(
-    () => this.items().filter((i) => !!i.done).length,
-  );
+  protected readonly doneCount = computed(() => this.items().filter((i) => !!i.done).length);
   protected readonly allDone = computed(
     () => this.total() > 0 && this.doneCount() === this.total(),
   );
