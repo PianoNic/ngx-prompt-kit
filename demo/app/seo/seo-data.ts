@@ -63,6 +63,7 @@ const COMPONENT_TITLES: Readonly<Record<string, string>> = {
   'todo-list': 'Todo List',
   'token-counter': 'Token Counter',
   tool: 'Tool',
+  'tool-steps': 'Tool Steps',
   'usage-card': 'Usage Card',
 };
 

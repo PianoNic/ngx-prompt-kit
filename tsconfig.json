@@ -105,7 +105,8 @@
       "ngx-prompt-kit/model-list": ["./libs/prompt-kit/model-list"],
       "ngx-prompt-kit/model-browser": ["./libs/prompt-kit/model-browser"],
       "ngx-prompt-kit/usage-card": ["./libs/prompt-kit/usage-card"],
-      "ngx-prompt-kit/todo-list": ["./libs/prompt-kit/todo-list"]
+      "ngx-prompt-kit/todo-list": ["./libs/prompt-kit/todo-list"],
+      "ngx-prompt-kit/tool-steps": ["./libs/prompt-kit/tool-steps"]
     }
   },
   "angularCompilerOptions": {

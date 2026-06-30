@@ -186,6 +186,11 @@
       "factory": "./tool/index#tool",
       "schema": "./tool/schema.json"
     },
+    "tool-steps": {
+      "description": "Add the tool-steps component (ngx-prompt-kit original).",
+      "factory": "./tool-steps/index#toolSteps",
+      "schema": "./tool-steps/schema.json"
+    },
     "usage-card": {
       "description": "Add the usage-card component (ngx-prompt-kit original).",
       "factory": "./usage-card/index#usageCard",
