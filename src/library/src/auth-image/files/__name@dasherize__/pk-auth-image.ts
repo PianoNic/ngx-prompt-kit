@@ -32,7 +32,7 @@ import { cn } from '../utils/cn';
   },
   template: `
     @if (objectUrl(); as src) {
-      <img [src]="src" [alt]="alt()" class="h-full w-full object-cover" />
+      <img [src]="src" [alt]="alt()" [class]="imgClass()" />
     } @else if (failed()) {
       <div
         class="bg-muted text-muted-foreground flex h-full w-full items-center justify-center text-xs"
@@ -48,6 +48,9 @@ export class PkAuthImage {
   public readonly url = input.required<string>();
   public readonly alt = input<string>('');
   public readonly class = input<string>('');
+  /** Classes for the <img> itself. Default fills+crops (avatar/thumbnail);
+   *  pass e.g. 'max-h-80 max-w-full object-contain' for natural fit. */
+  public readonly imgClass = input<string>('h-full w-full object-cover');
 
   private readonly http = inject(HttpClient);
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
