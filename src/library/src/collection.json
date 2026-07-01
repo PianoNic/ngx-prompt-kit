@@ -26,6 +26,11 @@
       "factory": "./attachment-preview/index#attachmentPreview",
       "schema": "./attachment-preview/schema.json"
     },
+    "auth-image": {
+      "description": "Add the auth-image component (ngx-prompt-kit original).",
+      "factory": "./auth-image/index#authImage",
+      "schema": "./auth-image/schema.json"
+    },
     "branch-nav": {
       "description": "Add the branch-nav component (ngx-prompt-kit original).",
       "factory": "./branch-nav/index#branchNav",
@@ -110,6 +115,11 @@
       "description": "Add the model-browser component (ngx-prompt-kit original).",
       "factory": "./model-browser/index#modelBrowser",
       "schema": "./model-browser/schema.json"
+    },
+    "model-icon": {
+      "description": "Add the model-icon utility (ngx-prompt-kit original).",
+      "factory": "./model-icon/index#modelIcon",
+      "schema": "./model-icon/schema.json"
     },
     "model-list": {
       "description": "Add the model-list component (ngx-prompt-kit original).",

@@ -70,6 +70,9 @@ export const NAV: NavGroup[] = [
       { label: 'Streaming (SSE)', path: '/utilities/streaming', badge: 'New' },
       { label: 'Streaming Message', path: '/utilities/streaming-message', badge: 'New' },
       { label: 'HTTP Error', path: '/utilities/http-error', badge: 'New' },
+      { label: 'Model Icon', path: '/utilities/model-icon', badge: 'New' },
+      { label: 'Auth Image', path: '/utilities/auth-image', badge: 'New' },
+      { label: 'Chat Stream', path: '/utilities/chat-stream', badge: 'New' },
     ],
   },
 ];

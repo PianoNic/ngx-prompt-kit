@@ -47,3 +47,7 @@ Thumbs.db
 # AI tooling
 .claude/
 .playwright-mcp/
+
+# Playwright MCP artifacts
+polyglot-*.png
+.playwright-mcp/

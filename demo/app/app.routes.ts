@@ -269,6 +269,18 @@ export const routes: Routes = [
         path: 'utilities/http-error',
         loadComponent: () => import('./demo/http-error-demo').then((m) => m.HttpErrorDemo),
       },
+      {
+        path: 'utilities/model-icon',
+        loadComponent: () => import('./demo/model-icon-demo').then((m) => m.ModelIconDemo),
+      },
+      {
+        path: 'utilities/auth-image',
+        loadComponent: () => import('./demo/auth-image-demo').then((m) => m.AuthImageDemo),
+      },
+      {
+        path: 'utilities/chat-stream',
+        loadComponent: () => import('./demo/chat-stream-demo').then((m) => m.ChatStreamDemo),
+      },
     ],
   },
   { path: '**', redirectTo: '' },
