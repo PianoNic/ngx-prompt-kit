@@ -11,6 +11,7 @@ import {
   input,
   output,
   signal,
+  untracked,
 } from '@angular/core';
 import { PkMarkdown } from '../markdown/pk-markdown';
 import { cn } from '../utils/cn';
@@ -172,7 +173,10 @@ export class PkResponseStream {
       return;
     }
 
-    const displayed = this.displayedText();
+    // Read untracked: start() runs inside the textStream effect, and the RAF
+    // tick writes displayedText every frame — tracking it here would re-run the
+    // effect on every frame.
+    const displayed = untracked(this.displayedText);
 
     // Diverged: new text doesn't start with what we've already revealed.
     // Reset and animate from scratch. (Also catches the truncation case

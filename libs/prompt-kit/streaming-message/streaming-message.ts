@@ -43,6 +43,10 @@ export function createStreamingMessage(): StreamingMessageController {
   const text = signal('');
   const done = signal(false);
   let pendingCommit: (() => void) | null = null;
+  // Set once the source stream is done. Blocks late/duplicate tokens (e.g. a
+  // provider that re-emits after signalling completion) from re-growing the
+  // buffer and making the reveal appear to start over.
+  let ended = false;
 
   const finish = (): void => {
     const commit = pendingCommit;
@@ -56,8 +60,12 @@ export function createStreamingMessage(): StreamingMessageController {
     text: text.asReadonly(),
     done: done.asReadonly(),
     streaming: computed(() => text().length > 0 || done()),
-    append: (chunk: string) => text.update((current) => current + chunk),
+    append: (chunk: string) => {
+      if (ended) return;
+      text.update((current) => current + chunk);
+    },
     end: (onCommit?: () => void) => {
+      ended = true;
       pendingCommit = onCommit ?? null;
       if (text() === '') {
         // No buffered text → pk-response-stream won't emit (finished).
@@ -68,6 +76,7 @@ export function createStreamingMessage(): StreamingMessageController {
     },
     finished: finish,
     reset: () => {
+      ended = false;
       text.set('');
       done.set(false);
       pendingCommit = null;
