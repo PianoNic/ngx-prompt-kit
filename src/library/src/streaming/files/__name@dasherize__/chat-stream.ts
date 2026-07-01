@@ -6,8 +6,8 @@ import { readSseHttpEvents } from './sse';
 /** Normalised chat-stream frame. Your `adapt` maps each raw SSE `data` payload
  *  to one of these (or `null` to ignore it). */
 export interface ChatStreamFrame<TResult = unknown> {
-  kind: 'token' | 'tool-call' | 'tool-result' | 'done' | 'error';
-  /** For `token`: the text delta. */
+  kind: 'token' | 'reasoning' | 'tool-call' | 'tool-result' | 'done' | 'error';
+  /** For `token` and `reasoning`: the text delta. */
   text?: string;
   /** For `tool-call` / `tool-result`: the tool name. */
   name?: string;
@@ -24,6 +24,8 @@ export interface ChatStreamFrame<TResult = unknown> {
 /** Callbacks invoked as the stream is consumed. */
 export interface ChatStreamHandlers {
   onToken?(text: string): void;
+  /** A reasoning/thinking delta (separate from the answer text). */
+  onReasoning?(text: string): void;
   onToolCall?(name: string, input: string): void;
   onToolResult?(name: string, output: string): void;
 }
@@ -60,6 +62,9 @@ export function readChatStream<TResult>(
     switch (frame.kind) {
       case 'token':
         if (frame.text) handlers.onToken?.(frame.text);
+        break;
+      case 'reasoning':
+        if (frame.text) handlers.onReasoning?.(frame.text);
         break;
       case 'tool-call':
         if (frame.name) handlers.onToolCall?.(frame.name, frame.input ?? '');
