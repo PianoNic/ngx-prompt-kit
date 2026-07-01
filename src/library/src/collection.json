@@ -41,6 +41,11 @@
       "factory": "./chain-of-thought/index#chainOfThought",
       "schema": "./chain-of-thought/schema.json"
     },
+    "chain-of-thought-steps": {
+      "description": "Add the chain-of-thought-steps component (ngx-prompt-kit original).",
+      "factory": "./chain-of-thought-steps/index#chainOfThoughtSteps",
+      "schema": "./chain-of-thought-steps/schema.json"
+    },
     "chat-container": {
       "description": "Add the chat-container component.",
       "factory": "./chat-container/index#chatContainer",
