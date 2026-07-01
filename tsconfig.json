@@ -93,6 +93,7 @@
       "ngx-prompt-kit/source": ["./libs/prompt-kit/source"],
       "ngx-prompt-kit/feedback-bar": ["./libs/prompt-kit/feedback-bar"],
       "ngx-prompt-kit/chain-of-thought": ["./libs/prompt-kit/chain-of-thought"],
+      "ngx-prompt-kit/chain-of-thought-steps": ["./libs/prompt-kit/chain-of-thought-steps"],
       "ngx-prompt-kit/tool": ["./libs/prompt-kit/tool"],
       "ngx-prompt-kit/conversation-list": ["./libs/prompt-kit/conversation-list"],
       "ngx-prompt-kit/token-counter": ["./libs/prompt-kit/token-counter"],
