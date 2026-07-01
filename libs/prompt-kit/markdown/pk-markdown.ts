@@ -82,6 +82,14 @@ export class PkMarkdown {
           const escaped = escapeHtml(token.text);
           return `<div class="pk-code-container" data-code-lang="${langAttr}"><pre><code class="language-${langAttr}">${escaped}</code></pre></div>`;
         },
+        image(token: Tokens.Image): string | false {
+          // Drop images whose URL is not http(s). Models sometimes hallucinate
+          // inline image markup (data:, attachment:, sandbox:, blob: ...) that
+          // points nowhere and renders as a broken image.
+          const href = (token.href ?? '').trim();
+          if (!/^https?:\/\//i.test(href)) return '';
+          return false;
+        },
       },
     });
     return m;
