@@ -78,6 +78,9 @@ export const ALL_PAGE_PATHS: readonly string[] = [
   '/utilities/streaming',
   '/utilities/streaming-message',
   '/utilities/http-error',
+  '/utilities/model-icon',
+  '/utilities/auth-image',
+  '/utilities/chat-stream',
 ];
 
 /**
@@ -172,6 +175,39 @@ export function metaForUrl(url: string): PageMeta {
       title: `HTTP Error helper · ${SITE.name}`,
       description:
         'describeHttpError() for ngx-prompt-kit — maps HttpErrorResponse status codes to friendly, user-facing messages with optional per-status overrides. Schematic command included.',
+      path,
+      changefreq: 'monthly',
+      priority: 0.6,
+    };
+  }
+
+  if (path === '/utilities/model-icon') {
+    return {
+      title: `Model Icon helper · ${SITE.name}`,
+      description:
+        'modelIconUrl() for ngx-prompt-kit — resolves an AI model to a LobeHub brand icon (with a neutral fallback) for pk-model-picker / pk-model-list. Schematic command included.',
+      path,
+      changefreq: 'monthly',
+      priority: 0.6,
+    };
+  }
+
+  if (path === '/utilities/auth-image') {
+    return {
+      title: `Auth Image component · ${SITE.name}`,
+      description:
+        'pk-auth-image for ngx-prompt-kit — fetches a token-protected image via HttpClient, shows it as an object URL with skeleton/error states, and revokes on destroy. Schematic command included.',
+      path,
+      changefreq: 'monthly',
+      priority: 0.6,
+    };
+  }
+
+  if (path === '/utilities/chat-stream') {
+    return {
+      title: `Chat Stream helper · ${SITE.name}`,
+      description:
+        'readChatStream() for ngx-prompt-kit — reduces an SSE chat stream (tokens, tool calls/results, done/error) into handler callbacks over any tool-calling backend. Schematic command included.',
       path,
       changefreq: 'monthly',
       priority: 0.6,

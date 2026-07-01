@@ -1,4 +1,5 @@
 import { ApplicationConfig } from '@angular/core';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import {
   provideRouter,
   withComponentInputBinding,
@@ -16,6 +17,7 @@ import { reloadOnChunkLoadError } from './lazy-chunk-error-handler';
  */
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideHttpClient(withFetch()),
     provideRouter(
       routes,
       withComponentInputBinding(),
