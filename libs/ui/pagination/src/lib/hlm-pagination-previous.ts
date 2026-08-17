@@ -52,7 +52,7 @@ export class HlmPaginationPrevious {
     transform: booleanAttribute,
   });
   protected readonly _labelClass = computed(() =>
-    this.iconOnly() ? 'sr-only' : 'spartan-pagination-previous-text hidden sm:block',
+    hlm(this.iconOnly() ? 'sr-only' : 'hidden sm:block'),
   );
 
   protected readonly _size = computed<ButtonVariants['size']>(() =>
@@ -60,6 +60,6 @@ export class HlmPaginationPrevious {
   );
 
   protected readonly _computedClass = computed(() =>
-    hlm(!this.iconOnly() && 'spartan-pagination-previous', this.userClass()),
+    hlm(!this.iconOnly() && 'ps-2!', this.userClass()),
   );
 }

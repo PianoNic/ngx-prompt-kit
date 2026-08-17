@@ -34,7 +34,10 @@ export class HlmTable {
 })
 export class HlmTHead {
   constructor() {
-    classes(() => '[&_tr]:border-b');
+    // sticky + bg-card: the table header pins to the top of whichever scroll container
+    // it sits inside, matching the surrounding card's background so the rows beneath
+    // don't bleed through as they scroll past. z-10 keeps it above hover styles.
+    classes(() => '[&_tr]:border-b sticky top-0 z-10 bg-card');
   }
 }
 

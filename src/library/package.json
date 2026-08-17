@@ -1,6 +1,6 @@
 {
   "name": "ngx-prompt-kit",
-  "version": "21.4.1",
+  "version": "22.0.0",
   "description": "Angular components for AI chat interfaces. Schematic-based — bring your own Spartan UI.",
   "keywords": [
     "angular",
@@ -26,8 +26,8 @@
     "save": "devDependencies"
   },
   "dependencies": {
-    "@angular-devkit/core": "^21.0.0",
-    "@angular-devkit/schematics": "^21.0.0",
-    "@schematics/angular": "^21.0.0"
+    "@angular-devkit/core": "^22.0.0",
+    "@angular-devkit/schematics": "^22.0.0",
+    "@schematics/angular": "^22.0.0"
   }
 }

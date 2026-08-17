@@ -60,6 +60,6 @@ export class HlmPaginationNext {
   );
 
   protected readonly _computedClass = computed(() =>
-    hlm(!this.iconOnly() && 'spartan-pagination-next', this.userClass()),
+    hlm(!this.iconOnly() && 'pe-2!', this.userClass()),
   );
 }

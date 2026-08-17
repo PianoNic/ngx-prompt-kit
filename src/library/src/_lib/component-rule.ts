@@ -15,7 +15,7 @@ import {
 } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { getWorkspace } from '@schematics/angular/utility/workspace';
-import { join } from 'path';
+import { join } from 'node:path';
 import { resolveComponentPath } from './config';
 
 export interface ComponentSchema {

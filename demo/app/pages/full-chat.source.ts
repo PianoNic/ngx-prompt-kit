@@ -147,7 +147,7 @@ export const FULL_CHAT_HTML_SOURCE = `<hlm-tabs tab="preview" class="mx-auto fle
                   </pk-message>
                   @if (m.attachments?.length) {
                     <pk-attachment-preview
-                      [attachments]="m.attachments ?? []"
+                      [attachments]="m.attachments"
                       [removable]="false"
                     />
                   }
