@@ -134,7 +134,11 @@ Want me to group by author next time?"
       </app-doc-example>
 
       <section class="mt-10">
-        <h2 class="text-xl font-semibold tracking-tight">Upgrading to v23</h2>
+        <h2 class="text-xl font-semibold tracking-tight">Upgrading to v22.1</h2>
+        <p class="text-muted-foreground mt-2 text-sm leading-relaxed">
+          The major version tracks the Angular major it targets, so breaking component changes ship
+          in minors. This one needs a template edit.
+        </p>
         <p class="text-muted-foreground mt-2 text-sm leading-relaxed">
           <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs"
             >pk-message</code
