@@ -9,11 +9,14 @@ import { classes } from '@spartan-ng/helm/utils';
       directive: BrnNavigationMenuList,
     },
   ],
+  host: {
+    'data-slot': 'navigation-menu-list',
+  },
 })
 export class HlmNavigationMenuList {
   constructor() {
     classes(() => [
-      'group flex flex-1 list-none items-center justify-center gap-0',
+      'gap-0 group flex flex-1 list-none items-center justify-center',
       'data-[orientation=vertical]:flex-col',
     ]);
   }

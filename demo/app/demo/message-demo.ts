@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideCopy, lucideThumbsDown, lucideThumbsUp } from '@ng-icons/lucide';
+import { HlmMessageImports } from '@spartan-ng/helm/message';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { DocApi, type ApiSection } from '../layout/doc-api';
@@ -12,7 +13,16 @@ import { PkMessageImports } from 'ngx-prompt-kit/message';
 @Component({
   selector: 'app-message-demo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DocPage, DocExample, DocInstall, DocApi, HlmButton, HlmIconImports, PkMessageImports],
+  imports: [
+    DocPage,
+    DocExample,
+    DocInstall,
+    DocApi,
+    HlmButton,
+    HlmIconImports,
+    PkMessageImports,
+    HlmMessageImports,
+  ],
   providers: [provideIcons({ lucideCopy, lucideThumbsUp, lucideThumbsDown })],
   template: `
     <app-doc-page
@@ -26,13 +36,13 @@ import { PkMessageImports } from 'ngx-prompt-kit/message';
         [code]="basicCode"
       >
         <div class="flex w-full flex-col gap-4">
-          <pk-message class="justify-end">
+          <div hlmMessage align="end">
             <pk-message-content
               class="bg-primary text-primary-foreground"
               content="Could you summarize the latest commit log into release notes?"
             />
-          </pk-message>
-          <pk-message>
+          </div>
+          <div hlmMessage>
             <pk-message-avatar
               src="https://avatars.githubusercontent.com/u/0?v=4"
               alt="Assistant"
@@ -41,7 +51,7 @@ import { PkMessageImports } from 'ngx-prompt-kit/message';
             <pk-message-content
               content="I can help with that — pull the commit range and I'll group them into features, fixes, and chores."
             />
-          </pk-message>
+          </div>
         </div>
       </app-doc-example>
 
@@ -52,13 +62,13 @@ import { PkMessageImports } from 'ngx-prompt-kit/message';
         [code]="markdownCode"
       >
         <div class="flex w-full flex-col gap-4">
-          <pk-message class="justify-end">
+          <div hlmMessage align="end">
             <pk-message-content
               class="bg-primary text-primary-foreground"
               content="Give me the v0.1.0 changelog as markdown."
             />
-          </pk-message>
-          <pk-message>
+          </div>
+          <div hlmMessage>
             <pk-message-avatar src="" alt="Assistant" fallback="AI" />
             <pk-message-content
               [markdown]="true"
@@ -70,7 +80,7 @@ import { PkMessageImports } from 'ngx-prompt-kit/message';
 
 Want me to group by author next time?"
             />
-          </pk-message>
+          </div>
         </div>
       </app-doc-example>
 
@@ -81,20 +91,20 @@ Want me to group by author next time?"
         [code]="actionsCode"
       >
         <div class="flex w-full flex-col gap-4">
-          <pk-message class="justify-end">
+          <div hlmMessage align="end">
             <pk-message-content
               class="bg-primary text-primary-foreground"
               content="Explain the difference between signal() and computed()."
             />
-          </pk-message>
+          </div>
           <div class="flex flex-col gap-1">
-            <pk-message>
+            <div hlmMessage>
               <pk-message-avatar src="" alt="Assistant" fallback="AI" />
               <pk-message-content
                 content="signal() holds writable state. computed() derives a read-only value from one or more signals; it re-evaluates lazily when its dependencies change."
               />
-            </pk-message>
-            <pk-message-actions class="ml-11">
+            </div>
+            <div hlmMessageFooter class="ml-11">
               <pk-message-action tooltip="Copy">
                 <button hlmBtn variant="ghost" size="icon-sm" type="button" aria-label="Copy">
                   <ng-icon hlm size="xs" name="lucideCopy" />
@@ -116,7 +126,7 @@ Want me to group by author next time?"
                   <ng-icon hlm size="xs" name="lucideThumbsDown" />
                 </button>
               </pk-message-action>
-            </pk-message-actions>
+            </div>
           </div>
         </div>
       </app-doc-example>
@@ -129,9 +139,14 @@ Want me to group by author next time?"
 export class MessageDemo {
   protected readonly api: ApiSection[] = [
     {
-      name: 'PkMessage',
+      name: 'HlmMessage (spartan)',
       props: [
-        { name: 'class', type: 'string', description: 'Extra classes merged onto the host.' },
+        {
+          name: 'align',
+          type: '"start" | "end"',
+          default: '"start"',
+          description: 'Row direction. Use "end" for user messages. Replaces PkMessage.',
+        },
       ],
     },
     {
@@ -161,8 +176,14 @@ export class MessageDemo {
       ],
     },
     {
-      name: 'PkMessageActions',
-      props: [{ name: 'class', type: 'string', description: 'Extra classes for the action row.' }],
+      name: 'HlmMessageFooter (spartan)',
+      props: [
+        {
+          name: '—',
+          type: '—',
+          description: 'Action row; auto-aligns for align="end". Replaces PkMessageActions.',
+        },
+      ],
     },
     {
       name: 'PkMessageAction',
@@ -187,21 +208,21 @@ export class MessageDemo {
     },
   ];
 
-  protected readonly basicCode = `<pk-message class="justify-end">
+  protected readonly basicCode = `<div hlmMessage align="end">
   <pk-message-content
     class="bg-primary text-primary-foreground"
     content="Could you summarize the latest commit log into release notes?"
   />
-</pk-message>
+</div>
 
-<pk-message>
+<div hlmMessage>
   <pk-message-avatar src="" alt="Assistant" fallback="AI" />
   <pk-message-content
     content="I can help with that — pull the commit range and I'll group them..."
   />
-</pk-message>`;
+</div>`;
 
-  protected readonly markdownCode = `<pk-message>
+  protected readonly markdownCode = `<div hlmMessage>
   <pk-message-avatar src="" alt="Assistant" fallback="AI" />
   <pk-message-content
     [markdown]="true"
@@ -210,14 +231,14 @@ export class MessageDemo {
 - Refactored the auth middleware
 - Added \\\`session.refresh()\\\` helper"
   />
-</pk-message>`;
+</div>`;
 
-  protected readonly actionsCode = `<pk-message>
+  protected readonly actionsCode = `<div hlmMessage>
   <pk-message-avatar src="" alt="Assistant" fallback="AI" />
   <pk-message-content content="signal() holds writable state..." />
-</pk-message>
+</div>
 
-<pk-message-actions class="ml-11">
+<div hlmMessageFooter class="ml-11">
   <pk-message-action tooltip="Copy">
     <button hlmBtn variant="ghost" size="icon-sm">
       <svg>...</svg>
@@ -225,5 +246,5 @@ export class MessageDemo {
   </pk-message-action>
   <pk-message-action tooltip="Good response">...</pk-message-action>
   <pk-message-action tooltip="Bad response">...</pk-message-action>
-</pk-message-actions>`;
+</div>`;
 }

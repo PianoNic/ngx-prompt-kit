@@ -9,8 +9,6 @@ import { BrnAlertDialogTrigger } from '@spartan-ng/brain/alert-dialog';
       inputs: ['id', 'brnAlertDialogTriggerFor: hlmAlertDialogTriggerFor', 'type'],
     },
   ],
-  host: {
-    'data-slot': 'alert-dialog-trigger',
-  },
+  host: { 'data-slot': 'alert-dialog-trigger' },
 })
 export class HlmAlertDialogTrigger {}

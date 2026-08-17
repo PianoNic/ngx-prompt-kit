@@ -36,7 +36,7 @@ export interface ComponentSpec {
 }
 
 const HELM_REQUIREMENTS: Record<string, string[]> = {
-  message: ['avatar', 'tooltip'],
+  message: ['avatar', 'tooltip', 'message'],
   'prompt-input': ['textarea', 'tooltip'],
   'prompt-suggestion': ['button'],
   'scroll-button': ['button'],

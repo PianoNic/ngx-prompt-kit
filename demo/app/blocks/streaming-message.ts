@@ -1,3 +1,4 @@
+import { HlmMessageImports } from '@spartan-ng/helm/message';
 import { isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -32,7 +33,14 @@ Want me to show \`effect()\` next?`;
 @Component({
   selector: 'app-block-streaming-message',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [BlockPage, DocExample, PkMessageImports, PkResponseStream, PkStreamControlsImports],
+  imports: [
+    BlockPage,
+    DocExample,
+    PkMessageImports,
+    PkResponseStream,
+    PkStreamControlsImports,
+    HlmMessageImports,
+  ],
   template: `
     <app-block-page
       title="Streaming assistant message"
@@ -40,14 +48,14 @@ Want me to show \`effect()\` next?`;
     >
       <app-doc-example title="Live response with stream controls" [code]="code">
         <div class="flex w-full flex-col gap-4">
-          <pk-message class="justify-end">
+          <div hlmMessage align="end">
             <pk-message-content
               class="bg-primary text-primary-foreground"
               content="Show me a small computed() example."
             />
-          </pk-message>
+          </div>
 
-          <pk-message>
+          <div hlmMessage>
             <pk-message-avatar src="" alt="Assistant" fallback="AI" />
             <div class="flex min-w-0 flex-1 flex-col gap-2">
               @if (state() === 'streaming' || streamed()) {
@@ -59,7 +67,7 @@ Want me to show \`effect()\` next?`;
                 />
               }
             </div>
-          </pk-message>
+          </div>
 
           <div class="ml-11 flex">
             <pk-stream-controls [state]="state()" (stop)="stop()" (regenerate)="start()" />
@@ -110,14 +118,14 @@ export class StreamingMessageBlock {
     this.state.set('idle');
   }
 
-  protected readonly code = `<pk-message class="justify-end">
+  protected readonly code = `<div hlmMessage align="end">
   <pk-message-content
     class="bg-primary text-primary-foreground"
     content="Show me a small computed() example."
   />
-</pk-message>
+</div>
 
-<pk-message>
+<div hlmMessage>
   <pk-message-avatar src="" alt="Assistant" fallback="AI" />
   <pk-response-stream
     class="prose prose-sm dark:prose-invert max-w-none"
@@ -125,7 +133,7 @@ export class StreamingMessageBlock {
     [markdown]="true"
     [speed]="80"
   />
-</pk-message>
+</div>
 
 <pk-stream-controls
   [state]="state()"

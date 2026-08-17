@@ -39,7 +39,8 @@ Distributed via Angular schematics: `ng add` and `ng generate` copy source into 
 
 ## Prerequisites
 
-- Angular 19+ (tested on Angular 22)
+- Angular 21 or 22 (tested on Angular 22)
+- Node.js 22.22.3+, 24.15+ or 26+
 - Tailwind CSS v4
 - [Spartan UI](https://www.spartan.ng) installed in your workspace
 

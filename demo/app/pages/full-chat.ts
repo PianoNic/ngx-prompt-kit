@@ -18,6 +18,7 @@ import {
   lucideUserRound,
   lucideX,
 } from '@ng-icons/lucide';
+import { HlmMessageImports } from '@spartan-ng/helm/message';
 import { HlmButton } from '@spartan-ng/helm/button';
 import {
   HlmDropdownMenu,
@@ -90,6 +91,7 @@ const SAMPLE_ATTACHMENT_IMAGE =
     PkResponseStream,
     PkScrollButton,
     PkTokenCounter,
+    HlmMessageImports,
   ],
   providers: [
     provideIcons({

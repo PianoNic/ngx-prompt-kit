@@ -1,3 +1,4 @@
+import { HlmMessageImports } from '@spartan-ng/helm/message';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
@@ -47,7 +48,7 @@ The \`<=>\` operator is pgvector's cosine-distance shorthand. For a 1M-row corpu
 @Component({
   selector: 'app-block-markdown-showcase',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [BlockPage, DocExample, PkMarkdown, PkMessageImports],
+  imports: [BlockPage, DocExample, PkMarkdown, PkMessageImports, HlmMessageImports],
   template: `
     <app-block-page
       title="Markdown showcase"
@@ -55,14 +56,14 @@ The \`<=>\` operator is pgvector's cosine-distance shorthand. For a 1M-row corpu
     >
       <app-doc-example title="Math · code · Mermaid in one reply" [code]="code">
         <div class="flex w-full max-w-3xl flex-col gap-4">
-          <pk-message class="justify-end">
+          <div hlmMessage align="end">
             <pk-message-content
               class="bg-primary text-primary-foreground"
               content="Explain how vector search works — formulas + a pipeline diagram + sample code."
             />
-          </pk-message>
+          </div>
 
-          <pk-message>
+          <div hlmMessage>
             <pk-message-avatar src="" alt="Assistant" fallback="AI" />
             <pk-markdown
               class="prose prose-sm dark:prose-invert min-w-0 flex-1"
@@ -70,7 +71,7 @@ The \`<=>\` operator is pgvector's cosine-distance shorthand. For a 1M-row corpu
               [enableDiagrams]="true"
               [content]="doc"
             />
-          </pk-message>
+          </div>
         </div>
       </app-doc-example>
     </app-block-page>
@@ -79,7 +80,7 @@ The \`<=>\` operator is pgvector's cosine-distance shorthand. For a 1M-row corpu
 export class MarkdownShowcaseBlock {
   protected readonly doc = RICH_DOC;
 
-  protected readonly code = `<pk-message>
+  protected readonly code = `<div hlmMessage>
   <pk-message-avatar src="" alt="Assistant" fallback="AI" />
   <pk-markdown
     class="prose prose-sm dark:prose-invert flex-1"
@@ -87,7 +88,7 @@ export class MarkdownShowcaseBlock {
     [enableDiagrams]="true"
     [content]="doc"
   />
-</pk-message>
+</div>
 
 // Component
 protected readonly doc = \`# How vector search works

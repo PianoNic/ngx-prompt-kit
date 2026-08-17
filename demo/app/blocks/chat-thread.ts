@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { HlmMessageImports } from '@spartan-ng/helm/message';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
@@ -22,6 +23,7 @@ interface Turn {
     PkChatContainerImports,
     PkMessageImports,
     PkScrollButton,
+    HlmMessageImports,
   ],
   template: `
     <app-block-page
@@ -40,17 +42,17 @@ interface Turn {
               <pk-chat-container-content class="gap-4">
                 @for (t of turns(); track t.id) {
                   @if (t.role === 'user') {
-                    <pk-message class="justify-end">
+                    <div hlmMessage align="end">
                       <pk-message-content
                         class="bg-primary text-primary-foreground"
                         [content]="t.text"
                       />
-                    </pk-message>
+                    </div>
                   } @else {
-                    <pk-message>
+                    <div hlmMessage>
                       <pk-message-avatar src="" alt="Assistant" fallback="AI" />
                       <pk-message-content [markdown]="true" [content]="t.text" />
-                    </pk-message>
+                    </div>
                   }
                 }
               </pk-chat-container-content>
@@ -98,17 +100,17 @@ export class ChatThreadBlock {
   <pk-chat-container-content class="gap-4">
     @for (t of turns(); track t.id) {
       @if (t.role === 'user') {
-        <pk-message class="justify-end">
+        <div hlmMessage align="end">
           <pk-message-content
             class="bg-primary text-primary-foreground"
             [content]="t.text"
           />
-        </pk-message>
+        </div>
       } @else {
-        <pk-message>
+        <div hlmMessage>
           <pk-message-avatar src="" alt="Assistant" fallback="AI" />
           <pk-message-content [markdown]="true" [content]="t.text" />
-        </pk-message>
+        </div>
       }
     }
   </pk-chat-container-content>

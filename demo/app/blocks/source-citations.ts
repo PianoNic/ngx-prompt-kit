@@ -1,3 +1,4 @@
+import { HlmMessageImports } from '@spartan-ng/helm/message';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
@@ -7,7 +8,7 @@ import { PkSourceImports } from 'ngx-prompt-kit/source';
 @Component({
   selector: 'app-block-source-citations',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [BlockPage, DocExample, PkMessageImports, PkSourceImports],
+  imports: [BlockPage, DocExample, PkMessageImports, PkSourceImports, HlmMessageImports],
   template: `
     <app-block-page
       title="Source-attributed answer"
@@ -15,14 +16,14 @@ import { PkSourceImports } from 'ngx-prompt-kit/source';
     >
       <app-doc-example title="Inline cites + sources footer" [code]="code">
         <div class="flex w-full max-w-2xl flex-col gap-4">
-          <pk-message class="justify-end">
+          <div hlmMessage align="end">
             <pk-message-content
               class="bg-primary text-primary-foreground"
               content="What's the difference between HNSW and IVF vector indexes?"
             />
-          </pk-message>
+          </div>
 
-          <pk-message>
+          <div hlmMessage>
             <pk-message-avatar src="" alt="Assistant" fallback="AI" />
             <div class="flex min-w-0 flex-1 flex-col gap-3">
               <p class="text-sm leading-relaxed">
@@ -90,14 +91,14 @@ import { PkSourceImports } from 'ngx-prompt-kit/source';
                 </div>
               </div>
             </div>
-          </pk-message>
+          </div>
         </div>
       </app-doc-example>
     </app-block-page>
   `,
 })
 export class SourceCitationsBlock {
-  protected readonly code = `<pk-message>
+  protected readonly code = `<div hlmMessage>
   <pk-message-avatar src="" alt="Assistant" fallback="AI" />
   <div class="flex flex-1 flex-col gap-3">
     <p class="text-sm leading-relaxed">
@@ -128,5 +129,5 @@ export class SourceCitationsBlock {
       </div>
     </div>
   </div>
-</pk-message>`;
+</div>`;
 }

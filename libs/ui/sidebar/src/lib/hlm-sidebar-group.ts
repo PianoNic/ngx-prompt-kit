@@ -10,6 +10,6 @@ import { classes } from '@spartan-ng/helm/utils';
 })
 export class HlmSidebarGroup {
   constructor() {
-    classes(() => 'relative flex w-full min-w-0 flex-col p-2');
+    classes(() => 'p-2 relative flex w-full min-w-0 flex-col');
   }
 }

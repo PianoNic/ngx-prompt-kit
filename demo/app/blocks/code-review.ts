@@ -1,3 +1,4 @@
+import { HlmMessageImports } from '@spartan-ng/helm/message';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
@@ -25,7 +26,7 @@ function refreshSession(token: string) {
 @Component({
   selector: 'app-block-code-review',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [BlockPage, DocExample, PkCodeBlockImports, PkMessageImports],
+  imports: [BlockPage, DocExample, PkCodeBlockImports, PkMessageImports, HlmMessageImports],
   template: `
     <app-block-page
       title="Code review thread"
@@ -33,7 +34,7 @@ function refreshSession(token: string) {
     >
       <app-doc-example title="Snippet → review with diff" [code]="code">
         <div class="flex w-full max-w-2xl flex-col gap-4">
-          <pk-message class="justify-end">
+          <div hlmMessage align="end">
             <div class="flex max-w-full min-w-0 flex-col gap-2">
               <pk-message-content
                 class="bg-primary text-primary-foreground"
@@ -49,9 +50,9 @@ function refreshSession(token: string) {
                 <pk-code-block-code [code]="before" language="ts" />
               </pk-code-block>
             </div>
-          </pk-message>
+          </div>
 
-          <pk-message>
+          <div hlmMessage>
             <pk-message-avatar src="" alt="Assistant" fallback="AI" />
             <div class="flex min-w-0 flex-1 flex-col gap-3">
               <pk-message-content
@@ -68,7 +69,7 @@ function refreshSession(token: string) {
                 <pk-code-block-code [code]="after" language="ts" />
               </pk-code-block>
             </div>
-          </pk-message>
+          </div>
         </div>
       </app-doc-example>
     </app-block-page>
@@ -79,7 +80,7 @@ export class CodeReviewBlock {
   protected readonly after = AFTER;
 
   protected readonly code = `<!-- User message: prose + the snippet inside one bubble -->
-<pk-message class="justify-end">
+<div hlmMessage align="end">
   <div class="flex flex-col gap-2 max-w-full min-w-0">
     <pk-message-content
       class="bg-primary text-primary-foreground"
@@ -93,10 +94,10 @@ export class CodeReviewBlock {
       <pk-code-block-code [code]="before" language="ts" />
     </pk-code-block>
   </div>
-</pk-message>
+</div>
 
 <!-- Assistant: markdown commentary + suggested fix -->
-<pk-message>
+<div hlmMessage>
   <pk-message-avatar src="" alt="Assistant" fallback="AI" />
   <div class="flex flex-1 flex-col gap-3">
     <pk-message-content
@@ -111,5 +112,5 @@ export class CodeReviewBlock {
       <pk-code-block-code [code]="after" language="ts" />
     </pk-code-block>
   </div>
-</pk-message>`;
+</div>`;
 }

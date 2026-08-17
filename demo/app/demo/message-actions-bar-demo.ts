@@ -1,3 +1,4 @@
+import { HlmMessageImports } from '@spartan-ng/helm/message';
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import {
@@ -33,6 +34,7 @@ import {
     PkMessageImports,
     PkMessageEditImports,
     PkMessageActionsBarImports,
+    HlmMessageImports,
   ],
   providers: [
     provideIcons({
@@ -53,16 +55,16 @@ import {
     >
       <app-doc-example
         title="Assistant — default actions"
-        description="DEFAULT_ASSISTANT_ACTIONS: copy, regenerate, thumbs-up, thumbs-down. The wrapping pk-message + group container drives the hover-reveal."
+        description="DEFAULT_ASSISTANT_ACTIONS: copy, regenerate, thumbs-up, thumbs-down. The wrapping hlmMessage + group container drives the hover-reveal."
         [code]="assistantCode"
       >
         <div class="group flex w-full flex-col gap-1">
-          <pk-message>
+          <div hlmMessage>
             <pk-message-avatar src="" alt="Assistant" fallback="AI" />
             <pk-message-content
               content="Yes — Tailwind's color tokens flow through Spartan's CSS variables, so the kit picks up your theme without extra configuration."
             />
-          </pk-message>
+          </div>
           <pk-message-actions-bar
             class="ml-11"
             [actions]="assistantActions"
@@ -77,12 +79,12 @@ import {
         [code]="userCode"
       >
         <div class="group flex w-full flex-col items-end gap-1">
-          <pk-message class="justify-end">
+          <div hlmMessage align="end">
             <pk-message-content
               class="bg-primary text-primary-foreground"
               content="Does the kit pick up my Spartan theme automatically?"
             />
-          </pk-message>
+          </div>
           <pk-message-actions-bar
             [actions]="userActions"
             (actionPicked)="lastEvent.set('user: ' + $event.id)"
@@ -96,12 +98,12 @@ import {
         [code]="customCode"
       >
         <div class="group flex w-full flex-col gap-2">
-          <pk-message>
+          <div hlmMessage>
             <pk-message-avatar src="" alt="Assistant" fallback="AI" />
             <pk-message-content
               content="Click thumbs-up to see the active state — it persists across hover-reveal so the consumer can read 'this message was rated good'."
             />
-          </pk-message>
+          </div>
           <pk-message-actions-bar
             class="ml-11"
             visible="always"
@@ -122,7 +124,7 @@ import {
         [code]="composedCode"
       >
         <div class="group flex w-full flex-col items-end gap-1">
-          <pk-message class="justify-end">
+          <div hlmMessage align="end">
             <pk-message-edit
               #composedEditor
               editTrigger="hidden"
@@ -134,7 +136,7 @@ import {
                 [content]="composedContent()"
               />
             </pk-message-edit>
-          </pk-message>
+          </div>
           <pk-message-actions-bar
             [actions]="userActions"
             (actionPicked)="onComposedAction($event, composedEditor)"
@@ -271,10 +273,10 @@ export class MessageActionsBarDemo {
   ];
 
   protected readonly assistantCode = `<div class="group flex flex-col gap-1">
-  <pk-message>
+  <div hlmMessage>
     <pk-message-avatar src="" alt="Assistant" fallback="AI" />
     <pk-message-content content="..." />
-  </pk-message>
+  </div>
   <pk-message-actions-bar
     class="ml-11"
     [actions]="DEFAULT_ASSISTANT_ACTIONS"
@@ -283,9 +285,9 @@ export class MessageActionsBarDemo {
 </div>`;
 
   protected readonly userCode = `<div class="group flex flex-col items-end gap-1">
-  <pk-message class="justify-end">
+  <div hlmMessage align="end">
     <pk-message-content content="..." />
-  </pk-message>
+  </div>
   <pk-message-actions-bar
     [actions]="DEFAULT_USER_ACTIONS"
     (actionPicked)="handle($event)"
@@ -294,7 +296,7 @@ export class MessageActionsBarDemo {
 
   protected readonly composedCode = `// Suppress pk-message-edit's built-in pencil; let the actions bar own the trigger.
 <div class="group flex flex-col items-end gap-1">
-  <pk-message class="justify-end">
+  <div hlmMessage align="end">
     <pk-message-edit
       #editor
       editTrigger="hidden"
@@ -303,7 +305,7 @@ export class MessageActionsBarDemo {
     >
       <pk-message-content [content]="content()" />
     </pk-message-edit>
-  </pk-message>
+  </div>
   <pk-message-actions-bar
     [actions]="DEFAULT_USER_ACTIONS"
     (actionPicked)="onAction($event, editor)"

@@ -1,3 +1,4 @@
+import { HlmMessageImports } from '@spartan-ng/helm/message';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
@@ -15,7 +16,7 @@ const ART_OCEAN =
 @Component({
   selector: 'app-block-image-result',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [BlockPage, DocExample, PkImage, PkMessageImports],
+  imports: [BlockPage, DocExample, PkImage, PkMessageImports, HlmMessageImports],
   template: `
     <app-block-page
       title="Image generation result"
@@ -23,14 +24,14 @@ const ART_OCEAN =
     >
       <app-doc-example title="Generated images in a chat reply" [code]="code">
         <div class="flex w-full max-w-2xl flex-col gap-4">
-          <pk-message class="justify-end">
+          <div hlmMessage align="end">
             <pk-message-content
               class="bg-primary text-primary-foreground"
               content="Generate four cover variants in a sunset palette."
             />
-          </pk-message>
+          </div>
 
-          <pk-message>
+          <div hlmMessage>
             <pk-message-avatar src="" alt="Assistant" fallback="AI" />
             <div class="flex min-w-0 flex-1 flex-col gap-3">
               <p class="text-sm leading-relaxed">
@@ -62,7 +63,7 @@ const ART_OCEAN =
                 Pending: variant 4 — waiting for the queue.
               </p>
             </div>
-          </pk-message>
+          </div>
         </div>
       </app-doc-example>
     </app-block-page>
@@ -73,7 +74,7 @@ export class ImageResultBlock {
   protected readonly art2 = ART_VIOLET;
   protected readonly art3 = ART_OCEAN;
 
-  protected readonly code = `<pk-message>
+  protected readonly code = `<div hlmMessage>
   <pk-message-avatar src="" alt="Assistant" fallback="AI" />
   <div class="flex flex-1 flex-col gap-3">
     <p>Here are four variants — each runs through a different seed.</p>
@@ -99,5 +100,5 @@ export class ImageResultBlock {
       <pk-image alt="Pending generation" class="aspect-square w-full rounded-md" />
     </div>
   </div>
-</pk-message>`;
+</div>`;
 }
