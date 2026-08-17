@@ -39,7 +39,7 @@ import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
               class="font-medium underline underline-offset-4"
               >npm</a
             >
-            10+ (Node.js 22+)
+            10+ (Node.js 22.22.3+, 24.15+ or 26+)
           </li>
           <li>
             <a
@@ -49,7 +49,7 @@ import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
               class="font-medium underline underline-offset-4"
               >Angular</a
             >
-            19 or later (tested on 21)
+            21 or 22 (tested on 22)
           </li>
           <li>
             <a
