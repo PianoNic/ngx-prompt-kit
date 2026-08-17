@@ -7,6 +7,6 @@ import { classes } from '@spartan-ng/helm/utils';
 })
 export class HlmPaginationContent {
   constructor() {
-    classes(() => 'gap-1 flex items-center');
+    classes(() => 'gap-0.5 flex items-center');
   }
 }

@@ -9,8 +9,6 @@ import { BrnDialogTrigger } from '@spartan-ng/brain/dialog';
       inputs: ['id', 'brnDialogTriggerFor: hlmDialogTriggerFor', 'type'],
     },
   ],
-  host: {
-    'data-slot': 'dialog-trigger',
-  },
+  host: { 'data-slot': 'dialog-trigger' },
 })
 export class HlmDialogTrigger {}
