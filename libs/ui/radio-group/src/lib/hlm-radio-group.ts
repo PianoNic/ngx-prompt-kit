@@ -36,7 +36,7 @@ export class HlmRadioGroup {
 
   constructor() {
     classes(() => [
-      'grid gap-3',
+      'grid gap-2',
       this.userClass(),
       this._errorState() ? 'data-[invalid=true]:text-destructive' : '',
     ]);

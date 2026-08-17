@@ -8,13 +8,14 @@ import { classes } from '@spartan-ng/helm/utils';
   imports: [NgIcon],
   providers: [provideIcons({ lucideCheck })],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: ` <ng-icon class="text-base" name="lucideCheck" /> `,
+  host: { 'data-slot': 'dropdown-menu-checkbox-item-indicator' },
+  template: ` <ng-icon name="lucideCheck" /> `,
 })
 export class HlmDropdownMenuCheckboxIndicator {
   constructor() {
     classes(
       () =>
-        'pointer-events-none absolute left-2 flex size-3.5 items-center justify-center opacity-0 group-data-[checked]:opacity-100',
+        'absolute end-2 flex items-center justify-center [&_ng-icon]:text-[length:--spacing(4)] pointer-events-none opacity-0 group-data-checked/dropdown-menu-checkbox:opacity-100',
     );
   }
 }

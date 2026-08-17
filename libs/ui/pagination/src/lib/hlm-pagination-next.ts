@@ -30,7 +30,7 @@ import { HlmPaginationLink } from './hlm-pagination-link';
       [attr.aria-label]="ariaLabel()"
     >
       <span [class]="_labelClass()">{{ text() }}</span>
-      <ng-icon name="lucideChevronRight" class="rtl:rotate-180 spartan-rtl-flip" />
+      <ng-icon name="lucideChevronRight" class="rtl:rotate-180" />
     </a>
   `,
 })
@@ -60,6 +60,6 @@ export class HlmPaginationNext {
   );
 
   protected readonly _computedClass = computed(() =>
-    hlm(!this.iconOnly() && 'pe-2!', this.userClass()),
+    hlm(!this.iconOnly() && 'pe-1.5!', this.userClass()),
   );
 }

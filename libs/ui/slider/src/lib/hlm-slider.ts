@@ -37,7 +37,7 @@ import { classes } from '@spartan-ng/helm/utils';
     >
       <div
         brnSliderTrack
-        class="bg-muted relative grow overflow-hidden rounded-full data-horizontal:h-1 data-horizontal:w-full data-vertical:h-full data-vertical:w-1"
+        class="bg-muted rounded-full data-horizontal:h-1 data-horizontal:w-full data-vertical:h-full data-vertical:w-1 relative grow overflow-hidden"
       >
         <div
           class="bg-primary absolute select-none data-draggable-range:cursor-move data-horizontal:h-full data-vertical:w-full"
@@ -47,7 +47,7 @@ import { classes } from '@spartan-ng/helm/utils';
 
       @for (i of _slider.thumbIndexes(); track i) {
         <span
-          class="border-ring ring-ring/50 absolute block size-3 shrink-0 rounded-full border bg-white transition-[color,box-shadow] select-none after:absolute after:-inset-2 hover:ring-[3px] focus-visible:ring-[3px] focus-visible:outline-hidden active:ring-[3px]"
+          class="border-ring ring-ring/50 size-3 rounded-full border bg-white transition-[color,box-shadow] hover:ring-3 focus-visible:ring-3 focus-visible:outline-hidden active:ring-3 absolute block shrink-0 select-none after:absolute after:-inset-2"
           brnSliderThumb
         ></span>
       }
@@ -55,7 +55,7 @@ import { classes } from '@spartan-ng/helm/utils';
 
     @if (_slider.showTicks()) {
       <div
-        class="text-muted-foreground mt-3 flex w-full items-start justify-between gap-1 px-1.5 text-xs font-medium group-data-horizontal:group-data-inverted:flex-row-reverse group-data-vertical:ms-3 group-data-vertical:mt-0 group-data-vertical:w-auto group-data-vertical:flex-col-reverse group-data-vertical:px-0 group-data-vertical:py-1.5 group-data-vertical:group-data-inverted:flex-col"
+        class="px-1.5 group-data-vertical:px-0 group-data-vertical:py-1.5 text-muted-foreground mt-3 flex w-full items-start justify-between gap-1 text-xs font-medium group-data-horizontal:group-data-inverted:flex-row-reverse group-data-vertical:ms-3 group-data-vertical:mt-0 group-data-vertical:w-auto group-data-vertical:flex-col-reverse group-data-vertical:group-data-inverted:flex-col"
       >
         <div
           *brnSliderTick="let tick; let formattedTick = formattedTick"

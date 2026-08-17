@@ -19,7 +19,7 @@ export class HlmCommand {
   constructor() {
     classes(
       () =>
-        'bg-popover text-popover-foreground flex size-full flex-col overflow-hidden rounded-xl p-1',
+        'bg-popover text-popover-foreground rounded-xl p-1 flex size-full flex-col overflow-hidden',
     );
   }
 }
