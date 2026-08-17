@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideSearch } from '@ng-icons/lucide';
-import { HlmBadge } from '@spartan-ng/helm/badge';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { cn } from '../utils/cn';
 import {
@@ -22,7 +21,7 @@ import {
 @Component({
   selector: 'pk-model-browser',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [HlmBadge, HlmIconImports],
+  imports: [HlmIconImports],
   providers: [provideIcons({ lucideSearch })],
   host: {
     '[class]': 'hostClass()',
