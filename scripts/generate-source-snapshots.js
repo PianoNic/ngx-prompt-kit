@@ -31,7 +31,9 @@ for (const target of TARGETS) {
   ];
   for (const s of TARGETS[0].sources) {
     const abs = path.join(ROOT, s.path);
-    const text = fs.readFileSync(abs, 'utf8');
+    // Normalise CRLF so the snapshot is byte-identical regardless of the checkout's
+    // line endings — otherwise the output mixes CRLF (embedded) with LF (joined below).
+    const text = fs.readFileSync(abs, 'utf8').replace(/\r\n/g, '\n');
     lines.push(`export const ${constName(s.id)} = \`${escape(text)}\`;`);
     lines.push('');
   }

@@ -132,7 +132,7 @@ export const FULL_CHAT_HTML_SOURCE = `<hlm-tabs tab="preview" class="mx-auto fle
             @for (m of currentMessages(); track m.id) {
               @if (m.role === 'user') {
                 <div class="group flex max-w-[80%] flex-col items-end gap-1 self-end">
-                  <pk-message class="justify-end">
+                  <div hlmMessage align="end">
                     <pk-message-edit
                       #userEditor
                       editTrigger="hidden"
@@ -144,7 +144,7 @@ export const FULL_CHAT_HTML_SOURCE = `<hlm-tabs tab="preview" class="mx-auto fle
                         [content]="m.content"
                       />
                     </pk-message-edit>
-                  </pk-message>
+                  </div>
                   @if (m.attachments?.length) {
                     <pk-attachment-preview [attachments]="m.attachments" [removable]="false" />
                   }
@@ -155,7 +155,7 @@ export const FULL_CHAT_HTML_SOURCE = `<hlm-tabs tab="preview" class="mx-auto fle
                 </div>
               } @else {
                 <div class="group flex max-w-[85%] flex-col gap-1 self-start">
-                  <pk-message>
+                  <div hlmMessage>
                     <pk-message-avatar src="" alt="Assistant" fallback="AI" />
                     @if (m.streaming) {
                       <pk-message-content>
@@ -169,7 +169,7 @@ export const FULL_CHAT_HTML_SOURCE = `<hlm-tabs tab="preview" class="mx-auto fle
                     } @else {
                       <pk-message-content [markdown]="m.markdown === true" [content]="m.content" />
                     }
-                  </pk-message>
+                  </div>
                   @if (!m.streaming) {
                     <pk-message-actions-bar
                       class="ml-11"

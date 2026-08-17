@@ -1,3 +1,4 @@
+import { HlmMessageImports } from '@spartan-ng/helm/message';
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
@@ -9,7 +10,15 @@ import { PkBranchNavImports } from 'ngx-prompt-kit/branch-nav';
 @Component({
   selector: 'app-branch-nav-demo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DocPage, DocExample, DocInstall, DocApi, PkMessageImports, PkBranchNavImports],
+  imports: [
+    DocPage,
+    DocExample,
+    DocInstall,
+    DocApi,
+    PkMessageImports,
+    PkBranchNavImports,
+    HlmMessageImports,
+  ],
   template: `
     <app-doc-page
       title="Branch Nav"
@@ -40,10 +49,10 @@ import { PkBranchNavImports } from 'ngx-prompt-kit/branch-nav';
         [code]="verboseCode"
       >
         <div class="flex w-full flex-col gap-1">
-          <pk-message>
+          <div hlmMessage>
             <pk-message-avatar src="" alt="Assistant" fallback="AI" />
             <pk-message-content [content]="branchedContent()" />
-          </pk-message>
+          </div>
           <div class="ml-11">
             <pk-branch-nav
               [current]="verboseCurrent()"
@@ -125,10 +134,10 @@ export class BranchNavDemo {
   (changed)="current.set($event)"
 />`;
 
-  protected readonly verboseCode = `<pk-message>
+  protected readonly verboseCode = `<div hlmMessage>
   <pk-message-avatar src="" alt="Assistant" fallback="AI" />
   <pk-message-content [content]="branchContent()" />
-</pk-message>
+</div>
 <pk-branch-nav
   class="ml-11"
   [current]="current()"

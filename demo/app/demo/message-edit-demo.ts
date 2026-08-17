@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal, viewChild } from '@angular/core';
+import { HlmMessageImports } from '@spartan-ng/helm/message';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
@@ -18,6 +19,7 @@ import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit
     HlmButton,
     PkMessageImports,
     PkMessageEditImports,
+    HlmMessageImports,
   ],
   template: `
     <app-doc-page
@@ -31,20 +33,20 @@ import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit
         [code]="overlayCode"
       >
         <div class="flex w-full flex-col gap-4">
-          <pk-message class="justify-end">
+          <div hlmMessage align="end">
             <pk-message-edit [content]="overlayContent()" (saved)="overlayContent.set($event)">
               <pk-message-content
                 class="bg-primary text-primary-foreground"
                 [content]="overlayContent()"
               />
             </pk-message-edit>
-          </pk-message>
-          <pk-message>
+          </div>
+          <div hlmMessage>
             <pk-message-avatar src="" alt="Assistant" fallback="AI" />
             <pk-message-content
               content="Sure — let me know what you'd like to change and I'll update my reply."
             />
-          </pk-message>
+          </div>
         </div>
       </app-doc-example>
 
@@ -54,7 +56,7 @@ import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit
         [code]="belowCode"
       >
         <div class="flex w-full flex-col gap-4">
-          <pk-message class="justify-end">
+          <div hlmMessage align="end">
             <pk-message-edit
               editTrigger="pencil-below"
               [content]="belowContent()"
@@ -65,7 +67,7 @@ import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit
                 [content]="belowContent()"
               />
             </pk-message-edit>
-          </pk-message>
+          </div>
         </div>
       </app-doc-example>
 
@@ -75,7 +77,7 @@ import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit
         [code]="persistentCode"
       >
         <div class="flex w-full flex-col gap-4">
-          <pk-message class="justify-end">
+          <div hlmMessage align="end">
             <pk-message-edit
               editTrigger="pencil-below-persistent"
               [content]="persistentContent()"
@@ -86,7 +88,7 @@ import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit
                 [content]="persistentContent()"
               />
             </pk-message-edit>
-          </pk-message>
+          </div>
         </div>
       </app-doc-example>
 
@@ -96,7 +98,7 @@ import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit
         [code]="iconBelowCode"
       >
         <div class="flex w-full flex-col gap-4">
-          <pk-message class="justify-end">
+          <div hlmMessage align="end">
             <pk-message-edit
               editTrigger="icon-below"
               [content]="iconBelowContent()"
@@ -107,7 +109,7 @@ import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit
                 [content]="iconBelowContent()"
               />
             </pk-message-edit>
-          </pk-message>
+          </div>
         </div>
       </app-doc-example>
 
@@ -117,7 +119,7 @@ import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit
         [code]="menuCode"
       >
         <div class="flex w-full flex-col gap-4">
-          <pk-message class="justify-end">
+          <div hlmMessage align="end">
             <pk-message-edit
               editTrigger="menu-overlay"
               [content]="menuContent()"
@@ -128,7 +130,7 @@ import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit
                 [content]="menuContent()"
               />
             </pk-message-edit>
-          </pk-message>
+          </div>
         </div>
       </app-doc-example>
 
@@ -138,7 +140,7 @@ import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit
         [code]="hiddenCode"
       >
         <div class="flex w-full flex-col gap-4">
-          <pk-message class="justify-end">
+          <div hlmMessage align="end">
             <pk-message-edit
               #hiddenEditor
               editTrigger="hidden"
@@ -150,7 +152,7 @@ import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit
                 [content]="hiddenContent()"
               />
             </pk-message-edit>
-          </pk-message>
+          </div>
           <div class="flex justify-end">
             <button hlmBtn variant="outline" size="sm" type="button" (click)="triggerHidden()">
               Edit last message
@@ -246,7 +248,7 @@ export class MessageEditDemo {
     },
   ];
 
-  protected readonly overlayCode = `<pk-message class="justify-end">
+  protected readonly overlayCode = `<div hlmMessage align="end">
   <pk-message-edit
     [content]="content()"
     (saved)="content.set($event)"
@@ -256,7 +258,7 @@ export class MessageEditDemo {
       [content]="content()"
     />
   </pk-message-edit>
-</pk-message>`;
+</div>`;
 
   protected readonly belowCode = `<pk-message-edit
   editTrigger="pencil-below"

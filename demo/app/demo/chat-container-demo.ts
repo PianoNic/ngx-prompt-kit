@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { HlmMessageImports } from '@spartan-ng/helm/message';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
@@ -20,6 +21,7 @@ import { PkScrollButton } from 'ngx-prompt-kit/scroll-button';
     PkChatContainerImports,
     PkMessageImports,
     PkScrollButton,
+    HlmMessageImports,
   ],
   template: `
     <app-doc-page
@@ -46,10 +48,10 @@ import { PkScrollButton } from 'ngx-prompt-kit/scroll-button';
             <pk-chat-container-root class="relative h-full p-4">
               <pk-chat-container-content class="gap-3">
                 @for (m of messages(); track m.id) {
-                  <pk-message>
+                  <div hlmMessage>
                     <pk-message-avatar src="" alt="User" fallback="U" />
                     <pk-message-content [content]="m.text" />
-                  </pk-message>
+                  </div>
                 }
               </pk-chat-container-content>
               <pk-chat-container-scroll-anchor />
@@ -116,10 +118,10 @@ export class ChatContainerDemo {
   protected readonly autoScrollCode = `<pk-chat-container-root class="relative h-[360px] p-4">
   <pk-chat-container-content class="gap-3">
     @for (m of messages(); track m.id) {
-      <pk-message>
+      <div hlmMessage>
         <pk-message-avatar [src]="m.avatar" alt="" />
         <pk-message-content [content]="m.text" />
-      </pk-message>
+      </div>
     }
   </pk-chat-container-content>
   <pk-chat-container-scroll-anchor />

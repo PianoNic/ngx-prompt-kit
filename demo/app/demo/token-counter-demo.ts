@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { HlmMessageImports } from '@spartan-ng/helm/message';
 import { HlmTextarea } from '@spartan-ng/helm/textarea';
 import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
@@ -18,6 +19,7 @@ import { PkTokenCounterImports } from 'ngx-prompt-kit/token-counter';
     HlmTextarea,
     PkMessageImports,
     PkTokenCounterImports,
+    HlmMessageImports,
   ],
   template: `
     <app-doc-page
@@ -159,12 +161,12 @@ import { PkTokenCounterImports } from 'ngx-prompt-kit/token-counter';
         [code]="footerCode"
       >
         <div class="flex w-full flex-col gap-1">
-          <pk-message>
+          <div hlmMessage>
             <pk-message-avatar src="" alt="Assistant" fallback="AI" />
             <pk-message-content
               content="Refactor complete — the auth middleware now delegates to a SessionService, and the integration tests cover both branches."
             />
-          </pk-message>
+          </div>
           <div class="ml-11 flex items-center">
             <span class="text-muted-foreground text-[10px]">Response</span>
             <pk-token-counter display="footer" mode="tokens" [text]="footerSampleText()" />

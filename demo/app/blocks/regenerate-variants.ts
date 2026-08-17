@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import { lucideRefreshCw } from '@ng-icons/lucide';
+import { HlmMessageImports } from '@spartan-ng/helm/message';
 import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
@@ -16,7 +17,14 @@ interface Variant {
 @Component({
   selector: 'app-block-regenerate-variants',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [BlockPage, DocExample, HlmIconImports, PkMessageImports, PkPromptSuggestion],
+  imports: [
+    BlockPage,
+    DocExample,
+    HlmIconImports,
+    PkMessageImports,
+    PkPromptSuggestion,
+    HlmMessageImports,
+  ],
   providers: [provideIcons({ lucideRefreshCw })],
   template: `
     <app-block-page
@@ -25,14 +33,14 @@ interface Variant {
     >
       <app-doc-example title="Tone presets · live message swap" [code]="code">
         <div class="flex w-full max-w-2xl flex-col gap-4">
-          <pk-message class="justify-end">
+          <div hlmMessage align="end">
             <pk-message-content
               class="bg-primary text-primary-foreground"
               content="Explain why semantic versioning matters."
             />
-          </pk-message>
+          </div>
 
-          <pk-message>
+          <div hlmMessage>
             <pk-message-avatar src="" alt="Assistant" fallback="AI" />
             <div class="flex min-w-0 flex-1 flex-col gap-3">
               <pk-message-content [markdown]="true" [content]="current().text" />
@@ -55,7 +63,7 @@ interface Variant {
                 </div>
               </div>
             </div>
-          </pk-message>
+          </div>
         </div>
       </app-doc-example>
     </app-block-page>
@@ -90,7 +98,7 @@ export class RegenerateVariantsBlock {
     () => this.variants.find((v) => v.id === this.currentId()) ?? this.variants[0],
   );
 
-  protected readonly code = `<pk-message>
+  protected readonly code = `<div hlmMessage>
   <pk-message-avatar src="" alt="Assistant" fallback="AI" />
   <div class="flex flex-1 flex-col gap-3">
     <pk-message-content [markdown]="true" [content]="current().text" />
@@ -108,7 +116,7 @@ export class RegenerateVariantsBlock {
       </div>
     </div>
   </div>
-</pk-message>
+</div>
 
 // Component
 interface Variant { id: string; label: string; text: string; }

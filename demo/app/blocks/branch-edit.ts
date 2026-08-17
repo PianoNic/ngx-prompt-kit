@@ -1,3 +1,4 @@
+import { HlmMessageImports } from '@spartan-ng/helm/message';
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { provideIcons } from '@ng-icons/core';
 import {
@@ -29,6 +30,7 @@ import {
     PkMessageImports,
     PkMessageEditImports,
     PkMessageActionsBarImports,
+    HlmMessageImports,
   ],
   providers: [
     provideIcons({
@@ -47,7 +49,7 @@ import {
       <app-doc-example title="Edit user → swap assistant branches" [code]="code">
         <div class="flex w-full max-w-2xl flex-col gap-4">
           <div class="group flex flex-col items-end gap-1">
-            <pk-message class="justify-end">
+            <div hlmMessage align="end">
               <pk-message-edit
                 #userEditor
                 editTrigger="hidden"
@@ -59,7 +61,7 @@ import {
                   [content]="userMessage()"
                 />
               </pk-message-edit>
-            </pk-message>
+            </div>
             <pk-message-actions-bar
               [actions]="userActions"
               (actionPicked)="onUserAction($event, userEditor)"
@@ -67,10 +69,10 @@ import {
           </div>
 
           <div class="group flex flex-col gap-1">
-            <pk-message>
+            <div hlmMessage>
               <pk-message-avatar src="" alt="Assistant" fallback="AI" />
               <pk-message-content [content]="currentBranch()" />
-            </pk-message>
+            </div>
             <div class="ml-11 flex flex-wrap items-center justify-between gap-2">
               <pk-branch-nav
                 [current]="branchIdx()"
@@ -141,7 +143,7 @@ export class BranchEditBlock {
 
   protected readonly code = `<!-- User message: edit-trigger=hidden, programmatically opened from the actions bar -->
 <div class="group flex flex-col items-end gap-1">
-  <pk-message class="justify-end">
+  <div hlmMessage align="end">
     <pk-message-edit #userEditor editTrigger="hidden"
       [content]="userMessage()" (saved)="onSaveUser($event)">
       <pk-message-content
@@ -149,7 +151,7 @@ export class BranchEditBlock {
         [content]="userMessage()"
       />
     </pk-message-edit>
-  </pk-message>
+  </div>
   <pk-message-actions-bar
     [actions]="DEFAULT_USER_ACTIONS"
     (actionPicked)="onUserAction($event, userEditor)"
@@ -158,10 +160,10 @@ export class BranchEditBlock {
 
 <!-- Assistant message with sibling branches -->
 <div class="group flex flex-col gap-1">
-  <pk-message>
+  <div hlmMessage>
     <pk-message-avatar src="" alt="Assistant" fallback="AI" />
     <pk-message-content [content]="currentBranch()" />
-  </pk-message>
+  </div>
   <div class="ml-11 flex items-center justify-between gap-2">
     <pk-branch-nav
       [current]="branchIdx()"
