@@ -8,6 +8,7 @@ import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
+import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
 import { PkMessageImports } from 'ngx-prompt-kit/message';
 
 @Component({
@@ -22,6 +23,7 @@ import { PkMessageImports } from 'ngx-prompt-kit/message';
     HlmIconImports,
     PkMessageImports,
     HlmMessageImports,
+    PkCodeBlockImports,
   ],
   providers: [provideIcons({ lucideCopy, lucideThumbsUp, lucideThumbsDown })],
   template: `
@@ -131,6 +133,45 @@ Want me to group by author next time?"
         </div>
       </app-doc-example>
 
+      <section class="mt-10">
+        <h2 class="text-xl font-semibold tracking-tight">Upgrading to v23</h2>
+        <p class="text-muted-foreground mt-2 text-sm leading-relaxed">
+          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs"
+            >pk-message</code
+          >
+          and
+          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs"
+            >pk-message-actions</code
+          >
+          were removed in favour of Spartan's own message primitives, which provide the alignment
+          context the surrounding slots rely on. Generate them with
+          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs"
+            >ng g &#64;spartan-ng/cli:ui message</code
+          >, then swap the wrappers:
+        </p>
+        <div class="mt-3">
+          <pk-code-block>
+            <pk-code-block-code [code]="migrationCode" language="html" />
+          </pk-code-block>
+        </div>
+        <p class="text-muted-foreground mt-3 text-sm leading-relaxed">
+          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs"
+            >pk-message-content</code
+          >,
+          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs"
+            >pk-message-avatar</code
+          >
+          and
+          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs"
+            >pk-message-action</code
+          >
+          are unchanged — keep using them inside
+          <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs"
+            >hlmMessage</code
+          >.
+        </p>
+      </section>
+
       <app-doc-install component="message" />
       <app-doc-api [sections]="api" />
     </app-doc-page>
@@ -207,6 +248,14 @@ export class MessageDemo {
       ],
     },
   ];
+
+  protected readonly migrationCode = `<!-- before -->
+<pk-message class="justify-end">…</pk-message>
+<pk-message-actions>…</pk-message-actions>
+
+<!-- after -->
+<div hlmMessage align="end">…</div>
+<div hlmMessageFooter>…</div>`;
 
   protected readonly basicCode = `<div hlmMessage align="end">
   <pk-message-content
