@@ -35,6 +35,7 @@
     "@types/katex": "^0.16.8",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "dompurify": "^3.4.15",
     "embla-carousel": ">=8.0.0 <9.0.0",
     "embla-carousel-angular": "^22.0.0",
     "katex": "^0.16.11",
