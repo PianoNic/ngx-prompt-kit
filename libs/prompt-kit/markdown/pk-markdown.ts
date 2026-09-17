@@ -1,4 +1,4 @@
-import { isPlatformBrowser } from '@angular/common';
+﻿import { isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,6 +13,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { DomSanitizer, type SafeHtml } from '@angular/platform-browser';
+import DOMPurify from 'dompurify';
 import { Marked, type Tokens } from 'marked';
 // Types come from @types/katex (auto-installed by the schematic).
 
@@ -87,9 +88,25 @@ export class PkMarkdown {
     return m;
   });
 
-  protected readonly html = computed<SafeHtml>(() => {
+  protected readonly html = computed<SafeHtml | string>(() => {
     const parsed = this.md().parse(this.content(), { async: false }) as string;
-    return this.sanitizer.bypassSecurityTrustHtml(parsed);
+
+    // marked emits author HTML verbatim - it dropped its own sanitize option in
+    // v5 and defers to a sanitizer - so parsed output is untrusted. Handing it
+    // straight to bypassSecurityTrustHtml would execute <script>, inline event
+    // handlers and javascript: URLs from any rendered content.
+    if (!isPlatformBrowser(this.platformId)) {
+      // No DOM for DOMPurify to work against during SSR. Return the raw string
+      // so Angular's own sanitizer strips dangerous markup instead.
+      return parsed;
+    }
+
+    return this.sanitizer.bypassSecurityTrustHtml(
+      DOMPurify.sanitize(parsed, {
+        // Mermaid and KaTeX render into this subtree, so SVG and MathML stay.
+        USE_PROFILES: { html: true, svg: true, mathMl: true },
+      }),
+    );
   });
 
   private readonly delimiters = computed<KatexDelimiter[]>(() => {
