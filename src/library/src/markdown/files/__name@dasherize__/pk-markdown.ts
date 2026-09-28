@@ -225,6 +225,8 @@ export class PkMarkdown {
             const html = await codeToHtml(code, { lang, theme });
             parsed = new DOMParser().parseFromString(html, 'text/html');
           } catch {
+            // Plain fallback — build a <pre><code>{textContent}</code></pre>.
+            // No innerHTML; textContent escapes for us.
             const pre = document.createElement('pre');
             const codeNode = document.createElement('code');
             codeNode.textContent = code;
@@ -234,6 +236,7 @@ export class PkMarkdown {
             container.replaceWith(wrapper);
             continue;
           }
+          // Shiki returns a single <pre> wrapper. Move it into the body.
           const pre = parsed.body.querySelector('pre');
           if (pre) body.appendChild(pre);
         }
@@ -376,6 +379,11 @@ function escapeHtml(s: string): string {
     .replace(/'/g, '&#39;');
 }
 
+/**
+ * Build the static chrome (header bar + body container) for an enhanced
+ * fenced-code block. Built with DOM APIs only so we never pass user-supplied
+ * text through innerHTML.
+ */
 function buildCodeBlockShell(lang: string): HTMLDivElement {
   const wrapper = document.createElement('div');
   wrapper.className =

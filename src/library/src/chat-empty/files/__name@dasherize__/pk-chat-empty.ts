@@ -1,7 +1,7 @@
 // ngx-prompt-kit original — not part of ibelick/prompt-kit
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import { NgIcon } from '@ng-icons/core';
 import { HlmCard, HlmCardContent } from '@spartan-ng/helm/card';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { cn } from '../utils/cn';
 
 export interface ChatEmptySuggestion {
@@ -15,7 +15,7 @@ export interface ChatEmptySuggestion {
 @Component({
   selector: 'pk-chat-empty',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [HlmCard, HlmCardContent, HlmIconImports],
+  imports: [HlmCard, HlmCardContent, NgIcon],
   host: {
     '[class]': 'hostClass()',
   },
@@ -41,7 +41,7 @@ export interface ChatEmptySuggestion {
             <div hlmCard class="hover:bg-accent h-full transition-colors">
               <div hlmCardContent class="flex flex-col gap-2">
                 @if (s.icon; as icon) {
-                  <ng-icon hlm size="sm" [name]="icon" class="text-muted-foreground" />
+                  <ng-icon [name]="icon" class="text-[length:--spacing(4)] text-muted-foreground" />
                 }
                 <span class="text-foreground text-sm font-medium leading-snug">
                   {{ s.label }}

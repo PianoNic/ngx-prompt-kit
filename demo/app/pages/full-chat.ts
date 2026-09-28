@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideArrowUp,
   lucideChevronsUpDown,
@@ -26,7 +26,6 @@ import {
   HlmDropdownMenuSeparator,
   HlmDropdownMenuTrigger,
 } from '@spartan-ng/helm/dropdown-menu';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmTabsImports } from '@spartan-ng/helm/tabs';
 import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
 import { type Attachment, PkAttachmentPreviewImports } from 'ngx-prompt-kit/attachment-preview';
@@ -76,7 +75,7 @@ const SAMPLE_ATTACHMENT_IMAGE =
     HlmDropdownMenuItem,
     HlmDropdownMenuSeparator,
     HlmDropdownMenuTrigger,
-    HlmIconImports,
+    NgIcon,
     HlmTabsImports,
     PkAttachmentPreviewImports,
     PkCodeBlockImports,

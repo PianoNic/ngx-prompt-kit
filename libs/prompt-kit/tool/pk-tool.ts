@@ -23,7 +23,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideChevronDown,
   lucideCircleCheck,
@@ -31,7 +31,6 @@ import {
   lucideLoader,
   lucideSettings,
 } from '@ng-icons/lucide';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { cn } from '../utils/cn';
 
 export type ToolState = 'input-streaming' | 'input-available' | 'output-available' | 'output-error';
@@ -72,7 +71,7 @@ const BADGE: Record<ToolState, BadgeStyle> = {
 @Component({
   selector: 'pk-tool',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [HlmIconImports],
+  imports: [NgIcon],
   providers: [
     provideIcons({
       lucideChevronDown,
@@ -91,15 +90,13 @@ const BADGE: Record<ToolState, BadgeStyle> = {
           class="bg-background h-auto w-full justify-between rounded-b-none px-3 py-2 font-normal flex items-center transition-colors hover:bg-muted/50"
         >
           <div class="flex items-center gap-2">
-            <ng-icon hlm size="sm" [name]="iconName()" [class]="iconColor()" />
+            <ng-icon [name]="iconName()" [class]="iconColor()" class="text-[length:--spacing(4)]" />
             <span class="font-mono text-sm font-medium">{{ toolPart().type }}</span>
             <span [class]="badgeClass()">{{ badgeLabel() }}</span>
           </div>
           <ng-icon
-            hlm
-            size="xs"
             name="lucideChevronDown"
-            class="transition-transform"
+            class="text-[length:--spacing(3)] transition-transform"
             [class.rotate-180]="isOpen()"
           />
         </button>

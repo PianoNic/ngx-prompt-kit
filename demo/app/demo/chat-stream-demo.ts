@@ -99,6 +99,20 @@ function adapt(data: string): ChatStreamFrame<string> | null {
           </pk-code-block>
         </div>
       </section>
+
+      <section class="mt-12">
+        <h2 class="text-xl font-semibold tracking-tight">Stopping a stream</h2>
+        <p class="text-muted-foreground mt-1 text-sm leading-relaxed">
+          readChatStream() takes an optional AbortSignal after the handlers. Aborting it cancels
+          the request and rejects with an AbortError; check for it with isAbortError() so a stop
+          button (e.g. pk-composer's stopped output) isn't reported as a failure.
+        </p>
+        <div class="mt-3">
+          <pk-code-block>
+            <pk-code-block-code [code]="abortCode" language="typescript" />
+          </pk-code-block>
+        </div>
+      </section>
     </app-doc-page>
   `,
 })
@@ -139,4 +153,15 @@ const result = await readChatStream(events$, (data) => {
   if (p.type === 'done')  return { kind: 'done', result: p.result };
   return null;
 }, { onToken: (t) => stream.append(t) });`;
+
+  protected readonly abortCode = `import { isAbortError, readChatStream } from 'ngx-prompt-kit/streaming';
+
+const controller = new AbortController();
+// <pk-composer [busy]="busy()" (stopped)="controller.abort()" />
+
+try {
+  const result = await readChatStream(events$, adapt, handlers, controller.signal);
+} catch (error) {
+  if (!isAbortError(error)) throw error; // stopped on purpose: keep the partial reply
+}`;
 }

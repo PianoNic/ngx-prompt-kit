@@ -1,14 +1,13 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronDown, lucideCircle } from '@ng-icons/lucide';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { cn } from '../utils/cn';
 import { CHAIN_OF_THOUGHT_STEP_STATE } from './chain-of-thought.state';
 
 @Component({
   selector: 'pk-chain-of-thought-trigger',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [HlmIconImports],
+  imports: [NgIcon],
   providers: [provideIcons({ lucideChevronDown, lucideCircle })],
   template: `
     <button
@@ -25,26 +24,22 @@ import { CHAIN_OF_THOUGHT_STEP_STATE } from './chain-of-thought.state';
             </span>
             @if (swapIconOnHover()) {
               <ng-icon
-                hlm
-                size="xs"
                 name="lucideChevronDown"
-                class="absolute opacity-0 transition-opacity group-hover:opacity-100 group-data-[state=open]:rotate-180"
+                class="text-[length:--spacing(3)] absolute opacity-0 transition-opacity group-hover:opacity-100 group-data-[state=open]:rotate-180"
               />
             }
           </span>
         } @else {
           <span class="relative inline-flex size-4 items-center justify-center">
-            <ng-icon hlm size="xs" name="lucideCircle" class="size-2 fill-current" />
+            <ng-icon name="lucideCircle" class="text-[length:--spacing(3)] size-2 fill-current" />
           </span>
         }
         <span><ng-content /></span>
       </div>
       @if (!leftIcon()) {
         <ng-icon
-          hlm
-          size="xs"
           name="lucideChevronDown"
-          class="transition-transform group-data-[state=open]:rotate-180"
+          class="text-[length:--spacing(3)] transition-transform group-data-[state=open]:rotate-180"
         />
       }
     </button>

@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucidePlus } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { PkSystemMessage } from 'ngx-prompt-kit/system-message';
@@ -16,7 +15,7 @@ interface Notice {
 @Component({
   selector: 'app-block-notification-stack',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [BlockPage, DocExample, HlmButton, HlmIconImports, PkSystemMessage],
+  imports: [BlockPage, DocExample, HlmButton, NgIcon, PkSystemMessage],
   providers: [provideIcons({ lucidePlus })],
   template: `
     <app-block-page
@@ -27,7 +26,7 @@ interface Notice {
         <div class="flex w-full max-w-md flex-col gap-3">
           <div class="flex justify-end">
             <button hlmBtn variant="outline" size="sm" type="button" (click)="add()">
-              <ng-icon hlm size="xs" name="lucidePlus" />
+              <ng-icon name="lucidePlus" class="text-[length:--spacing(3)]" />
               Add notice
             </button>
           </div>

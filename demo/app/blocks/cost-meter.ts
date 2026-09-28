@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowUp } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { PkCostDisplayImports } from 'ngx-prompt-kit/cost-display';
@@ -16,7 +15,7 @@ import { PkTokenCounterImports } from 'ngx-prompt-kit/token-counter';
     BlockPage,
     DocExample,
     HlmButton,
-    HlmIconImports,
+    NgIcon,
     PkCostDisplayImports,
     PkPromptInputImports,
     PkTokenCounterImports,
@@ -63,7 +62,7 @@ import { PkTokenCounterImports } from 'ngx-prompt-kit/token-counter';
                   (click)="onSend()"
                   aria-label="Send"
                 >
-                  <ng-icon hlm size="xs" name="lucideArrowUp" />
+                  <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
                 </button>
               </pk-prompt-input-action>
             </pk-prompt-input-actions>
@@ -138,7 +137,7 @@ export class CostMeterBlock {
     />
     <pk-prompt-input-action tooltip="Send">
       <button hlmBtn size="icon-sm" class="rounded-full" (click)="onSend()">
-        <ng-icon hlm size="xs" name="lucideArrowUp" />
+        <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
       </button>
     </pk-prompt-input-action>
   </pk-prompt-input-actions>

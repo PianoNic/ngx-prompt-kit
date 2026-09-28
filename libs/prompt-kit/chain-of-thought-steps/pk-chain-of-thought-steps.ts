@@ -1,8 +1,7 @@
 // ngx-prompt-kit original — not part of ibelick/prompt-kit
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideBrain, lucideLoaderCircle, lucideWrench } from '@ng-icons/lucide';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { PkChainOfThoughtImports } from '../chain-of-thought';
 import { PkReasoningImports } from '../reasoning';
 import { PkCodeBlockImports } from '../code-block';
@@ -38,7 +37,7 @@ export interface PkCotStep {
     ...PkReasoningImports,
     ...PkCodeBlockImports,
     PkMarkdown,
-    HlmIconImports,
+    NgIcon,
   ],
   providers: [provideIcons({ lucideBrain, lucideLoaderCircle, lucideWrench })],
   host: { class: 'block' },
@@ -50,7 +49,7 @@ export interface PkCotStep {
             <pk-chain-of-thought-step [last]="isLast">
               @if (step.type === 'reasoning') {
                 <pk-chain-of-thought-trigger [leftIcon]="true">
-                  <ng-icon hlm leftIcon size="xs" name="lucideBrain" />
+                  <ng-icon leftIcon name="lucideBrain" class="text-[length:--spacing(3)]" />
                   {{ reasoningLabel() }}
                 </pk-chain-of-thought-trigger>
                 <pk-chain-of-thought-content>
@@ -64,9 +63,8 @@ export interface PkCotStep {
               } @else {
                 <pk-chain-of-thought-trigger [leftIcon]="true">
                   <ng-icon
-                    hlm
+                    class="text-[length:--spacing(3)]"
                     leftIcon
-                    size="xs"
                     [name]="step.output == null ? 'lucideLoaderCircle' : 'lucideWrench'"
                     [class.animate-spin]="step.output == null"
                   />
@@ -94,7 +92,7 @@ export interface PkCotStep {
         <pk-reasoning [isStreaming]="streaming()">
           <pk-reasoning-trigger>
             <span class="inline-flex items-center gap-1.5">
-              <ng-icon hlm size="xs" name="lucideBrain" />
+              <ng-icon name="lucideBrain" class="text-[length:--spacing(3)]" />
               {{ reasoningLabel() }}
             </span>
           </pk-reasoning-trigger>

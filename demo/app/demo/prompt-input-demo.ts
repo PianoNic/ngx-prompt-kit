@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowUp, lucideMic, lucidePaperclip } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
@@ -18,7 +17,7 @@ import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
     DocInstall,
     DocApi,
     HlmButton,
-    HlmIconImports,
+    NgIcon,
     PkPromptInputImports,
   ],
   providers: [provideIcons({ lucideArrowUp, lucideMic, lucidePaperclip })],
@@ -45,7 +44,7 @@ import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
                   (click)="onSubmit()"
                   aria-label="Send"
                 >
-                  <ng-icon hlm size="xs" name="lucideArrowUp" />
+                  <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
                 </button>
               </pk-prompt-input-action>
             </pk-prompt-input-actions>
@@ -68,18 +67,18 @@ import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
             <div class="flex gap-1">
               <pk-prompt-input-action tooltip="Attach file">
                 <button hlmBtn size="icon-sm" variant="ghost" type="button" aria-label="Attach">
-                  <ng-icon hlm size="sm" name="lucidePaperclip" />
+                  <ng-icon name="lucidePaperclip" class="text-[length:--spacing(4)]" />
                 </button>
               </pk-prompt-input-action>
               <pk-prompt-input-action tooltip="Voice">
                 <button hlmBtn size="icon-sm" variant="ghost" type="button" aria-label="Voice">
-                  <ng-icon hlm size="sm" name="lucideMic" />
+                  <ng-icon name="lucideMic" class="text-[length:--spacing(4)]" />
                 </button>
               </pk-prompt-input-action>
             </div>
             <pk-prompt-input-action tooltip="Send">
               <button hlmBtn size="icon-sm" type="button" class="rounded-full" aria-label="Send">
-                <ng-icon hlm size="xs" name="lucideArrowUp" />
+                <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
               </button>
             </pk-prompt-input-action>
           </pk-prompt-input-actions>
@@ -180,7 +179,7 @@ export class PromptInputDemo {
   <pk-prompt-input-actions class="mt-2 justify-end">
     <pk-prompt-input-action tooltip="Send">
       <button hlmBtn size="icon-sm" class="rounded-full" (click)="onSubmit()">
-        <ng-icon hlm size="xs" name="lucideArrowUp" />
+        <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
       </button>
     </pk-prompt-input-action>
   </pk-prompt-input-actions>
@@ -192,18 +191,18 @@ export class PromptInputDemo {
     <div class="flex gap-1">
       <pk-prompt-input-action tooltip="Attach file">
         <button hlmBtn size="icon-sm" variant="ghost">
-          <ng-icon hlm size="sm" name="lucidePaperclip" />
+          <ng-icon name="lucidePaperclip" class="text-[length:--spacing(4)]" />
         </button>
       </pk-prompt-input-action>
       <pk-prompt-input-action tooltip="Voice">
         <button hlmBtn size="icon-sm" variant="ghost">
-          <ng-icon hlm size="sm" name="lucideMic" />
+          <ng-icon name="lucideMic" class="text-[length:--spacing(4)]" />
         </button>
       </pk-prompt-input-action>
     </div>
     <pk-prompt-input-action tooltip="Send">
       <button hlmBtn size="icon-sm" class="rounded-full">
-        <ng-icon hlm size="xs" name="lucideArrowUp" />
+        <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
       </button>
     </pk-prompt-input-action>
   </pk-prompt-input-actions>

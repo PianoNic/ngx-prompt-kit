@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideMessageSquare } from '@ng-icons/lucide';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
@@ -11,7 +10,7 @@ import { PkFeedbackBar } from 'ngx-prompt-kit/feedback-bar';
 @Component({
   selector: 'app-feedback-bar-demo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DocPage, DocExample, DocInstall, DocApi, HlmIconImports, PkFeedbackBar],
+  imports: [DocPage, DocExample, DocInstall, DocApi, NgIcon, PkFeedbackBar],
   providers: [provideIcons({ lucideMessageSquare })],
   template: `
     <app-doc-page
@@ -46,7 +45,7 @@ import { PkFeedbackBar } from 'ngx-prompt-kit/feedback-bar';
 
       <app-doc-example
         title="With a custom leading icon"
-        description="Project an icon into the [icon] slot — use any Spartan ng-icon hlm."
+        description="Project an icon into the [icon] slot — use any ng-icon."
         [code]="iconCode"
       >
         @if (visible2()) {
@@ -56,7 +55,7 @@ import { PkFeedbackBar } from 'ngx-prompt-kit/feedback-bar';
             (notHelpful)="onAction('not-helpful')"
             (closed)="visible2.set(false)"
           >
-            <ng-icon icon hlm size="sm" name="lucideMessageSquare" />
+            <ng-icon icon name="lucideMessageSquare" class="text-[length:--spacing(4)]" />
           </pk-feedback-bar>
         } @else {
           <p class="text-muted-foreground text-sm">
@@ -100,7 +99,7 @@ export class FeedbackBarDemo {
 />`;
 
   protected readonly iconCode = `<pk-feedback-bar title="Tell us how the model did." ...>
-  <ng-icon icon hlm size="sm" name="lucideMessageSquare" />
+  <ng-icon icon name="lucideMessageSquare" class="text-[length:--spacing(4)]" />
 </pk-feedback-bar>`;
 
   protected readonly api: ApiSection[] = [

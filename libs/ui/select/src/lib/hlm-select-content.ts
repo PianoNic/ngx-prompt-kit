@@ -6,14 +6,14 @@ import {
   computed,
   input,
 } from '@angular/core';
-import { BrnSelectContent } from '@spartan-ng/brain/select';
+import { BrnSelectContent, BrnSelectList } from '@spartan-ng/brain/select';
 import { classes, hlm } from '@spartan-ng/helm/utils';
 import { HlmSelectScrollDown } from './hlm-select-scroll-down';
 import { HlmSelectScrollUp } from './hlm-select-scroll-up';
 
 @Component({
   selector: 'hlm-select-content',
-  imports: [HlmSelectScrollUp, HlmSelectScrollDown],
+  imports: [HlmSelectScrollUp, HlmSelectScrollDown, BrnSelectList],
   changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [BrnSelectContent],
   template: `
@@ -21,7 +21,7 @@ import { HlmSelectScrollUp } from './hlm-select-scroll-up';
       <hlm-select-scroll-up />
     }
 
-    <div role="listbox" [class]="_computedListboxClasses()">
+    <div brnSelectList [class]="_computedListboxClasses()">
       <ng-content />
     </div>
 

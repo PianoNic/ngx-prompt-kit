@@ -85,6 +85,20 @@ const SAMPLE_SSE = [
           </pk-code-block>
         </div>
       </section>
+
+      <section class="mt-12">
+        <h2 class="text-xl font-semibold tracking-tight">Stopping a stream</h2>
+        <p class="text-muted-foreground mt-1 text-sm leading-relaxed">
+          Pass an AbortSignal as the third argument. Aborting it unsubscribes, which cancels the
+          HTTP request, and rejects the promise with an AbortError DOMException. isAbortError()
+          tells that apart from a real failure, so a stop button doesn't show an error.
+        </p>
+        <div class="mt-3">
+          <pk-code-block>
+            <pk-code-block-code [code]="abortCode" language="typescript" />
+          </pk-code-block>
+        </div>
+      </section>
     </app-doc-page>
   `,
 })
@@ -119,4 +133,24 @@ await readSseHttpEvents(
     else if (payload.type === 'done') result = payload.result;
   },
 );`;
+
+  protected readonly abortCode = `import { isAbortError, readSseHttpEvents } from 'ngx-prompt-kit/streaming';
+
+private controller: AbortController | null = null;
+
+async send(body: ChatRequest) {
+  this.controller = new AbortController();
+  try {
+    await readSseHttpEvents(events$, (data) => handle(data), this.controller.signal);
+  } catch (error) {
+    if (isAbortError(error)) return; // the user pressed stop
+    throw error;
+  } finally {
+    this.controller = null;
+  }
+}
+
+stop() {
+  this.controller?.abort();
+}`;
 }

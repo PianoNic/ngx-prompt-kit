@@ -17,10 +17,9 @@
  * inputs (icon, ctaLabel) instead of React's "node-or-undefined" pattern.
  */
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCircleAlert, lucideInfo, lucideTriangleAlert } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { cva } from 'class-variance-authority';
 import { cn } from '../utils/cn';
 
@@ -53,14 +52,14 @@ const variants = cva('flex flex-row items-center gap-3 rounded-[12px] border py-
 @Component({
   selector: 'pk-system-message',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [HlmButton, HlmIconImports],
+  imports: [HlmButton, NgIcon],
   providers: [provideIcons({ lucideCircleAlert, lucideInfo, lucideTriangleAlert })],
   template: `
     <div [class]="computedClass()">
       <div class="flex flex-1 flex-row items-center gap-3 leading-normal">
         @if (icon()) {
           <div class="flex h-[1lh] shrink-0 items-center justify-center self-start">
-            <ng-icon hlm size="sm" [name]="iconName()" />
+            <ng-icon [name]="iconName()" class="text-[length:--spacing(4)]" />
           </div>
         }
         <div class="flex min-w-0 flex-1 items-center" [class.gap-3]="icon()">

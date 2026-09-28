@@ -13,7 +13,6 @@
     "target": "ES2022",
     "module": "preserve",
     "paths": {
-      "@spartan-ng/helm/icon": ["./libs/ui/icon/src/index.ts"],
       "ngx-prompt-kit/utils": ["./libs/prompt-kit/utils"],
       "ngx-prompt-kit/streaming": ["./libs/prompt-kit/streaming"],
       "ngx-prompt-kit/streaming-message": ["./libs/prompt-kit/streaming-message"],
@@ -53,6 +52,9 @@
       "ngx-prompt-kit/model-list": ["./libs/prompt-kit/model-list"],
       "ngx-prompt-kit/model-browser": ["./libs/prompt-kit/model-browser"],
       "ngx-prompt-kit/model-icon": ["./libs/prompt-kit/model-icon"],
+      "ngx-prompt-kit/model-selector": ["./libs/prompt-kit/model-selector"],
+      "ngx-prompt-kit/composer": ["./libs/prompt-kit/composer"],
+      "ngx-prompt-kit/chat-turn": ["./libs/prompt-kit/chat-turn"],
       "ngx-prompt-kit/auth-image": ["./libs/prompt-kit/auth-image"],
       "ngx-prompt-kit/usage-card": ["./libs/prompt-kit/usage-card"],
       "ngx-prompt-kit/todo-list": ["./libs/prompt-kit/todo-list"],
@@ -117,7 +119,10 @@
       "@spartan-ng/helm/tabs": ["./libs/ui/tabs/src/index.ts"],
       "@spartan-ng/helm/toggle": ["./libs/ui/toggle/src/index.ts"],
       "@spartan-ng/helm/toggle-group": ["./libs/ui/toggle-group/src/index.ts"],
-      "@spartan-ng/helm/typography": ["./libs/ui/typography/src/index.ts"]
+      "@spartan-ng/helm/typography": ["./libs/ui/typography/src/index.ts"],
+      "@spartan-ng/helm/chart": ["./libs/ui/chart/src/index.ts"],
+      "@spartan-ng/helm/message-scroller": ["./libs/ui/message-scroller/src/index.ts"],
+      "@spartan-ng/helm/questionnaire": ["./libs/ui/questionnaire/src/index.ts"]
     }
   },
   "angularCompilerOptions": {

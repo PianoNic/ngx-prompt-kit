@@ -126,6 +126,21 @@
       "factory": "./model-icon/index#modelIcon",
       "schema": "./model-icon/schema.json"
     },
+    "composer": {
+      "description": "Add the composer and composer-dock components (ngx-prompt-kit original).",
+      "factory": "./composer/index#composer",
+      "schema": "./composer/schema.json"
+    },
+    "chat-turn": {
+      "description": "Add the user-turn and assistant-turn components (ngx-prompt-kit original).",
+      "factory": "./chat-turn/index#chatTurn",
+      "schema": "./chat-turn/schema.json"
+    },
+    "model-selector": {
+      "description": "Add the model-selector component (ngx-prompt-kit original).",
+      "factory": "./model-selector/index#modelSelector",
+      "schema": "./model-selector/schema.json"
+    },
     "model-list": {
       "description": "Add the model-list component (ngx-prompt-kit original).",
       "factory": "./model-list/index#modelList",

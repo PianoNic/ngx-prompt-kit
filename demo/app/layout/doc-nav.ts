@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronLeft, lucideChevronRight } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { filter, map, startWith } from 'rxjs/operators';
 import { NAV, type NavLink } from './nav-data';
 
@@ -13,13 +12,13 @@ const FLAT: NavLink[] = NAV.flatMap((g) => g.links);
 @Component({
   selector: 'app-doc-nav',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, HlmButton, HlmIconImports],
+  imports: [RouterLink, HlmButton, NgIcon],
   providers: [provideIcons({ lucideChevronLeft, lucideChevronRight })],
   template: `
     <nav class="border-border mt-16 flex items-center justify-between gap-4 border-t pt-6">
       @if (prev(); as p) {
         <a hlmBtn variant="outline" size="sm" [routerLink]="p.path" class="gap-1">
-          <ng-icon hlm size="xs" name="lucideChevronLeft" />
+          <ng-icon name="lucideChevronLeft" class="text-[length:--spacing(3)]" />
           {{ p.label }}
         </a>
       } @else {
@@ -29,7 +28,7 @@ const FLAT: NavLink[] = NAV.flatMap((g) => g.links);
       @if (next(); as n) {
         <a hlmBtn variant="outline" size="sm" [routerLink]="n.path" class="gap-1">
           {{ n.label }}
-          <ng-icon hlm size="xs" name="lucideChevronRight" />
+          <ng-icon name="lucideChevronRight" class="text-[length:--spacing(3)]" />
         </a>
       } @else {
         <span></span>

@@ -40,12 +40,7 @@ const HELM_REQUIREMENTS: Record<string, string[]> = {
   'prompt-input': ['textarea', 'tooltip'],
   'prompt-suggestion': ['button'],
   'scroll-button': ['button'],
-  'system-message': ['button', 'icon'],
-  'thinking-bar': ['icon'],
-  'feedback-bar': ['icon'],
-  steps: ['icon'],
-  'chain-of-thought': ['icon'],
-  tool: ['icon'],
+  'system-message': ['button'],
   source: ['hover-card'],
   'conversation-list': ['button', 'separator', 'dropdown-menu'],
   'stream-controls': ['button'],
@@ -56,7 +51,7 @@ const HELM_REQUIREMENTS: Record<string, string[]> = {
   'message-actions-bar': ['button', 'tooltip'],
   'branch-nav': ['button'],
   'model-picker': ['button', 'dropdown-menu', 'badge'],
-  'todo-list': ['icon'],
+  'model-selector': ['button', 'sheet'],
 };
 
 function resolveProjectName(

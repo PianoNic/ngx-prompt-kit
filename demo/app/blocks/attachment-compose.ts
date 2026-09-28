@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowUp, lucidePaperclip, lucideUpload } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { PkAttachmentPreviewImports, type Attachment } from 'ngx-prompt-kit/attachment-preview';
@@ -22,7 +21,7 @@ const SAMPLE_THUMB =
     BlockPage,
     DocExample,
     HlmButton,
-    HlmIconImports,
+    NgIcon,
     PkAttachmentPreviewImports,
     PkFileUploadImports,
     PkPromptInputImports,
@@ -60,7 +59,7 @@ const SAMPLE_THUMB =
                     aria-label="Attach"
                     (click)="fu.openPicker(); $event.stopPropagation()"
                   >
-                    <ng-icon hlm size="sm" name="lucidePaperclip" />
+                    <ng-icon name="lucidePaperclip" class="text-[length:--spacing(4)]" />
                   </button>
                 </pk-prompt-input-action>
                 <pk-prompt-input-action tooltip="Send">
@@ -72,7 +71,7 @@ const SAMPLE_THUMB =
                     (click)="onSubmit()"
                     aria-label="Send"
                   >
-                    <ng-icon hlm size="xs" name="lucideArrowUp" />
+                    <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
                   </button>
                 </pk-prompt-input-action>
               </pk-prompt-input-actions>
@@ -89,7 +88,7 @@ const SAMPLE_THUMB =
                 class="bg-background/90 border-border m-4 w-full max-w-md rounded-lg border p-8 shadow-lg"
               >
                 <div class="mb-3 flex justify-center">
-                  <ng-icon hlm size="lg" name="lucideUpload" class="text-muted-foreground" />
+                  <ng-icon name="lucideUpload" class="text-[length:--spacing(8)] text-muted-foreground" />
                 </div>
                 <h3 class="mb-1 text-center text-base font-medium">Drop files to attach</h3>
                 <p class="text-muted-foreground text-center text-sm">
@@ -170,12 +169,12 @@ export class AttachmentComposeBlock {
       <pk-prompt-input-action tooltip="Attach files">
         <button hlmBtn size="icon-sm" variant="ghost"
                 (click)="fu.openPicker(); $event.stopPropagation()">
-          <ng-icon hlm size="sm" name="lucidePaperclip" />
+          <ng-icon name="lucidePaperclip" class="text-[length:--spacing(4)]" />
         </button>
       </pk-prompt-input-action>
       <pk-prompt-input-action tooltip="Send">
         <button hlmBtn size="icon-sm" class="rounded-full" (click)="onSubmit()">
-          <ng-icon hlm size="xs" name="lucideArrowUp" />
+          <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
         </button>
       </pk-prompt-input-action>
     </pk-prompt-input-actions>

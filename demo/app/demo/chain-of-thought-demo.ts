@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideLightbulb, lucideSearch, lucideTarget } from '@ng-icons/lucide';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
@@ -11,7 +10,7 @@ import { PkChainOfThoughtImports } from 'ngx-prompt-kit/chain-of-thought';
 @Component({
   selector: 'app-chain-of-thought-demo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DocPage, DocExample, DocInstall, DocApi, HlmIconImports, PkChainOfThoughtImports],
+  imports: [DocPage, DocExample, DocInstall, DocApi, NgIcon, PkChainOfThoughtImports],
   providers: [provideIcons({ lucideSearch, lucideLightbulb, lucideTarget })],
   template: `
     <app-doc-page
@@ -64,7 +63,7 @@ import { PkChainOfThoughtImports } from 'ngx-prompt-kit/chain-of-thought';
         <pk-chain-of-thought class="max-w-md w-full">
           <pk-chain-of-thought-step>
             <pk-chain-of-thought-trigger [leftIcon]="true">
-              <ng-icon leftIcon hlm size="xs" name="lucideSearch" />
+              <ng-icon leftIcon name="lucideSearch" class="text-[length:--spacing(3)]" />
               Research phase: Understanding the problem space
             </pk-chain-of-thought-trigger>
             <pk-chain-of-thought-content>
@@ -77,7 +76,7 @@ import { PkChainOfThoughtImports } from 'ngx-prompt-kit/chain-of-thought';
 
           <pk-chain-of-thought-step>
             <pk-chain-of-thought-trigger [leftIcon]="true">
-              <ng-icon leftIcon hlm size="xs" name="lucideLightbulb" />
+              <ng-icon leftIcon name="lucideLightbulb" class="text-[length:--spacing(3)]" />
               Analysis: Identifying optimization opportunities
             </pk-chain-of-thought-trigger>
             <pk-chain-of-thought-content>
@@ -90,7 +89,7 @@ import { PkChainOfThoughtImports } from 'ngx-prompt-kit/chain-of-thought';
 
           <pk-chain-of-thought-step [last]="true">
             <pk-chain-of-thought-trigger [leftIcon]="true">
-              <ng-icon leftIcon hlm size="xs" name="lucideTarget" />
+              <ng-icon leftIcon name="lucideTarget" class="text-[length:--spacing(3)]" />
               Solution: Implementing targeted improvements
             </pk-chain-of-thought-trigger>
             <pk-chain-of-thought-content>
@@ -129,7 +128,7 @@ export class ChainOfThoughtDemo {
 
   protected readonly iconCode = `<pk-chain-of-thought-step>
   <pk-chain-of-thought-trigger [leftIcon]="true">
-    <ng-icon leftIcon hlm size="xs" name="lucideSearch" />
+    <ng-icon leftIcon name="lucideSearch" class="text-[length:--spacing(3)]" />
     Research phase: Understanding the problem space
   </pk-chain-of-thought-trigger>
   <pk-chain-of-thought-content>
@@ -172,7 +171,7 @@ export class ChainOfThoughtDemo {
           type: 'boolean',
           default: 'false',
           description:
-            'Reserve a left-icon slot. Project the icon via the [leftIcon] attribute (e.g. <ng-icon leftIcon hlm name="lucideSearch" />).',
+            'Reserve a left-icon slot. Project the icon via the [leftIcon] attribute (e.g. <ng-icon leftIcon name="lucideSearch" />).',
         },
         {
           name: 'swapIconOnHover',

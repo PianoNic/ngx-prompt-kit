@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideArrowUp,
   lucideCoffee,
@@ -10,7 +10,6 @@ import {
 } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmCard, HlmCardDescription, HlmCardHeader, HlmCardTitle } from '@spartan-ng/helm/card';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
 import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
 
@@ -29,7 +28,7 @@ interface Feature {
     HlmCardDescription,
     HlmCardHeader,
     HlmCardTitle,
-    HlmIconImports,
+    NgIcon,
     PkCodeBlockImports,
     PkPromptInputImports,
   ],
@@ -72,7 +71,7 @@ interface Feature {
                   class="rounded-full"
                   aria-label="Attach files"
                 >
-                  <ng-icon hlm size="sm" name="lucidePlus" />
+                  <ng-icon name="lucidePlus" class="text-[length:--spacing(4)]" />
                 </button>
               </pk-prompt-input-action>
               <pk-prompt-input-action tooltip="Search the web">
@@ -83,7 +82,7 @@ interface Feature {
                   type="button"
                   class="rounded-full gap-1.5"
                 >
-                  <ng-icon hlm size="xs" name="lucideGlobe" />
+                  <ng-icon name="lucideGlobe" class="text-[length:--spacing(3)]" />
                   Search
                 </button>
               </pk-prompt-input-action>
@@ -96,7 +95,7 @@ interface Feature {
                   class="rounded-full"
                   aria-label="More tools"
                 >
-                  <ng-icon hlm size="sm" name="lucideEllipsis" />
+                  <ng-icon name="lucideEllipsis" class="text-[length:--spacing(4)]" />
                 </button>
               </pk-prompt-input-action>
             </div>
@@ -109,7 +108,7 @@ interface Feature {
                 (click)="onHeroSubmit()"
                 aria-label="Send"
               >
-                <ng-icon hlm size="xs" name="lucideArrowUp" />
+                <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
               </button>
             </pk-prompt-input-action>
           </pk-prompt-input-actions>
@@ -179,7 +178,7 @@ interface Feature {
               rel="noopener noreferrer"
               class="hover:text-foreground inline-flex items-center gap-1.5"
             >
-              <ng-icon hlm size="xs" name="lucideCoffee" />
+              <ng-icon name="lucideCoffee" class="text-[length:--spacing(3)]" />
               Buy me a coffee
             </a>
           </div>
@@ -198,19 +197,19 @@ export class Landing {
     <div class="flex items-center gap-1">
       <pk-prompt-input-action tooltip="Attach files">
         <button hlmBtn variant="ghost" size="icon-sm">
-          <ng-icon hlm size="sm" name="lucidePlus" />
+          <ng-icon name="lucidePlus" class="text-[length:--spacing(4)]" />
         </button>
       </pk-prompt-input-action>
       <pk-prompt-input-action tooltip="Search the web">
         <button hlmBtn variant="outline" size="sm">
-          <ng-icon hlm size="xs" name="lucideGlobe" />
+          <ng-icon name="lucideGlobe" class="text-[length:--spacing(3)]" />
           Search
         </button>
       </pk-prompt-input-action>
     </div>
     <pk-prompt-input-action tooltip="Send message">
       <button hlmBtn size="icon-sm" (click)="onSubmit()">
-        <ng-icon hlm size="xs" name="lucideArrowUp" />
+        <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
       </button>
     </pk-prompt-input-action>
   </pk-prompt-input-actions>

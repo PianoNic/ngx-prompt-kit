@@ -139,6 +139,19 @@ export const routes: Routes = [
         loadComponent: () => import('./demo/model-browser-demo').then((m) => m.ModelBrowserDemo),
       },
       {
+        path: 'components/model-selector',
+        loadComponent: () =>
+          import('./demo/model-selector-demo').then((m) => m.ModelSelectorDemo),
+      },
+      {
+        path: 'components/composer',
+        loadComponent: () => import('./demo/composer-demo').then((m) => m.ComposerDemo),
+      },
+      {
+        path: 'components/chat-turn',
+        loadComponent: () => import('./demo/chat-turn-demo').then((m) => m.ChatTurnDemo),
+      },
+      {
         path: 'components/usage-card',
         loadComponent: () => import('./demo/usage-card-demo').then((m) => m.UsageCardDemo),
       },

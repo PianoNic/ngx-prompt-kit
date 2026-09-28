@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowUp, lucideMic, lucideSquare } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
@@ -13,7 +12,7 @@ type State = 'idle' | 'recording' | 'transcribing';
 @Component({
   selector: 'app-block-voice-input',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [BlockPage, DocExample, HlmButton, HlmIconImports, PkPromptInputImports, PkTextShimmer],
+  imports: [BlockPage, DocExample, HlmButton, NgIcon, PkPromptInputImports, PkTextShimmer],
   providers: [provideIcons({ lucideArrowUp, lucideMic, lucideSquare })],
   template: `
     <app-block-page
@@ -42,8 +41,7 @@ type State = 'idle' | 'recording' | 'transcribing';
                   (click)="toggleVoice()"
                 >
                   <ng-icon
-                    hlm
-                    size="sm"
+                    class="text-[length:--spacing(4)]"
                     [name]="state() === 'recording' ? 'lucideSquare' : 'lucideMic'"
                   />
                 </button>
@@ -58,7 +56,7 @@ type State = 'idle' | 'recording' | 'transcribing';
                   (click)="onSubmit()"
                   aria-label="Send"
                 >
-                  <ng-icon hlm size="xs" name="lucideArrowUp" />
+                  <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
                 </button>
               </pk-prompt-input-action>
             </pk-prompt-input-actions>
@@ -118,7 +116,7 @@ export class VoiceInputBlock {
       <button hlmBtn size="icon-sm"
               [variant]="state() === 'recording' ? 'destructive' : 'ghost'"
               (click)="toggleVoice()">
-        <ng-icon hlm size="sm"
+        <ng-icon class="text-[length:--spacing(4)]"
                  [name]="state() === 'recording' ? 'lucideSquare' : 'lucideMic'" />
       </button>
     </pk-prompt-input-action>
@@ -126,7 +124,7 @@ export class VoiceInputBlock {
       <button hlmBtn size="icon-sm" class="rounded-full"
               [disabled]="state() !== 'idle' || !value().trim()"
               (click)="onSubmit()">
-        <ng-icon hlm size="xs" name="lucideArrowUp" />
+        <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
       </button>
     </pk-prompt-input-action>
   </pk-prompt-input-actions>
