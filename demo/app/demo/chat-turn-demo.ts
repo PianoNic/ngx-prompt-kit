@@ -36,7 +36,16 @@ For most teams, 30 is a comfortable ceiling.`;
 @Component({
   selector: 'app-chat-turn-demo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DocPage, DocExample, DocInstall, DocApi, HlmButton, NgIcon, PkChatTurnImports, PkMarkdown],
+  imports: [
+    DocPage,
+    DocExample,
+    DocInstall,
+    DocApi,
+    HlmButton,
+    NgIcon,
+    PkChatTurnImports,
+    PkMarkdown,
+  ],
   providers: [provideIcons({ lucidePaperclip, lucideRefreshCw })],
   template: `
     <app-doc-page
@@ -58,10 +67,17 @@ For most teams, 30 is a comfortable ceiling.`;
               <ng-icon name="lucidePaperclip" aria-hidden="true" />
               lifecycle.json
             </span>
-            <span>How long should I keep daily Postgres backups for a small SaaS, and how do I prune old ones from S3?</span>
+            <span
+              >How long should I keep daily Postgres backups for a small SaaS, and how do I prune
+              old ones from S3?</span
+            >
           </pk-user-turn>
 
-          <pk-assistant-turn modelName="Claude Sonnet 5.5" [iconUrl]="sonnetIcon" [copyText]="firstReply">
+          <pk-assistant-turn
+            modelName="Claude Sonnet 5.5"
+            [iconUrl]="sonnetIcon"
+            [copyText]="firstReply"
+          >
             <pk-markdown [class]="markdownClass" [content]="firstReply" />
             <button
               pkAssistantTurnActions
@@ -155,27 +171,76 @@ export class ChatTurnDemo {
     {
       name: 'PkUserTurn',
       props: [
-        { name: 'class', type: 'string', default: "''", description: 'Extra classes for the host (a right-aligned column).' },
-        { name: '(content)', type: 'text', description: 'The message, in a bubble up to 76% wide that keeps line breaks as typed.' },
-        { name: '[pkUserTurnTop]', type: 'element', description: 'Above the bubble, e.g. attachment chips.' },
+        {
+          name: 'class',
+          type: 'string',
+          default: "''",
+          description: 'Extra classes for the host (a right-aligned column).',
+        },
+        {
+          name: '(content)',
+          type: 'text',
+          description: 'The message, in a bubble up to 76% wide that keeps line breaks as typed.',
+        },
+        {
+          name: '[pkUserTurnTop]',
+          type: 'element',
+          description: 'Above the bubble, e.g. attachment chips.',
+        },
       ],
     },
     {
       name: 'PkAssistantTurn',
       props: [
-        { name: 'modelName', type: 'string', default: "''", description: 'Name of the model that answered, shown above the reply. No header without it.' },
-        { name: 'iconUrl', type: 'string | undefined', default: 'undefined', description: 'Brand icon for the model, e.g. from modelIconUrl(). Monochrome icons invert in dark mode.' },
-        { name: 'copyText', type: 'string', default: "''", description: 'The text the copy button puts on the clipboard; no copy button without it.' },
-        { name: 'streaming', type: 'boolean', default: 'false', description: 'Holds back the action row while the reply is still arriving.' },
-        { name: 'class', type: 'string', default: "''", description: 'Extra classes for the host.' },
+        {
+          name: 'modelName',
+          type: 'string',
+          default: "''",
+          description:
+            'Name of the model that answered, shown above the reply. No header without it.',
+        },
+        {
+          name: 'iconUrl',
+          type: 'string | undefined',
+          default: 'undefined',
+          description:
+            'Brand icon for the model, e.g. from modelIconUrl(). Monochrome icons invert in dark mode.',
+        },
+        {
+          name: 'copyText',
+          type: 'string',
+          default: "''",
+          description: 'The text the copy button puts on the clipboard; no copy button without it.',
+        },
+        {
+          name: 'streaming',
+          type: 'boolean',
+          default: 'false',
+          description: 'Holds back the action row while the reply is still arriving.',
+        },
+        {
+          name: 'class',
+          type: 'string',
+          default: "''",
+          description: 'Extra classes for the host.',
+        },
       ],
     },
     {
       name: 'PkAssistantTurn content projection',
       props: [
         { name: '(content)', type: 'element', description: 'The reply, e.g. a pk-markdown.' },
-        { name: '[pkAssistantTurnActions]', type: 'element', description: 'Extra actions in the row under the reply, after copy (e.g. regenerate, branch nav).' },
-        { name: '[pkAssistantTurnMeta]', type: 'element', description: 'Details at the end of the row, e.g. what the reply cost.' },
+        {
+          name: '[pkAssistantTurnActions]',
+          type: 'element',
+          description:
+            'Extra actions in the row under the reply, after copy (e.g. regenerate, branch nav).',
+        },
+        {
+          name: '[pkAssistantTurnMeta]',
+          type: 'element',
+          description: 'Details at the end of the row, e.g. what the reply cost.',
+        },
       ],
     },
   ];

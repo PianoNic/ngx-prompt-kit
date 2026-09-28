@@ -30,7 +30,10 @@ export const FULL_CHAT_HTML_SOURCE = `<hlm-tabs tab="preview" class="mx-auto fle
           <div
             class="bg-muted/40 focus-within:ring-ring flex items-center gap-2 rounded-md px-2 focus-within:ring-2"
           >
-            <ng-icon name="lucideSearch" class="text-[length:--spacing(3)] text-muted-foreground shrink-0" />
+            <ng-icon
+              name="lucideSearch"
+              class="text-[length:--spacing(3)] text-muted-foreground shrink-0"
+            />
             <input
               type="search"
               [(ngModel)]="searchQueryInput"

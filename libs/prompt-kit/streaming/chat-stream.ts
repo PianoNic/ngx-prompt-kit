@@ -58,31 +58,35 @@ export function readChatStream<TResult>(
   let failed: string | undefined;
   let gotResult = false;
 
-  return readSseHttpEvents(events$, (data) => {
-    const frame = adapt(data);
-    if (!frame) return;
-    switch (frame.kind) {
-      case 'token':
-        if (frame.text) handlers.onToken?.(frame.text);
-        break;
-      case 'reasoning':
-        if (frame.text) handlers.onReasoning?.(frame.text);
-        break;
-      case 'tool-call':
-        if (frame.name) handlers.onToolCall?.(frame.name, frame.input ?? '');
-        break;
-      case 'tool-result':
-        if (frame.name) handlers.onToolResult?.(frame.name, frame.output ?? '');
-        break;
-      case 'done':
-        result = frame.result;
-        gotResult = true;
-        break;
-      case 'error':
-        failed = frame.error ?? 'The stream failed.';
-        break;
-    }
-  }, signal).then(() => {
+  return readSseHttpEvents(
+    events$,
+    (data) => {
+      const frame = adapt(data);
+      if (!frame) return;
+      switch (frame.kind) {
+        case 'token':
+          if (frame.text) handlers.onToken?.(frame.text);
+          break;
+        case 'reasoning':
+          if (frame.text) handlers.onReasoning?.(frame.text);
+          break;
+        case 'tool-call':
+          if (frame.name) handlers.onToolCall?.(frame.name, frame.input ?? '');
+          break;
+        case 'tool-result':
+          if (frame.name) handlers.onToolResult?.(frame.name, frame.output ?? '');
+          break;
+        case 'done':
+          result = frame.result;
+          gotResult = true;
+          break;
+        case 'error':
+          failed = frame.error ?? 'The stream failed.';
+          break;
+      }
+    },
+    signal,
+  ).then(() => {
     if (failed !== undefined) throw new Error(failed);
     if (!gotResult) throw new Error('The stream ended unexpectedly.');
     return result as TResult;

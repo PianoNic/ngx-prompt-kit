@@ -36,7 +36,10 @@ import { PkTextShimmer } from '../text-shimmer/pk-text-shimmer';
           class="flex items-center gap-1 text-sm transition-opacity hover:opacity-80"
         >
           <pk-text-shimmer class="font-medium" [text]="text()" />
-          <ng-icon name="lucideChevronRight" class="text-[length:--spacing(3)] text-muted-foreground" />
+          <ng-icon
+            name="lucideChevronRight"
+            class="text-[length:--spacing(3)] text-muted-foreground"
+          />
         </button>
       } @else {
         <pk-text-shimmer class="cursor-default font-medium" [text]="text()" />

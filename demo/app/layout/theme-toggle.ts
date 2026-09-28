@@ -18,7 +18,10 @@ import { ThemeService } from './theme.service';
       [attr.aria-label]="label()"
       (click)="theme.toggle()"
     >
-      <ng-icon [name]="theme.theme() === 'dark' ? 'lucideSun' : 'lucideMoon'" class="text-[length:--spacing(4)]" />
+      <ng-icon
+        [name]="theme.theme() === 'dark' ? 'lucideSun' : 'lucideMoon'"
+        class="text-[length:--spacing(4)]"
+      />
     </button>
   `,
 })

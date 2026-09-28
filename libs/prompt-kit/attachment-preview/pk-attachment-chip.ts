@@ -35,7 +35,10 @@ import { type Attachment, formatAttachmentSize } from './pk-attachment-types';
         [attr.aria-label]="'Preview ' + attachment().name"
         class="border-border bg-muted hover:bg-accent flex h-12 max-w-xs items-center gap-2 rounded-md border px-3 text-left transition-colors focus-visible:ring-ring focus-visible:ring-2 focus-visible:outline-none"
       >
-        <ng-icon [name]="iconName()" class="text-[length:--spacing(4)] text-muted-foreground shrink-0" />
+        <ng-icon
+          [name]="iconName()"
+          class="text-[length:--spacing(4)] text-muted-foreground shrink-0"
+        />
         <div class="flex min-w-0 flex-col leading-tight">
           <span class="text-foreground truncate text-sm">{{ attachment().name }}</span>
           @if (formattedSize(); as s) {

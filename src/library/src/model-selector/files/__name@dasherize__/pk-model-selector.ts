@@ -21,7 +21,13 @@ import {
   viewChild,
 } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideCheck, lucideChevronDown, lucideSearch, lucideStar, lucideX } from '@ng-icons/lucide';
+import {
+  lucideCheck,
+  lucideChevronDown,
+  lucideSearch,
+  lucideStar,
+  lucideX,
+} from '@ng-icons/lucide';
 import { BrnSheetContent } from '@spartan-ng/brain/sheet';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmSheet, HlmSheetContent, HlmSheetTitle } from '@spartan-ng/helm/sheet';
@@ -140,12 +146,7 @@ let nextId = 0;
       (detach)="onDesktopDetach()"
       (overlayOutsideClick)="closeDesktop(false)"
     >
-      <div
-        role="dialog"
-        [attr.aria-label]="title()"
-        cdkTrapFocus
-        [class]="desktopPanelClass()"
-      >
+      <div role="dialog" [attr.aria-label]="title()" cdkTrapFocus [class]="desktopPanelClass()">
         <ng-container *ngTemplateOutlet="panel; context: { $implicit: false }" />
       </div>
     </ng-template>
@@ -178,7 +179,13 @@ let nextId = 0;
     </hlm-sheet>
 
     <ng-template #panel let-mobile>
-      <div [class]="mobile ? 'shrink-0 px-3.5 pb-2.5' : 'flex shrink-0 items-center gap-3 border-b px-3.5 pt-3.5 pb-3'">
+      <div
+        [class]="
+          mobile
+            ? 'shrink-0 px-3.5 pb-2.5'
+            : 'flex shrink-0 items-center gap-3 border-b px-3.5 pt-3.5 pb-3'
+        "
+      >
         <div class="relative flex min-w-0 grow items-center">
           <ng-icon
             name="lucideSearch"
@@ -261,7 +268,12 @@ let nextId = 0;
                 <img
                   [src]="src"
                   alt=""
-                  [class]="cn('size-4 object-contain', view() === m.name ? 'invert dark:invert-0' : 'dark:invert')"
+                  [class]="
+                    cn(
+                      'size-4 object-contain',
+                      view() === m.name ? 'invert dark:invert-0' : 'dark:invert'
+                    )
+                  "
                 />
               }
               {{ m.name }}
@@ -283,7 +295,11 @@ let nextId = 0;
                 (click)="setView(sectionsView)"
                 [class]="railItemClass(view() === sectionsView)"
               >
-                <ng-icon name="lucideStar" aria-hidden="true" class="text-[length:--spacing(4)] shrink-0" />
+                <ng-icon
+                  name="lucideStar"
+                  aria-hidden="true"
+                  class="text-[length:--spacing(4)] shrink-0"
+                />
                 <span class="grow truncate">{{ sectionsLabel() }}</span>
               </button>
               <div class="bg-border mx-1 my-1.5 h-px shrink-0" aria-hidden="true"></div>
@@ -403,7 +419,8 @@ let nextId = 0;
                         <span class="font-semibold tracking-[1px]">
                           <span class="sr-only">{{ priceTierLabel(t) }}</span>
                           <span aria-hidden="true"
-                            >{{ dollars(t) }}<span class="text-muted-foreground/60">{{
+                            >{{ dollars(t)
+                            }}<span class="text-muted-foreground/60">{{
                               dollars(3 - t)
                             }}</span></span
                           >
@@ -770,7 +787,9 @@ export class PkModelSelector {
     const showRing = active && (this.keyboardNav() || this.searching());
     return cn(
       'group flex cursor-pointer items-center text-left select-none',
-      mobile ? 'min-h-[60px] gap-3 rounded-xl px-2.5 py-2' : 'min-h-14 gap-3.5 rounded-[10px] px-3 py-2',
+      mobile
+        ? 'min-h-[60px] gap-3 rounded-xl px-2.5 py-2'
+        : 'min-h-14 gap-3.5 rounded-[10px] px-3 py-2',
       o.model.id === this.value() ? 'bg-accent' : active ? 'bg-accent/50' : '',
       showRing ? 'ring-ring ring-2 ring-inset' : '',
       o.model.disabled ? 'cursor-not-allowed opacity-50' : '',
@@ -806,7 +825,12 @@ export class PkModelSelector {
     if (!options.length) return;
     let i = this.activeIndex();
     for (let step = 0; step < options.length; step++) {
-      i = i < 0 ? (delta > 0 ? 0 : options.length - 1) : (i + delta + options.length) % options.length;
+      i =
+        i < 0
+          ? delta > 0
+            ? 0
+            : options.length - 1
+          : (i + delta + options.length) % options.length;
       if (!options[i].model.disabled) break;
     }
     this.activeIndex.set(i);
@@ -816,9 +840,8 @@ export class PkModelSelector {
   private scrollActiveIntoView(): void {
     const id = this.activeOption()?.id;
     if (!id) return;
-    afterNextRender(
-      () => this.document.getElementById(id)?.scrollIntoView({ block: 'nearest' }),
-      { injector: this.injector },
-    );
+    afterNextRender(() => this.document.getElementById(id)?.scrollIntoView({ block: 'nearest' }), {
+      injector: this.injector,
+    });
   }
 }

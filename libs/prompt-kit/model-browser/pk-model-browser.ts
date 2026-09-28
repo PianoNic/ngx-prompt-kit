@@ -28,7 +28,10 @@ import {
   template: `
     <div class="border-border flex min-h-0 flex-col border-r md:w-[55%] md:border-b-0 md:border-r">
       <div class="border-border flex items-center gap-2 border-b px-3 py-2">
-        <ng-icon name="lucideSearch" class="text-[length:--spacing(3)] text-muted-foreground shrink-0" />
+        <ng-icon
+          name="lucideSearch"
+          class="text-[length:--spacing(3)] text-muted-foreground shrink-0"
+        />
         <input
           type="text"
           [value]="query()"

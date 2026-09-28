@@ -103,9 +103,9 @@ function adapt(data: string): ChatStreamFrame<string> | null {
       <section class="mt-12">
         <h2 class="text-xl font-semibold tracking-tight">Stopping a stream</h2>
         <p class="text-muted-foreground mt-1 text-sm leading-relaxed">
-          readChatStream() takes an optional AbortSignal after the handlers. Aborting it cancels
-          the request and rejects with an AbortError; check for it with isAbortError() so a stop
-          button (e.g. pk-composer's stopped output) isn't reported as a failure.
+          readChatStream() takes an optional AbortSignal after the handlers. Aborting it cancels the
+          request and rejects with an AbortError; check for it with isAbortError() so a stop button
+          (e.g. pk-composer's stopped output) isn't reported as a failure.
         </p>
         <div class="mt-3">
           <pk-code-block>

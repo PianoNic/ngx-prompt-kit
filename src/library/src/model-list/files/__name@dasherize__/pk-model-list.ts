@@ -24,7 +24,10 @@ import type { Model } from './pk-model-list-types';
   template: `
     @if (showSearch()) {
       <div class="border-border flex items-center gap-2 border-b px-3 py-2">
-        <ng-icon name="lucideSearch" class="text-[length:--spacing(3)] text-muted-foreground shrink-0" />
+        <ng-icon
+          name="lucideSearch"
+          class="text-[length:--spacing(3)] text-muted-foreground shrink-0"
+        />
         <input
           type="text"
           [value]="query()"

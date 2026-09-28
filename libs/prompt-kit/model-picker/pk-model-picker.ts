@@ -71,7 +71,10 @@ import { formatModelPrice, type Model, type ModelTier } from './pk-model-types';
             class="border-border flex items-center gap-2 border-b px-3 py-2"
             (click)="$event.stopPropagation()"
           >
-            <ng-icon name="lucideSearch" class="text-[length:--spacing(3)] text-muted-foreground shrink-0" />
+            <ng-icon
+              name="lucideSearch"
+              class="text-[length:--spacing(3)] text-muted-foreground shrink-0"
+            />
             <input
               type="text"
               [value]="query()"
@@ -94,7 +97,10 @@ import { formatModelPrice, type Model, type ModelTier } from './pk-model-types';
             <div class="flex w-full items-center justify-between gap-2">
               <span class="flex min-w-0 items-center gap-2">
                 @if (m.id === selectedId()) {
-                  <ng-icon name="lucideCheck" class="text-[length:--spacing(3)] text-primary shrink-0" />
+                  <ng-icon
+                    name="lucideCheck"
+                    class="text-[length:--spacing(3)] text-primary shrink-0"
+                  />
                 } @else {
                   <span class="w-3 shrink-0" aria-hidden="true"></span>
                 }

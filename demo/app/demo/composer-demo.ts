@@ -27,10 +27,38 @@ const LONG_DRAFT = `Here is the incident timeline I want to turn into a post-mor
 Please write a blameless summary, the customer impact, the root cause, and three follow-ups we can actually ship this sprint.`;
 
 const MODELS: SelectorModel[] = [
-  { id: 'anthropic/claude-sonnet-5.5', name: 'Claude Sonnet 5.5', shortName: 'Sonnet 5.5', maker: 'Anthropic', priceTier: 2, costLabel: '≈ 14 credits' },
-  { id: 'anthropic/claude-haiku-4.5', name: 'Claude Haiku 4.5', shortName: 'Haiku 4.5', maker: 'Anthropic', priceTier: 1, costLabel: '≈ 4 credits' },
-  { id: 'openai/gpt-5', name: 'GPT-5', shortName: 'GPT-5', maker: 'OpenAI', priceTier: 2, costLabel: '≈ 20 credits' },
-  { id: 'google/gemini-3-flash', name: 'Gemini 3 Flash', shortName: 'Gemini 3 Flash', maker: 'Google', priceTier: 1, costLabel: '≈ 3 credits' },
+  {
+    id: 'anthropic/claude-sonnet-5.5',
+    name: 'Claude Sonnet 5.5',
+    shortName: 'Sonnet 5.5',
+    maker: 'Anthropic',
+    priceTier: 2,
+    costLabel: '≈ 14 credits',
+  },
+  {
+    id: 'anthropic/claude-haiku-4.5',
+    name: 'Claude Haiku 4.5',
+    shortName: 'Haiku 4.5',
+    maker: 'Anthropic',
+    priceTier: 1,
+    costLabel: '≈ 4 credits',
+  },
+  {
+    id: 'openai/gpt-5',
+    name: 'GPT-5',
+    shortName: 'GPT-5',
+    maker: 'OpenAI',
+    priceTier: 2,
+    costLabel: '≈ 20 credits',
+  },
+  {
+    id: 'google/gemini-3-flash',
+    name: 'Gemini 3 Flash',
+    shortName: 'Gemini 3 Flash',
+    maker: 'Google',
+    priceTier: 1,
+    costLabel: '≈ 3 credits',
+  },
 ].map((m) => ({ ...m, iconUrl: modelIconUrl({ id: m.id }) }) as SelectorModel);
 
 @Component({
@@ -54,7 +82,7 @@ const MODELS: SelectorModel[] = [
     >
       <app-doc-example
         title="Empty state"
-        description="variant=&quot;card&quot; for a composer centred in an empty chat. Enter sends, Shift+Enter adds a line; the + button opens a file picker."
+        description='variant="card" for a composer centred in an empty chat. Enter sends, Shift+Enter adds a line; the + button opens a file picker.'
         [code]="cardCode"
       >
         <div class="flex min-h-[320px] flex-col items-center justify-center gap-6">
@@ -101,7 +129,11 @@ const MODELS: SelectorModel[] = [
                 @if (turn.role === 'user') {
                   <pk-user-turn>{{ turn.text }}</pk-user-turn>
                 } @else {
-                  <pk-assistant-turn modelName="Claude Sonnet 5.5" [iconUrl]="sonnetIcon" [copyText]="turn.text">
+                  <pk-assistant-turn
+                    modelName="Claude Sonnet 5.5"
+                    [iconUrl]="sonnetIcon"
+                    [copyText]="turn.text"
+                  >
                     {{ turn.text }}
                   </pk-assistant-turn>
                 }
@@ -228,7 +260,10 @@ export class ComposerDemo {
     this.thread.update((turns) => [
       ...turns,
       { role: 'user', text },
-      { role: 'assistant', text: 'This is a demo, so here is a canned reply. Keep typing to watch the thread scroll above the dock.' },
+      {
+        role: 'assistant',
+        text: 'This is a demo, so here is a canned reply. Keep typing to watch the thread scroll above the dock.',
+      },
     ]);
   }
 
@@ -236,46 +271,169 @@ export class ComposerDemo {
     {
       name: 'PkComposer',
       props: [
-        { name: 'value', type: 'string', default: "''", description: 'The draft. Two-way bindable via [(value)], so a draft can survive navigation.' },
-        { name: 'placeholder', type: 'string', default: "'Message'", description: 'Placeholder of the text box.' },
-        { name: 'label', type: 'string', default: "'Message'", description: 'Accessible name for the text box (a visually hidden label).' },
-        { name: 'busy', type: 'boolean', default: 'false', description: 'A reply is being generated: the send button becomes a stop button and Enter no longer sends.' },
-        { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the text box, the attach button and sending.' },
-        { name: 'sendBlocked', type: 'boolean', default: 'false', description: 'Keeps the send button disabled, e.g. while attachments upload.' },
-        { name: 'maxHeight', type: 'number', default: '200', description: 'Height in px the text box grows to before it scrolls and the expand toggle appears.' },
-        { name: 'attachable', type: 'boolean', default: 'false', description: 'Shows the attach (+) button, which opens a file picker.' },
-        { name: 'accept', type: 'string', default: "''", description: 'File types the picker offers, as for <input type="file" accept>.' },
-        { name: 'describedBy', type: 'string', default: "''", description: 'Id(s) for the text box’s aria-describedby, e.g. a hint or error.' },
-        { name: 'class', type: 'string', default: "''", description: 'Extra classes for the host.' },
+        {
+          name: 'value',
+          type: 'string',
+          default: "''",
+          description:
+            'The draft. Two-way bindable via [(value)], so a draft can survive navigation.',
+        },
+        {
+          name: 'placeholder',
+          type: 'string',
+          default: "'Message'",
+          description: 'Placeholder of the text box.',
+        },
+        {
+          name: 'label',
+          type: 'string',
+          default: "'Message'",
+          description: 'Accessible name for the text box (a visually hidden label).',
+        },
+        {
+          name: 'busy',
+          type: 'boolean',
+          default: 'false',
+          description:
+            'A reply is being generated: the send button becomes a stop button and Enter no longer sends.',
+        },
+        {
+          name: 'disabled',
+          type: 'boolean',
+          default: 'false',
+          description: 'Disables the text box, the attach button and sending.',
+        },
+        {
+          name: 'sendBlocked',
+          type: 'boolean',
+          default: 'false',
+          description: 'Keeps the send button disabled, e.g. while attachments upload.',
+        },
+        {
+          name: 'maxHeight',
+          type: 'number',
+          default: '200',
+          description:
+            'Height in px the text box grows to before it scrolls and the expand toggle appears.',
+        },
+        {
+          name: 'attachable',
+          type: 'boolean',
+          default: 'false',
+          description: 'Shows the attach (+) button, which opens a file picker.',
+        },
+        {
+          name: 'accept',
+          type: 'string',
+          default: "''",
+          description: 'File types the picker offers, as for <input type="file" accept>.',
+        },
+        {
+          name: 'describedBy',
+          type: 'string',
+          default: "''",
+          description: 'Id(s) for the text box’s aria-describedby, e.g. a hint or error.',
+        },
+        {
+          name: 'class',
+          type: 'string',
+          default: "''",
+          description: 'Extra classes for the host.',
+        },
       ],
     },
     {
       name: 'PkComposer outputs & members',
       props: [
-        { name: 'submitted', type: '(text: string) => void', description: 'The trimmed draft, on Enter or the send button. The draft is then cleared and the box shrinks back.' },
-        { name: 'stopped', type: '() => void', description: 'The stop button was pressed while busy.' },
-        { name: 'filesPicked', type: '(files: File[]) => void', description: 'Files picked through the attach button.' },
-        { name: 'element', type: 'ElementRef<HTMLElement>', description: 'The composer’s element, e.g. to anchor a model selector’s panel to the whole composer.' },
-        { name: 'expanded', type: 'WritableSignal<boolean>', description: 'Whether the text box is grown to 60% of the viewport for long drafts.' },
-        { name: 'focus()', type: 'void', description: 'Focuses the text box. Clicks on the composer’s padding do this too.' },
+        {
+          name: 'submitted',
+          type: '(text: string) => void',
+          description:
+            'The trimmed draft, on Enter or the send button. The draft is then cleared and the box shrinks back.',
+        },
+        {
+          name: 'stopped',
+          type: '() => void',
+          description: 'The stop button was pressed while busy.',
+        },
+        {
+          name: 'filesPicked',
+          type: '(files: File[]) => void',
+          description: 'Files picked through the attach button.',
+        },
+        {
+          name: 'element',
+          type: 'ElementRef<HTMLElement>',
+          description:
+            'The composer’s element, e.g. to anchor a model selector’s panel to the whole composer.',
+        },
+        {
+          name: 'expanded',
+          type: 'WritableSignal<boolean>',
+          description: 'Whether the text box is grown to 60% of the viewport for long drafts.',
+        },
+        {
+          name: 'focus()',
+          type: 'void',
+          description: 'Focuses the text box. Clicks on the composer’s padding do this too.',
+        },
       ],
     },
     {
       name: 'PkComposer content projection',
       props: [
-        { name: '[pkComposerTop]', type: 'element', description: 'Above the text, e.g. attachment chips or an upload error.' },
-        { name: '[pkComposerStart]', type: 'element', description: 'In the action row, after the attach button.' },
-        { name: '[pkComposerEnd]', type: 'element', description: 'In the action row, before the send button, e.g. a model selector.' },
+        {
+          name: '[pkComposerTop]',
+          type: 'element',
+          description: 'Above the text, e.g. attachment chips or an upload error.',
+        },
+        {
+          name: '[pkComposerStart]',
+          type: 'element',
+          description: 'In the action row, after the attach button.',
+        },
+        {
+          name: '[pkComposerEnd]',
+          type: 'element',
+          description: 'In the action row, before the send button, e.g. a model selector.',
+        },
       ],
     },
     {
       name: 'PkComposerDock',
       props: [
-        { name: 'variant', type: "'docked' | 'card' | 'plain'", default: "'docked'", description: 'docked: pinned to the bottom of a relative, clipping panel with a band and raised notch in the page colour. card: a bordered, softly shadowed card for an empty chat. plain: no chrome, e.g. on phones.' },
-        { name: 'contentClass', type: 'string', default: "''", description: 'Extra classes for the card or notch content wrapper, e.g. a dashed border for an incognito chat.' },
-        { name: 'class', type: 'string', default: "''", description: 'Extra classes for the host.' },
-        { name: 'occupied', type: '(px: number) => void', description: 'Output. Px of the panel’s height the docked band covers (0 for the other variants), so the thread can pad its bottom.' },
-        { name: 'data-variant', type: 'attribute', description: 'Host attribute mirroring variant. Square the panel’s bottom corners with has-[pk-composer-dock[data-variant=docked]]:rounded-b-none.' },
+        {
+          name: 'variant',
+          type: "'docked' | 'card' | 'plain'",
+          default: "'docked'",
+          description:
+            'docked: pinned to the bottom of a relative, clipping panel with a band and raised notch in the page colour. card: a bordered, softly shadowed card for an empty chat. plain: no chrome, e.g. on phones.',
+        },
+        {
+          name: 'contentClass',
+          type: 'string',
+          default: "''",
+          description:
+            'Extra classes for the card or notch content wrapper, e.g. a dashed border for an incognito chat.',
+        },
+        {
+          name: 'class',
+          type: 'string',
+          default: "''",
+          description: 'Extra classes for the host.',
+        },
+        {
+          name: 'occupied',
+          type: '(px: number) => void',
+          description:
+            'Output. Px of the panel’s height the docked band covers (0 for the other variants), so the thread can pad its bottom.',
+        },
+        {
+          name: 'data-variant',
+          type: 'attribute',
+          description:
+            'Host attribute mirroring variant. Square the panel’s bottom corners with has-[pk-composer-dock[data-variant=docked]]:rounded-b-none.',
+        },
       ],
     },
   ];

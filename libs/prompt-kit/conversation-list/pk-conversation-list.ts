@@ -90,9 +90,9 @@ export class PkConversationList {
    * Renders each row as a router link to the returned path, so a conversation can be opened in a
    * new tab. Without it the rows are buttons and only `selected` fires.
    */
-  public readonly link = input<((conversation: Conversation) => string | readonly unknown[]) | null>(
-    null,
-  );
+  public readonly link = input<
+    ((conversation: Conversation) => string | readonly unknown[]) | null
+  >(null);
 
   public readonly selected = output<string>();
   public readonly renamed = output<ConversationRename>();

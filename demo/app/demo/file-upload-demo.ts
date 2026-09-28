@@ -102,7 +102,10 @@ import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
                 class="bg-background/90 border-border m-4 w-full max-w-md rounded-lg border p-8 shadow-lg"
               >
                 <div class="mb-4 flex justify-center">
-                  <ng-icon name="lucideUpload" class="text-[length:--spacing(8)] text-muted-foreground" />
+                  <ng-icon
+                    name="lucideUpload"
+                    class="text-[length:--spacing(8)] text-muted-foreground"
+                  />
                 </div>
                 <h3 class="mb-2 text-center text-base font-medium">Drop files to upload</h3>
                 <p class="text-muted-foreground text-center text-sm">

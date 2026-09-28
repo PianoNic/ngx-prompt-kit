@@ -16,14 +16,7 @@ interface Variant {
 @Component({
   selector: 'app-block-regenerate-variants',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    BlockPage,
-    DocExample,
-    NgIcon,
-    PkMessageImports,
-    PkPromptSuggestion,
-    HlmMessageImports,
-  ],
+  imports: [BlockPage, DocExample, NgIcon, PkMessageImports, PkPromptSuggestion, HlmMessageImports],
   providers: [provideIcons({ lucideRefreshCw })],
   template: `
     <app-block-page

@@ -140,8 +140,7 @@ export const routes: Routes = [
       },
       {
         path: 'components/model-selector',
-        loadComponent: () =>
-          import('./demo/model-selector-demo').then((m) => m.ModelSelectorDemo),
+        loadComponent: () => import('./demo/model-selector-demo').then((m) => m.ModelSelectorDemo),
       },
       {
         path: 'components/composer',

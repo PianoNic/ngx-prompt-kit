@@ -88,7 +88,10 @@ const SAMPLE_THUMB =
                 class="bg-background/90 border-border m-4 w-full max-w-md rounded-lg border p-8 shadow-lg"
               >
                 <div class="mb-3 flex justify-center">
-                  <ng-icon name="lucideUpload" class="text-[length:--spacing(8)] text-muted-foreground" />
+                  <ng-icon
+                    name="lucideUpload"
+                    class="text-[length:--spacing(8)] text-muted-foreground"
+                  />
                 </div>
                 <h3 class="mb-1 text-center text-base font-medium">Drop files to attach</h3>
                 <p class="text-muted-foreground text-center text-sm">

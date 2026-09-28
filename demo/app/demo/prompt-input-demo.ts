@@ -11,15 +11,7 @@ import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
 @Component({
   selector: 'app-prompt-input-demo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    DocPage,
-    DocExample,
-    DocInstall,
-    DocApi,
-    HlmButton,
-    NgIcon,
-    PkPromptInputImports,
-  ],
+  imports: [DocPage, DocExample, DocInstall, DocApi, HlmButton, NgIcon, PkPromptInputImports],
   providers: [provideIcons({ lucideArrowUp, lucideMic, lucidePaperclip })],
   template: `
     <app-doc-page
