@@ -1,9 +1,8 @@
 // ngx-prompt-kit original — not part of ibelick/prompt-kit
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideRefreshCw, lucideRotateCcw, lucideSquare } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { cn } from '../utils/cn';
 
 export type StreamControlsState = 'idle' | 'streaming' | 'error';
@@ -11,7 +10,7 @@ export type StreamControlsState = 'idle' | 'streaming' | 'error';
 @Component({
   selector: 'pk-stream-controls',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [HlmButton, HlmIconImports],
+  imports: [HlmButton, NgIcon],
   providers: [provideIcons({ lucideSquare, lucideRefreshCw, lucideRotateCcw })],
   host: {
     '[class]': 'computedClass()',
@@ -27,7 +26,7 @@ export type StreamControlsState = 'idle' | 'streaming' | 'error';
           (click)="stop.emit()"
           aria-label="Stop streaming"
         >
-          <ng-icon hlm size="xs" name="lucideSquare" />
+          <ng-icon name="lucideSquare" class="text-[length:--spacing(3)]" />
           Stop
         </button>
       }
@@ -41,7 +40,7 @@ export type StreamControlsState = 'idle' | 'streaming' | 'error';
           (click)="regenerate.emit()"
           aria-label="Try again"
         >
-          <ng-icon hlm size="xs" name="lucideRotateCcw" />
+          <ng-icon name="lucideRotateCcw" class="text-[length:--spacing(3)]" />
           Try again
         </button>
       }
@@ -55,7 +54,7 @@ export type StreamControlsState = 'idle' | 'streaming' | 'error';
             (click)="regenerate.emit()"
             aria-label="Regenerate response"
           >
-            <ng-icon hlm size="xs" name="lucideRefreshCw" />
+            <ng-icon name="lucideRefreshCw" class="text-[length:--spacing(3)]" />
             Regenerate
           </button>
         }

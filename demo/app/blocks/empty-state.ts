@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideArrowUp,
   lucideCode,
@@ -8,7 +8,6 @@ import {
   lucidePencilLine,
 } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { PkChatEmptyImports, type ChatEmptySuggestion } from 'ngx-prompt-kit/chat-empty';
@@ -22,7 +21,7 @@ import { PkPromptSuggestion } from 'ngx-prompt-kit/prompt-suggestion';
     BlockPage,
     DocExample,
     HlmButton,
-    HlmIconImports,
+    NgIcon,
     PkChatEmptyImports,
     PkPromptInputImports,
     PkPromptSuggestion,
@@ -69,7 +68,7 @@ import { PkPromptSuggestion } from 'ngx-prompt-kit/prompt-suggestion';
                     (click)="onSubmit()"
                     aria-label="Send"
                   >
-                    <ng-icon hlm size="xs" name="lucideArrowUp" />
+                    <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
                   </button>
                 </pk-prompt-input-action>
               </pk-prompt-input-actions>
@@ -148,7 +147,7 @@ export class EmptyStateBlock {
   <pk-prompt-input-actions class="mt-2 justify-end">
     <pk-prompt-input-action tooltip="Send">
       <button hlmBtn size="icon-sm" class="rounded-full" (click)="onSubmit()">
-        <ng-icon hlm size="xs" name="lucideArrowUp" />
+        <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
       </button>
     </pk-prompt-input-action>
   </pk-prompt-input-actions>

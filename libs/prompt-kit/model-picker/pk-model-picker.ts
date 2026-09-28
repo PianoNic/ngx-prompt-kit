@@ -8,7 +8,7 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCheck, lucideChevronDown, lucideSearch } from '@ng-icons/lucide';
 import { HlmBadge } from '@spartan-ng/helm/badge';
 import { HlmButton } from '@spartan-ng/helm/button';
@@ -17,7 +17,6 @@ import {
   HlmDropdownMenuItem,
   HlmDropdownMenuTrigger,
 } from '@spartan-ng/helm/dropdown-menu';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { cn } from '../utils/cn';
 import { formatModelPrice, type Model, type ModelTier } from './pk-model-types';
 
@@ -30,7 +29,7 @@ import { formatModelPrice, type Model, type ModelTier } from './pk-model-types';
     HlmDropdownMenu,
     HlmDropdownMenuItem,
     HlmDropdownMenuTrigger,
-    HlmIconImports,
+    NgIcon,
   ],
   providers: [provideIcons({ lucideCheck, lucideChevronDown, lucideSearch })],
   host: {
@@ -62,7 +61,7 @@ import { formatModelPrice, type Model, type ModelTier } from './pk-model-types';
           <span class="text-muted-foreground">{{ placeholder() }}</span>
         }
       </span>
-      <ng-icon hlm size="xs" name="lucideChevronDown" class="text-muted-foreground" />
+      <ng-icon name="lucideChevronDown" class="text-[length:--spacing(3)] text-muted-foreground" />
     </button>
 
     <ng-template #menu>
@@ -72,7 +71,10 @@ import { formatModelPrice, type Model, type ModelTier } from './pk-model-types';
             class="border-border flex items-center gap-2 border-b px-3 py-2"
             (click)="$event.stopPropagation()"
           >
-            <ng-icon hlm size="xs" name="lucideSearch" class="text-muted-foreground shrink-0" />
+            <ng-icon
+              name="lucideSearch"
+              class="text-[length:--spacing(3)] text-muted-foreground shrink-0"
+            />
             <input
               type="text"
               [value]="query()"
@@ -95,7 +97,10 @@ import { formatModelPrice, type Model, type ModelTier } from './pk-model-types';
             <div class="flex w-full items-center justify-between gap-2">
               <span class="flex min-w-0 items-center gap-2">
                 @if (m.id === selectedId()) {
-                  <ng-icon hlm size="xs" name="lucideCheck" class="text-primary shrink-0" />
+                  <ng-icon
+                    name="lucideCheck"
+                    class="text-[length:--spacing(3)] text-primary shrink-0"
+                  />
                 } @else {
                   <span class="w-3 shrink-0" aria-hidden="true"></span>
                 }

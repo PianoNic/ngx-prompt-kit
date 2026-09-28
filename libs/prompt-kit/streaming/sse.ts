@@ -47,12 +47,21 @@ export function consumeSseFrames(buffer: string, onData: (data: string) => void)
  *
  * The caller owns interpretation of each frame (e.g. `JSON.parse` + a switch on
  * a discriminator) and any notion of a terminal "result" or "error" payload.
+ *
+ * Aborting `signal` unsubscribes, which cancels the underlying request, and
+ * rejects with an `AbortError` DOMException (see {@link isAbortError}).
  */
 export function readSseHttpEvents(
   events$: Observable<HttpEvent<unknown>>,
   onData: (data: string) => void,
+  signal?: AbortSignal,
 ): Promise<void> {
   return new Promise<void>((resolve, reject) => {
+    if (signal?.aborted) {
+      reject(abortError());
+      return;
+    }
+
     let parsedUpTo = 0;
     let buffer = '';
 
@@ -63,7 +72,7 @@ export function readSseHttpEvents(
       buffer = consumeSseFrames(buffer, onData);
     };
 
-    events$.subscribe({
+    const subscription = events$.subscribe({
       next: (event) => {
         if (event.type === HttpEventType.DownloadProgress) {
           ingest((event as HttpDownloadProgressEvent).partialText ?? '');
@@ -74,5 +83,23 @@ export function readSseHttpEvents(
       },
       error: (err) => reject(err),
     });
+
+    signal?.addEventListener(
+      'abort',
+      () => {
+        subscription.unsubscribe();
+        reject(abortError());
+      },
+      { once: true },
+    );
   });
+}
+
+/** True for the rejection a stream reader produces when its signal is aborted. */
+export function isAbortError(error: unknown): boolean {
+  return error instanceof DOMException && error.name === 'AbortError';
+}
+
+function abortError(): DOMException {
+  return new DOMException('The stream was stopped.', 'AbortError');
 }

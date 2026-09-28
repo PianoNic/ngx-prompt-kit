@@ -14,15 +14,14 @@
  * leading icon via the `icon` slot if needed (<ng-content select="[icon]">).
  */
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideThumbsDown, lucideThumbsUp, lucideX } from '@ng-icons/lucide';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { cn } from '../utils/cn';
 
 @Component({
   selector: 'pk-feedback-bar',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [HlmIconImports],
+  imports: [NgIcon],
   providers: [provideIcons({ lucideThumbsUp, lucideThumbsDown, lucideX })],
   template: `
     <div [class]="computedClass()">
@@ -38,7 +37,7 @@ import { cn } from '../utils/cn';
             aria-label="Helpful"
             (click)="helpful.emit()"
           >
-            <ng-icon hlm size="sm" name="lucideThumbsUp" />
+            <ng-icon name="lucideThumbsUp" class="text-[length:--spacing(4)]" />
           </button>
           <button
             type="button"
@@ -46,7 +45,7 @@ import { cn } from '../utils/cn';
             aria-label="Not helpful"
             (click)="notHelpful.emit()"
           >
-            <ng-icon hlm size="sm" name="lucideThumbsDown" />
+            <ng-icon name="lucideThumbsDown" class="text-[length:--spacing(4)]" />
           </button>
         </div>
         <div class="border-border flex items-center justify-center border-l">
@@ -56,7 +55,7 @@ import { cn } from '../utils/cn';
             class="text-muted-foreground hover:text-foreground flex items-center justify-center rounded-md p-3"
             aria-label="Close"
           >
-            <ng-icon hlm size="sm" name="lucideX" />
+            <ng-icon name="lucideX" class="text-[length:--spacing(4)]" />
           </button>
         </div>
       </div>

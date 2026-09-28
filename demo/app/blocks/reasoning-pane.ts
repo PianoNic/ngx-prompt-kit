@@ -7,10 +7,9 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideLightbulb, lucideSearch, lucideTarget } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { PkChainOfThoughtImports } from 'ngx-prompt-kit/chain-of-thought';
@@ -27,7 +26,7 @@ The cycle is between \`refreshSession\` and \`verifyToken\`. Extracting the toke
     BlockPage,
     DocExample,
     HlmButton,
-    HlmIconImports,
+    NgIcon,
     PkChainOfThoughtImports,
     PkReasoningImports,
     PkThinkingBar,
@@ -63,7 +62,7 @@ The cycle is between \`refreshSession\` and \`verifyToken\`. Extracting the toke
             <pk-chain-of-thought class="max-w-xl">
               <pk-chain-of-thought-step>
                 <pk-chain-of-thought-trigger [leftIcon]="true">
-                  <ng-icon leftIcon hlm size="xs" name="lucideSearch" />
+                  <ng-icon leftIcon name="lucideSearch" class="text-[length:--spacing(3)]" />
                   Read the input prompt
                 </pk-chain-of-thought-trigger>
                 <pk-chain-of-thought-content>
@@ -75,7 +74,7 @@ The cycle is between \`refreshSession\` and \`verifyToken\`. Extracting the toke
 
               <pk-chain-of-thought-step>
                 <pk-chain-of-thought-trigger [leftIcon]="true">
-                  <ng-icon leftIcon hlm size="xs" name="lucideLightbulb" />
+                  <ng-icon leftIcon name="lucideLightbulb" class="text-[length:--spacing(3)]" />
                   Walk the AST
                 </pk-chain-of-thought-trigger>
                 <pk-chain-of-thought-content>
@@ -89,7 +88,7 @@ The cycle is between \`refreshSession\` and \`verifyToken\`. Extracting the toke
 
               <pk-chain-of-thought-step [last]="true">
                 <pk-chain-of-thought-trigger [leftIcon]="true">
-                  <ng-icon leftIcon hlm size="xs" name="lucideTarget" />
+                  <ng-icon leftIcon name="lucideTarget" class="text-[length:--spacing(3)]" />
                   Compose the answer
                 </pk-chain-of-thought-trigger>
                 <pk-chain-of-thought-content>
@@ -155,7 +154,7 @@ export class ReasoningPaneBlock {
   <pk-chain-of-thought>
     <pk-chain-of-thought-step>
       <pk-chain-of-thought-trigger [leftIcon]="true">
-        <ng-icon leftIcon hlm size="xs" name="lucideSearch" />
+        <ng-icon leftIcon name="lucideSearch" class="text-[length:--spacing(3)]" />
         Read the input prompt
       </pk-chain-of-thought-trigger>
       <pk-chain-of-thought-content>
@@ -165,7 +164,7 @@ export class ReasoningPaneBlock {
     <!-- ...more steps... -->
     <pk-chain-of-thought-step [last]="true">
       <pk-chain-of-thought-trigger [leftIcon]="true">
-        <ng-icon leftIcon hlm size="xs" name="lucideTarget" />
+        <ng-icon leftIcon name="lucideTarget" class="text-[length:--spacing(3)]" />
         Compose the answer
       </pk-chain-of-thought-trigger>
       <pk-chain-of-thought-content>

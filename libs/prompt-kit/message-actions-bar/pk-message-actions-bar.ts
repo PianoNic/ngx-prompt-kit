@@ -1,7 +1,7 @@
 // ngx-prompt-kit original — not part of ibelick/prompt-kit
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import { NgIcon } from '@ng-icons/core';
 import { HlmButton } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmTooltip } from '@spartan-ng/helm/tooltip';
 import { cn } from '../utils/cn';
 import type { MessageAction } from './pk-message-actions-bar-types';
@@ -9,7 +9,7 @@ import type { MessageAction } from './pk-message-actions-bar-types';
 @Component({
   selector: 'pk-message-actions-bar',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [HlmButton, HlmIconImports, HlmTooltip],
+  imports: [HlmButton, NgIcon, HlmTooltip],
   host: {
     '[class]': 'hostClass()',
   },
@@ -30,7 +30,7 @@ import type { MessageAction } from './pk-message-actions-bar-types';
         [class]="buttonClass(action)"
         (click)="actionPicked.emit(action)"
       >
-        <ng-icon hlm size="xs" [name]="action.icon" />
+        <ng-icon [name]="action.icon" class="text-[length:--spacing(3)]" />
       </button>
     }
   `,

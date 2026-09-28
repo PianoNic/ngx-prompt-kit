@@ -1,6 +1,6 @@
 import { HttpEventType, type HttpEvent } from '@angular/common/http';
 import { Subject, of, throwError } from 'rxjs';
-import { consumeSseFrames, readSseHttpEvents } from 'ngx-prompt-kit/streaming';
+import { consumeSseFrames, isAbortError, readSseHttpEvents } from 'ngx-prompt-kit/streaming';
 
 function collect(): { data: string[]; onData: (d: string) => void } {
   const data: string[] = [];
@@ -95,5 +95,30 @@ describe('readSseHttpEvents', () => {
         onData,
       ),
     ).rejects.toThrow('socket');
+  });
+
+  it('unsubscribes and rejects with an AbortError when the signal aborts', async () => {
+    const events$ = new Subject<HttpEvent<unknown>>();
+    const controller = new AbortController();
+    const { data, onData } = collect();
+    const done = readSseHttpEvents(events$, onData, controller.signal);
+    events$.next(progress('data: a\n\n'));
+    controller.abort();
+    events$.next(progress('data: a\n\ndata: b\n\n'));
+
+    const error = await done.catch((e: unknown) => e);
+    expect(isAbortError(error)).toBe(true);
+    expect(data).toEqual(['a']);
+    expect(events$.observed).toBe(false);
+  });
+
+  it('rejects straight away when the signal is already aborted', async () => {
+    const controller = new AbortController();
+    controller.abort();
+    const { onData } = collect();
+    const error = await readSseHttpEvents(new Subject(), onData, controller.signal).catch(
+      (e: unknown) => e,
+    );
+    expect(isAbortError(error)).toBe(true);
   });
 });

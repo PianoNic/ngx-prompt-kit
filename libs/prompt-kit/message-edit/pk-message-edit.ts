@@ -9,7 +9,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideEllipsis, lucidePencil } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
 import {
@@ -17,7 +17,6 @@ import {
   HlmDropdownMenuItem,
   HlmDropdownMenuTrigger,
 } from '@spartan-ng/helm/dropdown-menu';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmTextarea } from '@spartan-ng/helm/textarea';
 import { cn } from '../utils/cn';
 
@@ -34,7 +33,7 @@ export type MessageEditTrigger =
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     HlmButton,
-    HlmIconImports,
+    NgIcon,
     HlmTextarea,
     HlmDropdownMenu,
     HlmDropdownMenuItem,
@@ -79,7 +78,7 @@ export type MessageEditTrigger =
               aria-label="Edit message"
               class="bg-background border-border absolute -right-2 -top-2 rounded-full border opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-within:opacity-100"
             >
-              <ng-icon hlm size="xs" name="lucidePencil" />
+              <ng-icon name="lucidePencil" class="text-[length:--spacing(3)]" />
             </button>
           }
           @if (editable() && editTrigger() === 'menu-overlay') {
@@ -92,12 +91,12 @@ export type MessageEditTrigger =
               aria-label="Message actions"
               class="bg-background border-border absolute -right-2 -top-2 rounded-full border opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-within:opacity-100"
             >
-              <ng-icon hlm size="xs" name="lucideEllipsis" />
+              <ng-icon name="lucideEllipsis" class="text-[length:--spacing(3)]" />
             </button>
             <ng-template #menu>
               <hlm-dropdown-menu>
                 <button hlmDropdownMenuItem type="button" (triggered)="startEdit()">
-                  <ng-icon hlm size="xs" name="lucidePencil" />
+                  <ng-icon name="lucidePencil" class="text-[length:--spacing(3)]" />
                   Edit
                 </button>
               </hlm-dropdown-menu>
@@ -116,7 +115,7 @@ export type MessageEditTrigger =
               (click)="startEdit()"
               aria-label="Edit message"
             >
-              <ng-icon hlm size="xs" name="lucidePencil" />
+              <ng-icon name="lucidePencil" class="text-[length:--spacing(3)]" />
               Edit
             </button>
           </div>
@@ -131,7 +130,7 @@ export type MessageEditTrigger =
               (click)="startEdit()"
               aria-label="Edit message"
             >
-              <ng-icon hlm size="xs" name="lucidePencil" />
+              <ng-icon name="lucidePencil" class="text-[length:--spacing(3)]" />
               Edit
             </button>
           </div>
@@ -148,7 +147,7 @@ export type MessageEditTrigger =
               (click)="startEdit()"
               aria-label="Edit message"
             >
-              <ng-icon hlm size="xs" name="lucidePencil" />
+              <ng-icon name="lucidePencil" class="text-[length:--spacing(3)]" />
             </button>
           </div>
         }

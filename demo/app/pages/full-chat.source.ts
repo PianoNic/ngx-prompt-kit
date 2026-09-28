@@ -23,14 +23,17 @@ export const FULL_CHAT_HTML_SOURCE = `<hlm-tabs tab="preview" class="mx-auto fle
             aria-label="New conversation"
             (click)="newConversation()"
           >
-            <ng-icon hlm size="xs" name="lucidePlus" />
+            <ng-icon name="lucidePlus" class="text-[length:--spacing(3)]" />
           </button>
         </div>
         <div class="border-border border-b px-2 py-2">
           <div
             class="bg-muted/40 focus-within:ring-ring flex items-center gap-2 rounded-md px-2 focus-within:ring-2"
           >
-            <ng-icon hlm size="xs" name="lucideSearch" class="text-muted-foreground shrink-0" />
+            <ng-icon
+              name="lucideSearch"
+              class="text-[length:--spacing(3)] text-muted-foreground shrink-0"
+            />
             <input
               type="search"
               [(ngModel)]="searchQueryInput"
@@ -46,7 +49,7 @@ export const FULL_CHAT_HTML_SOURCE = `<hlm-tabs tab="preview" class="mx-auto fle
                 class="text-muted-foreground hover:text-foreground shrink-0"
                 (click)="clearSearch()"
               >
-                <ng-icon hlm size="xs" name="lucideX" />
+                <ng-icon name="lucideX" class="text-[length:--spacing(3)]" />
               </button>
             }
           </div>
@@ -85,20 +88,18 @@ export const FULL_CHAT_HTML_SOURCE = `<hlm-tabs tab="preview" class="mx-auto fle
               <span class="text-muted-foreground truncate text-xs">Pro plan</span>
             </div>
             <ng-icon
-              hlm
-              size="sm"
               name="lucideChevronsUpDown"
-              class="text-muted-foreground shrink-0"
+              class="text-[length:--spacing(4)] text-muted-foreground shrink-0"
             />
           </button>
           <ng-template #userMenu>
             <hlm-dropdown-menu class="min-w-[220px]">
               <button hlmDropdownMenuItem type="button" (triggered)="onMenu('account')">
-                <ng-icon hlm size="xs" name="lucideUserRound" />
+                <ng-icon name="lucideUserRound" class="text-[length:--spacing(3)]" />
                 Account
               </button>
               <button hlmDropdownMenuItem type="button" (triggered)="onMenu('settings')">
-                <ng-icon hlm size="xs" name="lucideSettings" />
+                <ng-icon name="lucideSettings" class="text-[length:--spacing(3)]" />
                 Settings
               </button>
               <hlm-dropdown-menu-separator />
@@ -108,7 +109,7 @@ export const FULL_CHAT_HTML_SOURCE = `<hlm-tabs tab="preview" class="mx-auto fle
                 type="button"
                 (triggered)="onMenu('signout')"
               >
-                <ng-icon hlm size="xs" name="lucideLogOut" />
+                <ng-icon name="lucideLogOut" class="text-[length:--spacing(3)]" />
                 Sign out
               </button>
             </hlm-dropdown-menu>
@@ -214,7 +215,7 @@ export const FULL_CHAT_HTML_SOURCE = `<hlm-tabs tab="preview" class="mx-auto fle
                     aria-label="Attach files"
                     (click)="addSampleAttachment()"
                   >
-                    <ng-icon hlm size="sm" name="lucidePaperclip" />
+                    <ng-icon name="lucidePaperclip" class="text-[length:--spacing(4)]" />
                   </button>
                 </pk-prompt-input-action>
                 <pk-prompt-input-action tooltip="Voice input">
@@ -225,7 +226,7 @@ export const FULL_CHAT_HTML_SOURCE = `<hlm-tabs tab="preview" class="mx-auto fle
                     type="button"
                     aria-label="Voice input"
                   >
-                    <ng-icon hlm size="sm" name="lucideMic" />
+                    <ng-icon name="lucideMic" class="text-[length:--spacing(4)]" />
                   </button>
                 </pk-prompt-input-action>
                 <pk-token-counter
@@ -245,7 +246,7 @@ export const FULL_CHAT_HTML_SOURCE = `<hlm-tabs tab="preview" class="mx-auto fle
                   [disabled]="!canSend()"
                   (click)="send()"
                 >
-                  <ng-icon hlm size="xs" name="lucideArrowUp" />
+                  <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
                 </button>
               </pk-prompt-input-action>
             </pk-prompt-input-actions>

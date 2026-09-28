@@ -17,16 +17,15 @@
  * keep the API signal-friendly.
  */
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronRight } from '@ng-icons/lucide';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { cn } from '../utils/cn';
 import { PkTextShimmer } from '../text-shimmer/pk-text-shimmer';
 
 @Component({
   selector: 'pk-thinking-bar',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [HlmIconImports, PkTextShimmer],
+  imports: [NgIcon, PkTextShimmer],
   providers: [provideIcons({ lucideChevronRight })],
   template: `
     <div [class]="computedClass()">
@@ -37,7 +36,10 @@ import { PkTextShimmer } from '../text-shimmer/pk-text-shimmer';
           class="flex items-center gap-1 text-sm transition-opacity hover:opacity-80"
         >
           <pk-text-shimmer class="font-medium" [text]="text()" />
-          <ng-icon hlm size="xs" name="lucideChevronRight" class="text-muted-foreground" />
+          <ng-icon
+            name="lucideChevronRight"
+            class="text-[length:--spacing(3)] text-muted-foreground"
+          />
         </button>
       } @else {
         <pk-text-shimmer class="cursor-default font-medium" [text]="text()" />

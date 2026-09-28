@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideMenu, lucideX } from '@ng-icons/lucide';
 import { BrnSheetContent, BrnSheetTrigger } from '@spartan-ng/brain/sheet';
 import { HlmButton } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { HlmSheet, HlmSheetContent } from '@spartan-ng/helm/sheet';
 import { SidebarNav } from './sidebar-nav';
 import { ThemeToggle } from './theme-toggle';
@@ -16,7 +15,7 @@ import { ThemeToggle } from './theme-toggle';
     RouterLink,
     RouterOutlet,
     HlmButton,
-    HlmIconImports,
+    NgIcon,
     HlmSheet,
     HlmSheetContent,
     BrnSheetTrigger,
@@ -40,7 +39,7 @@ import { ThemeToggle } from './theme-toggle';
             aria-label="Open navigation"
             class="md:hidden"
           >
-            <ng-icon hlm size="sm" name="lucideMenu" />
+            <ng-icon name="lucideMenu" class="text-[length:--spacing(4)]" />
           </button>
           <hlm-sheet-content
             *brnSheetContent="let ctx"
@@ -59,7 +58,7 @@ import { ThemeToggle } from './theme-toggle';
                 aria-label="Close navigation"
                 (click)="ctx.close()"
               >
-                <ng-icon hlm size="sm" name="lucideX" />
+                <ng-icon name="lucideX" class="text-[length:--spacing(4)]" />
               </button>
             </div>
             <div class="pt-2">

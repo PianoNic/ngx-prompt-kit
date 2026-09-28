@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCopy, lucideThumbsDown, lucideThumbsUp } from '@ng-icons/lucide';
 import { HlmMessageImports } from '@spartan-ng/helm/message';
 import { HlmButton } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
@@ -20,7 +19,7 @@ import { PkMessageImports } from 'ngx-prompt-kit/message';
     DocInstall,
     DocApi,
     HlmButton,
-    HlmIconImports,
+    NgIcon,
     PkMessageImports,
     HlmMessageImports,
     PkCodeBlockImports,
@@ -109,12 +108,12 @@ Want me to group by author next time?"
             <div hlmMessageFooter class="ml-11">
               <pk-message-action tooltip="Copy">
                 <button hlmBtn variant="ghost" size="icon-sm" type="button" aria-label="Copy">
-                  <ng-icon hlm size="xs" name="lucideCopy" />
+                  <ng-icon name="lucideCopy" class="text-[length:--spacing(3)]" />
                 </button>
               </pk-message-action>
               <pk-message-action tooltip="Good response">
                 <button hlmBtn variant="ghost" size="icon-sm" type="button" aria-label="Thumbs up">
-                  <ng-icon hlm size="xs" name="lucideThumbsUp" />
+                  <ng-icon name="lucideThumbsUp" class="text-[length:--spacing(3)]" />
                 </button>
               </pk-message-action>
               <pk-message-action tooltip="Bad response">
@@ -125,7 +124,7 @@ Want me to group by author next time?"
                   type="button"
                   aria-label="Thumbs down"
                 >
-                  <ng-icon hlm size="xs" name="lucideThumbsDown" />
+                  <ng-icon name="lucideThumbsDown" class="text-[length:--spacing(3)]" />
                 </button>
               </pk-message-action>
             </div>

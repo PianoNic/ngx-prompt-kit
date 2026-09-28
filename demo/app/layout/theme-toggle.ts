@@ -1,14 +1,13 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideMoon, lucideSun } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { ThemeService } from './theme.service';
 
 @Component({
   selector: 'app-theme-toggle',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [HlmButton, HlmIconImports],
+  imports: [HlmButton, NgIcon],
   providers: [provideIcons({ lucideSun, lucideMoon })],
   template: `
     <button
@@ -19,7 +18,10 @@ import { ThemeService } from './theme.service';
       [attr.aria-label]="label()"
       (click)="theme.toggle()"
     >
-      <ng-icon hlm size="sm" [name]="theme.theme() === 'dark' ? 'lucideSun' : 'lucideMoon'" />
+      <ng-icon
+        [name]="theme.theme() === 'dark' ? 'lucideSun' : 'lucideMoon'"
+        class="text-[length:--spacing(4)]"
+      />
     </button>
   `,
 })

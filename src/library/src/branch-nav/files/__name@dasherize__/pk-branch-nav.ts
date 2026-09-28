@@ -1,15 +1,14 @@
 // ngx-prompt-kit original — not part of ibelick/prompt-kit
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronLeft, lucideChevronRight } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { cn } from '../utils/cn';
 
 @Component({
   selector: 'pk-branch-nav',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [HlmButton, HlmIconImports],
+  imports: [HlmButton, NgIcon],
   providers: [provideIcons({ lucideChevronLeft, lucideChevronRight })],
   host: {
     '[class]': 'hostClass()',
@@ -28,7 +27,7 @@ import { cn } from '../utils/cn';
         (click)="prev()"
         aria-label="Previous branch"
       >
-        <ng-icon hlm size="xs" name="lucideChevronLeft" />
+        <ng-icon name="lucideChevronLeft" class="text-[length:--spacing(3)]" />
       </button>
       <span class="text-muted-foreground tabular-nums select-none text-xs">
         {{ label() }}
@@ -42,7 +41,7 @@ import { cn } from '../utils/cn';
         (click)="next()"
         aria-label="Next branch"
       >
-        <ng-icon hlm size="xs" name="lucideChevronRight" />
+        <ng-icon name="lucideChevronRight" class="text-[length:--spacing(3)]" />
       </button>
     }
   `,

@@ -8,9 +8,8 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronDown, lucideCircle, lucideCircleCheck } from '@ng-icons/lucide';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { cn } from '../utils/cn';
 
 export interface PkTodoItem {
@@ -29,7 +28,7 @@ export interface PkTodoItem {
 @Component({
   selector: 'pk-todo-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [HlmIconImports],
+  imports: [NgIcon],
   providers: [provideIcons({ lucideChevronDown, lucideCircle, lucideCircleCheck })],
   host: {
     '[class]': 'hostClass()',
@@ -42,8 +41,7 @@ export interface PkTodoItem {
       (click)="toggleOpen()"
     >
       <ng-icon
-        hlm
-        size="xs"
+        class="text-[length:--spacing(3)]"
         [name]="allDone() ? 'lucideCircleCheck' : 'lucideCircle'"
         [class.text-primary]="allDone()"
         [class.text-muted-foreground]="!allDone()"
@@ -52,10 +50,8 @@ export interface PkTodoItem {
         {{ doneCount() }} of {{ total() }} {{ title() }} complete
       </span>
       <ng-icon
-        hlm
-        size="xs"
         name="lucideChevronDown"
-        class="text-muted-foreground ml-auto transition-transform duration-200"
+        class="text-[length:--spacing(3)] text-muted-foreground ml-auto transition-transform duration-200"
         [class.rotate-180]="isOpen()"
       />
     </button>
@@ -71,9 +67,7 @@ export interface PkTodoItem {
               (click)="onItemClick(item)"
             >
               <ng-icon
-                hlm
-                size="xs"
-                class="mt-0.5 shrink-0"
+                class="text-[length:--spacing(3)] mt-0.5 shrink-0"
                 [name]="item.done ? 'lucideCircleCheck' : 'lucideCircle'"
                 [class.text-primary]="item.done"
                 [class.text-muted-foreground]="!item.done"
@@ -115,6 +109,7 @@ export class PkTodoList {
   /** Fires once when the list first reaches 100%. Useful for navigation / next-step triggers. */
   public readonly allCompleted = output<void>();
 
+  /** Manual header override; null = follow auto behavior. */
   private readonly manualOpen = signal<boolean | null>(null);
 
   protected readonly hostClass = computed(() =>
@@ -127,6 +122,7 @@ export class PkTodoList {
     () => this.total() > 0 && this.doneCount() === this.total(),
   );
 
+  /** Effective open state: manual override wins, otherwise collapse-when-done. */
   protected readonly isOpen = computed(() => {
     const manual = this.manualOpen();
     if (manual !== null) return manual;
@@ -134,6 +130,8 @@ export class PkTodoList {
   });
 
   constructor() {
+    // Emit (allCompleted) on the rising edge of allDone(). Effects fire after
+    // the first computed evaluation, so the initial-fully-done case is included.
     let prevAllDone = false;
     let firstRun = true;
     effect(() => {

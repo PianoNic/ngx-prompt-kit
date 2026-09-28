@@ -8,5 +8,6 @@ export const markdown = buildComponent({
     katex: '^0.16.11',
     '@types/katex': '^0.16.8',
     mermaid: '^11.4.0',
+    shiki: '^4.0.2',
   },
 });

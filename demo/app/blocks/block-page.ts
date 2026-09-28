@@ -1,13 +1,12 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowLeft } from '@ng-icons/lucide';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 
 @Component({
   selector: 'app-block-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, HlmIconImports],
+  imports: [RouterLink, NgIcon],
   providers: [provideIcons({ lucideArrowLeft })],
   template: `
     <div class="mx-auto flex max-w-4xl flex-col gap-6 px-6 py-10">
@@ -15,7 +14,7 @@ import { HlmIconImports } from '@spartan-ng/helm/icon';
         routerLink="/blocks"
         class="text-muted-foreground hover:text-foreground inline-flex w-fit items-center gap-1 text-xs"
       >
-        <ng-icon hlm size="xs" name="lucideArrowLeft" />
+        <ng-icon name="lucideArrowLeft" class="text-[length:--spacing(3)]" />
         All blocks
       </a>
       <header class="flex flex-col gap-2">

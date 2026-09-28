@@ -30,6 +30,9 @@
           "model-browser",
           "model-list",
           "model-picker",
+          "model-selector",
+          "composer",
+          "chat-turn",
           "prompt-input",
           "prompt-suggestion",
           "reasoning",
@@ -131,6 +134,18 @@
           {
             "value": "model-picker",
             "label": "model-picker"
+          },
+          {
+            "value": "model-selector",
+            "label": "model-selector"
+          },
+          {
+            "value": "composer",
+            "label": "composer"
+          },
+          {
+            "value": "chat-turn",
+            "label": "chat-turn"
           },
           {
             "value": "prompt-input",

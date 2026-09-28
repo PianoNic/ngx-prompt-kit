@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideRefreshCw } from '@ng-icons/lucide';
 import { HlmMessageImports } from '@spartan-ng/helm/message';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { PkMessageImports } from 'ngx-prompt-kit/message';
@@ -17,14 +16,7 @@ interface Variant {
 @Component({
   selector: 'app-block-regenerate-variants',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    BlockPage,
-    DocExample,
-    HlmIconImports,
-    PkMessageImports,
-    PkPromptSuggestion,
-    HlmMessageImports,
-  ],
+  imports: [BlockPage, DocExample, NgIcon, PkMessageImports, PkPromptSuggestion, HlmMessageImports],
   providers: [provideIcons({ lucideRefreshCw })],
   template: `
     <app-block-page
@@ -49,7 +41,7 @@ interface Variant {
                 <span
                   class="text-muted-foreground inline-flex items-center gap-1 text-[10px] font-medium uppercase tracking-wider"
                 >
-                  <ng-icon hlm size="xs" name="lucideRefreshCw" />
+                  <ng-icon name="lucideRefreshCw" class="text-[length:--spacing(3)]" />
                   Try a different tone
                 </span>
                 <div class="flex flex-wrap gap-2">

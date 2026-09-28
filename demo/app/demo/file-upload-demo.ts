@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowUp, lucidePaperclip, lucideUpload, lucideX } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
@@ -19,7 +18,7 @@ import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
     DocInstall,
     DocApi,
     HlmButton,
-    HlmIconImports,
+    NgIcon,
     PkFileUploadImports,
     PkPromptInputImports,
   ],
@@ -49,7 +48,7 @@ import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
                     (click)="$event.stopPropagation()"
                   >
                     <div class="flex min-w-0 items-center gap-2">
-                      <ng-icon hlm size="xs" name="lucidePaperclip" />
+                      <ng-icon name="lucidePaperclip" class="text-[length:--spacing(3)]" />
                       <span class="truncate">{{ f.name }}</span>
                     </div>
                     <button
@@ -58,7 +57,7 @@ import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
                       (click)="removeFile($index)"
                       [attr.aria-label]="'Remove ' + f.name"
                     >
-                      <ng-icon hlm size="xs" name="lucideX" />
+                      <ng-icon name="lucideX" class="text-[length:--spacing(3)]" />
                     </button>
                   </div>
                 }
@@ -78,7 +77,7 @@ import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
                   aria-label="Attach files"
                   (click)="fu.openPicker(); $event.stopPropagation()"
                 >
-                  <ng-icon hlm size="sm" name="lucidePaperclip" />
+                  <ng-icon name="lucidePaperclip" class="text-[length:--spacing(4)]" />
                 </button>
               </pk-prompt-input-action>
 
@@ -91,7 +90,7 @@ import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
                   (click)="onSubmit()"
                   [attr.aria-label]="isLoading() ? 'Stop' : 'Send'"
                 >
-                  <ng-icon hlm size="xs" name="lucideArrowUp" />
+                  <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
                 </button>
               </pk-prompt-input-action>
             </pk-prompt-input-actions>
@@ -103,7 +102,10 @@ import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
                 class="bg-background/90 border-border m-4 w-full max-w-md rounded-lg border p-8 shadow-lg"
               >
                 <div class="mb-4 flex justify-center">
-                  <ng-icon hlm size="lg" name="lucideUpload" class="text-muted-foreground" />
+                  <ng-icon
+                    name="lucideUpload"
+                    class="text-[length:--spacing(8)] text-muted-foreground"
+                  />
                 </div>
                 <h3 class="mb-2 text-center text-base font-medium">Drop files to upload</h3>
                 <p class="text-muted-foreground text-center text-sm">
@@ -206,7 +208,7 @@ export class FileUploadDemo {
           <div class="bg-secondary flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-sm">
             <span class="truncate">{{ f.name }}</span>
             <button (click)="removeFile($index)">
-              <ng-icon hlm size="xs" name="lucideX" />
+              <ng-icon name="lucideX" class="text-[length:--spacing(3)]" />
             </button>
           </div>
         }
@@ -219,12 +221,12 @@ export class FileUploadDemo {
       <pk-prompt-input-action tooltip="Attach files">
         <button hlmBtn variant="ghost" size="icon-sm"
                 (click)="fu.openPicker(); $event.stopPropagation()">
-          <ng-icon hlm size="sm" name="lucidePaperclip" />
+          <ng-icon name="lucidePaperclip" class="text-[length:--spacing(4)]" />
         </button>
       </pk-prompt-input-action>
       <pk-prompt-input-action tooltip="Send">
         <button hlmBtn size="icon-sm" (click)="onSubmit()">
-          <ng-icon hlm size="xs" name="lucideArrowUp" />
+          <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
         </button>
       </pk-prompt-input-action>
     </pk-prompt-input-actions>
@@ -233,7 +235,7 @@ export class FileUploadDemo {
   <pk-file-upload-content>
     <div class="flex min-h-[200px] w-full items-center justify-center backdrop-blur-sm">
       <div class="bg-background/90 border-border m-4 max-w-md rounded-lg border p-8 shadow-lg text-center">
-        <ng-icon hlm size="lg" name="lucideUpload" class="text-muted-foreground" />
+        <ng-icon name="lucideUpload" class="text-[length:--spacing(8)] text-muted-foreground" />
         <h3 class="text-base font-medium">Drop files to upload</h3>
         <p class="text-muted-foreground text-sm">Release to add files to your message</p>
       </div>

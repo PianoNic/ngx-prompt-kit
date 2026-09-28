@@ -8,9 +8,8 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideFileSearch, lucideHammer, lucideRefreshCw } from '@ng-icons/lucide';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { PkChainOfThoughtImports } from 'ngx-prompt-kit/chain-of-thought';
@@ -30,7 +29,7 @@ interface PhaseEntry {
   imports: [
     BlockPage,
     DocExample,
-    HlmIconImports,
+    NgIcon,
     PkChainOfThoughtImports,
     PkStreamControlsImports,
     PkThinkingBar,
@@ -59,7 +58,7 @@ interface PhaseEntry {
               @for (p of visiblePhases(); track p.trigger; let isLast = $last) {
                 <pk-chain-of-thought-step [last]="isLast && state() !== 'streaming'">
                   <pk-chain-of-thought-trigger [leftIcon]="true">
-                    <ng-icon leftIcon hlm size="xs" [name]="p.iconName" />
+                    <ng-icon leftIcon [name]="p.iconName" class="text-[length:--spacing(3)]" />
                     {{ p.trigger }}
                   </pk-chain-of-thought-trigger>
                   <pk-chain-of-thought-content>
@@ -167,7 +166,7 @@ export class AgentTaskBlock {
   @for (p of visiblePhases(); track p.trigger; let isLast = $last) {
     <pk-chain-of-thought-step [last]="isLast && state() !== 'streaming'">
       <pk-chain-of-thought-trigger [leftIcon]="true">
-        <ng-icon leftIcon hlm size="xs" [name]="p.iconName" />
+        <ng-icon leftIcon [name]="p.iconName" class="text-[length:--spacing(3)]" />
         {{ p.trigger }}
       </pk-chain-of-thought-trigger>
       <pk-chain-of-thought-content>

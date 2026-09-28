@@ -8,16 +8,15 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCheck, lucideSearch } from '@ng-icons/lucide';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { cn } from '../utils/cn';
 import type { Model } from './pk-model-list-types';
 
 @Component({
   selector: 'pk-model-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [HlmIconImports],
+  imports: [NgIcon],
   providers: [provideIcons({ lucideCheck, lucideSearch })],
   host: {
     '[class]': 'hostClass()',
@@ -25,7 +24,10 @@ import type { Model } from './pk-model-list-types';
   template: `
     @if (showSearch()) {
       <div class="border-border flex items-center gap-2 border-b px-3 py-2">
-        <ng-icon hlm size="xs" name="lucideSearch" class="text-muted-foreground shrink-0" />
+        <ng-icon
+          name="lucideSearch"
+          class="text-[length:--spacing(3)] text-muted-foreground shrink-0"
+        />
         <input
           type="text"
           [value]="query()"
@@ -64,7 +66,7 @@ import type { Model } from './pk-model-list-types';
           }
           <span class="ml-auto"></span>
           @if (m.id === selectedId()) {
-            <ng-icon hlm size="xs" name="lucideCheck" class="text-primary shrink-0" />
+            <ng-icon name="lucideCheck" class="text-[length:--spacing(3)] text-primary shrink-0" />
           }
         </button>
       }

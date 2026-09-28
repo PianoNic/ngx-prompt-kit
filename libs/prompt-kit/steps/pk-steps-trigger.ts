@@ -1,14 +1,13 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronDown } from '@ng-icons/lucide';
-import { HlmIconImports } from '@spartan-ng/helm/icon';
 import { cn } from '../utils/cn';
 import { STEPS_STATE } from './steps.state';
 
 @Component({
   selector: 'pk-steps-trigger',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [HlmIconImports],
+  imports: [NgIcon],
   providers: [provideIcons({ lucideChevronDown })],
   template: `
     <button
@@ -25,10 +24,8 @@ import { STEPS_STATE } from './steps.state';
             </span>
             @if (swapIconOnHover()) {
               <ng-icon
-                hlm
-                size="xs"
                 name="lucideChevronDown"
-                class="absolute opacity-0 transition-opacity group-hover:opacity-100 group-data-[state=open]:rotate-180"
+                class="text-[length:--spacing(3)] absolute opacity-0 transition-opacity group-hover:opacity-100 group-data-[state=open]:rotate-180"
               />
             }
           </span>
@@ -37,10 +34,8 @@ import { STEPS_STATE } from './steps.state';
       </div>
       @if (!hasLeftIcon()) {
         <ng-icon
-          hlm
-          size="xs"
           name="lucideChevronDown"
-          class="transition-transform group-data-[state=open]:rotate-180"
+          class="text-[length:--spacing(3)] transition-transform group-data-[state=open]:rotate-180"
         />
       }
     </button>

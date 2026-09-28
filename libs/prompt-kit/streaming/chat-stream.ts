@@ -36,7 +36,8 @@ export interface ChatStreamHandlers {
  * `adapt` that maps each raw SSE `data` string to a {@link ChatStreamFrame}, so
  * the helper stays independent of your backend's payload shape/discriminator.
  *
- * Rejects if the stream emits an `error` frame or ends without a `done`.
+ * Rejects if the stream emits an `error` frame or ends without a `done`, and
+ * with an `AbortError` (see {@link isAbortError}) when `signal` is aborted.
  *
  * ```ts
  * const result = await readChatStream<SendResult>(events$, (data) => {
@@ -51,36 +52,41 @@ export function readChatStream<TResult>(
   events$: Observable<HttpEvent<unknown>>,
   adapt: (data: string) => ChatStreamFrame<TResult> | null,
   handlers: ChatStreamHandlers = {},
+  signal?: AbortSignal,
 ): Promise<TResult> {
   let result: TResult | undefined;
   let failed: string | undefined;
   let gotResult = false;
 
-  return readSseHttpEvents(events$, (data) => {
-    const frame = adapt(data);
-    if (!frame) return;
-    switch (frame.kind) {
-      case 'token':
-        if (frame.text) handlers.onToken?.(frame.text);
-        break;
-      case 'reasoning':
-        if (frame.text) handlers.onReasoning?.(frame.text);
-        break;
-      case 'tool-call':
-        if (frame.name) handlers.onToolCall?.(frame.name, frame.input ?? '');
-        break;
-      case 'tool-result':
-        if (frame.name) handlers.onToolResult?.(frame.name, frame.output ?? '');
-        break;
-      case 'done':
-        result = frame.result;
-        gotResult = true;
-        break;
-      case 'error':
-        failed = frame.error ?? 'The stream failed.';
-        break;
-    }
-  }).then(() => {
+  return readSseHttpEvents(
+    events$,
+    (data) => {
+      const frame = adapt(data);
+      if (!frame) return;
+      switch (frame.kind) {
+        case 'token':
+          if (frame.text) handlers.onToken?.(frame.text);
+          break;
+        case 'reasoning':
+          if (frame.text) handlers.onReasoning?.(frame.text);
+          break;
+        case 'tool-call':
+          if (frame.name) handlers.onToolCall?.(frame.name, frame.input ?? '');
+          break;
+        case 'tool-result':
+          if (frame.name) handlers.onToolResult?.(frame.name, frame.output ?? '');
+          break;
+        case 'done':
+          result = frame.result;
+          gotResult = true;
+          break;
+        case 'error':
+          failed = frame.error ?? 'The stream failed.';
+          break;
+      }
+    },
+    signal,
+  ).then(() => {
     if (failed !== undefined) throw new Error(failed);
     if (!gotResult) throw new Error('The stream ended unexpectedly.');
     return result as TResult;
