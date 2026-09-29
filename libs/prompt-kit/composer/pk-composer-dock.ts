@@ -29,7 +29,8 @@ const R = 12;
  * - `docked`: pinned to the bottom of a content panel (the host is absolutely positioned, so put
  *   it in a `relative` panel that clips). A band in the page colour rises from the panel's bottom
  *   edge with a raised notch around the composer, so the composer reads as sitting in the page
- *   rather than floating over the thread. The notch grows with the composer; the sides don't.
+ *   rather than floating over the thread. The notch grows with the composer; the sides keep the
+ *   height they have around a resting one.
  * - `card`: a bordered, softly shadowed card, for a composer centred in an empty chat.
  * - `plain`: no chrome, for a composer laid straight on the page, as on phones.
  *
@@ -78,6 +79,8 @@ export class PkComposerDock {
   protected readonly R = R;
   protected readonly width = signal(0);
   private readonly contentHeight = signal(0);
+  /** The composer's smallest height so far: one line, no attachments. The sides are sized to it. */
+  private readonly restingHeight = signal(Infinity);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly content = viewChild.required<ElementRef<HTMLElement>>('content');
 
@@ -110,7 +113,9 @@ export class PkComposerDock {
     // bottom so the band's drop shadow never shows at the panel's edges.
     const left = R + (w - notch) / 2;
     const right = left + notch;
-    const side = Math.max(2 * R, h - SIDE_HEIGHT - R);
+    // The sides keep the height they have around a resting composer; only the notch grows with it.
+    const resting = Math.min(this.restingHeight(), this.contentHeight()) + R;
+    const side = h - Math.min(SIDE_HEIGHT + R, resting - 2 * R);
     const edge = w + 2 * R;
     return [
       `M0 ${side - R} L${R} ${side - R} Q${R} ${side} ${2 * R} ${side}`,
@@ -129,7 +134,9 @@ export class PkComposerDock {
     afterNextRender(() => {
       const observer = new ResizeObserver(() => {
         this.width.set(this.host.nativeElement.clientWidth);
-        this.contentHeight.set(this.content().nativeElement.offsetHeight);
+        const height = this.content().nativeElement.offsetHeight;
+        this.contentHeight.set(height);
+        if (height > 0) this.restingHeight.update((resting) => Math.min(resting, height));
         this.occupied.emit(this.variant() === 'docked' ? this.contentHeight() : 0);
       });
       observer.observe(this.host.nativeElement);
