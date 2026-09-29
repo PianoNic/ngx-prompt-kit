@@ -17,17 +17,19 @@ jobs:
         with:
           ref: ${{ github.event.release.tag_name }}
 
-      - name: Verify tag matches the library version
+      # The release tag is the version. Release Drafter picks it from the PR labels, so
+      # nobody bumps package.json by hand; it is stamped here for the build only.
+      - name: Set library version from the release tag
         run: |
           TAG="${{ github.event.release.tag_name }}"
           VERSION="${TAG#v}"
-          CURRENT=$(node -p "require('./src/library/package.json').version")
-          if [ "$CURRENT" != "$VERSION" ]; then
-            echo "::error::Tag $TAG expects version $VERSION but src/library/package.json is $CURRENT."
-            echo "Bump the version in a pull request before tagging the release."
+          if ! printf '%s' "$VERSION" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$'; then
+            echo "::error::Release tag '$TAG' is not a semantic version"
             exit 1
           fi
-          echo "Version $VERSION matches the tag."
+          npm version "$VERSION" --no-git-tag-version --allow-same-version
+          echo "Publishing $VERSION"
+        working-directory: src/library
 
       - uses: oven-sh/setup-bun@v2
         with:
