@@ -36,6 +36,9 @@ const R = 12;
  * A docked band replaces the panel's bottom corners with its own curves, so square them off, e.g.
  * `has-[pk-composer-dock[data-variant=docked]]:rounded-b-none` on the panel.
  *
+ * The band is drawn in `--pk-composer-dock-fill`, falling back to `--background`; set it to the
+ * colour of the page around the panel when that differs, e.g. a sidebar layout's `--sidebar`.
+ *
  * `occupied` reports how many px of the panel the docked band covers, so the thread can pad its
  * bottom and keep the last message clear of it.
  */
@@ -50,7 +53,7 @@ const R = 12;
     @if (variant() === 'docked' && width() > 0) {
       <svg
         aria-hidden="true"
-        class="fill-background pointer-events-none absolute -start-3 -bottom-3 block drop-shadow-[0_0_5px_rgb(10_10_10/0.2)] dark:drop-shadow-[0_0_5px_rgb(0_0_0/0.8)]"
+        class="pointer-events-none fill-[var(--pk-composer-dock-fill,var(--background))] absolute -start-3 -bottom-3 block drop-shadow-[0_0_5px_rgb(10_10_10/0.2)] dark:drop-shadow-[0_0_5px_rgb(0_0_0/0.8)]"
         [attr.width]="width() + 2 * R"
         [attr.height]="bandHeight()"
         [attr.viewBox]="'0 0 ' + (width() + 2 * R) + ' ' + bandHeight()"
