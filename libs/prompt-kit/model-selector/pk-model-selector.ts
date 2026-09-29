@@ -28,9 +28,8 @@ import {
   lucideStar,
   lucideX,
 } from '@ng-icons/lucide';
-import { BrnSheetContent } from '@spartan-ng/brain/sheet';
 import { HlmButton } from '@spartan-ng/helm/button';
-import { HlmSheet, HlmSheetContent, HlmSheetTitle } from '@spartan-ng/helm/sheet';
+import { HlmSheet, HlmSheetContent, HlmSheetPortal, HlmSheetTitle } from '@spartan-ng/helm/sheet';
 import { cn } from '../utils/cn';
 import {
   highlightSegments,
@@ -94,7 +93,7 @@ let nextId = 0;
     HlmSheet,
     HlmSheetContent,
     HlmSheetTitle,
-    BrnSheetContent,
+    HlmSheetPortal,
   ],
   providers: [provideIcons({ lucideCheck, lucideChevronDown, lucideSearch, lucideStar, lucideX })],
   host: {
@@ -153,7 +152,7 @@ let nextId = 0;
 
     <hlm-sheet #sheet side="bottom" autoFocus="dialog" (closed)="onSheetClosed()">
       <hlm-sheet-content
-        *brnSheetContent="let ctx"
+        *hlmSheetPortal="let ctx"
         [showCloseButton]="false"
         class="gap-0 rounded-t-[22px] border-0 p-0 data-[side=bottom]:h-[min(680px,88dvh)]"
       >
