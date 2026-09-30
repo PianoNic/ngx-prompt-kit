@@ -33,7 +33,6 @@ import { HlmSheet, HlmSheetContent, HlmSheetPortal, HlmSheetTitle } from '@spart
 import { cn } from '../utils/cn';
 import {
   highlightSegments,
-  modelMatches,
   type HighlightSegment,
   type PriceTier,
   type SelectorModel,
@@ -49,6 +48,9 @@ import {
   host: { class: 'flex w-full items-center justify-between gap-3' },
 })
 export class PkModelSelectorFooter {}
+
+/** Most rows a search shows; past this the query needs narrowing, and rendering more only lags. */
+const MAX_SEARCH_RESULTS = 60;
 
 /** Rail key for the curated sections entry; maker keys are the maker names. */
 const SECTIONS_VIEW = '\u0000sections';
@@ -360,7 +362,7 @@ let nextId = 0;
                   }
                 </div>
               }
-              @for (o of g.options; track o.id) {
+              @for (o of g.options; track o.model.id) {
                 <div
                   role="option"
                   [id]="o.id"
@@ -564,6 +566,18 @@ export class PkModelSelector {
     return [...seen.values()];
   });
 
+  /** Each model with its name and its other searchable text, lowercased once rather than per keystroke. */
+  private readonly searchIndex = computed(() =>
+    this.models().map(
+      (m) =>
+        [
+          m,
+          m.name.toLowerCase(),
+          [m.maker, m.description ?? '', ...(m.capabilities ?? [])].join(' ').toLowerCase(),
+        ] as const,
+    ),
+  );
+
   protected readonly hasSections = computed(() => this.sections().length > 0);
   protected readonly searching = computed(() => this.query().trim().length > 0);
 
@@ -592,9 +606,17 @@ export class PkModelSelector {
     });
 
     if (q) {
+      // Models whose name matches come before those matched only by their description, and the
+      // list stops at MAX_SEARCH_RESULTS: a one-letter query matches nearly everything.
+      const needle = q.toLowerCase();
+      const byName: SelectorModel[] = [];
+      const byText: SelectorModel[] = [];
+      for (const [model, name, text] of this.searchIndex()) {
+        if (name.includes(needle)) byName.push(model);
+        else if (text.includes(needle)) byText.push(model);
+      }
       const byMaker = new Map<string, SelectorModel[]>();
-      for (const m of this.models()) {
-        if (!modelMatches(m, q)) continue;
+      for (const m of [...byName, ...byText].slice(0, MAX_SEARCH_RESULTS)) {
         const list = byMaker.get(m.maker) ?? [];
         list.push(m);
         byMaker.set(m.maker, list);
