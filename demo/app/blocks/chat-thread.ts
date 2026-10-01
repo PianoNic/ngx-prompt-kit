@@ -1,11 +1,14 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideChevronDown } from '@ng-icons/lucide';
 import { HlmMessageImports } from '@spartan-ng/helm/message';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { PkChatContainerImports } from 'ngx-prompt-kit/chat-container';
-import { PkMessageImports } from 'ngx-prompt-kit/message';
-import { PkScrollButton } from 'ngx-prompt-kit/scroll-button';
+import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
+import { HlmBubbleImports } from '@spartan-ng/helm/bubble';
+import { PkMarkdown } from 'ngx-prompt-kit/markdown';
 
 interface Turn {
   id: number;
@@ -21,14 +24,17 @@ interface Turn {
     DocExample,
     HlmButton,
     PkChatContainerImports,
-    PkMessageImports,
-    PkScrollButton,
+    HlmAvatarImports,
+    HlmBubbleImports,
+    PkMarkdown,
+    NgIcon,
     HlmMessageImports,
   ],
+  providers: [provideIcons({ lucideChevronDown })],
   template: `
     <app-block-page
       title="Scrollable chat thread"
-      description="Full back-and-forth thread inside a chat-container. Auto-sticks to the bottom on new turns; scroll up and the floating scroll-button takes you back."
+      description="Full back-and-forth thread inside a chat-container. Auto-sticks to the bottom on new turns; scroll up and a floating spartan button (reading the container's isAtBottom()) takes you back."
     >
       <app-doc-example title="Auto-stick + back-to-bottom button" [code]="code">
         <div class="flex w-full max-w-2xl flex-col gap-3">
@@ -38,27 +44,49 @@ interface Turn {
             </button>
           </div>
           <div class="border-border h-[420px] rounded-lg border">
-            <pk-chat-container-root class="relative h-full p-4">
+            <pk-chat-container-root #thread class="relative h-full p-4">
               <pk-chat-container-content class="gap-4">
                 @for (t of turns(); track t.id) {
                   @if (t.role === 'user') {
                     <div hlmMessage align="end">
-                      <pk-message-content
-                        class="bg-primary text-primary-foreground"
-                        [content]="t.text"
-                      />
+                      <div hlmMessageContent>
+                        <div hlmBubble>
+                          <div hlmBubbleContent>{{ t.text }}</div>
+                        </div>
+                      </div>
                     </div>
                   } @else {
                     <div hlmMessage>
-                      <pk-message-avatar src="" alt="Assistant" fallback="AI" />
-                      <pk-message-content [markdown]="true" [content]="t.text" />
+                      <div hlmMessageAvatar>
+                        <hlm-avatar>
+                          <span hlmAvatarFallback>AI</span>
+                        </hlm-avatar>
+                      </div>
+                      <div hlmMessageContent>
+                        <div hlmBubble variant="secondary">
+                          <div hlmBubbleContent class="prose dark:prose-invert">
+                            <pk-markdown [content]="t.text" />
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   }
                 }
               </pk-chat-container-content>
               <pk-chat-container-scroll-anchor />
               <div class="sticky bottom-2 ml-auto w-fit pr-1">
-                <pk-scroll-button />
+                <button
+                  hlmBtn
+                  variant="outline"
+                  size="icon"
+                  type="button"
+                  aria-label="Scroll to bottom"
+                  class="size-10 rounded-full transition-all duration-150 ease-out data-[hidden=true]:pointer-events-none data-[hidden=true]:translate-y-4 data-[hidden=true]:scale-95 data-[hidden=true]:opacity-0"
+                  [attr.data-hidden]="thread.isAtBottom()"
+                  (click)="thread.scrollToBottom()"
+                >
+                  <ng-icon name="lucideChevronDown" />
+                </button>
               </div>
             </pk-chat-container-root>
           </div>
@@ -96,27 +124,49 @@ export class ChatThreadBlock {
     this.turns.update((list) => [...list, { id, role, text }]);
   }
 
-  protected readonly code = `<pk-chat-container-root class="relative h-full p-4">
+  protected readonly code = `<pk-chat-container-root #thread class="relative h-full p-4">
   <pk-chat-container-content class="gap-4">
     @for (t of turns(); track t.id) {
       @if (t.role === 'user') {
         <div hlmMessage align="end">
-          <pk-message-content
-            class="bg-primary text-primary-foreground"
-            [content]="t.text"
-          />
+          <div hlmMessageContent>
+            <div hlmBubble>
+              <div hlmBubbleContent>{{ t.text }}</div>
+            </div>
+          </div>
         </div>
       } @else {
         <div hlmMessage>
-          <pk-message-avatar src="" alt="Assistant" fallback="AI" />
-          <pk-message-content [markdown]="true" [content]="t.text" />
+          <div hlmMessageAvatar>
+            <hlm-avatar>
+              <span hlmAvatarFallback>AI</span>
+            </hlm-avatar>
+          </div>
+          <div hlmMessageContent>
+            <div hlmBubble variant="secondary">
+              <div hlmBubbleContent class="prose dark:prose-invert">
+                <pk-markdown [content]="t.text" />
+              </div>
+            </div>
+          </div>
         </div>
       }
     }
   </pk-chat-container-content>
   <pk-chat-container-scroll-anchor />
   <div class="sticky bottom-2 ml-auto w-fit pr-1">
-    <pk-scroll-button />
+    <button
+      hlmBtn
+      variant="outline"
+      size="icon"
+      type="button"
+      aria-label="Scroll to bottom"
+      class="size-10 rounded-full transition-all duration-150 ease-out data-[hidden=true]:pointer-events-none data-[hidden=true]:translate-y-4 data-[hidden=true]:scale-95 data-[hidden=true]:opacity-0"
+      [attr.data-hidden]="thread.isAtBottom()"
+      (click)="thread.scrollToBottom()"
+    >
+      <ng-icon name="lucideChevronDown" />
+    </button>
   </div>
 </pk-chat-container-root>
 

@@ -1,21 +1,16 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronDown, lucideCircle } from '@ng-icons/lucide';
+import { BrnCollapsibleTrigger } from '@spartan-ng/brain/collapsible';
 import { cn } from '../utils/cn';
-import { CHAIN_OF_THOUGHT_STEP_STATE } from './chain-of-thought.state';
 
 @Component({
   selector: 'pk-chain-of-thought-trigger',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgIcon],
+  imports: [BrnCollapsibleTrigger, NgIcon],
   providers: [provideIcons({ lucideChevronDown, lucideCircle })],
   template: `
-    <button
-      type="button"
-      [class]="computedClass()"
-      [attr.data-state]="state.isOpen() ? 'open' : 'closed'"
-      (click)="state.toggle()"
-    >
+    <button brnCollapsibleTrigger [class]="computedClass()">
       <div class="flex items-center gap-2">
         @if (leftIcon()) {
           <span class="relative inline-flex size-4 items-center justify-center">
@@ -52,8 +47,6 @@ export class PkChainOfThoughtTrigger {
   public readonly leftIcon = input<boolean>(false);
   public readonly swapIconOnHover = input<boolean>(true);
   public readonly class = input<string>('');
-
-  protected readonly state = inject(CHAIN_OF_THOUGHT_STEP_STATE);
 
   protected readonly computedClass = computed(() =>
     cn(

@@ -51,7 +51,7 @@ For most teams, 30 is a comfortable ceiling.`;
     <app-doc-page
       title="Chat Turn"
       [original]="true"
-      description="The two halves of a conversation: pk-user-turn is a soft right-aligned bubble that keeps line breaks, and pk-assistant-turn shows which model answered, the reply, and a row with a copy button, extra actions and details such as cost."
+      description="The two halves of a conversation: pk-user-turn is a right-aligned spartan hlm-bubble that keeps line breaks, and pk-assistant-turn shows which model answered, the reply, and a row with a copy button, extra actions and details such as cost."
     >
       <app-doc-example
         title="Conversation"

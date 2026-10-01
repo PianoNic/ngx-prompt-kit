@@ -77,7 +77,7 @@ export const BLOCKS: readonly BlockMeta[] = [
   {
     slug: 'voice-input',
     title: 'Voice input',
-    description: 'Mic button toggles recording; text-shimmer overlays during transcription.',
+    description: 'Mic button toggles recording; a spartan shimmer overlays during transcription.',
   },
   {
     slug: 'code-review',
@@ -87,7 +87,7 @@ export const BLOCKS: readonly BlockMeta[] = [
   {
     slug: 'setup-tour',
     title: 'Onboarding tour',
-    description: 'First-run hero plus a setup checklist driven by chat-empty + steps.',
+    description: 'First-run hero plus a setup checklist driven by spartan empty + steps.',
   },
   {
     slug: 'agent-task',
@@ -97,7 +97,7 @@ export const BLOCKS: readonly BlockMeta[] = [
   {
     slug: 'notification-stack',
     title: 'Notification stack',
-    description: 'Toast centre composed of dismissible system-message rows of mixed variants.',
+    description: 'Toast centre composed of dismissible spartan alert rows of mixed variants.',
   },
   {
     slug: 'markdown-showcase',

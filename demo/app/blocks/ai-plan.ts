@@ -8,10 +8,12 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideInfo } from '@ng-icons/lucide';
+import { HlmAlertImports } from '@spartan-ng/helm/alert';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
-import { PkSystemMessage } from 'ngx-prompt-kit/system-message';
 import { PkThinkingBar } from 'ngx-prompt-kit/thinking-bar';
 import { PkTodoListImports, type PkTodoItem } from 'ngx-prompt-kit/todo-list';
 
@@ -30,7 +32,16 @@ const PLAN: PlannedTodo[] = [
 @Component({
   selector: 'app-block-ai-plan',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [BlockPage, DocExample, HlmButton, PkSystemMessage, PkThinkingBar, PkTodoListImports],
+  imports: [
+    BlockPage,
+    DocExample,
+    HlmAlertImports,
+    HlmButton,
+    NgIcon,
+    PkThinkingBar,
+    PkTodoListImports,
+  ],
+  providers: [provideIcons({ lucideInfo })],
   template: `
     <app-block-page
       title="AI-driven plan"
@@ -48,11 +59,10 @@ const PLAN: PlannedTodo[] = [
           }
 
           @if (state() === 'done') {
-            <pk-system-message
-              text="Plan complete. Update posted."
-              variant="action"
-              [fill]="false"
-            />
+            <div hlmAlert>
+              <ng-icon name="lucideInfo" />
+              <p hlmAlertDescription>Plan complete. Update posted.</p>
+            </div>
           }
 
           @if (items().length > 0) {

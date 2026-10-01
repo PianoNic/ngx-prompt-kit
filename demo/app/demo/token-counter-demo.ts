@@ -5,7 +5,8 @@ import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
-import { PkMessageImports } from 'ngx-prompt-kit/message';
+import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
+import { HlmBubbleImports } from '@spartan-ng/helm/bubble';
 import { PkTokenCounterImports } from 'ngx-prompt-kit/token-counter';
 
 @Component({
@@ -17,7 +18,8 @@ import { PkTokenCounterImports } from 'ngx-prompt-kit/token-counter';
     DocInstall,
     DocApi,
     HlmTextarea,
-    PkMessageImports,
+    HlmAvatarImports,
+    HlmBubbleImports,
     PkTokenCounterImports,
     HlmMessageImports,
   ],
@@ -25,7 +27,7 @@ import { PkTokenCounterImports } from 'ngx-prompt-kit/token-counter';
     <app-doc-page
       title="Token Counter"
       [original]="true"
-      description="Inline character / token counter for a prompt input. Six display modes — compact, detailed, progress, remaining, hidden, footer — and a four-tier threshold inspired by IDE-style token meters."
+      description="Inline character / token counter for a prompt input. Six display modes — compact, detailed, progress, remaining, hidden, footer — and a four-tier threshold inspired by IDE-style token meters. The progress mode is an hlm-progress bar."
     >
       <app-doc-example
         title="Compact, no limit"
@@ -162,10 +164,19 @@ import { PkTokenCounterImports } from 'ngx-prompt-kit/token-counter';
       >
         <div class="flex w-full flex-col gap-1">
           <div hlmMessage>
-            <pk-message-avatar src="" alt="Assistant" fallback="AI" />
-            <pk-message-content
-              content="Refactor complete — the auth middleware now delegates to a SessionService, and the integration tests cover both branches."
-            />
+            <div hlmMessageAvatar>
+              <hlm-avatar>
+                <span hlmAvatarFallback>AI</span>
+              </hlm-avatar>
+            </div>
+            <div hlmMessageContent>
+              <div hlmBubble variant="secondary">
+                <div hlmBubbleContent>
+                  Refactor complete — the auth middleware now delegates to a SessionService, and the
+                  integration tests cover both branches.
+                </div>
+              </div>
+            </div>
           </div>
           <div class="ml-11 flex items-center">
             <span class="text-muted-foreground text-[10px]">Response</span>

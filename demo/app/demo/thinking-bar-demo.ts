@@ -12,7 +12,7 @@ import { PkThinkingBar } from 'ngx-prompt-kit/thinking-bar';
   template: `
     <app-doc-page
       title="Thinking Bar"
-      description="A compact 'still working' indicator — combine the shimmer label with optional click-to-expand or stop affordances."
+      description="A compact 'still working' indicator — combine a label in spartan's shimmer utility with optional click-to-expand or stop affordances."
     >
       <app-doc-example
         title="Static label"

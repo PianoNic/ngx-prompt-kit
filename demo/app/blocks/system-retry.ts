@@ -1,50 +1,72 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideCircleAlert, lucideInfo } from '@ng-icons/lucide';
+import { HlmAlertImports } from '@spartan-ng/helm/alert';
+import { HlmButton } from '@spartan-ng/helm/button';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { PkFeedbackBar } from 'ngx-prompt-kit/feedback-bar';
 import { PkStreamControlsImports } from 'ngx-prompt-kit/stream-controls';
-import { PkSystemMessage } from 'ngx-prompt-kit/system-message';
 
 type Phase = 'error' | 'recovering' | 'recovered';
 
 @Component({
   selector: 'app-block-system-retry',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [BlockPage, DocExample, PkFeedbackBar, PkStreamControlsImports, PkSystemMessage],
+  imports: [
+    BlockPage,
+    DocExample,
+    HlmAlertImports,
+    HlmButton,
+    NgIcon,
+    PkFeedbackBar,
+    PkStreamControlsImports,
+  ],
+  providers: [provideIcons({ lucideCircleAlert, lucideInfo })],
   template: `
     <app-block-page
       title="System notice + retry"
-      description="The error-and-recover lane. A failed stream surfaces a system-message, stream-controls switches to Try again, and once we recover, a feedback-bar prompts for a rating."
+      description="The error-and-recover lane. A failed stream surfaces a spartan alert, stream-controls switches to Try again, and once we recover, a feedback-bar prompts for a rating."
     >
       <app-doc-example title="Error → retry → feedback" [code]="code">
         <div class="flex w-full max-w-xl flex-col gap-4">
           @switch (phase()) {
             @case ('error') {
-              <pk-system-message
-                text="Stream failed: upstream timeout after 30s."
-                variant="error"
-                [fill]="true"
-                ctaLabel="Details"
-                (ctaClicked)="lastEvent.set('details requested')"
-              />
+              <div hlmAlert variant="destructive">
+                <ng-icon name="lucideCircleAlert" />
+                <p hlmAlertDescription>Stream failed: upstream timeout after 30s.</p>
+                <div hlmAlertAction>
+                  <button
+                    hlmBtn
+                    variant="outline"
+                    size="xs"
+                    type="button"
+                    (click)="lastEvent.set('details requested')"
+                  >
+                    Details
+                  </button>
+                </div>
+              </div>
               <div class="flex justify-end">
                 <pk-stream-controls state="error" (regenerate)="retry()" />
               </div>
             }
 
             @case ('recovering') {
-              <pk-system-message
-                text="Retrying with the same prompt..."
-                variant="action"
-                [fill]="true"
-              />
+              <div hlmAlert>
+                <ng-icon name="lucideInfo" />
+                <p hlmAlertDescription>Retrying with the same prompt...</p>
+              </div>
               <div class="flex justify-end">
                 <pk-stream-controls state="streaming" (stop)="abort()" />
               </div>
             }
 
             @case ('recovered') {
-              <pk-system-message text="Response delivered." variant="action" [fill]="false" />
+              <div hlmAlert>
+                <ng-icon name="lucideInfo" />
+                <p hlmAlertDescription>Response delivered.</p>
+              </div>
               @if (showFeedback()) {
                 <pk-feedback-bar
                   title="How was that response after the retry?"
@@ -121,25 +143,29 @@ export class SystemRetryBlock {
 
   protected readonly code = `@switch (phase()) {
   @case ('error') {
-    <pk-system-message
-      text="Stream failed: upstream timeout after 30s."
-      variant="error" [fill]="true"
-      ctaLabel="Details"
-      (ctaClicked)="showDetails()"
-    />
+    <div hlmAlert variant="destructive">
+      <ng-icon name="lucideCircleAlert" />
+      <p hlmAlertDescription>Stream failed: upstream timeout after 30s.</p>
+      <div hlmAlertAction>
+        <button hlmBtn variant="outline" size="xs" (click)="showDetails()">Details</button>
+      </div>
+    </div>
     <pk-stream-controls state="error" (regenerate)="retry()" />
   }
 
   @case ('recovering') {
-    <pk-system-message
-      text="Retrying with the same prompt..."
-      variant="action" [fill]="true"
-    />
+    <div hlmAlert>
+      <ng-icon name="lucideInfo" />
+      <p hlmAlertDescription>Retrying with the same prompt...</p>
+    </div>
     <pk-stream-controls state="streaming" (stop)="abort()" />
   }
 
   @case ('recovered') {
-    <pk-system-message text="Response delivered." variant="action" />
+    <div hlmAlert>
+      <ng-icon name="lucideInfo" />
+      <p hlmAlertDescription>Response delivered.</p>
+    </div>
     <pk-feedback-bar
       title="How was that response after the retry?"
       (helpful)="rate('helpful')"

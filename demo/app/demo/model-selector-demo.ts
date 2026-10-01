@@ -237,7 +237,7 @@ const CATALOG: ApiModel[] = [
     <app-doc-page
       title="Model Selector"
       [original]="true"
-      description="A composer's model switcher: a compact trigger pill that opens a wide panel with search, a maker rail, admin-curated sections, price tiers and credit estimates. On phones it becomes a bottom sheet with maker chips, which closes when dragged down by its handle or title."
+      description="A composer's model switcher: a compact trigger pill that opens a wide panel with a spartan input-group search, a maker rail, admin-curated sections, price tiers and credit estimates. On phones it becomes a bottom sheet with maker chips, which closes when dragged down by its handle or title."
     >
       <app-doc-example
         title="In a composer"

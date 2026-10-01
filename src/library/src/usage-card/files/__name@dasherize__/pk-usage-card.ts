@@ -1,7 +1,9 @@
 // ngx-prompt-kit original — not part of ibelick/prompt-kit
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmCard } from '@spartan-ng/helm/card';
+import { HlmProgressImports } from '@spartan-ng/helm/progress';
 import { HlmTooltip } from '@spartan-ng/helm/tooltip';
 import { cn } from '../utils/cn';
 
@@ -11,7 +13,7 @@ type ThresholdState = 'normal' | 'warn' | 'over';
 @Component({
   selector: 'pk-usage-card',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [HlmButton, HlmCard, HlmTooltip],
+  imports: [HlmAvatarImports, HlmButton, HlmCard, HlmProgressImports, HlmTooltip],
   host: {
     '[class]': 'hostClass()',
   },
@@ -58,24 +60,22 @@ type ThresholdState = 'normal' | 'warn' | 'over';
               }
             </svg>
             <div class="absolute inset-0 flex items-center justify-center">
-              @if (avatar(); as src) {
-                <img
-                  [src]="src"
-                  [alt]="name() || 'Avatar'"
-                  class="rounded-full object-cover"
-                  [style.width.px]="avatarInnerSize()"
-                  [style.height.px]="avatarInnerSize()"
-                />
-              } @else {
+              <hlm-avatar
+                class="after:border-0"
+                [style.width.px]="avatarInnerSize()"
+                [style.height.px]="avatarInnerSize()"
+              >
+                @if (avatar(); as src) {
+                  <img hlmAvatarImage [src]="src" [alt]="name() || 'Avatar'" />
+                }
                 <span
-                  class="bg-muted text-muted-foreground flex items-center justify-center rounded-full text-[10px] font-medium uppercase"
-                  [style.width.px]="avatarInnerSize()"
-                  [style.height.px]="avatarInnerSize()"
+                  hlmAvatarFallback
+                  class="text-[10px] font-medium uppercase"
                   aria-hidden="true"
                 >
                   {{ initials() }}
                 </span>
-              }
+              </hlm-avatar>
             </div>
           </div>
           @if (name() || sublabel()) {
@@ -94,20 +94,14 @@ type ThresholdState = 'normal' | 'warn' | 'over';
         <div class="flex w-full items-center gap-3" [attr.aria-label]="ariaLabel()">
           @if (avatar() || name()) {
             <div class="shrink-0">
-              @if (avatar(); as src) {
-                <img
-                  [src]="src"
-                  [alt]="name() || 'Avatar'"
-                  class="h-9 w-9 rounded-full object-cover"
-                />
-              } @else {
-                <span
-                  class="bg-muted text-muted-foreground flex h-9 w-9 items-center justify-center rounded-full text-xs font-medium uppercase"
-                  aria-hidden="true"
-                >
+              <hlm-avatar class="size-9">
+                @if (avatar(); as src) {
+                  <img hlmAvatarImage [src]="src" [alt]="name() || 'Avatar'" />
+                }
+                <span hlmAvatarFallback class="text-xs font-medium uppercase" aria-hidden="true">
                   {{ initials() }}
                 </span>
-              }
+              </hlm-avatar>
             </div>
           }
           <div class="flex min-w-0 flex-1 flex-col gap-1">
@@ -127,13 +121,9 @@ type ThresholdState = 'normal' | 'warn' | 'over';
               </div>
             }
             @if (hasLimit()) {
-              <div class="bg-muted h-1.5 w-full overflow-hidden rounded-full">
-                <div
-                  class="h-full transition-[width] duration-200 ease-out"
-                  [class]="barFillClass()"
-                  [style.width.%]="percent()"
-                ></div>
-              </div>
+              <hlm-progress class="h-1.5" [value]="percent()">
+                <hlm-progress-indicator [class]="barFillClass()" />
+              </hlm-progress>
             }
           </div>
         </div>
@@ -143,19 +133,19 @@ type ThresholdState = 'normal' | 'warn' | 'over';
         <div hlmCard class="flex flex-col gap-3 p-4" [attr.aria-label]="ariaLabel()">
           @if (avatar() || name() || sublabel()) {
             <div class="flex items-center gap-2">
-              @if (avatar(); as src) {
-                <img
-                  [src]="src"
-                  [alt]="name() || 'Avatar'"
-                  class="h-7 w-7 shrink-0 rounded-full object-cover"
-                />
-              } @else if (name()) {
-                <span
-                  class="bg-muted text-muted-foreground flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[10px] font-medium uppercase"
-                  aria-hidden="true"
-                >
-                  {{ initials() }}
-                </span>
+              @if (avatar() || name()) {
+                <hlm-avatar class="size-7">
+                  @if (avatar(); as src) {
+                    <img hlmAvatarImage [src]="src" [alt]="name() || 'Avatar'" />
+                  }
+                  <span
+                    hlmAvatarFallback
+                    class="text-[10px] font-medium uppercase"
+                    aria-hidden="true"
+                  >
+                    {{ initials() }}
+                  </span>
+                </hlm-avatar>
               }
               <div class="flex min-w-0 flex-col leading-tight">
                 @if (name(); as n) {
@@ -180,13 +170,9 @@ type ThresholdState = 'normal' | 'warn' | 'over';
             }
           </div>
           @if (hasLimit()) {
-            <div class="bg-muted h-2 w-full overflow-hidden rounded-full">
-              <div
-                class="h-full transition-[width] duration-200 ease-out"
-                [class]="barFillClass()"
-                [style.width.%]="percent()"
-              ></div>
-            </div>
+            <hlm-progress class="h-2" [value]="percent()">
+              <hlm-progress-indicator [class]="barFillClass()" />
+            </hlm-progress>
           }
           @if (topUpLabel(); as cta) {
             <div class="flex justify-end">

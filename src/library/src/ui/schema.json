@@ -15,16 +15,13 @@
           "branch-nav",
           "chain-of-thought",
           "chat-container",
-          "chat-empty",
           "code-block",
           "conversation-list",
           "cost-display",
           "feedback-bar",
           "file-upload",
           "image",
-          "loader",
           "markdown",
-          "message",
           "message-actions-bar",
           "message-edit",
           "model-browser",
@@ -33,16 +30,12 @@
           "model-selector",
           "composer",
           "chat-turn",
-          "prompt-input",
           "prompt-suggestion",
           "reasoning",
           "response-stream",
-          "scroll-button",
           "source",
           "steps",
           "stream-controls",
-          "system-message",
-          "text-shimmer",
           "thinking-bar",
           "token-counter",
           "tool",
@@ -76,10 +69,6 @@
             "label": "chat-container"
           },
           {
-            "value": "chat-empty",
-            "label": "chat-empty"
-          },
-          {
             "value": "code-block",
             "label": "code-block"
           },
@@ -104,16 +93,8 @@
             "label": "image"
           },
           {
-            "value": "loader",
-            "label": "loader"
-          },
-          {
             "value": "markdown",
             "label": "markdown"
-          },
-          {
-            "value": "message",
-            "label": "message"
           },
           {
             "value": "message-actions-bar",
@@ -148,10 +129,6 @@
             "label": "chat-turn"
           },
           {
-            "value": "prompt-input",
-            "label": "prompt-input"
-          },
-          {
             "value": "prompt-suggestion",
             "label": "prompt-suggestion"
           },
@@ -164,10 +141,6 @@
             "label": "response-stream"
           },
           {
-            "value": "scroll-button",
-            "label": "scroll-button"
-          },
-          {
             "value": "source",
             "label": "source"
           },
@@ -178,14 +151,6 @@
           {
             "value": "stream-controls",
             "label": "stream-controls"
-          },
-          {
-            "value": "system-message",
-            "label": "system-message"
-          },
-          {
-            "value": "text-shimmer",
-            "label": "text-shimmer"
           },
           {
             "value": "thinking-bar",

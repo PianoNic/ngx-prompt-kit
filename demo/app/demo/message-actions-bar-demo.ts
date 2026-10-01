@@ -14,7 +14,8 @@ import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
-import { PkMessageImports } from 'ngx-prompt-kit/message';
+import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
+import { HlmBubbleImports } from '@spartan-ng/helm/bubble';
 import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit';
 import {
   DEFAULT_ASSISTANT_ACTIONS,
@@ -31,7 +32,8 @@ import {
     DocExample,
     DocInstall,
     DocApi,
-    PkMessageImports,
+    HlmAvatarImports,
+    HlmBubbleImports,
     PkMessageEditImports,
     PkMessageActionsBarImports,
     HlmMessageImports,
@@ -60,10 +62,19 @@ import {
       >
         <div class="group flex w-full flex-col gap-1">
           <div hlmMessage>
-            <pk-message-avatar src="" alt="Assistant" fallback="AI" />
-            <pk-message-content
-              content="Yes — Tailwind's color tokens flow through Spartan's CSS variables, so the kit picks up your theme without extra configuration."
-            />
+            <div hlmMessageAvatar>
+              <hlm-avatar>
+                <span hlmAvatarFallback>AI</span>
+              </hlm-avatar>
+            </div>
+            <div hlmMessageContent>
+              <div hlmBubble variant="secondary">
+                <div hlmBubbleContent>
+                  Yes — Tailwind's color tokens flow through Spartan's CSS variables, so the kit
+                  picks up your theme without extra configuration.
+                </div>
+              </div>
+            </div>
           </div>
           <pk-message-actions-bar
             class="ml-11"
@@ -80,10 +91,11 @@ import {
       >
         <div class="group flex w-full flex-col items-end gap-1">
           <div hlmMessage align="end">
-            <pk-message-content
-              class="bg-primary text-primary-foreground"
-              content="Does the kit pick up my Spartan theme automatically?"
-            />
+            <div hlmMessageContent>
+              <div hlmBubble>
+                <div hlmBubbleContent>Does the kit pick up my Spartan theme automatically?</div>
+              </div>
+            </div>
           </div>
           <pk-message-actions-bar
             [actions]="userActions"
@@ -99,10 +111,19 @@ import {
       >
         <div class="group flex w-full flex-col gap-2">
           <div hlmMessage>
-            <pk-message-avatar src="" alt="Assistant" fallback="AI" />
-            <pk-message-content
-              content="Click thumbs-up to see the active state — it persists across hover-reveal so the consumer can read 'this message was rated good'."
-            />
+            <div hlmMessageAvatar>
+              <hlm-avatar>
+                <span hlmAvatarFallback>AI</span>
+              </hlm-avatar>
+            </div>
+            <div hlmMessageContent>
+              <div hlmBubble variant="secondary">
+                <div hlmBubbleContent>
+                  Click thumbs-up to see the active state — it persists across hover-reveal so the
+                  consumer can read 'this message was rated good'.
+                </div>
+              </div>
+            </div>
           </div>
           <pk-message-actions-bar
             class="ml-11"
@@ -131,10 +152,9 @@ import {
               [content]="composedContent()"
               (saved)="composedContent.set($event)"
             >
-              <pk-message-content
-                class="bg-primary text-primary-foreground"
-                [content]="composedContent()"
-              />
+              <div hlmBubble class="max-w-full">
+                <div hlmBubbleContent>{{ composedContent() }}</div>
+              </div>
             </pk-message-edit>
           </div>
           <pk-message-actions-bar
@@ -274,8 +294,16 @@ export class MessageActionsBarDemo {
 
   protected readonly assistantCode = `<div class="group flex flex-col gap-1">
   <div hlmMessage>
-    <pk-message-avatar src="" alt="Assistant" fallback="AI" />
-    <pk-message-content content="..." />
+    <div hlmMessageAvatar>
+      <hlm-avatar>
+        <span hlmAvatarFallback>AI</span>
+      </hlm-avatar>
+    </div>
+    <div hlmMessageContent>
+      <div hlmBubble variant="secondary">
+        <div hlmBubbleContent>...</div>
+      </div>
+    </div>
   </div>
   <pk-message-actions-bar
     class="ml-11"
@@ -286,7 +314,11 @@ export class MessageActionsBarDemo {
 
   protected readonly userCode = `<div class="group flex flex-col items-end gap-1">
   <div hlmMessage align="end">
-    <pk-message-content content="..." />
+    <div hlmMessageContent>
+      <div hlmBubble>
+        <div hlmBubbleContent>...</div>
+      </div>
+    </div>
   </div>
   <pk-message-actions-bar
     [actions]="DEFAULT_USER_ACTIONS"
@@ -303,7 +335,9 @@ export class MessageActionsBarDemo {
       [content]="content()"
       (saved)="content.set($event)"
     >
-      <pk-message-content [content]="content()" />
+      <div hlmBubble class="max-w-full">
+        <div hlmBubbleContent>{{ content() }}</div>
+      </div>
     </pk-message-edit>
   </div>
   <pk-message-actions-bar

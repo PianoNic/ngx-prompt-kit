@@ -10,7 +10,8 @@ import {
 } from '@angular/core';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
-import { PkMessageImports } from 'ngx-prompt-kit/message';
+import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
+import { HlmBubbleImports } from '@spartan-ng/helm/bubble';
 import { PkResponseStream } from 'ngx-prompt-kit/response-stream';
 import { PkStreamControlsImports, type StreamControlsState } from 'ngx-prompt-kit/stream-controls';
 
@@ -36,7 +37,8 @@ Want me to show \`effect()\` next?`;
   imports: [
     BlockPage,
     DocExample,
-    PkMessageImports,
+    HlmAvatarImports,
+    HlmBubbleImports,
     PkResponseStream,
     PkStreamControlsImports,
     HlmMessageImports,
@@ -49,15 +51,20 @@ Want me to show \`effect()\` next?`;
       <app-doc-example title="Live response with stream controls" [code]="code">
         <div class="flex w-full flex-col gap-4">
           <div hlmMessage align="end">
-            <pk-message-content
-              class="bg-primary text-primary-foreground"
-              content="Show me a small computed() example."
-            />
+            <div hlmMessageContent>
+              <div hlmBubble>
+                <div hlmBubbleContent>Show me a small computed() example.</div>
+              </div>
+            </div>
           </div>
 
           <div hlmMessage>
-            <pk-message-avatar src="" alt="Assistant" fallback="AI" />
-            <div class="flex min-w-0 flex-1 flex-col gap-2">
+            <div hlmMessageAvatar>
+              <hlm-avatar>
+                <span hlmAvatarFallback>AI</span>
+              </hlm-avatar>
+            </div>
+            <div hlmMessageContent>
               @if (state() === 'streaming' || streamed()) {
                 <pk-response-stream
                   class="prose prose-sm dark:prose-invert min-w-0 max-w-none"
@@ -119,14 +126,19 @@ export class StreamingMessageBlock {
   }
 
   protected readonly code = `<div hlmMessage align="end">
-  <pk-message-content
-    class="bg-primary text-primary-foreground"
-    content="Show me a small computed() example."
-  />
+  <div hlmMessageContent>
+    <div hlmBubble>
+      <div hlmBubbleContent>Show me a small computed() example.</div>
+    </div>
+  </div>
 </div>
 
 <div hlmMessage>
-  <pk-message-avatar src="" alt="Assistant" fallback="AI" />
+  <div hlmMessageAvatar>
+    <hlm-avatar>
+      <span hlmAvatarFallback>AI</span>
+    </hlm-avatar>
+  </div>
   <pk-response-stream
     class="prose prose-sm dark:prose-invert max-w-none"
     [textStream]="streamed()"

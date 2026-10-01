@@ -34,7 +34,6 @@ const COMPONENT_TITLES: Readonly<Record<string, string>> = {
   'branch-nav': 'Branch Nav',
   'chain-of-thought': 'Chain Of Thought',
   'chat-container': 'Chat Container',
-  'chat-empty': 'Chat Empty',
   'chat-turn': 'Chat Turn',
   'code-block': 'Code Block',
   composer: 'Composer',
@@ -43,25 +42,19 @@ const COMPONENT_TITLES: Readonly<Record<string, string>> = {
   'feedback-bar': 'Feedback Bar',
   'file-upload': 'File Upload',
   image: 'Image',
-  loader: 'Loader',
   markdown: 'Markdown',
-  message: 'Message',
   'message-actions-bar': 'Message Actions Bar',
   'message-edit': 'Message Edit',
   'model-browser': 'Model Browser',
   'model-list': 'Model List',
   'model-picker': 'Model Picker',
   'model-selector': 'Model Selector',
-  'prompt-input': 'Prompt Input',
   'prompt-suggestion': 'Prompt Suggestion',
   reasoning: 'Reasoning',
   'response-stream': 'Response Stream',
-  'scroll-button': 'Scroll Button',
   source: 'Source',
   steps: 'Steps',
   'stream-controls': 'Stream Controls',
-  'system-message': 'System Message',
-  'text-shimmer': 'Text Shimmer',
   'thinking-bar': 'Thinking Bar',
   'todo-list': 'Todo List',
   'token-counter': 'Token Counter',
@@ -70,10 +63,22 @@ const COMPONENT_TITLES: Readonly<Record<string, string>> = {
   'usage-card': 'Usage Card',
 };
 
+/** Removed in favour of spartan/ui; their old URLs show the replacements page. */
+const REMOVED_COMPONENTS: readonly string[] = [
+  'loader',
+  'text-shimmer',
+  'scroll-button',
+  'message',
+  'system-message',
+  'chat-empty',
+  'prompt-input',
+];
+
 /** Public list of every prerender-able URL. Read by sitemap generator. */
 export const ALL_PAGE_PATHS: readonly string[] = [
   '/',
   '/installation',
+  '/spartan-replacements',
   '/blocks',
   ...BLOCKS.map((b) => `/blocks/${b.slug}`),
   '/showcase/full-chat',
@@ -112,6 +117,25 @@ export function metaForUrl(url: string): PageMeta {
       changefreq: 'monthly',
       priority: 0.9,
     };
+  }
+
+  if (path === '/spartan-replacements') {
+    return {
+      title: `Spartan replacements · ${SITE.name}`,
+      description:
+        'Components ngx-prompt-kit dropped because spartan/ui ships them — loader, text shimmer, scroll button, message, system message, chat empty state and prompt input — and the spartan helm component to use for each.',
+      path,
+      changefreq: 'monthly',
+      priority: 0.7,
+    };
+  }
+
+  // Removed components land on the replacements page.
+  if (
+    path.startsWith('/components/') &&
+    REMOVED_COMPONENTS.includes(path.slice('/components/'.length))
+  ) {
+    return { ...metaForUrl('/spartan-replacements'), path };
   }
 
   if (path === '/blocks') {

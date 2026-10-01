@@ -16,7 +16,7 @@ const ICON = (name: string) =>
     <app-doc-page
       title="Model List"
       [original]="true"
-      description="Inline searchable list of models. Open WebUI / Ollama style — circular icon, name, optional inline metadata. Renders as a list, not a dropdown — wrap in your own popover/dialog if you need that surface."
+      description="Inline searchable list of models, searched through a spartan input-group. Open WebUI / Ollama style — circular icon, name, optional inline metadata. Renders as a list, not a dropdown — wrap in your own popover/dialog if you need that surface."
     >
       <app-doc-example
         title="Searchable list"

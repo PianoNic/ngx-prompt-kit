@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideChevronDown } from '@ng-icons/lucide';
 import { HlmMessageImports } from '@spartan-ng/helm/message';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { DocApi, type ApiSection } from '../layout/doc-api';
@@ -6,8 +8,8 @@ import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
 import { PkChatContainerImports } from 'ngx-prompt-kit/chat-container';
-import { PkMessageImports } from 'ngx-prompt-kit/message';
-import { PkScrollButton } from 'ngx-prompt-kit/scroll-button';
+import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
+import { HlmBubbleImports } from '@spartan-ng/helm/bubble';
 
 @Component({
   selector: 'app-chat-container-demo',
@@ -19,14 +21,16 @@ import { PkScrollButton } from 'ngx-prompt-kit/scroll-button';
     DocApi,
     HlmButton,
     PkChatContainerImports,
-    PkMessageImports,
-    PkScrollButton,
+    HlmAvatarImports,
+    HlmBubbleImports,
+    NgIcon,
     HlmMessageImports,
   ],
+  providers: [provideIcons({ lucideChevronDown })],
   template: `
     <app-doc-page
       title="Chat Container"
-      description="A scroll area that auto-sticks to the bottom on new content — but only if the user is already there. Pair with ScrollButton for a back-to-bottom affordance."
+      description="A scroll area that auto-sticks to the bottom on new content — but only if the user is already there. For a back-to-bottom affordance, bind a spartan hlmBtn to the container's isAtBottom() and scrollToBottom()."
     >
       <app-doc-example
         title="Auto-scroll on new messages"
@@ -45,18 +49,37 @@ import { PkScrollButton } from 'ngx-prompt-kit/scroll-button';
             Add message
           </button>
           <div class="border-border h-[360px] rounded-lg border">
-            <pk-chat-container-root class="relative h-full p-4">
+            <pk-chat-container-root #thread class="relative h-full p-4">
               <pk-chat-container-content class="gap-3">
                 @for (m of messages(); track m.id) {
                   <div hlmMessage>
-                    <pk-message-avatar src="" alt="User" fallback="U" />
-                    <pk-message-content [content]="m.text" />
+                    <div hlmMessageAvatar>
+                      <hlm-avatar>
+                        <span hlmAvatarFallback>U</span>
+                      </hlm-avatar>
+                    </div>
+                    <div hlmMessageContent>
+                      <div hlmBubble variant="secondary">
+                        <div hlmBubbleContent>{{ m.text }}</div>
+                      </div>
+                    </div>
                   </div>
                 }
               </pk-chat-container-content>
               <pk-chat-container-scroll-anchor />
               <div class="sticky bottom-2 ml-auto w-fit pr-1">
-                <pk-scroll-button />
+                <button
+                  hlmBtn
+                  variant="outline"
+                  size="icon"
+                  type="button"
+                  aria-label="Scroll to bottom"
+                  class="size-10 rounded-full transition-all duration-150 ease-out data-[hidden=true]:pointer-events-none data-[hidden=true]:translate-y-4 data-[hidden=true]:scale-95 data-[hidden=true]:opacity-0"
+                  [attr.data-hidden]="thread.isAtBottom()"
+                  (click)="thread.scrollToBottom()"
+                >
+                  <ng-icon name="lucideChevronDown" />
+                </button>
               </div>
             </pk-chat-container-root>
           </div>
@@ -115,18 +138,38 @@ export class ChatContainerDemo {
     this.messages.set([...list, { id: list.length, text: `Message ${list.length + 1}` }]);
   }
 
-  protected readonly autoScrollCode = `<pk-chat-container-root class="relative h-[360px] p-4">
+  protected readonly autoScrollCode = `<pk-chat-container-root #thread class="relative h-[360px] p-4">
   <pk-chat-container-content class="gap-3">
     @for (m of messages(); track m.id) {
       <div hlmMessage>
-        <pk-message-avatar [src]="m.avatar" alt="" />
-        <pk-message-content [content]="m.text" />
+        <div hlmMessageAvatar>
+          <hlm-avatar>
+            <img hlmAvatarImage [src]="m.avatar" alt="" />
+            <span hlmAvatarFallback>AI</span>
+          </hlm-avatar>
+        </div>
+        <div hlmMessageContent>
+          <div hlmBubble variant="secondary">
+            <div hlmBubbleContent>{{ m.text }}</div>
+          </div>
+        </div>
       </div>
     }
   </pk-chat-container-content>
   <pk-chat-container-scroll-anchor />
   <div class="sticky bottom-2 ml-auto w-fit pr-1">
-    <pk-scroll-button />
+    <button
+      hlmBtn
+      variant="outline"
+      size="icon"
+      type="button"
+      aria-label="Scroll to bottom"
+      class="size-10 rounded-full transition-all duration-150 ease-out data-[hidden=true]:pointer-events-none data-[hidden=true]:translate-y-4 data-[hidden=true]:scale-95 data-[hidden=true]:opacity-0"
+      [attr.data-hidden]="thread.isAtBottom()"
+      (click)="thread.scrollToBottom()"
+    >
+      <ng-icon name="lucideChevronDown" />
+    </button>
   </div>
 </pk-chat-container-root>`;
 }

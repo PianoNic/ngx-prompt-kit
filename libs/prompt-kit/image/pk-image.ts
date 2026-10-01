@@ -29,12 +29,13 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { HlmSkeleton } from '@spartan-ng/helm/skeleton';
 import { cn } from '../utils/cn';
 
 @Component({
   selector: 'pk-image',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgOptimizedImage],
+  imports: [NgOptimizedImage, HlmSkeleton],
   template: `
     @if (resolvedSrc(); as s) {
       @if (src()) {
@@ -49,7 +50,7 @@ import { cn } from '../utils/cn';
         <img [src]="s" [alt]="alt()" [class]="imageClass()" />
       }
     } @else {
-      <div [attr.aria-label]="alt()" role="img" [class]="placeholderClass()"></div>
+      <div hlmSkeleton [attr.aria-label]="alt()" role="img" [class]="placeholderClass()"></div>
     }
   `,
 })
@@ -99,9 +100,6 @@ export class PkImage {
   );
 
   protected readonly placeholderClass = computed(() =>
-    cn(
-      'h-auto max-w-full animate-pulse overflow-hidden rounded-md bg-gray-100 dark:bg-neutral-800',
-      this.class(),
-    ),
+    cn('h-auto max-w-full overflow-hidden', this.class()),
   );
 }

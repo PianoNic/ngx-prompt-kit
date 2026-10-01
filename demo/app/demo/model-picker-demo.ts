@@ -13,7 +13,7 @@ import { PkModelPickerImports, type Model } from 'ngx-prompt-kit/model-picker';
     <app-doc-page
       title="Model Picker"
       [original]="true"
-      description="Dropdown for selecting an LLM. Items show name, provider, optional tagline, optional tier badge, and optional pricing line. Pricing is consumer-supplied — no model rates are bundled."
+      description="A spartan dropdown menu for selecting an LLM, with an input-group search. Items show name, provider, optional tagline, optional tier badge, and optional pricing line. Pricing is consumer-supplied — no model rates are bundled."
     >
       <app-doc-example
         title="Full detail"

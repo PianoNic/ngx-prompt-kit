@@ -78,7 +78,7 @@ const MODELS: SelectorModel[] = [
     <app-doc-page
       title="Composer"
       [original]="true"
-      description="A chat composer whose text box grows with the draft and then scrolls, with an expand toggle for long drafts, an optional attach button, slots for chips and a model selector, and a send button that becomes stop while a reply streams. pk-composer-dock holds it as a card, as plain content, or docked into the bottom of a chat panel."
+      description="A chat composer whose text box grows with the draft and then scrolls, with an expand toggle for long drafts, an optional attach button, slots for chips and a model selector, and a send button that becomes stop while a reply streams. The text box is a borderless hlmTextarea and every button an hlmBtn. pk-composer-dock holds it as a card, as plain content, or docked into the bottom of a chat panel."
     >
       <app-doc-example
         title="Empty state"

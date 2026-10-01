@@ -1,5 +1,6 @@
 // ngx-prompt-kit original — not part of ibelick/prompt-kit
 import { ChangeDetectionStrategy, Component, computed, effect, input, output } from '@angular/core';
+import { HlmProgressImports } from '@spartan-ng/helm/progress';
 import { cn } from '../utils/cn';
 
 export type TokenCounterMode = 'chars' | 'tokens' | 'both';
@@ -19,6 +20,7 @@ const fmt = new Intl.NumberFormat();
 @Component({
   selector: 'pk-token-counter',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [HlmProgressImports],
   host: {
     '[class]': 'hostClass()',
     'aria-live': 'polite',
@@ -32,13 +34,9 @@ const fmt = new Intl.NumberFormat();
             <span class="text-muted-foreground text-xs tabular-nums">{{ s }}</span>
           }
         </div>
-        <div class="bg-muted mt-1 h-1.5 w-full overflow-hidden rounded-full">
-          <div
-            class="h-full transition-all"
-            [class]="barClass()"
-            [style.width.%]="barPercent()"
-          ></div>
-        </div>
+        <hlm-progress class="mt-1 h-1.5" [value]="barPercent()">
+          <hlm-progress-indicator [class]="barClass()" />
+        </hlm-progress>
       } @else {
         <span [class]="textClass()">{{ primaryText() }}</span>
         @if (secondaryText(); as s) {

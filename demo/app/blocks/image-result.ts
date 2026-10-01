@@ -3,7 +3,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { PkImage } from 'ngx-prompt-kit/image';
-import { PkMessageImports } from 'ngx-prompt-kit/message';
+import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
+import { HlmBubbleImports } from '@spartan-ng/helm/bubble';
 
 // Pre-encoded base64 SVGs (200x200 rounded gradient squares) — three palettes.
 const ART_SUNSET =
@@ -16,7 +17,7 @@ const ART_OCEAN =
 @Component({
   selector: 'app-block-image-result',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [BlockPage, DocExample, PkImage, PkMessageImports, HlmMessageImports],
+  imports: [BlockPage, DocExample, PkImage, HlmAvatarImports, HlmBubbleImports, HlmMessageImports],
   template: `
     <app-block-page
       title="Image generation result"
@@ -25,15 +26,20 @@ const ART_OCEAN =
       <app-doc-example title="Generated images in a chat reply" [code]="code">
         <div class="flex w-full max-w-2xl flex-col gap-4">
           <div hlmMessage align="end">
-            <pk-message-content
-              class="bg-primary text-primary-foreground"
-              content="Generate four cover variants in a sunset palette."
-            />
+            <div hlmMessageContent>
+              <div hlmBubble>
+                <div hlmBubbleContent>Generate four cover variants in a sunset palette.</div>
+              </div>
+            </div>
           </div>
 
           <div hlmMessage>
-            <pk-message-avatar src="" alt="Assistant" fallback="AI" />
-            <div class="flex min-w-0 flex-1 flex-col gap-3">
+            <div hlmMessageAvatar>
+              <hlm-avatar>
+                <span hlmAvatarFallback>AI</span>
+              </hlm-avatar>
+            </div>
+            <div hlmMessageContent>
               <p class="text-sm leading-relaxed">
                 Here are four variants — each runs the same prompt through a different seed. Click
                 any image to upscale.
@@ -75,8 +81,12 @@ export class ImageResultBlock {
   protected readonly art3 = ART_OCEAN;
 
   protected readonly code = `<div hlmMessage>
-  <pk-message-avatar src="" alt="Assistant" fallback="AI" />
-  <div class="flex flex-1 flex-col gap-3">
+  <div hlmMessageAvatar>
+    <hlm-avatar>
+      <span hlmAvatarFallback>AI</span>
+    </hlm-avatar>
+  </div>
+  <div hlmMessageContent>
     <p>Here are four variants — each runs through a different seed.</p>
     <div class="grid grid-cols-2 gap-2">
       <pk-image

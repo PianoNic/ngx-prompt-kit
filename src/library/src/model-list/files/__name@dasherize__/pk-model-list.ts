@@ -10,32 +10,34 @@ import {
 } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCheck, lucideSearch } from '@ng-icons/lucide';
+import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 import { cn } from '../utils/cn';
 import type { Model } from './pk-model-list-types';
 
 @Component({
   selector: 'pk-model-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgIcon],
+  imports: [HlmInputGroupImports, NgIcon],
   providers: [provideIcons({ lucideCheck, lucideSearch })],
   host: {
     '[class]': 'hostClass()',
   },
   template: `
     @if (showSearch()) {
-      <div class="border-border flex items-center gap-2 border-b px-3 py-2">
-        <ng-icon
-          name="lucideSearch"
-          class="text-[length:--spacing(3)] text-muted-foreground shrink-0"
-        />
-        <input
-          type="text"
-          [value]="query()"
-          (input)="onSearch($event)"
-          [placeholder]="searchPlaceholder()"
-          class="text-foreground placeholder:text-muted-foreground w-full bg-transparent text-sm outline-none"
-          aria-label="Search models"
-        />
+      <div class="border-border border-b p-2">
+        <hlm-input-group>
+          <hlm-input-group-addon>
+            <ng-icon name="lucideSearch" />
+          </hlm-input-group-addon>
+          <input
+            hlmInputGroupInput
+            type="text"
+            [value]="query()"
+            (input)="onSearch($event)"
+            [placeholder]="searchPlaceholder()"
+            aria-label="Search models"
+          />
+        </hlm-input-group>
       </div>
     }
     <div class="flex max-h-80 flex-col overflow-y-auto py-1">

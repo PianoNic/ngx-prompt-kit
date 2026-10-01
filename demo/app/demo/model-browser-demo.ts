@@ -20,7 +20,7 @@ const ICON = (name: string) =>
     <app-doc-page
       title="Model Browser"
       [original]="true"
-      description="OpenRouter-style split-pane model picker. Search + optional filter chips on the left, model list grouped by category, and a detail pane on the right showing description, pricing, and arbitrary metric rows. The marketplace pattern when a single dropdown isn't enough."
+      description="OpenRouter-style split-pane model picker. A spartan input-group search + optional filter chips on the left, model list grouped by category, and a detail pane on the right showing description, pricing, and arbitrary metric rows. The marketplace pattern when a single dropdown isn't enough."
     >
       <app-doc-example
         title="Full marketplace"

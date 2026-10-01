@@ -8,11 +8,21 @@ import {
   lucidePencilLine,
 } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
+import { HlmCard, HlmCardContent } from '@spartan-ng/helm/card';
+import { HlmEmptyImports } from '@spartan-ng/helm/empty';
+import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
+import { HlmTooltip } from '@spartan-ng/helm/tooltip';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
-import { PkChatEmptyImports, type ChatEmptySuggestion } from 'ngx-prompt-kit/chat-empty';
-import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
 import { PkPromptSuggestion } from 'ngx-prompt-kit/prompt-suggestion';
+
+interface Suggestion {
+  label: string;
+  /** Lucide icon name, registered with provideIcons(). */
+  icon: string;
+  /** Text put in the input when the card is picked. */
+  prompt: string;
+}
 
 @Component({
   selector: 'app-block-empty-state',
@@ -21,9 +31,12 @@ import { PkPromptSuggestion } from 'ngx-prompt-kit/prompt-suggestion';
     BlockPage,
     DocExample,
     HlmButton,
+    HlmCard,
+    HlmCardContent,
+    HlmEmptyImports,
+    HlmInputGroupImports,
+    HlmTooltip,
     NgIcon,
-    PkChatEmptyImports,
-    PkPromptInputImports,
     PkPromptSuggestion,
   ],
   providers: [
@@ -42,12 +55,35 @@ import { PkPromptSuggestion } from 'ngx-prompt-kit/prompt-suggestion';
     >
       <app-doc-example title="Onboarding hero with prefill" [code]="code">
         <div class="flex w-full flex-col items-center gap-8">
-          <pk-chat-empty
-            subtitle="Pick a starting point or just start typing."
-            [suggestions]="suggestions"
-            (suggestionPicked)="prefill($event.prompt)"
-            class="w-full"
-          />
+          <hlm-empty class="w-full p-0">
+            <hlm-empty-header>
+              <h2 hlmEmptyTitle class="text-3xl font-medium tracking-tight">
+                How can I help today?
+              </h2>
+              <p hlmEmptyDescription>Pick a starting point or just start typing.</p>
+            </hlm-empty-header>
+            <hlm-empty-content class="max-w-3xl flex-row flex-wrap justify-center gap-3">
+              @for (s of suggestions; track s.label) {
+                <button
+                  type="button"
+                  (click)="prefill(s.prompt)"
+                  class="basis-full text-left sm:basis-[calc(50%-0.375rem)] lg:basis-[170px]"
+                >
+                  <div hlmCard class="hover:bg-accent h-full transition-colors">
+                    <div hlmCardContent class="flex flex-col gap-2">
+                      <ng-icon
+                        [name]="s.icon"
+                        class="text-[length:--spacing(4)] text-muted-foreground"
+                      />
+                      <span class="text-foreground text-sm font-medium leading-snug">
+                        {{ s.label }}
+                      </span>
+                    </div>
+                  </div>
+                </button>
+              }
+            </hlm-empty-content>
+          </hlm-empty>
 
           <div class="flex w-full max-w-2xl flex-col gap-3">
             <div class="flex flex-wrap justify-center gap-2">
@@ -56,23 +92,30 @@ import { PkPromptSuggestion } from 'ngx-prompt-kit/prompt-suggestion';
               }
             </div>
 
-            <pk-prompt-input [(value)]="value" (submitted)="onSubmit()">
-              <pk-prompt-input-textarea placeholder="Ask anything..." />
-              <pk-prompt-input-actions class="mt-2 justify-end">
-                <pk-prompt-input-action tooltip="Send">
-                  <button
-                    hlmBtn
-                    size="icon-sm"
-                    type="button"
-                    class="rounded-full"
-                    (click)="onSubmit()"
-                    aria-label="Send"
-                  >
-                    <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
-                  </button>
-                </pk-prompt-input-action>
-              </pk-prompt-input-actions>
-            </pk-prompt-input>
+            <div hlmInputGroup class="rounded-3xl">
+              <textarea
+                hlmInputGroupTextarea
+                class="max-h-60 px-4 pt-3"
+                placeholder="Ask anything..."
+                aria-label="Message"
+                [value]="value()"
+                (input)="value.set($any($event.target).value)"
+                (keydown.enter)="onEnter($event)"
+              ></textarea>
+              <div hlmInputGroupAddon align="block-end" class="justify-end px-3 pb-3">
+                <button
+                  hlmBtn
+                  size="icon-sm"
+                  type="button"
+                  class="rounded-full"
+                  hlmTooltip="Send"
+                  (click)="onSubmit()"
+                  aria-label="Send"
+                >
+                  <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
+                </button>
+              </div>
+            </div>
 
             @if (lastSent(); as msg) {
               <p class="text-muted-foreground text-center text-xs">
@@ -89,7 +132,7 @@ export class EmptyStateBlock {
   protected readonly value = signal('');
   protected readonly lastSent = signal<string | null>(null);
 
-  protected readonly suggestions: ChatEmptySuggestion[] = [
+  protected readonly suggestions: Suggestion[] = [
     {
       label: 'Draft release notes from the latest commit log',
       icon: 'lucideFileText',
@@ -123,6 +166,12 @@ export class EmptyStateBlock {
     this.value.set(prompt);
   }
 
+  protected onEnter(event: Event): void {
+    if ((event as KeyboardEvent).shiftKey) return;
+    event.preventDefault();
+    this.onSubmit();
+  }
+
   protected onSubmit(): void {
     const v = this.value().trim();
     if (!v) return;
@@ -130,11 +179,25 @@ export class EmptyStateBlock {
     this.value.set('');
   }
 
-  protected readonly code = `<pk-chat-empty
-  subtitle="Pick a starting point or just start typing."
-  [suggestions]="suggestions"
-  (suggestionPicked)="prefill($event.prompt)"
-/>
+  protected readonly code = `<!-- spartan empty state with suggestion cards -->
+<hlm-empty>
+  <hlm-empty-header>
+    <h2 hlmEmptyTitle>How can I help today?</h2>
+    <p hlmEmptyDescription>Pick a starting point or just start typing.</p>
+  </hlm-empty-header>
+  <hlm-empty-content class="flex-row flex-wrap justify-center gap-3">
+    @for (s of suggestions; track s.label) {
+      <button type="button" (click)="prefill(s.prompt)" class="text-left">
+        <div hlmCard class="hover:bg-accent h-full">
+          <div hlmCardContent class="flex flex-col gap-2">
+            <ng-icon [name]="s.icon" />
+            <span class="text-sm font-medium">{{ s.label }}</span>
+          </div>
+        </div>
+      </button>
+    }
+  </hlm-empty-content>
+</hlm-empty>
 
 <div class="flex flex-wrap justify-center gap-2">
   @for (q of quickPrompts; track q) {
@@ -142,25 +205,35 @@ export class EmptyStateBlock {
   }
 </div>
 
-<pk-prompt-input [(value)]="value" (submitted)="onSubmit()">
-  <pk-prompt-input-textarea placeholder="Ask anything..." />
-  <pk-prompt-input-actions class="mt-2 justify-end">
-    <pk-prompt-input-action tooltip="Send">
-      <button hlmBtn size="icon-sm" class="rounded-full" (click)="onSubmit()">
-        <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
-      </button>
-    </pk-prompt-input-action>
-  </pk-prompt-input-actions>
-</pk-prompt-input>
+<!-- spartan input-group: textarea plus a block-end addon -->
+<div hlmInputGroup class="rounded-3xl">
+  <textarea
+    hlmInputGroupTextarea
+    placeholder="Ask anything..."
+    [value]="value()"
+    (input)="value.set($any($event.target).value)"
+    (keydown.enter)="onEnter($event)"
+  ></textarea>
+  <div hlmInputGroupAddon align="block-end" class="justify-end">
+    <button hlmBtn size="icon-sm" class="rounded-full" hlmTooltip="Send" (click)="onSubmit()">
+      <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
+    </button>
+  </div>
+</div>
 
 // In the component
 protected readonly value = signal('');
-protected readonly suggestions: ChatEmptySuggestion[] = [
+protected readonly suggestions = [
   { label: 'Draft release notes...', icon: 'lucideFileText', prompt: '...' },
   // ...
 ];
 protected readonly quickPrompts = ['Summarise', 'Translate', 'Shorter'];
 protected prefill(p: string) { this.value.set(p); }
+protected onEnter(event: Event) {
+  if ((event as KeyboardEvent).shiftKey) return; // Shift+Enter adds a line
+  event.preventDefault();
+  this.onSubmit();
+}
 protected onSubmit() {
   const v = this.value().trim();
   if (!v) return;

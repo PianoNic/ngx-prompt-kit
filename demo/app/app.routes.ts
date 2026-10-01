@@ -106,16 +106,32 @@ export const routes: Routes = [
         loadComponent: () => import('./blocks/ai-plan').then((m) => m.AiPlanBlock),
       },
       {
+        path: 'spartan-replacements',
+        loadComponent: () =>
+          import('./pages/spartan-replacements').then((m) => m.SpartanReplacements),
+      },
+      // Removed in favour of spartan/ui; old links land on the page that names the replacement.
+      ...[
+        'loader',
+        'text-shimmer',
+        'scroll-button',
+        'message',
+        'system-message',
+        'chat-empty',
+        'prompt-input',
+      ].map((component) => ({
+        path: `components/${component}`,
+        data: { component },
+        loadComponent: () =>
+          import('./pages/spartan-replacements').then((m) => m.SpartanReplacements),
+      })),
+      {
         path: 'showcase/full-chat',
         loadComponent: () => import('./pages/full-chat').then((m) => m.FullChat),
       },
       {
         path: 'components/branch-nav',
         loadComponent: () => import('./demo/branch-nav-demo').then((m) => m.BranchNavDemo),
-      },
-      {
-        path: 'components/message',
-        loadComponent: () => import('./demo/message-demo').then((m) => m.MessageDemo),
       },
       {
         path: 'components/message-edit',
@@ -163,25 +179,13 @@ export const routes: Routes = [
         loadComponent: () => import('./demo/code-block-demo').then((m) => m.CodeBlockDemo),
       },
       {
-        path: 'components/prompt-input',
-        loadComponent: () => import('./demo/prompt-input-demo').then((m) => m.PromptInputDemo),
-      },
-      {
         path: 'components/response-stream',
         loadComponent: () =>
           import('./demo/response-stream-demo').then((m) => m.ResponseStreamDemo),
       },
       {
-        path: 'components/loader',
-        loadComponent: () => import('./demo/loader-demo').then((m) => m.LoaderDemo),
-      },
-      {
         path: 'components/chat-container',
         loadComponent: () => import('./demo/chat-container-demo').then((m) => m.ChatContainerDemo),
-      },
-      {
-        path: 'components/chat-empty',
-        loadComponent: () => import('./demo/chat-empty-demo').then((m) => m.ChatEmptyDemo),
       },
       {
         path: 'components/conversation-list',
@@ -191,10 +195,6 @@ export const routes: Routes = [
       {
         path: 'components/cost-display',
         loadComponent: () => import('./demo/cost-display-demo').then((m) => m.CostDisplayDemo),
-      },
-      {
-        path: 'components/scroll-button',
-        loadComponent: () => import('./demo/chat-container-demo').then((m) => m.ChatContainerDemo),
       },
       {
         path: 'components/prompt-suggestion',
@@ -210,20 +210,12 @@ export const routes: Routes = [
         loadComponent: () => import('./demo/reasoning-demo').then((m) => m.ReasoningDemo),
       },
       {
-        path: 'components/text-shimmer',
-        loadComponent: () => import('./demo/text-shimmer-demo').then((m) => m.TextShimmerDemo),
-      },
-      {
         path: 'components/thinking-bar',
         loadComponent: () => import('./demo/thinking-bar-demo').then((m) => m.ThinkingBarDemo),
       },
       {
         path: 'components/token-counter',
         loadComponent: () => import('./demo/token-counter-demo').then((m) => m.TokenCounterDemo),
-      },
-      {
-        path: 'components/system-message',
-        loadComponent: () => import('./demo/system-message-demo').then((m) => m.SystemMessageDemo),
       },
       {
         path: 'components/steps',

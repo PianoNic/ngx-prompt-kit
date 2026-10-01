@@ -1,7 +1,8 @@
 // ngx-prompt-kit original — not part of ibelick/prompt-kit
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideBrain, lucideLoaderCircle, lucideWrench } from '@ng-icons/lucide';
+import { lucideBrain, lucideWrench } from '@ng-icons/lucide';
+import { HlmSpinner } from '@spartan-ng/helm/spinner';
 import { PkChainOfThoughtImports } from '../chain-of-thought';
 import { PkReasoningImports } from '../reasoning';
 import { PkCodeBlockImports } from '../code-block';
@@ -38,8 +39,9 @@ export interface PkCotStep {
     ...PkCodeBlockImports,
     PkMarkdown,
     NgIcon,
+    HlmSpinner,
   ],
-  providers: [provideIcons({ lucideBrain, lucideLoaderCircle, lucideWrench })],
+  providers: [provideIcons({ lucideBrain, lucideWrench })],
   host: { class: 'block' },
   template: `
     @if (steps().length > 0) {
@@ -62,12 +64,11 @@ export interface PkCotStep {
                 </pk-chain-of-thought-content>
               } @else {
                 <pk-chain-of-thought-trigger [leftIcon]="true">
-                  <ng-icon
-                    class="text-[length:--spacing(3)]"
-                    leftIcon
-                    [name]="step.output == null ? 'lucideLoaderCircle' : 'lucideWrench'"
-                    [class.animate-spin]="step.output == null"
-                  />
+                  @if (step.output == null) {
+                    <hlm-spinner leftIcon class="text-[length:--spacing(3)]" />
+                  } @else {
+                    <ng-icon leftIcon name="lucideWrench" class="text-[length:--spacing(3)]" />
+                  }
                   {{ step.output == null ? runningLabel() : ranLabel() }} {{ step.name }}
                 </pk-chain-of-thought-trigger>
                 <pk-chain-of-thought-content>

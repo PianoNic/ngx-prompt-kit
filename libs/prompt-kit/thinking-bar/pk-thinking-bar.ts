@@ -15,17 +15,18 @@
  * Note: React used callback presence (onStop, onClick) as the toggle. We expose
  * explicit boolean inputs (showStop, clickable) and always-defined outputs to
  * keep the API signal-friendly.
+ *
+ * The label shimmers with spartan's `shimmer` utility, from `@spartan-ng/brain/hlm-tailwind-preset.css`.
  */
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronRight } from '@ng-icons/lucide';
 import { cn } from '../utils/cn';
-import { PkTextShimmer } from '../text-shimmer/pk-text-shimmer';
 
 @Component({
   selector: 'pk-thinking-bar',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgIcon, PkTextShimmer],
+  imports: [NgIcon],
   providers: [provideIcons({ lucideChevronRight })],
   template: `
     <div [class]="computedClass()">
@@ -35,14 +36,14 @@ import { PkTextShimmer } from '../text-shimmer/pk-text-shimmer';
           (click)="clicked.emit()"
           class="flex items-center gap-1 text-sm transition-opacity hover:opacity-80"
         >
-          <pk-text-shimmer class="font-medium" [text]="text()" />
+          <span class="shimmer font-medium">{{ text() }}</span>
           <ng-icon
             name="lucideChevronRight"
             class="text-[length:--spacing(3)] text-muted-foreground"
           />
         </button>
       } @else {
-        <pk-text-shimmer class="cursor-default font-medium" [text]="text()" />
+        <span class="shimmer cursor-default font-medium">{{ text() }}</span>
       }
       @if (showStop()) {
         <button

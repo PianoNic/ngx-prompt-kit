@@ -1,16 +1,33 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideKey, lucideRocket, lucideUserPlus } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
+import { HlmCard, HlmCardContent } from '@spartan-ng/helm/card';
+import { HlmEmptyImports } from '@spartan-ng/helm/empty';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
-import { PkChatEmptyImports, type ChatEmptySuggestion } from 'ngx-prompt-kit/chat-empty';
 import { PkTodoListImports, type PkTodoItem } from 'ngx-prompt-kit/todo-list';
+
+interface Suggestion {
+  label: string;
+  icon: string;
+  /** Id of the setup task the card ticks off. */
+  task: string;
+}
 
 @Component({
   selector: 'app-block-setup-tour',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [BlockPage, DocExample, HlmButton, PkChatEmptyImports, PkTodoListImports],
+  imports: [
+    BlockPage,
+    DocExample,
+    HlmButton,
+    HlmCard,
+    HlmCardContent,
+    HlmEmptyImports,
+    NgIcon,
+    PkTodoListImports,
+  ],
   providers: [provideIcons({ lucideKey, lucideRocket, lucideUserPlus })],
   template: `
     <app-block-page
@@ -19,12 +36,35 @@ import { PkTodoListImports, type PkTodoItem } from 'ngx-prompt-kit/todo-list';
     >
       <app-doc-example title="Hero + checklist with auto-collapse" [code]="code">
         <div class="flex w-full flex-col gap-6">
-          <pk-chat-empty
-            title="Welcome to ngx-prompt-kit"
-            subtitle="Three quick steps to get you streaming."
-            [suggestions]="suggestions"
-            (suggestionPicked)="onPick($event)"
-          />
+          <hlm-empty class="p-0">
+            <hlm-empty-header>
+              <h2 hlmEmptyTitle class="text-3xl font-medium tracking-tight">
+                Welcome to ngx-prompt-kit
+              </h2>
+              <p hlmEmptyDescription>Three quick steps to get you streaming.</p>
+            </hlm-empty-header>
+            <hlm-empty-content class="max-w-3xl flex-row flex-wrap justify-center gap-3">
+              @for (s of suggestions; track s.label) {
+                <button
+                  type="button"
+                  (click)="onPick(s)"
+                  class="basis-full text-left sm:basis-[calc(50%-0.375rem)] lg:basis-[170px]"
+                >
+                  <div hlmCard class="hover:bg-accent h-full transition-colors">
+                    <div hlmCardContent class="flex flex-col gap-2">
+                      <ng-icon
+                        [name]="s.icon"
+                        class="text-[length:--spacing(4)] text-muted-foreground"
+                      />
+                      <span class="text-foreground text-sm font-medium leading-snug">
+                        {{ s.label }}
+                      </span>
+                    </div>
+                  </div>
+                </button>
+              }
+            </hlm-empty-content>
+          </hlm-empty>
 
           <div class="mx-auto w-full max-w-md">
             <pk-todo-list
@@ -53,10 +93,10 @@ export class SetupTourBlock {
   ]);
   protected readonly allDone = signal(false);
 
-  protected readonly suggestions: ChatEmptySuggestion[] = [
-    { label: 'Add your API key', icon: 'lucideKey', prompt: 'auth' },
-    { label: 'Pick a default model', icon: 'lucideRocket', prompt: 'pick' },
-    { label: 'Invite a teammate', icon: 'lucideUserPlus', prompt: 'invite' },
+  protected readonly suggestions: Suggestion[] = [
+    { label: 'Add your API key', icon: 'lucideKey', task: 'auth' },
+    { label: 'Pick a default model', icon: 'lucideRocket', task: 'pick' },
+    { label: 'Invite a teammate', icon: 'lucideUserPlus', task: 'invite' },
   ];
 
   protected onToggle(item: PkTodoItem): void {
@@ -65,12 +105,10 @@ export class SetupTourBlock {
     );
   }
 
-  protected onPick(s: ChatEmptySuggestion): void {
-    if (s.prompt) {
-      this.items.update((list) =>
-        list.map((it) => (it.id === s.prompt ? { ...it, done: !it.done } : it)),
-      );
-    }
+  protected onPick(s: Suggestion): void {
+    this.items.update((list) =>
+      list.map((it) => (it.id === s.task ? { ...it, done: !it.done } : it)),
+    );
   }
 
   protected onAllDone(): void {
@@ -82,12 +120,25 @@ export class SetupTourBlock {
     this.items.update((list) => list.map((it) => ({ ...it, done: false })));
   }
 
-  protected readonly code = `<pk-chat-empty
-  title="Welcome to ngx-prompt-kit"
-  subtitle="Three quick steps to get you streaming."
-  [suggestions]="suggestions"
-  (suggestionPicked)="onPick($event)"
-/>
+  protected readonly code = `<!-- spartan empty state with a card per task -->
+<hlm-empty>
+  <hlm-empty-header>
+    <h2 hlmEmptyTitle>Welcome to ngx-prompt-kit</h2>
+    <p hlmEmptyDescription>Three quick steps to get you streaming.</p>
+  </hlm-empty-header>
+  <hlm-empty-content class="flex-row flex-wrap justify-center gap-3">
+    @for (s of suggestions; track s.label) {
+      <button type="button" (click)="onPick(s)" class="text-left">
+        <div hlmCard class="hover:bg-accent h-full">
+          <div hlmCardContent class="flex flex-col gap-2">
+            <ng-icon [name]="s.icon" />
+            <span class="text-sm font-medium">{{ s.label }}</span>
+          </div>
+        </div>
+      </button>
+    }
+  </hlm-empty-content>
+</hlm-empty>
 
 <pk-todo-list
   title="setup tasks"

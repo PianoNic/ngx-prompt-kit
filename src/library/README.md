@@ -20,14 +20,14 @@
 
 ## About
 
-Port of [ibelick/prompt-kit](https://github.com/ibelick/prompt-kit) to Angular. Components for building AI chat UIs — message threads, prompt input, streaming responses, markdown rendering, code blocks, and more.
+Port of [ibelick/prompt-kit](https://github.com/ibelick/prompt-kit) to Angular. Components for building AI chat UIs — chat turns, a composer, streaming responses, markdown rendering, code blocks, and more.
 
 Distributed via Angular schematics: `ng add` and `ng generate` copy source into your project, where you own and edit the code. No runtime dependency on this package after generation.
 
 ## Features
 
 - **Schematic-based** — Source lands in your project, no version-pinning hell
-- **Spartan UI native** — Composes with the helm primitives you already use
+- **Spartan UI native** — Built on the brain and helm primitives you already use
 - **Signal-based** — `input()`, `output()`, `model()`, `viewChild()` throughout
 - **OnPush by default** — Every component uses `ChangeDetectionStrategy.OnPush`
 - **SSR-safe** — All browser APIs guarded with `isPlatformBrowser` / `afterNextRender`
@@ -60,8 +60,8 @@ Prompts for an install path and persists it to `components.json` under `promptKi
 ## Add components
 
 ```bash
-ng generate ngx-prompt-kit:message
-ng generate ngx-prompt-kit:prompt-input
+ng generate ngx-prompt-kit:composer
+ng generate ngx-prompt-kit:chat-turn
 ng generate ngx-prompt-kit:markdown
 ```
 
@@ -78,8 +78,59 @@ ng generate ngx-prompt-kit:ui
 Or skip the prompt:
 
 ```bash
-ng generate ngx-prompt-kit:ui --components=message,prompt-input,markdown
+ng generate ngx-prompt-kit:ui --components=composer,chat-turn,markdown
 ```
+
+| Component                | Helm dependencies                         | Other deps    |
+| ------------------------ | ----------------------------------------- | ------------- |
+| `approval`               | badge, button, card, spinner              | —             |
+| `attachment-preview`     | attachment                                | —             |
+| `auth-image`             | skeleton                                  | —             |
+| `branch-nav`             | button                                    | —             |
+| `chain-of-thought`       | — (brain collapsible)                     | —             |
+| `chain-of-thought-steps` | spinner                                   | shiki, marked |
+| `chat-container`         | —                                         | —             |
+| `chat-turn`              | bubble, button                            | —             |
+| `code-block`             | —                                         | shiki         |
+| `composer`               | button, textarea                          | —             |
+| `conversation-list`      | button, dropdown-menu, input              | —             |
+| `cost-display`           | —                                         | —             |
+| `feedback-bar`           | button                                    | —             |
+| `file-upload`            | —                                         | —             |
+| `image`                  | skeleton                                  | —             |
+| `markdown`               | —                                         | marked        |
+| `message-actions-bar`    | button, tooltip                           | —             |
+| `message-edit`           | button, dropdown-menu, textarea           | —             |
+| `model-browser`          | input-group                               | —             |
+| `model-list`             | input-group                               | —             |
+| `model-picker`           | badge, button, dropdown-menu, input-group | —             |
+| `model-selector`         | button, input-group, sheet                | —             |
+| `prompt-suggestion`      | button                                    | —             |
+| `reasoning`              | — (brain collapsible)                     | —             |
+| `response-stream`        | —                                         | —             |
+| `source`                 | hover-card                                | —             |
+| `steps`                  | — (brain collapsible)                     | —             |
+| `stream-controls`        | button                                    | —             |
+| `thinking-bar`           | — (spartan `shimmer` utility)             | —             |
+| `todo-list`              | — (brain collapsible)                     | —             |
+| `token-counter`          | progress                                  | —             |
+| `tool`                   | badge, spinner                            | —             |
+| `tool-steps`             | —                                         | shiki         |
+| `usage-card`             | avatar, button, card, progress, tooltip   | —             |
+
+### Use spartan/ui directly for these
+
+Earlier versions shipped components that spartan/ui now covers. They were removed; reach for the spartan helm component instead:
+
+| Removed          | Use instead                                                        |
+| ---------------- | ------------------------------------------------------------------ |
+| `loader`         | `hlm-spinner`, or the `shimmer` utility for text                   |
+| `text-shimmer`   | the `shimmer` utility from spartan's tailwind preset               |
+| `scroll-button`  | an `hlmBtn` calling `pk-chat-container-root`'s `scrollToBottom()`  |
+| `message`        | `hlm-message` with `hlm-bubble` and `hlm-avatar` (+ `pk-markdown`) |
+| `system-message` | `hlm-alert`                                                        |
+| `chat-empty`     | `hlm-empty`                                                        |
+| `prompt-input`   | `hlm-input-group` with `hlmInputGroupTextarea`, or `pk-composer`   |
 
 Helm prerequisites must be installed separately via Spartan's CLI:
 
@@ -91,21 +142,21 @@ ng g @spartan-ng/cli:ui
 
 ```typescript
 import { Component, signal } from '@angular/core';
-import { PkPromptInputImports } from 'libs/prompt-kit/prompt-input';
+import { PkComposerImports } from 'libs/prompt-kit/composer';
 
 @Component({
   selector: 'app-chat',
-  imports: [PkPromptInputImports],
+  imports: [PkComposerImports],
   template: `
-    <pk-prompt-input [(value)]="value" (submitted)="onSubmit()">
-      <pk-prompt-input-textarea placeholder="Ask anything..." />
-    </pk-prompt-input>
+    <pk-composer-dock variant="card">
+      <pk-composer [(value)]="value" (submitted)="onSubmit($event)" placeholder="Ask anything..." />
+    </pk-composer-dock>
   `,
 })
 export class Chat {
   protected readonly value = signal('');
-  protected onSubmit(): void {
-    console.log('submitted:', this.value());
+  protected onSubmit(text: string): void {
+    console.log('submitted:', text);
   }
 }
 ```

@@ -2,22 +2,27 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
   forwardRef,
+  inject,
   input,
   model,
-  signal,
+  OnInit,
+  untracked,
 } from '@angular/core';
+import { BrnCollapsible } from '@spartan-ng/brain/collapsible';
 import {
   CHAIN_OF_THOUGHT_STEP_STATE,
   type ChainOfThoughtStepState,
 } from './chain-of-thought.state';
 
+/** One step of the timeline: a spartan brain collapsible with the line down to the next step. */
 @Component({
   selector: 'pk-chain-of-thought-step',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  hostDirectives: [BrnCollapsible],
   host: {
     'data-slot': 'cot-step',
-    '[attr.data-state]': "isOpen() ? 'open' : 'closed'",
     '[attr.data-last]': 'last()',
     class: 'group block',
   },
@@ -33,28 +38,39 @@ import {
     }
   `,
 })
-export class PkChainOfThoughtStep implements ChainOfThoughtStepState {
+export class PkChainOfThoughtStep implements ChainOfThoughtStepState, OnInit {
   public readonly open = model<boolean | undefined>(undefined);
   public readonly defaultOpen = input<boolean>(false);
   public readonly last = input<boolean>(false);
 
-  private readonly internalOpen = signal<boolean>(false);
+  private readonly collapsible = inject(BrnCollapsible);
+  private syncing = false;
 
-  constructor() {
-    this.internalOpen.set(this.defaultOpen());
-  }
-
-  public readonly isOpen = computed(() => {
-    const o = this.open();
-    return o !== undefined ? o : this.internalOpen();
-  });
-
+  public readonly isOpen = computed(() => this.collapsible.expanded());
   public readonly isLast = computed(() => this.last());
 
+  constructor() {
+    // The trigger toggles the collapsible directly; report that through `open`.
+    this.collapsible.expanded.subscribe((expanded) => {
+      if (!this.syncing) this.open.set(expanded);
+    });
+    effect(() => {
+      const open = this.open();
+      if (open !== undefined) untracked(() => this.setExpanded(open));
+    });
+  }
+
+  ngOnInit(): void {
+    if (this.open() === undefined) this.setExpanded(this.defaultOpen());
+  }
+
   public toggle(): void {
-    const isControlled = this.open() !== undefined;
-    const next = !this.isOpen();
-    if (!isControlled) this.internalOpen.set(next);
-    this.open.set(next);
+    this.collapsible.toggle();
+  }
+
+  private setExpanded(expanded: boolean): void {
+    this.syncing = true;
+    this.collapsible.expanded.set(expanded);
+    this.syncing = false;
   }
 }

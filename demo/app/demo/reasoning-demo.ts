@@ -47,7 +47,7 @@ I need to find a number that, when **multiplied by itself**, equals 144.
   template: `
     <app-doc-page
       title="Reasoning"
-      description="A collapsible component for showing AI reasoning, explanations, or logic. Auto-expands while a stream is in progress and collapses when it ends. Markdown supported."
+      description="A collapsible component for showing AI reasoning, explanations, or logic. Auto-expands while a stream is in progress and collapses when it ends. Markdown supported. Built on spartan's brain collapsible, which measures the content for the open/close animation and puts aria-expanded / aria-controls on the trigger."
     >
       <app-doc-example
         title="Basic Usage"

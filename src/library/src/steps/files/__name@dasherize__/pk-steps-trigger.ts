@@ -1,21 +1,16 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronDown } from '@ng-icons/lucide';
+import { BrnCollapsibleTrigger } from '@spartan-ng/brain/collapsible';
 import { cn } from '../utils/cn';
-import { STEPS_STATE } from './steps.state';
 
 @Component({
   selector: 'pk-steps-trigger',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgIcon],
+  imports: [BrnCollapsibleTrigger, NgIcon],
   providers: [provideIcons({ lucideChevronDown })],
   template: `
-    <button
-      type="button"
-      [class]="computedClass()"
-      [attr.data-state]="state.isOpen() ? 'open' : 'closed'"
-      (click)="state.toggle()"
-    >
+    <button brnCollapsibleTrigger [class]="computedClass()">
       <div class="flex items-center gap-2">
         @if (hasLeftIcon()) {
           <span class="relative inline-flex size-4 items-center justify-center">
@@ -49,7 +44,6 @@ export class PkStepsTrigger {
   public readonly swapIconOnHover = input<boolean>(true);
   public readonly class = input<string>('');
 
-  protected readonly state = inject(STEPS_STATE);
   protected readonly hasLeftIcon = computed(() => this.leftIcon());
   protected readonly computedClass = computed(() =>
     cn(

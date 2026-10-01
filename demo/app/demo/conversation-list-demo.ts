@@ -20,7 +20,7 @@ const now = Date.now();
     <app-doc-page
       title="Conversation List"
       [original]="true"
-      description="Sidebar of past conversations. Optional date grouping (Today / Yesterday / Last 7 Days / Older), inline rename, and a hover-revealed actions menu."
+      description="Sidebar of past conversations. Optional date grouping (Today / Yesterday / Last 7 Days / Older), inline rename (an hlmInput), and a hover-revealed spartan dropdown menu."
     >
       <app-doc-example
         title="Grouped by date"

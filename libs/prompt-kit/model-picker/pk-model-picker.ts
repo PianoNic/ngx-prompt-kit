@@ -17,6 +17,7 @@ import {
   HlmDropdownMenuItem,
   HlmDropdownMenuTrigger,
 } from '@spartan-ng/helm/dropdown-menu';
+import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 import { cn } from '../utils/cn';
 import { formatModelPrice, type Model, type ModelTier } from './pk-model-types';
 
@@ -29,6 +30,7 @@ import { formatModelPrice, type Model, type ModelTier } from './pk-model-types';
     HlmDropdownMenu,
     HlmDropdownMenuItem,
     HlmDropdownMenuTrigger,
+    HlmInputGroupImports,
     NgIcon,
   ],
   providers: [provideIcons({ lucideCheck, lucideChevronDown, lucideSearch })],
@@ -67,23 +69,21 @@ import { formatModelPrice, type Model, type ModelTier } from './pk-model-types';
     <ng-template #menu>
       <hlm-dropdown-menu class="min-w-[280px]">
         @if (searchable()) {
-          <div
-            class="border-border flex items-center gap-2 border-b px-3 py-2"
-            (click)="$event.stopPropagation()"
-          >
-            <ng-icon
-              name="lucideSearch"
-              class="text-[length:--spacing(3)] text-muted-foreground shrink-0"
-            />
-            <input
-              type="text"
-              [value]="query()"
-              (input)="onSearch($event)"
-              (keydown)="$event.stopPropagation()"
-              [placeholder]="searchPlaceholder()"
-              class="text-foreground placeholder:text-muted-foreground w-full bg-transparent text-sm outline-none"
-              aria-label="Search models"
-            />
+          <div class="border-border border-b p-1.5" (click)="$event.stopPropagation()">
+            <hlm-input-group>
+              <hlm-input-group-addon>
+                <ng-icon name="lucideSearch" />
+              </hlm-input-group-addon>
+              <input
+                hlmInputGroupInput
+                type="text"
+                [value]="query()"
+                (input)="onSearch($event)"
+                (keydown)="$event.stopPropagation()"
+                [placeholder]="searchPlaceholder()"
+                aria-label="Search models"
+              />
+            </hlm-input-group>
           </div>
         }
         @for (m of filtered(); track m.id) {
