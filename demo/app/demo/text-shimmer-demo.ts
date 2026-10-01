@@ -12,7 +12,7 @@ import { PkTextShimmer } from 'ngx-prompt-kit/text-shimmer';
   template: `
     <app-doc-page
       title="Text Shimmer"
-      description="A subtle gradient sweep across text — useful for placeholders, status labels, and 'thinking' states."
+      description="A subtle gradient sweep across text — useful for placeholders, status labels, and 'thinking' states. Under reduced motion it is plain muted text. It is only the look: put role=&quot;status&quot; on the element around it where screen readers should hear it."
     >
       <app-doc-example
         title="Default"

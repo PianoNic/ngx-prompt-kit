@@ -10,6 +10,8 @@ export interface SelectorModel {
   maker: string;
   /** Brand icon (URL or data URI). `modelIconUrl` from `../model-icon` resolves one from an id. */
   iconUrl?: string;
+  /** The maker's own icon for the rail, when a model's icon is a sub-brand's (Gemma under Google). Falls back to the first model's `iconUrl`. */
+  makerIconUrl?: string;
   /** One line shown under the name (truncated). Also searched. */
   description?: string;
   /** Small chip labels next to the name, e.g. `Vision`, `Reasoning`. Also searched. */

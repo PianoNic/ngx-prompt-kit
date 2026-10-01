@@ -1,6 +1,7 @@
 // ngx-prompt-kit original — not part of ibelick/prompt-kit
 import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { CdkConnectedOverlay, type ConnectedPosition } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   afterNextRender,
@@ -11,14 +12,16 @@ import {
   DestroyRef,
   Directive,
   DOCUMENT,
-  type ElementRef,
+  ElementRef,
   inject,
   Injector,
   input,
   model,
   output,
   signal,
+  TemplateRef,
   viewChild,
+  ViewContainerRef,
 } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
@@ -83,12 +86,89 @@ interface ListGroup {
 
 let nextId = 0;
 
+/**
+ * Drag-to-close for the phone sheet: the sheet follows the finger down from the handle or title,
+ * closes when let go far enough down (or flicked), and springs back otherwise. It moves with the
+ * `translate` property, which the sheet's own closing animation (a transform) adds to, so closing
+ * carries on from where the finger let go.
+ */
+@Directive({
+  selector: '[pkSheetDrag]',
+  host: {
+    class: 'touch-none',
+    '(pointerdown)': 'down($event)',
+    '(pointermove)': 'move($event)',
+    '(pointerup)': 'up($event)',
+    '(pointercancel)': 'up($event)',
+  },
+})
+export class PkSheetDrag {
+  public readonly dismissed = output<void>();
+
+  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+  private pointer: number | null = null;
+  private startY = 0;
+  private startTime = 0;
+  private offset = 0;
+  private dragging = false;
+
+  private get sheet(): HTMLElement | null {
+    return this.host.nativeElement.closest('hlm-sheet-content');
+  }
+
+  protected down(event: PointerEvent): void {
+    this.pointer = event.pointerId;
+    this.startY = event.clientY;
+    this.startTime = event.timeStamp;
+    this.offset = 0;
+    this.dragging = false;
+  }
+
+  protected move(event: PointerEvent): void {
+    if (event.pointerId !== this.pointer) return;
+    const offset = Math.max(0, event.clientY - this.startY);
+    // A few pixels before it counts as a drag, so a tap on the close button stays a tap.
+    if (!this.dragging && offset < DRAG_SLOP) return;
+    const sheet = this.sheet;
+    if (!sheet) return;
+    if (!this.dragging) {
+      this.dragging = true;
+      this.host.nativeElement.setPointerCapture(event.pointerId);
+      sheet.style.transition = 'none';
+    }
+    this.offset = offset;
+    sheet.style.translate = `0 ${offset}px`;
+  }
+
+  protected up(event: PointerEvent): void {
+    if (event.pointerId !== this.pointer) return;
+    this.pointer = null;
+    const sheet = this.sheet;
+    if (!this.dragging || !sheet) return;
+    this.dragging = false;
+    const speed = this.offset / Math.max(1, event.timeStamp - this.startTime);
+    if (this.offset > CLOSE_DISTANCE || speed > CLOSE_SPEED) {
+      this.dismissed.emit();
+      return;
+    }
+    sheet.style.transition = 'translate 200ms cubic-bezier(0.2, 0, 0, 1)';
+    sheet.style.translate = '';
+  }
+}
+
+/** Px the finger moves before a press on the sheet's top becomes a drag. */
+const DRAG_SLOP = 4;
+/** Px down, or px per ms on average, at which letting go closes the sheet. */
+const CLOSE_DISTANCE = 120;
+const CLOSE_SPEED = 0.6;
+
 @Component({
   selector: 'pk-model-selector',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CdkConnectedOverlay,
     CdkTrapFocus,
+    PkSheetDrag,
     NgTemplateOutlet,
     NgIcon,
     HlmButton,
@@ -158,26 +238,43 @@ let nextId = 0;
         [showCloseButton]="false"
         class="gap-0 rounded-t-[22px] border-0 p-0 data-[side=bottom]:h-[min(680px,88dvh)]"
       >
-        <div class="flex shrink-0 justify-center pt-2 pb-1" aria-hidden="true">
-          <span class="bg-border h-1 w-9 rounded-full"></span>
-        </div>
-        <div class="flex shrink-0 items-center justify-between py-1 pr-2 pl-[18px]">
-          <h2 hlmSheetTitle class="text-[17px] font-semibold">{{ title() }}</h2>
-          <button
-            hlmBtn
-            variant="ghost"
-            size="icon-lg"
-            type="button"
-            aria-label="Close"
-            class="size-11 rounded-xl"
-            (click)="ctx.close()"
-          >
-            <ng-icon name="lucideX" aria-hidden="true" class="text-[length:--spacing(5)]" />
-          </button>
+        <!-- Drag the handle or the title down to close the sheet. -->
+        <div pkSheetDrag class="shrink-0" (dismissed)="ctx.close()">
+          <div class="flex shrink-0 justify-center pt-2 pb-1" aria-hidden="true">
+            <span class="bg-border h-1 w-9 rounded-full"></span>
+          </div>
+          <div class="flex shrink-0 items-center justify-between py-1 pr-2 pl-[18px]">
+            <h2 hlmSheetTitle class="text-[17px] font-semibold">{{ title() }}</h2>
+            <button
+              hlmBtn
+              variant="ghost"
+              size="icon-lg"
+              type="button"
+              aria-label="Close"
+              class="size-11 rounded-xl"
+              (click)="ctx.close()"
+            >
+              <ng-icon name="lucideX" aria-hidden="true" class="text-[length:--spacing(5)]" />
+            </button>
+          </div>
         </div>
         <ng-container *ngTemplateOutlet="panel; context: { $implicit: true }" />
       </hlm-sheet-content>
     </hlm-sheet>
+
+    <!-- Desktop with \`inline\`: the same panel, shown in the page's flow through \`inlinePortal\`. -->
+    <ng-template #inlinePanel>
+      <div
+        role="dialog"
+        data-pk-model-selector-inline
+        [attr.aria-label]="title()"
+        cdkTrapFocus
+        [class]="inlinePanelClass()"
+        (keydown.escape)="closeInline(true)"
+      >
+        <ng-container *ngTemplateOutlet="panel; context: { $implicit: false }" />
+      </div>
+    </ng-template>
 
     <ng-template #panel let-mobile>
       <div
@@ -227,19 +324,6 @@ let nextId = 0;
             </button>
           }
         </div>
-        @if (!mobile) {
-          <button
-            hlmBtn
-            variant="ghost"
-            size="icon-lg"
-            type="button"
-            aria-label="Close"
-            class="text-muted-foreground shrink-0 rounded-[10px]"
-            (click)="closeDesktop(true)"
-          >
-            <ng-icon name="lucideX" aria-hidden="true" class="text-[length:--spacing(4.5)]" />
-          </button>
-        }
       </div>
 
       @if (mobile && !searching()) {
@@ -284,10 +368,11 @@ let nextId = 0;
       }
 
       <div class="flex min-h-0 grow">
+        <!-- The rail and the footer are drawn in --pk-model-selector-rail-fill, falling back to a muted tint. -->
         @if (!mobile && !searching()) {
           <nav
             [attr.aria-label]="railLabel()"
-            class="bg-muted/40 flex w-[196px] shrink-0 flex-col gap-0.5 overflow-y-auto border-r px-2 py-2.5"
+            class="bg-[var(--pk-model-selector-rail-fill,color-mix(in_oklab,var(--muted)_40%,transparent))] flex w-[196px] shrink-0 flex-col gap-0.5 overflow-y-auto border-r px-2 py-2.5"
           >
             @if (hasSections()) {
               <button
@@ -457,7 +542,9 @@ let nextId = 0;
           [class]="
             cn(
               'text-muted-foreground shrink-0 border-t text-xs',
-              mobile ? 'px-[18px] pt-2.5 pb-[18px]' : 'bg-muted/40 px-4 py-2.5'
+              mobile
+                ? 'px-[18px] pt-2.5 pb-[18px]'
+                : 'bg-[var(--pk-model-selector-rail-fill,color-mix(in_oklab,var(--muted)_40%,transparent))] px-4 py-2.5'
             )
           "
         >
@@ -492,6 +579,11 @@ export class PkModelSelector {
    * composer). Defaults to the trigger, with a 784px panel.
    */
   public readonly anchor = input<ElementRef<HTMLElement> | HTMLElement | null>(null);
+  /**
+   * On desktop, open in the page's flow instead of a floating panel: the page renders
+   * `inlinePortal` (a `cdkPortalOutlet`) where the panel belongs, e.g. below a centred composer.
+   */
+  public readonly inline = input<boolean>(false);
   public readonly class = input<string>('');
 
   /** Emits the chosen model id after a row is picked (the panel closes). */
@@ -518,7 +610,23 @@ export class PkModelSelector {
 
   protected readonly desktopOpen = signal(false);
   private readonly sheetOpen = signal(false);
-  protected readonly isOpen = computed(() => this.desktopOpen() || this.sheetOpen());
+  private readonly inlineOpen = signal(false);
+  protected readonly isOpen = computed(
+    () => this.desktopOpen() || this.sheetOpen() || this.inlineOpen(),
+  );
+  private readonly inlinePanelRef = viewChild.required<TemplateRef<unknown>>('inlinePanel');
+  private readonly viewContainer = inject(ViewContainerRef);
+  /** The open inline panel, for the page's `cdkPortalOutlet`; null while closed. */
+  public readonly inlinePortal = computed(() =>
+    this.inlineOpen() ? new TemplatePortal(this.inlinePanelRef(), this.viewContainer) : null,
+  );
+  /** A pointer down outside the inline panel and the trigger closes it, as one outside the overlay does. */
+  private readonly onOutsidePointer = (event: PointerEvent): void => {
+    const target = event.target as Element | null;
+    if (target?.closest('[data-pk-model-selector-inline]')) return;
+    if (this.triggerRef().nativeElement.contains(target)) return;
+    this.closeInline(false);
+  };
   protected readonly query = signal('');
   protected readonly view = signal<string>('');
   protected readonly activeIndex = signal(-1);
@@ -528,8 +636,14 @@ export class PkModelSelector {
   protected readonly hostClass = computed(() => cn('inline-block', this.class()));
   protected readonly desktopPanelClass = computed(() =>
     cn(
-      'bg-popover text-popover-foreground flex h-[min(560px,calc(100dvh-6rem))] flex-col overflow-hidden rounded-2xl border shadow-[0_20px_48px_rgb(10_10_10/0.14)] outline-none dark:shadow-[0_20px_48px_rgb(0_0_0/0.5)]',
+      'bg-popover text-popover-foreground flex h-[min(560px,calc(100dvh-6rem))] flex-col overflow-hidden rounded-[12px] border shadow-[0_0_5px_rgb(10_10_10/0.2)] outline-none dark:shadow-[0_0_5px_rgb(0_0_0/0.8)]',
       this.anchor() ? 'w-full' : 'w-[min(784px,calc(100vw-1rem))]',
+    ),
+  );
+
+  protected readonly inlinePanelClass = computed(() =>
+    cn(
+      'bg-popover text-popover-foreground flex h-[min(560px,calc(100dvh-22rem))] min-h-80 w-full flex-col overflow-hidden rounded-[12px] border shadow-[0_0_5px_rgb(10_10_10/0.2)] outline-none dark:shadow-[0_0_5px_rgb(0_0_0/0.8)]',
     ),
   );
 
@@ -560,8 +674,10 @@ export class PkModelSelector {
     const seen = new Map<string, Maker>();
     for (const m of this.models()) {
       const existing = seen.get(m.maker);
-      if (!existing) seen.set(m.maker, { name: m.maker, iconUrl: m.iconUrl });
-      else if (!existing.iconUrl && m.iconUrl) existing.iconUrl = m.iconUrl;
+      const icon = m.makerIconUrl ?? m.iconUrl;
+      if (!existing) seen.set(m.maker, { name: m.maker, iconUrl: icon });
+      else if (m.makerIconUrl) existing.iconUrl = m.makerIconUrl;
+      else if (!existing.iconUrl && icon) existing.iconUrl = icon;
     }
     return [...seen.values()];
   });
@@ -665,6 +781,7 @@ export class PkModelSelector {
     if (mql) {
       const onChange = (): void => {
         if (this.desktopOpen()) this.closeDesktop(false);
+        if (this.inlineOpen()) this.closeInline(false);
         if (this.sheetOpen()) this.sheet().close();
       };
       mql.addEventListener('change', onChange);
@@ -675,7 +792,11 @@ export class PkModelSelector {
   public open(): void {
     if (this.isOpen() || this.disabled()) return;
     this.resetPanelState();
-    if (this.isDesktop()) {
+    if (this.isDesktop() && this.inline()) {
+      this.inlineOpen.set(true);
+      this.document.addEventListener('pointerdown', this.onOutsidePointer, true);
+      this.onDesktopAttach();
+    } else if (this.isDesktop()) {
       this.desktopOpen.set(true);
     } else {
       this.sheetOpen.set(true);
@@ -686,6 +807,7 @@ export class PkModelSelector {
 
   public close(): void {
     if (this.desktopOpen()) this.closeDesktop(true);
+    if (this.inlineOpen()) this.closeInline(true);
     if (this.sheetOpen()) this.sheet().close();
   }
 
@@ -709,6 +831,14 @@ export class PkModelSelector {
       },
       { injector: this.injector },
     );
+  }
+
+  protected closeInline(restoreFocus: boolean): void {
+    if (!this.inlineOpen()) return;
+    this.inlineOpen.set(false);
+    this.document.removeEventListener('pointerdown', this.onOutsidePointer, true);
+    this.openChange.emit(false);
+    if (restoreFocus) this.triggerRef().nativeElement.focus();
   }
 
   /** CDK detaches on Escape (and on our own close); keep state and focus in sync. */
@@ -774,6 +904,7 @@ export class PkModelSelector {
     this.value.set(m.id);
     this.selected.emit(m.id);
     if (this.desktopOpen()) this.closeDesktop(true);
+    if (this.inlineOpen()) this.closeInline(true);
     if (this.sheetOpen()) this.sheet().close();
   }
 

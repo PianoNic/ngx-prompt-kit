@@ -1,3 +1,4 @@
+import { CdkPortalOutlet } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowUp, lucidePlus } from '@ng-icons/lucide';
@@ -221,13 +222,22 @@ const CATALOG: ApiModel[] = [
 @Component({
   selector: 'app-model-selector-demo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DocPage, DocExample, DocInstall, DocApi, PkModelSelectorImports, HlmButton, NgIcon],
+  imports: [
+    CdkPortalOutlet,
+    DocPage,
+    DocExample,
+    DocInstall,
+    DocApi,
+    PkModelSelectorImports,
+    HlmButton,
+    NgIcon,
+  ],
   providers: [provideIcons({ lucideArrowUp, lucidePlus })],
   template: `
     <app-doc-page
       title="Model Selector"
       [original]="true"
-      description="A composer's model switcher: a compact trigger pill that opens a wide panel with search, a maker rail, admin-curated sections, price tiers and credit estimates. On phones it becomes a bottom sheet with maker chips."
+      description="A composer's model switcher: a compact trigger pill that opens a wide panel with search, a maker rail, admin-curated sections, price tiers and credit estimates. On phones it becomes a bottom sheet with maker chips, which closes when dragged down by its handle or title."
     >
       <app-doc-example
         title="In a composer"
@@ -289,6 +299,45 @@ const CATALOG: ApiModel[] = [
         }
       </app-doc-example>
 
+      <app-doc-example
+        title="Inline, below a centred composer"
+        description="With [inline], the desktop panel opens in the page's flow instead of floating: the page renders inlinePortal through a cdkPortalOutlet where the panel belongs, here in place of the suggestions under an empty chat's composer. Escape and a click outside close it. Phones still get the bottom sheet."
+        [code]="inlineCode"
+      >
+        <div class="flex min-h-[620px] flex-col items-center gap-6 pt-10">
+          <div #centred class="bg-background w-full rounded-3xl border p-3 pl-4 shadow-sm">
+            <label for="demo-inline-prompt" class="sr-only">Message</label>
+            <textarea
+              id="demo-inline-prompt"
+              rows="1"
+              placeholder="Ask anything"
+              class="placeholder:text-muted-foreground w-full resize-none bg-transparent px-0.5 py-1 text-[15px] outline-none"
+            ></textarea>
+            <div class="mt-1.5 flex items-center justify-end">
+              <pk-model-selector
+                #inlineSelector
+                [models]="models"
+                [sections]="sections"
+                [(value)]="inlineModelId"
+                [anchor]="centred"
+                [inline]="true"
+              />
+            </div>
+          </div>
+          @if (inlineSelector.inlinePortal(); as portal) {
+            <div class="w-full">
+              <ng-template [cdkPortalOutlet]="portal" />
+            </div>
+          } @else {
+            <div class="flex flex-wrap justify-center gap-2">
+              @for (suggestion of suggestions; track suggestion) {
+                <button hlmBtn variant="outline" size="sm" type="button">{{ suggestion }}</button>
+              }
+            </div>
+          }
+        </div>
+      </app-doc-example>
+
       <app-doc-install component="model-selector" />
       <app-doc-api [sections]="api" />
     </app-doc-page>
@@ -297,6 +346,8 @@ const CATALOG: ApiModel[] = [
 export class ModelSelectorDemo {
   protected readonly modelId = signal<string | null>('anthropic/claude-sonnet-5.5');
   protected readonly lastSelected = signal<string | null>(null);
+  protected readonly inlineModelId = signal<string | null>('openai/gpt-5');
+  protected readonly suggestions = ['Plan a trip', 'Explain a concept', 'Review my code'];
 
   protected readonly models: SelectorModel[] = CATALOG.map((m) => ({
     id: m.id,
@@ -364,6 +415,13 @@ export class ModelSelectorDemo {
           default: 'null',
           description:
             'Element the desktop panel aligns to and matches the width of (e.g. the composer). Without it the panel is 784px wide, aligned to the trigger’s end.',
+        },
+        {
+          name: 'inline',
+          type: 'boolean',
+          default: 'false',
+          description:
+            'On desktop, open in the page’s flow instead of a floating panel. The page renders inlinePortal where the panel belongs. Escape and a pointer down outside the panel and trigger close it.',
         },
         {
           name: 'placeholder',
@@ -437,6 +495,12 @@ export class ModelSelectorDemo {
           description: 'Fires when the panel or sheet opens or closes.',
         },
         {
+          name: 'inlinePortal',
+          type: 'Signal<TemplatePortal | null>',
+          description:
+            'With [inline], the open panel for a cdkPortalOutlet in the page; null while closed.',
+        },
+        {
           name: 'open() / close()',
           type: 'void',
           description: 'Imperative control, e.g. from a keyboard shortcut.',
@@ -451,6 +515,18 @@ export class ModelSelectorDemo {
           type: 'element',
           description:
             'Footer strip content (note + balance). Laid out as a space-between row; use md:hidden / hidden md:inline for phone-specific text.',
+        },
+      ],
+    },
+    {
+      name: 'CSS variables',
+      props: [
+        {
+          name: '--pk-model-selector-rail-fill',
+          type: 'color',
+          default: 'var(--muted) at 40%',
+          description:
+            'Fill of the desktop maker rail and footer, e.g. var(--sidebar) to match a sidebar layout. Set it where the overlay can inherit it, such as :root.',
         },
       ],
     },
@@ -472,6 +548,12 @@ export class ModelSelectorDemo {
           name: 'iconUrl',
           type: 'string?',
           description: 'Brand icon; modelIconUrl() from model-icon resolves one.',
+        },
+        {
+          name: 'makerIconUrl',
+          type: 'string?',
+          description:
+            'The maker’s own icon for the rail, when a model’s icon is a sub-brand’s (Gemma under Google). Falls back to the first model’s iconUrl.',
         },
         {
           name: 'description',
@@ -523,6 +605,24 @@ export class ModelSelectorDemo {
       ],
     },
   ];
+
+  protected readonly inlineCode = `<div #composer class="rounded-3xl border p-3">
+  <textarea …></textarea>
+  <pk-model-selector
+    #selector
+    [models]="models"
+    [(value)]="modelId"
+    [anchor]="composer"
+    [inline]="true"
+  />
+</div>
+
+<!-- The panel opens here, in the page's flow, while it is open. -->
+@if (selector.inlinePortal(); as portal) {
+  <ng-template [cdkPortalOutlet]="portal" />
+} @else {
+  <suggestions />
+}`;
 
   protected readonly composerCode = `<div #composer class="rounded-3xl border p-3">
   <textarea …></textarea>

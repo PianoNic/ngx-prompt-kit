@@ -112,14 +112,14 @@ const MODELS: SelectorModel[] = [
 
       <app-doc-example
         title="Docked in a chat panel"
-        description="The dock draws a band in the page colour with a raised notch around the composer. The panel is relative and clips, and squares its bottom corners while a docked composer is inside. (occupied) reports how much of the panel the band covers, so the thread pads its bottom by that much."
+        description="The dock draws a band in the page colour with a raised notch around the composer. The panel is relative and clips; its bottom corners stay rounded, since they meet the band in the page colour. (occupied) reports how much of the panel the band covers, so the thread pads its bottom by that much."
         [code]="dockedCode"
       >
         <div
           class="bg-background overflow-hidden rounded-2xl px-2 pt-2 [--background:var(--muted)]"
         >
           <div
-            class="bg-card relative h-[480px] overflow-hidden rounded-[18px] shadow-[inset_0_2px_10px_-2px_rgb(10_10_10/0.14),inset_0_0_0_1px_rgb(10_10_10/0.05)] has-[pk-composer-dock[data-variant=docked]]:rounded-b-none dark:shadow-[inset_0_2px_12px_-2px_rgb(0_0_0/0.85),inset_0_0_0_1px_rgb(255_255_255/0.04)]"
+            class="bg-card relative h-[480px] overflow-hidden rounded-[18px] shadow-[inset_0_2px_10px_-2px_rgb(10_10_10/0.14),inset_0_0_0_1px_rgb(10_10_10/0.05)] dark:shadow-[inset_0_2px_12px_-2px_rgb(0_0_0/0.85),inset_0_0_0_1px_rgb(255_255_255/0.04)]"
           >
             <div
               class="flex h-full flex-col gap-6 overflow-y-auto px-4 pt-5 md:px-6"
@@ -432,7 +432,14 @@ export class ComposerDemo {
           name: 'data-variant',
           type: 'attribute',
           description:
-            'Host attribute mirroring variant. Square the panel’s bottom corners with has-[pk-composer-dock[data-variant=docked]]:rounded-b-none.',
+            'Host attribute mirroring variant, e.g. to style the panel while a composer is docked in it.',
+        },
+        {
+          name: '--pk-composer-dock-fill',
+          type: 'CSS variable',
+          default: 'var(--background)',
+          description:
+            'Colour of the docked band and of the wrapper over its notch. Set it to the page colour around the panel when that is not --background, e.g. var(--sidebar) in a sidebar layout.',
         },
       ],
     },
@@ -451,11 +458,8 @@ export class ComposerDemo {
 
   protected readonly dockedCode = `<!-- The page: its colour is --background, which the band is drawn in. -->
 <div class="bg-background px-2 pt-2">
-  <!-- The panel: relative, clips, and squares its bottom corners while docked. -->
-  <main
-    class="bg-card relative h-[480px] overflow-hidden rounded-[18px] shadow-[inset_…]
-           has-[pk-composer-dock[data-variant=docked]]:rounded-b-none"
-  >
+  <!-- The panel: relative and clips. Its rounded bottom corners meet the band in the page colour. -->
+  <main class="bg-card relative h-[480px] overflow-hidden rounded-[18px] shadow-[inset_…]">
     <div class="h-full overflow-y-auto" [style.padding-bottom.px]="occupied() + 24">
       @for (turn of thread(); track $index) { … }
     </div>
