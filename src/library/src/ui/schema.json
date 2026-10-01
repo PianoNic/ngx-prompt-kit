@@ -30,6 +30,7 @@
           "chat-turn",
           "prompt-suggestion",
           "reasoning",
+          "reasoning-selector",
           "response-stream",
           "source",
           "steps",
@@ -123,6 +124,10 @@
           {
             "value": "reasoning",
             "label": "reasoning"
+          },
+          {
+            "value": "reasoning-selector",
+            "label": "reasoning-selector"
           },
           {
             "value": "response-stream",

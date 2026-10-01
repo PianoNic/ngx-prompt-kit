@@ -28,6 +28,7 @@
       "ngx-prompt-kit/prompt-suggestion": ["./libs/prompt-kit/prompt-suggestion"],
       "ngx-prompt-kit/file-upload": ["./libs/prompt-kit/file-upload"],
       "ngx-prompt-kit/reasoning": ["./libs/prompt-kit/reasoning"],
+      "ngx-prompt-kit/reasoning-selector": ["./libs/prompt-kit/reasoning-selector"],
       "ngx-prompt-kit/text-shimmer": ["./libs/prompt-kit/text-shimmer"],
       "ngx-prompt-kit/thinking-bar": ["./libs/prompt-kit/thinking-bar"],
       "ngx-prompt-kit/system-message": ["./libs/prompt-kit/system-message"],

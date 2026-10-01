@@ -49,6 +49,7 @@ const COMPONENT_TITLES: Readonly<Record<string, string>> = {
   'model-selector': 'Model Selector',
   'prompt-suggestion': 'Prompt Suggestion',
   reasoning: 'Reasoning',
+  'reasoning-selector': 'Reasoning Selector',
   'response-stream': 'Response Stream',
   source: 'Source',
   steps: 'Steps',
