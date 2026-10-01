@@ -105,6 +105,7 @@ ng generate ngx-prompt-kit:ui --components=composer,chat-turn,markdown
 | `model-selector`         | button, input-group, sheet              | —             |
 | `prompt-suggestion`      | button                                  | —             |
 | `reasoning`              | — (brain collapsible)                   | —             |
+| `reasoning-selector`     | button, dropdown-menu                   | —             |
 | `response-stream`        | —                                       | —             |
 | `source`                 | hover-card                              | —             |
 | `steps`                  | — (brain collapsible)                   | —             |

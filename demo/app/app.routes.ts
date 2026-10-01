@@ -206,6 +206,11 @@ export const routes: Routes = [
         loadComponent: () => import('./demo/reasoning-demo').then((m) => m.ReasoningDemo),
       },
       {
+        path: 'components/reasoning-selector',
+        loadComponent: () =>
+          import('./demo/reasoning-selector-demo').then((m) => m.ReasoningSelectorDemo),
+      },
+      {
         path: 'components/token-counter',
         loadComponent: () => import('./demo/token-counter-demo').then((m) => m.TokenCounterDemo),
       },

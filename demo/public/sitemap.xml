@@ -231,6 +231,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://ngx-prompt-kit.pianonic.ch/components/reasoning-selector</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://ngx-prompt-kit.pianonic.ch/components/response-stream</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

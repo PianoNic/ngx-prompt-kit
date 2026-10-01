@@ -22,6 +22,7 @@ export const PROMPT_KIT_COMPONENTS = [
   'chat-turn',
   'prompt-suggestion',
   'reasoning',
+  'reasoning-selector',
   'response-stream',
   'source',
   'steps',

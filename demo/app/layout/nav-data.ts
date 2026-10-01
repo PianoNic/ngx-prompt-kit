@@ -48,6 +48,7 @@ export const NAV: NavGroup[] = [
       { label: 'Model Selector', path: '/components/model-selector', badge: 'New' },
       { label: 'Prompt Suggestion', path: '/components/prompt-suggestion' },
       { label: 'Reasoning', path: '/components/reasoning' },
+      { label: 'Reasoning Selector', path: '/components/reasoning-selector', badge: 'New' },
       { label: 'Response Stream', path: '/components/response-stream' },
       { label: 'Source', path: '/components/source' },
       { label: 'Steps', path: '/components/steps' },

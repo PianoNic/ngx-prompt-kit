@@ -136,6 +136,11 @@
       "factory": "./reasoning/index#reasoning",
       "schema": "./reasoning/schema.json"
     },
+    "reasoning-selector": {
+      "description": "Add the reasoning-selector component (ngx-prompt-kit original).",
+      "factory": "./reasoning-selector/index#reasoningSelector",
+      "schema": "./reasoning-selector/schema.json"
+    },
     "response-stream": {
       "description": "Add the response-stream component.",
       "factory": "./response-stream/index#responseStream",

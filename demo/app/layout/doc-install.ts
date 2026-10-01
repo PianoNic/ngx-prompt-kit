@@ -18,6 +18,7 @@ const HELM: Readonly<Record<string, readonly string[]>> = {
   'model-browser': ['input-group'],
   'model-selector': ['button', 'input-group', 'sheet'],
   'prompt-suggestion': ['button'],
+  'reasoning-selector': ['button', 'dropdown-menu'],
   source: ['hover-card'],
   'token-counter': ['progress'],
   tool: ['badge', 'spinner'],
