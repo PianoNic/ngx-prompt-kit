@@ -75,56 +75,56 @@ ng generate ngx-prompt-kit:ui                                       # interactiv
 ng generate ngx-prompt-kit:ui --components=composer,chat-turn      # non-interactive
 ```
 
-| Component                | Helm dependencies                         | Other deps    |
-| ------------------------ | ----------------------------------------- | ------------- |
-| `approval`               | badge, button, card, spinner              | —             |
-| `attachment-preview`     | attachment                                | —             |
-| `auth-image`             | skeleton                                  | —             |
-| `branch-nav`             | button                                    | —             |
-| `chain-of-thought`       | — (brain collapsible)                     | —             |
-| `chain-of-thought-steps` | spinner                                   | shiki, marked |
-| `chat-container`         | —                                         | —             |
-| `chat-turn`              | bubble, button                            | —             |
-| `code-block`             | —                                         | shiki         |
-| `composer`               | button, textarea                          | —             |
-| `conversation-list`      | button, dropdown-menu, input              | —             |
-| `cost-display`           | —                                         | —             |
-| `feedback-bar`           | button                                    | —             |
-| `file-upload`            | —                                         | —             |
-| `image`                  | skeleton                                  | —             |
-| `markdown`               | —                                         | marked        |
-| `message-actions-bar`    | button, tooltip                           | —             |
-| `message-edit`           | button, dropdown-menu, textarea           | —             |
-| `model-browser`          | input-group                               | —             |
-| `model-list`             | input-group                               | —             |
-| `model-picker`           | badge, button, dropdown-menu, input-group | —             |
-| `model-selector`         | button, input-group, sheet                | —             |
-| `prompt-suggestion`      | button                                    | —             |
-| `reasoning`              | — (brain collapsible)                     | —             |
-| `response-stream`        | —                                         | —             |
-| `source`                 | hover-card                                | —             |
-| `steps`                  | — (brain collapsible)                     | —             |
-| `stream-controls`        | button                                    | —             |
-| `thinking-bar`           | — (spartan `shimmer` utility)             | —             |
-| `todo-list`              | — (brain collapsible)                     | —             |
-| `token-counter`          | progress                                  | —             |
-| `tool`                   | badge, spinner                            | —             |
-| `tool-steps`             | —                                         | shiki         |
-| `usage-card`             | avatar, button, card, progress, tooltip   | —             |
+| Component                | Helm dependencies                       | Other deps    |
+| ------------------------ | --------------------------------------- | ------------- |
+| `approval`               | badge, button, card, spinner            | —             |
+| `attachment-preview`     | attachment                              | —             |
+| `auth-image`             | skeleton                                | —             |
+| `branch-nav`             | button                                  | —             |
+| `chain-of-thought`       | — (brain collapsible)                   | —             |
+| `chain-of-thought-steps` | spinner                                 | shiki, marked |
+| `chat-container`         | —                                       | —             |
+| `chat-turn`              | bubble, button                          | —             |
+| `code-block`             | —                                       | shiki         |
+| `composer`               | button, textarea                        | —             |
+| `conversation-list`      | button, dropdown-menu, input            | —             |
+| `cost-display`           | —                                       | —             |
+| `feedback-bar`           | button                                  | —             |
+| `file-upload`            | —                                       | —             |
+| `image`                  | skeleton                                | —             |
+| `markdown`               | —                                       | marked        |
+| `message-actions-bar`    | button, tooltip                         | —             |
+| `message-edit`           | button, dropdown-menu, textarea         | —             |
+| `model-browser`          | input-group                             | —             |
+| `model-selector`         | button, input-group, sheet              | —             |
+| `prompt-suggestion`      | button                                  | —             |
+| `reasoning`              | — (brain collapsible)                   | —             |
+| `response-stream`        | —                                       | —             |
+| `source`                 | hover-card                              | —             |
+| `steps`                  | — (brain collapsible)                   | —             |
+| `todo-list`              | — (brain collapsible)                   | —             |
+| `token-counter`          | progress                                | —             |
+| `tool`                   | badge, spinner                          | —             |
+| `tool-steps`             | —                                       | shiki         |
+| `usage-card`             | avatar, button, card, progress, tooltip | —             |
 
 ### Use spartan/ui directly for these
 
-Earlier versions shipped components that spartan/ui now covers. They were removed; reach for the spartan helm component instead:
+Earlier versions shipped components that spartan/ui, or another ngx-prompt-kit component, now covers. They were removed; use these instead:
 
-| Removed          | Use instead                                                        |
-| ---------------- | ------------------------------------------------------------------ |
-| `loader`         | `hlm-spinner`, or the `shimmer` utility for text                   |
-| `text-shimmer`   | the `shimmer` utility from spartan's tailwind preset               |
-| `scroll-button`  | an `hlmBtn` calling `pk-chat-container-root`'s `scrollToBottom()`  |
-| `message`        | `hlm-message` with `hlm-bubble` and `hlm-avatar` (+ `pk-markdown`) |
-| `system-message` | `hlm-alert`                                                        |
-| `chat-empty`     | `hlm-empty`                                                        |
-| `prompt-input`   | `hlm-input-group` with `hlmInputGroupTextarea`, or `pk-composer`   |
+| Removed           | Use instead                                                               |
+| ----------------- | ------------------------------------------------------------------------- |
+| `loader`          | `hlm-spinner`, or the `shimmer` utility for text                          |
+| `text-shimmer`    | the `shimmer` utility from spartan's tailwind preset                      |
+| `scroll-button`   | an `hlmBtn` calling `pk-chat-container-root`'s `scrollToBottom()`         |
+| `message`         | `hlm-message` with `hlm-bubble` and `hlm-avatar` (+ `pk-markdown`)        |
+| `system-message`  | `hlm-alert`                                                               |
+| `chat-empty`      | `hlm-empty`                                                               |
+| `prompt-input`    | `hlm-input-group` with `hlmInputGroupTextarea`, or `pk-composer`          |
+| `model-picker`    | `pk-model-selector`                                                       |
+| `model-list`      | `pk-model-selector`, or `pk-model-browser` for a catalogue page           |
+| `stream-controls` | an `hlmBtn` that swaps Stop / Regenerate (`pk-composer` already has stop) |
+| `thinking-bar`    | a `shimmer` span, or `pk-reasoning` / `pk-chain-of-thought`               |
 
 Helm prerequisites must be installed separately via Spartan's CLI:
 
@@ -160,6 +160,7 @@ See the [live demo](https://ngx-prompt-kit.pianonic.ch) for every component with
 ## Notes
 
 - Re-running a component schematic overwrites the existing files. If you've customized them, commit your changes first.
+- `model-icon` copies a monochrome icon per OpenRouter vendor (with `SOURCES.md` licence notes) to `public/model-icons` (`--assets-path` to change it) and generates `providerIconUrl()` / `makerIconUrl()` for `pk-model-selector` and `pk-model-browser`. Nothing is fetched from a third party.
 - You own the generated source — edit freely. Updates to this package won't push changes to your code.
 - `image` uses Angular's `NgOptimizedImage` directive when given a real `src` URL; falls back to a native `<img>` for base64/blob payloads.
 

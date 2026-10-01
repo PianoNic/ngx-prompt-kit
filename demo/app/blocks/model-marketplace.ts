@@ -6,9 +6,10 @@ import {
   type BrowserFilter,
   type BrowserModel,
 } from 'ngx-prompt-kit/model-browser';
+import { makerIconUrl } from 'ngx-prompt-kit/model-icon';
 
-const ICON = (name: string) =>
-  `https://unpkg.com/@lobehub/icons-static-svg@latest/icons/${name}.svg`;
+/** The bundled icon of an OpenRouter vendor, from the model-icon utility. */
+const ICON = (vendor: string) => makerIconUrl({ id: `${vendor}/` });
 
 @Component({
   selector: 'app-block-model-marketplace',
@@ -80,7 +81,7 @@ export class ModelMarketplaceBlock {
     {
       id: 'gemini-pro',
       name: 'Gemini 2.5 Pro',
-      iconUrl: ICON('gemini'),
+      iconUrl: ICON('google'),
       provider: 'Google',
       group: 'Frontier',
       description: "Google's frontier model with native 2M context. Strong on long-document tasks.",

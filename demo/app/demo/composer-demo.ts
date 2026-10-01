@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { PkChatTurnImports } from 'ngx-prompt-kit/chat-turn';
 import { PkComposerImports } from 'ngx-prompt-kit/composer';
-import { modelIconUrl } from 'ngx-prompt-kit/model-icon';
+import { providerIconUrl } from 'ngx-prompt-kit/model-icon';
 import { PkModelSelectorImports, type SelectorModel } from 'ngx-prompt-kit/model-selector';
 import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
@@ -59,7 +59,7 @@ const MODELS: SelectorModel[] = [
     priceTier: 1,
     costLabel: '≈ 3 credits',
   },
-].map((m) => ({ ...m, iconUrl: modelIconUrl({ id: m.id }) }) as SelectorModel);
+].map((m) => ({ ...m, iconUrl: providerIconUrl({ id: m.id }) }) as SelectorModel);
 
 @Component({
   selector: 'app-composer-demo',
@@ -217,7 +217,7 @@ const MODELS: SelectorModel[] = [
   `,
 })
 export class ComposerDemo {
-  protected readonly sonnetIcon = modelIconUrl({ id: 'anthropic/claude-sonnet-5.5' });
+  protected readonly sonnetIcon = providerIconUrl({ id: 'anthropic/claude-sonnet-5.5' });
   protected readonly models = MODELS;
 
   protected readonly cardDraft = signal('');

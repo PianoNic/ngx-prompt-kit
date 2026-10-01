@@ -46,16 +46,12 @@ const COMPONENT_TITLES: Readonly<Record<string, string>> = {
   'message-actions-bar': 'Message Actions Bar',
   'message-edit': 'Message Edit',
   'model-browser': 'Model Browser',
-  'model-list': 'Model List',
-  'model-picker': 'Model Picker',
   'model-selector': 'Model Selector',
   'prompt-suggestion': 'Prompt Suggestion',
   reasoning: 'Reasoning',
   'response-stream': 'Response Stream',
   source: 'Source',
   steps: 'Steps',
-  'stream-controls': 'Stream Controls',
-  'thinking-bar': 'Thinking Bar',
   'todo-list': 'Todo List',
   'token-counter': 'Token Counter',
   tool: 'Tool',
@@ -72,6 +68,10 @@ const REMOVED_COMPONENTS: readonly string[] = [
   'system-message',
   'chat-empty',
   'prompt-input',
+  'model-picker',
+  'model-list',
+  'stream-controls',
+  'thinking-bar',
 ];
 
 /** Public list of every prerender-able URL. Read by sitemap generator. */
@@ -123,7 +123,7 @@ export function metaForUrl(url: string): PageMeta {
     return {
       title: `Spartan replacements · ${SITE.name}`,
       description:
-        'Components ngx-prompt-kit dropped because spartan/ui ships them — loader, text shimmer, scroll button, message, system message, chat empty state and prompt input — and the spartan helm component to use for each.',
+        'Components ngx-prompt-kit dropped because spartan/ui ships them — loader, text shimmer, scroll button, message, system message, chat empty state, prompt input, model picker/list, stream controls and thinking bar — and what to use for each.',
       path,
       changefreq: 'monthly',
       priority: 0.7,
@@ -212,7 +212,7 @@ export function metaForUrl(url: string): PageMeta {
     return {
       title: `Model Icon helper · ${SITE.name}`,
       description:
-        'modelIconUrl() for ngx-prompt-kit — resolves an AI model to a LobeHub brand icon (with a neutral fallback) for pk-model-picker / pk-model-list. Schematic command included.',
+        'providerIconUrl() and makerIconUrl() for ngx-prompt-kit — a bundled, self-hosted icon per OpenRouter vendor (with a neutral fallback) for pk-model-selector and pk-model-browser. Schematic command included.',
       path,
       changefreq: 'monthly',
       priority: 0.6,

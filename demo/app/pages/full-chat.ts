@@ -43,7 +43,8 @@ import {
   PkMessageActionsBarImports,
 } from 'ngx-prompt-kit/message-actions-bar';
 import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit';
-import { type Model, PkModelPickerImports } from 'ngx-prompt-kit/model-picker';
+import { makerIconUrl } from 'ngx-prompt-kit/model-icon';
+import { PkModelSelectorImports, type SelectorModel } from 'ngx-prompt-kit/model-selector';
 import { PkResponseStream } from 'ngx-prompt-kit/response-stream';
 import { PkTokenCounter } from 'ngx-prompt-kit/token-counter';
 import { FULL_CHAT_HTML_SOURCE } from './full-chat.source';
@@ -58,7 +59,8 @@ interface ChatMessage {
   attachments?: Attachment[];
 }
 
-const ICON = (n: string) => `https://unpkg.com/@lobehub/icons-static-svg@latest/icons/${n}.svg`;
+/** The bundled icon of an OpenRouter vendor, from the model-icon utility. */
+const ICON = (vendor: string) => makerIconUrl({ id: `${vendor}/` });
 
 const SAMPLE_ATTACHMENT_IMAGE =
   'data:image/svg+xml;utf8,' +
@@ -89,7 +91,7 @@ const SAMPLE_ATTACHMENT_IMAGE =
     PkMarkdown,
     PkMessageActionsBarImports,
     PkMessageEditImports,
-    PkModelPickerImports,
+    PkModelSelectorImports,
     PkResponseStream,
     PkTokenCounter,
     HlmMessageImports,
@@ -119,44 +121,36 @@ export class FullChat {
   protected readonly userAvatar = 'https://avatars.githubusercontent.com/u/79938743?v=4';
   protected readonly fullChatHtmlSource = FULL_CHAT_HTML_SOURCE;
 
-  protected readonly models: Model[] = [
+  protected readonly models: SelectorModel[] = [
     {
       id: 'claude-opus',
       name: 'Claude Opus 4.7',
+      maker: 'Anthropic',
       iconUrl: ICON('anthropic'),
-      provider: 'Anthropic',
-      tier: 'smart',
-      tagline: 'Best for complex multi-step reasoning',
-      inputPricePer1M: 15,
-      outputPricePer1M: 75,
+      description: 'Best for complex multi-step reasoning',
+      priceTier: 3,
     },
     {
       id: 'claude-sonnet',
       name: 'Claude Sonnet 4.6',
+      maker: 'Anthropic',
       iconUrl: ICON('anthropic'),
-      provider: 'Anthropic',
-      tier: 'balanced',
-      tagline: 'Default for most workloads',
-      inputPricePer1M: 3,
-      outputPricePer1M: 15,
+      description: 'Default for most workloads',
+      priceTier: 2,
     },
     {
       id: 'gpt-5',
       name: 'GPT-5',
+      maker: 'OpenAI',
       iconUrl: ICON('openai'),
-      provider: 'OpenAI',
-      tier: 'smart',
-      inputPricePer1M: 5,
-      outputPricePer1M: 20,
+      priceTier: 3,
     },
     {
       id: 'qwen3',
       name: 'Qwen3 235B',
+      maker: 'Alibaba',
       iconUrl: ICON('qwen'),
-      provider: 'Alibaba',
-      tier: 'fast',
-      inputPricePer1M: 0.6,
-      outputPricePer1M: 2.4,
+      priceTier: 1,
     },
   ];
 

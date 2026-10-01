@@ -1,32 +1,23 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideCircleAlert, lucideInfo } from '@ng-icons/lucide';
+import { lucideCircleAlert, lucideInfo, lucideRotateCcw, lucideSquare } from '@ng-icons/lucide';
 import { HlmAlertImports } from '@spartan-ng/helm/alert';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { PkFeedbackBar } from 'ngx-prompt-kit/feedback-bar';
-import { PkStreamControlsImports } from 'ngx-prompt-kit/stream-controls';
 
 type Phase = 'error' | 'recovering' | 'recovered';
 
 @Component({
   selector: 'app-block-system-retry',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    BlockPage,
-    DocExample,
-    HlmAlertImports,
-    HlmButton,
-    NgIcon,
-    PkFeedbackBar,
-    PkStreamControlsImports,
-  ],
-  providers: [provideIcons({ lucideCircleAlert, lucideInfo })],
+  imports: [BlockPage, DocExample, HlmAlertImports, HlmButton, NgIcon, PkFeedbackBar],
+  providers: [provideIcons({ lucideCircleAlert, lucideInfo, lucideRotateCcw, lucideSquare })],
   template: `
     <app-block-page
       title="System notice + retry"
-      description="The error-and-recover lane. A failed stream surfaces a spartan alert, stream-controls switches to Try again, and once we recover, a feedback-bar prompts for a rating."
+      description="The error-and-recover lane. A failed stream surfaces a spartan alert, the button switches to Try again, and once we recover, a feedback-bar prompts for a rating."
     >
       <app-doc-example title="Error → retry → feedback" [code]="code">
         <div class="flex w-full max-w-xl flex-col gap-4">
@@ -48,7 +39,17 @@ type Phase = 'error' | 'recovering' | 'recovered';
                 </div>
               </div>
               <div class="flex justify-end">
-                <pk-stream-controls state="error" (regenerate)="retry()" />
+                <button
+                  hlmBtn
+                  variant="outline"
+                  size="sm"
+                  type="button"
+                  class="text-destructive border-destructive/40 hover:bg-destructive/10"
+                  (click)="retry()"
+                >
+                  <ng-icon name="lucideRotateCcw" />
+                  Try again
+                </button>
               </div>
             }
 
@@ -58,7 +59,10 @@ type Phase = 'error' | 'recovering' | 'recovered';
                 <p hlmAlertDescription>Retrying with the same prompt...</p>
               </div>
               <div class="flex justify-end">
-                <pk-stream-controls state="streaming" (stop)="abort()" />
+                <button hlmBtn variant="secondary" size="sm" type="button" (click)="abort()">
+                  <ng-icon name="lucideSquare" />
+                  Stop
+                </button>
               </div>
             }
 
@@ -150,7 +154,17 @@ export class SystemRetryBlock {
         <button hlmBtn variant="outline" size="xs" (click)="showDetails()">Details</button>
       </div>
     </div>
-    <pk-stream-controls state="error" (regenerate)="retry()" />
+    <button
+      hlmBtn
+      variant="outline"
+      size="sm"
+      type="button"
+      class="text-destructive border-destructive/40 hover:bg-destructive/10"
+      (click)="retry()"
+    >
+      <ng-icon name="lucideRotateCcw" />
+      Try again
+    </button>
   }
 
   @case ('recovering') {
@@ -158,7 +172,10 @@ export class SystemRetryBlock {
       <ng-icon name="lucideInfo" />
       <p hlmAlertDescription>Retrying with the same prompt...</p>
     </div>
-    <pk-stream-controls state="streaming" (stop)="abort()" />
+    <button hlmBtn variant="secondary" size="sm" type="button" (click)="abort()">
+      <ng-icon name="lucideSquare" />
+      Stop
+    </button>
   }
 
   @case ('recovered') {

@@ -8,12 +8,14 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { lucideRefreshCw, lucideSquare } from '@ng-icons/lucide';
+import { HlmButton } from '@spartan-ng/helm/button';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmBubbleImports } from '@spartan-ng/helm/bubble';
 import { PkResponseStream } from 'ngx-prompt-kit/response-stream';
-import { PkStreamControlsImports, type StreamControlsState } from 'ngx-prompt-kit/stream-controls';
 
 const FULL_RESPONSE = `Sure — here's a small \`computed()\` example.
 
@@ -40,13 +42,15 @@ Want me to show \`effect()\` next?`;
     HlmAvatarImports,
     HlmBubbleImports,
     PkResponseStream,
-    PkStreamControlsImports,
     HlmMessageImports,
+    HlmButton,
+    NgIcon,
   ],
+  providers: [provideIcons({ lucideRefreshCw, lucideSquare })],
   template: `
     <app-block-page
       title="Streaming assistant message"
-      description="A real assistant turn: user prompt above, the response streams in chunks with markdown + a fenced code block, and stream-controls swap from Stop to Regenerate when it finishes."
+      description="A real assistant turn: user prompt above, the response streams in chunks with markdown + a fenced code block, and the hlmBtn below swaps from Stop to Regenerate when it finishes."
     >
       <app-doc-example title="Live response with stream controls" [code]="code">
         <div class="flex w-full flex-col gap-4">
@@ -77,7 +81,17 @@ Want me to show \`effect()\` next?`;
           </div>
 
           <div class="ml-11 flex">
-            <pk-stream-controls [state]="state()" (stop)="stop()" (regenerate)="start()" />
+            @if (state() === 'streaming') {
+              <button hlmBtn variant="secondary" size="sm" type="button" (click)="stop()">
+                <ng-icon name="lucideSquare" />
+                Stop
+              </button>
+            } @else {
+              <button hlmBtn variant="ghost" size="sm" type="button" (click)="start()">
+                <ng-icon name="lucideRefreshCw" />
+                Regenerate
+              </button>
+            }
           </div>
         </div>
       </app-doc-example>
@@ -89,7 +103,7 @@ export class StreamingMessageBlock {
   private readonly destroyRef = inject(DestroyRef);
   private timer: ReturnType<typeof setTimeout> | null = null;
 
-  protected readonly state = signal<StreamControlsState>('idle');
+  protected readonly state = signal<'idle' | 'streaming'>('idle');
   protected readonly streamed = signal('');
 
   constructor() {
@@ -147,15 +161,21 @@ export class StreamingMessageBlock {
   />
 </div>
 
-<pk-stream-controls
-  [state]="state()"
-  (stop)="stop()"
-  (regenerate)="start()"
-/>
+@if (state() === 'streaming') {
+  <button hlmBtn variant="secondary" size="sm" type="button" (click)="stop()">
+    <ng-icon name="lucideSquare" />
+    Stop
+  </button>
+} @else {
+  <button hlmBtn variant="ghost" size="sm" type="button" (click)="start()">
+    <ng-icon name="lucideRefreshCw" />
+    Regenerate
+  </button>
+}
 
 // Component — chunked append while streaming.
 // pk-markdown re-renders on each update; partial markdown still renders gracefully.
-protected readonly state = signal<StreamControlsState>('idle');
+protected readonly state = signal<'idle' | 'streaming'>('idle');
 protected readonly streamed = signal('');
 
 protected start(): void {

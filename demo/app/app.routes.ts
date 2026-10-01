@@ -119,6 +119,10 @@ export const routes: Routes = [
         'system-message',
         'chat-empty',
         'prompt-input',
+        'model-picker',
+        'model-list',
+        'stream-controls',
+        'thinking-bar',
       ].map((component) => ({
         path: `components/${component}`,
         data: { component },
@@ -141,14 +145,6 @@ export const routes: Routes = [
         path: 'components/message-actions-bar',
         loadComponent: () =>
           import('./demo/message-actions-bar-demo').then((m) => m.MessageActionsBarDemo),
-      },
-      {
-        path: 'components/model-picker',
-        loadComponent: () => import('./demo/model-picker-demo').then((m) => m.ModelPickerDemo),
-      },
-      {
-        path: 'components/model-list',
-        loadComponent: () => import('./demo/model-list-demo').then((m) => m.ModelListDemo),
       },
       {
         path: 'components/model-browser',
@@ -210,21 +206,12 @@ export const routes: Routes = [
         loadComponent: () => import('./demo/reasoning-demo').then((m) => m.ReasoningDemo),
       },
       {
-        path: 'components/thinking-bar',
-        loadComponent: () => import('./demo/thinking-bar-demo').then((m) => m.ThinkingBarDemo),
-      },
-      {
         path: 'components/token-counter',
         loadComponent: () => import('./demo/token-counter-demo').then((m) => m.TokenCounterDemo),
       },
       {
         path: 'components/steps',
         loadComponent: () => import('./demo/steps-demo').then((m) => m.StepsDemo),
-      },
-      {
-        path: 'components/stream-controls',
-        loadComponent: () =>
-          import('./demo/stream-controls-demo').then((m) => m.StreamControlsDemo),
       },
       {
         path: 'components/image',

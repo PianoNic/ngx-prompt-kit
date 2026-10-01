@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowUp, lucidePlus } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
-import { modelIconUrl } from 'ngx-prompt-kit/model-icon';
+import { makerIconUrl, providerIconUrl } from 'ngx-prompt-kit/model-icon';
 import {
   PkModelSelectorImports,
   priceTier,
@@ -354,7 +354,8 @@ export class ModelSelectorDemo {
     name: m.name,
     shortName: m.shortName,
     maker: m.maker,
-    iconUrl: modelIconUrl({ id: m.id }),
+    iconUrl: providerIconUrl({ id: m.id }),
+    makerIconUrl: makerIconUrl({ id: m.id }),
     description: m.description,
     capabilities: m.capabilities,
     priceTier: priceTier(m.input, m.output),
@@ -547,7 +548,8 @@ export class ModelSelectorDemo {
         {
           name: 'iconUrl',
           type: 'string?',
-          description: 'Brand icon; modelIconUrl() from model-icon resolves one.',
+          description:
+            'Brand icon; providerIconUrl() from model-icon resolves one from the bundled set.',
         },
         {
           name: 'makerIconUrl',
@@ -648,7 +650,8 @@ models = api.map((m) => ({
   id: m.id,
   name: m.name,
   maker: m.maker,
-  iconUrl: modelIconUrl({ id: m.id }),
+  iconUrl: providerIconUrl({ id: m.id }),
+  makerIconUrl: makerIconUrl({ id: m.id }),
   description: m.description,
   capabilities: m.capabilities,
   priceTier: priceTier(m.inputPricePer1M, m.outputPricePer1M),

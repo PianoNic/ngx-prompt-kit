@@ -126,16 +126,6 @@
       "factory": "./model-selector/index#modelSelector",
       "schema": "./model-selector/schema.json"
     },
-    "model-list": {
-      "description": "Add the model-list component (ngx-prompt-kit original).",
-      "factory": "./model-list/index#modelList",
-      "schema": "./model-list/schema.json"
-    },
-    "model-picker": {
-      "description": "Add the model-picker component (ngx-prompt-kit original).",
-      "factory": "./model-picker/index#modelPicker",
-      "schema": "./model-picker/schema.json"
-    },
     "prompt-suggestion": {
       "description": "Add the prompt-suggestion component.",
       "factory": "./prompt-suggestion/index#promptSuggestion",
@@ -161,11 +151,6 @@
       "factory": "./steps/index#steps",
       "schema": "./steps/schema.json"
     },
-    "stream-controls": {
-      "description": "Add the stream-controls component (ngx-prompt-kit original).",
-      "factory": "./stream-controls/index#streamControls",
-      "schema": "./stream-controls/schema.json"
-    },
     "streaming": {
       "description": "Add the SSE streaming utility (ngx-prompt-kit original).",
       "factory": "./streaming/index#streaming",
@@ -175,11 +160,6 @@
       "description": "Add the streaming-message helper (ngx-prompt-kit original).",
       "factory": "./streaming-message/index#streamingMessage",
       "schema": "./streaming-message/schema.json"
-    },
-    "thinking-bar": {
-      "description": "Add the thinking-bar component.",
-      "factory": "./thinking-bar/index#thinkingBar",
-      "schema": "./thinking-bar/schema.json"
     },
     "token-counter": {
       "description": "Add the token-counter component (ngx-prompt-kit original).",

@@ -14,7 +14,6 @@ import { HlmAlertImports } from '@spartan-ng/helm/alert';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
-import { PkThinkingBar } from 'ngx-prompt-kit/thinking-bar';
 import { PkTodoListImports, type PkTodoItem } from 'ngx-prompt-kit/todo-list';
 
 interface PlannedTodo extends PkTodoItem {
@@ -32,30 +31,31 @@ const PLAN: PlannedTodo[] = [
 @Component({
   selector: 'app-block-ai-plan',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    BlockPage,
-    DocExample,
-    HlmAlertImports,
-    HlmButton,
-    NgIcon,
-    PkThinkingBar,
-    PkTodoListImports,
-  ],
+  imports: [BlockPage, DocExample, HlmAlertImports, HlmButton, NgIcon, PkTodoListImports],
   providers: [provideIcons({ lucideInfo })],
   template: `
     <app-block-page
       title="AI-driven plan"
-      description="The agent emits a todo list, then walks it. The thinking bar narrates the active step; pk-todo-list ticks each item off as it lands. The user can also click items to override the agent. Once everything is done the list auto-collapses."
+      description="The agent emits a todo list, then walks it. A shimmering status line narrates the active step; pk-todo-list ticks each item off as it lands. The user can also click items to override the agent. Once everything is done the list auto-collapses."
     >
       <app-doc-example title="Agent plans → executes → checks off" [code]="code">
         <div class="mx-auto flex w-full max-w-md flex-col gap-3">
           @if (state() === 'planning' || state() === 'executing') {
-            <pk-thinking-bar
-              [text]="currentLabel()"
-              stopLabel="Stop"
-              [showStop]="true"
-              (stopped)="stop()"
-            />
+            <div class="flex w-full items-center justify-between">
+              <span role="status" class="shimmer text-muted-foreground text-sm font-medium">{{
+                currentLabel()
+              }}</span>
+              <button
+                hlmBtn
+                variant="link"
+                size="sm"
+                type="button"
+                class="text-muted-foreground"
+                (click)="stop()"
+              >
+                Stop
+              </button>
+            </div>
           }
 
           @if (state() === 'done') {
@@ -185,12 +185,19 @@ export class AiPlanBlock {
   protected readonly code = `// AI-driven plan: model emits a todo list, walks it, and the user can intervene.
 
 @if (state() === 'planning' || state() === 'executing') {
-  <pk-thinking-bar
-    [text]="currentLabel()"
-    stopLabel="Stop"
-    [showStop]="true"
-    (stopped)="stop()"
-  />
+  <div class="flex w-full items-center justify-between">
+    <span role="status" class="shimmer text-muted-foreground text-sm font-medium">{{ currentLabel() }}</span>
+    <button
+      hlmBtn
+      variant="link"
+      size="sm"
+      type="button"
+      class="text-muted-foreground"
+      (click)="stop()"
+    >
+      Stop
+    </button>
+  </div>
 }
 
 @if (items().length > 0) {

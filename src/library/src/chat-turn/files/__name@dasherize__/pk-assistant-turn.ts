@@ -72,7 +72,7 @@ const COPIED_FOR_MS = 1500;
 export class PkAssistantTurn {
   /** Name of the model that answered, shown above the reply. */
   public readonly modelName = input('');
-  /** Brand icon for the model (e.g. from `modelIconUrl`). Monochrome icons invert in dark mode. */
+  /** Brand icon for the model (e.g. from `providerIconUrl`). Monochrome icons invert in dark mode. */
   public readonly iconUrl = input<string | undefined>(undefined);
   /** The text the copy button puts on the clipboard; no copy button without it. */
   public readonly copyText = input('');

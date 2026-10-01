@@ -216,16 +216,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://ngx-prompt-kit.pianonic.ch/components/model-list</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://ngx-prompt-kit.pianonic.ch/components/model-picker</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://ngx-prompt-kit.pianonic.ch/components/model-selector</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -252,16 +242,6 @@
   </url>
   <url>
     <loc>https://ngx-prompt-kit.pianonic.ch/components/steps</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://ngx-prompt-kit.pianonic.ch/components/stream-controls</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://ngx-prompt-kit.pianonic.ch/components/thinking-bar</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

@@ -2,7 +2,13 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideArrowUp, lucideInfo, lucidePaperclip } from '@ng-icons/lucide';
+import {
+  lucideArrowUp,
+  lucideInfo,
+  lucidePaperclip,
+  lucideRefreshCw,
+  lucideSquare,
+} from '@ng-icons/lucide';
 import { HlmAlertImports } from '@spartan-ng/helm/alert';
 import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
 import { HlmBubbleImports } from '@spartan-ng/helm/bubble';
@@ -25,6 +31,10 @@ const REMOVED: Readonly<Record<string, string>> = {
   'system-message': 'hlm-alert',
   'chat-empty': 'hlm-empty',
   'prompt-input': 'hlm-input-group with hlmInputGroupTextarea, or pk-composer',
+  'model-picker': 'pk-model-selector',
+  'model-list': 'pk-model-selector, or pk-model-browser for a catalogue page',
+  'stream-controls': 'an hlmBtn that swaps Stop and Regenerate (pk-composer already has stop)',
+  'thinking-bar': 'a span with the shimmer utility, or pk-reasoning / pk-chain-of-thought',
 };
 
 @Component({
@@ -44,11 +54,13 @@ const REMOVED: Readonly<Record<string, string>> = {
     HlmSpinner,
     HlmTooltip,
   ],
-  providers: [provideIcons({ lucideArrowUp, lucideInfo, lucidePaperclip })],
+  providers: [
+    provideIcons({ lucideArrowUp, lucideInfo, lucidePaperclip, lucideRefreshCw, lucideSquare }),
+  ],
   template: `
     <app-doc-page
       title="Spartan replacements"
-      description="Components that spartan/ui now ships were removed from ngx-prompt-kit. Add the spartan helm component with its CLI (ng g @spartan-ng/cli:ui) and compose it as below."
+      description="Components that spartan/ui now ships, or that another ngx-prompt-kit component covers, were removed. Add the spartan helm component with its CLI (ng g @spartan-ng/cli:ui) and compose it as below."
     >
       @if (removed(); as r) {
         <div hlmAlert>
@@ -185,6 +197,49 @@ const REMOVED: Readonly<Record<string, string>> = {
           <ng-icon name="lucideArrowUp" class="rotate-180" />
         </button>
       </app-doc-example>
+
+      <app-doc-example
+        title="model-picker, model-list → pk-model-selector"
+        description="pk-model-selector covers both: search, maker rail, curated sections, price tiers, a bottom sheet on phones and an inline mode. For a full catalogue page use pk-model-browser."
+        [code]="modelCode"
+        [centered]="true"
+      >
+        <p class="text-muted-foreground text-sm">
+          See the Model Selector and Model Browser pages for live examples.
+        </p>
+      </app-doc-example>
+
+      <app-doc-example
+        title="stream-controls → hlmBtn"
+        description="Swap the button on the stream state. Inside pk-composer the send button already turns into stop while busy."
+        [code]="streamControlsCode"
+        [centered]="true"
+      >
+        <div class="flex items-center gap-2">
+          <button hlmBtn variant="secondary" size="sm" type="button">
+            <ng-icon name="lucideSquare" />
+            Stop
+          </button>
+          <button hlmBtn variant="ghost" size="sm" type="button">
+            <ng-icon name="lucideRefreshCw" />
+            Regenerate
+          </button>
+        </div>
+      </app-doc-example>
+
+      <app-doc-example
+        title="thinking-bar → shimmer"
+        description="A status line is a span with the shimmer utility; put a stop button next to it if you need one. To show the thinking itself, use pk-reasoning or pk-chain-of-thought."
+        [code]="thinkingCode"
+        [centered]="true"
+      >
+        <div class="flex w-full max-w-md items-center justify-between">
+          <span role="status" class="shimmer text-muted-foreground text-sm font-medium"
+            >Thinking</span
+          >
+          <button hlmBtn variant="link" size="sm" type="button">Answer now</button>
+        </div>
+      </app-doc-example>
     </app-doc-page>
   `,
 })
@@ -279,6 +334,29 @@ import { HlmEmptyImports } from '@spartan-ng/helm/empty';`;
 </div>
 
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';`;
+
+  protected readonly modelCode = `<pk-model-selector
+  [models]="models"
+  [sections]="sections"
+  [(value)]="modelId"
+/>
+
+import { PkModelSelectorImports } from 'ngx-prompt-kit/model-selector';`;
+
+  protected readonly streamControlsCode = `@if (streaming()) {
+  <button hlmBtn variant="secondary" size="sm" (click)="stop()">
+    <ng-icon name="lucideSquare" /> Stop
+  </button>
+} @else {
+  <button hlmBtn variant="ghost" size="sm" (click)="regenerate()">
+    <ng-icon name="lucideRefreshCw" /> Regenerate
+  </button>
+}`;
+
+  protected readonly thinkingCode = `<div class="flex items-center justify-between">
+  <span role="status" class="shimmer text-muted-foreground font-medium">Thinking</span>
+  <button hlmBtn variant="link" size="sm" (click)="stop()">Answer now</button>
+</div>`;
 
   protected readonly scrollButtonCode = `<pk-chat-container-root #thread class="relative h-96">
   <pk-chat-container-content>…</pk-chat-container-content>

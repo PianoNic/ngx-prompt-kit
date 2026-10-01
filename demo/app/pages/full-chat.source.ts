@@ -121,7 +121,7 @@ export const FULL_CHAT_HTML_SOURCE = `<hlm-tabs tab="preview" class="mx-auto fle
       <section class="flex h-full min-h-0 min-w-0 flex-1 flex-col">
         <!-- Header -->
         <header class="border-border flex items-center justify-between gap-3 border-b px-4 py-2">
-          <pk-model-picker [compact]="true" [models]="models" [(selectedId)]="selectedModelId" />
+          <pk-model-selector [models]="models" [(value)]="selectedModelId" />
           <span class="text-muted-foreground truncate text-xs">
             {{ currentConvoTitle() }}
           </span>
