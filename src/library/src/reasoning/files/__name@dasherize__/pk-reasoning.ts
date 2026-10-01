@@ -4,16 +4,26 @@ import {
   computed,
   effect,
   forwardRef,
+  inject,
   input,
   model,
-  signal,
+  untracked,
 } from '@angular/core';
+import { BrnCollapsible } from '@spartan-ng/brain/collapsible';
 import { REASONING_STATE, type ReasoningState } from './reasoning.state';
 
+/**
+ * A collapsible block for a model's reasoning, built on spartan's brain collapsible.
+ *
+ * Uncontrolled by default; bind `[(open)]` to control it. While `isStreaming` it opens on its own
+ * and closes again when streaming ends, until the reader toggles it themselves.
+ */
 @Component({
   selector: 'pk-reasoning',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  hostDirectives: [BrnCollapsible],
   host: {
+    'data-slot': 'reasoning',
     '[class]': 'class()',
   },
   providers: [{ provide: REASONING_STATE, useExisting: forwardRef(() => PkReasoning) }],
@@ -24,32 +34,43 @@ export class PkReasoning implements ReasoningState {
   public readonly isStreaming = input<boolean>(false);
   public readonly class = input<string>('');
 
-  private readonly internalOpen = signal<boolean>(false);
+  private readonly collapsible = inject(BrnCollapsible);
+  private syncing = false;
   private wasAutoOpened = false;
 
-  public readonly isOpen = computed(() => {
-    const o = this.open();
-    return o !== undefined ? o : this.internalOpen();
-  });
+  public readonly isOpen = computed(() => this.collapsible.expanded());
 
   constructor() {
+    // The trigger toggles the collapsible directly; report that through `open`.
+    this.collapsible.expanded.subscribe((expanded) => {
+      if (!this.syncing) this.open.set(expanded);
+    });
+    effect(() => {
+      const open = this.open();
+      if (open !== undefined) untracked(() => this.setExpanded(open));
+    });
     effect(() => {
       const streaming = this.isStreaming();
-      const isControlled = this.open() !== undefined;
-      if (streaming && !this.wasAutoOpened) {
-        if (!isControlled) this.internalOpen.set(true);
-        this.wasAutoOpened = true;
-      } else if (!streaming && this.wasAutoOpened) {
-        if (!isControlled) this.internalOpen.set(false);
-        this.wasAutoOpened = false;
-      }
+      untracked(() => {
+        const isControlled = this.open() !== undefined;
+        if (streaming && !this.wasAutoOpened) {
+          if (!isControlled) this.setExpanded(true);
+          this.wasAutoOpened = true;
+        } else if (!streaming && this.wasAutoOpened) {
+          if (!isControlled) this.setExpanded(false);
+          this.wasAutoOpened = false;
+        }
+      });
     });
   }
 
   public toggle(): void {
-    const isControlled = this.open() !== undefined;
-    const next = !this.isOpen();
-    if (!isControlled) this.internalOpen.set(next);
-    this.open.set(next);
+    this.collapsible.toggle();
+  }
+
+  private setExpanded(expanded: boolean): void {
+    this.syncing = true;
+    this.collapsible.expanded.set(expanded);
+    this.syncing = false;
   }
 }

@@ -12,7 +12,7 @@ import { PkStepsImports } from 'ngx-prompt-kit/steps';
   template: `
     <app-doc-page
       title="Steps"
-      description="A collapsible numbered/bulleted timeline for tool traces or multi-step agent runs. Vertical bar marks the active section."
+      description="A collapsible numbered/bulleted timeline for tool traces or multi-step agent runs. Vertical bar marks the active section. Built on spartan's brain collapsible."
     >
       <app-doc-example
         title="Default open"

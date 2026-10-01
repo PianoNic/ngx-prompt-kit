@@ -51,11 +51,6 @@
       "factory": "./chat-container/index#chatContainer",
       "schema": "./chat-container/schema.json"
     },
-    "chat-empty": {
-      "description": "Add the chat-empty component (ngx-prompt-kit original).",
-      "factory": "./chat-empty/index#chatEmpty",
-      "schema": "./chat-empty/schema.json"
-    },
     "code-block": {
       "description": "Add the code-block component.",
       "factory": "./code-block/index#codeBlock",
@@ -91,20 +86,10 @@
       "factory": "./image/index#image",
       "schema": "./image/schema.json"
     },
-    "loader": {
-      "description": "Add the loader component.",
-      "factory": "./loader/index#loader",
-      "schema": "./loader/schema.json"
-    },
     "markdown": {
       "description": "Add the markdown component.",
       "factory": "./markdown/index#markdown",
       "schema": "./markdown/schema.json"
-    },
-    "message": {
-      "description": "Add the message component.",
-      "factory": "./message/index#message",
-      "schema": "./message/schema.json"
     },
     "message-actions-bar": {
       "description": "Add the message-actions-bar component (ngx-prompt-kit original).",
@@ -141,21 +126,6 @@
       "factory": "./model-selector/index#modelSelector",
       "schema": "./model-selector/schema.json"
     },
-    "model-list": {
-      "description": "Add the model-list component (ngx-prompt-kit original).",
-      "factory": "./model-list/index#modelList",
-      "schema": "./model-list/schema.json"
-    },
-    "model-picker": {
-      "description": "Add the model-picker component (ngx-prompt-kit original).",
-      "factory": "./model-picker/index#modelPicker",
-      "schema": "./model-picker/schema.json"
-    },
-    "prompt-input": {
-      "description": "Add the prompt-input component.",
-      "factory": "./prompt-input/index#promptInput",
-      "schema": "./prompt-input/schema.json"
-    },
     "prompt-suggestion": {
       "description": "Add the prompt-suggestion component.",
       "factory": "./prompt-suggestion/index#promptSuggestion",
@@ -171,11 +141,6 @@
       "factory": "./response-stream/index#responseStream",
       "schema": "./response-stream/schema.json"
     },
-    "scroll-button": {
-      "description": "Add the scroll-button component.",
-      "factory": "./scroll-button/index#scrollButton",
-      "schema": "./scroll-button/schema.json"
-    },
     "source": {
       "description": "Add the source component.",
       "factory": "./source/index#source",
@@ -186,11 +151,6 @@
       "factory": "./steps/index#steps",
       "schema": "./steps/schema.json"
     },
-    "stream-controls": {
-      "description": "Add the stream-controls component (ngx-prompt-kit original).",
-      "factory": "./stream-controls/index#streamControls",
-      "schema": "./stream-controls/schema.json"
-    },
     "streaming": {
       "description": "Add the SSE streaming utility (ngx-prompt-kit original).",
       "factory": "./streaming/index#streaming",
@@ -200,21 +160,6 @@
       "description": "Add the streaming-message helper (ngx-prompt-kit original).",
       "factory": "./streaming-message/index#streamingMessage",
       "schema": "./streaming-message/schema.json"
-    },
-    "system-message": {
-      "description": "Add the system-message component.",
-      "factory": "./system-message/index#systemMessage",
-      "schema": "./system-message/schema.json"
-    },
-    "text-shimmer": {
-      "description": "Add the text-shimmer component.",
-      "factory": "./text-shimmer/index#textShimmer",
-      "schema": "./text-shimmer/schema.json"
-    },
-    "thinking-bar": {
-      "description": "Add the thinking-bar component.",
-      "factory": "./thinking-bar/index#thinkingBar",
-      "schema": "./thinking-bar/schema.json"
     },
     "token-counter": {
       "description": "Add the token-counter component (ngx-prompt-kit original).",

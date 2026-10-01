@@ -16,12 +16,13 @@
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideThumbsDown, lucideThumbsUp, lucideX } from '@ng-icons/lucide';
+import { HlmButton } from '@spartan-ng/helm/button';
 import { cn } from '../utils/cn';
 
 @Component({
   selector: 'pk-feedback-bar',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgIcon],
+  imports: [HlmButton, NgIcon],
   providers: [provideIcons({ lucideThumbsUp, lucideThumbsDown, lucideX })],
   template: `
     <div [class]="computedClass()">
@@ -32,16 +33,22 @@ import { cn } from '../utils/cn';
         </div>
         <div class="flex items-center justify-center gap-0.5 px-3 py-0">
           <button
+            hlmBtn
+            variant="ghost"
+            size="icon"
             type="button"
-            class="text-muted-foreground hover:text-foreground flex size-8 items-center justify-center rounded-md transition-colors"
+            class="text-muted-foreground"
             aria-label="Helpful"
             (click)="helpful.emit()"
           >
             <ng-icon name="lucideThumbsUp" class="text-[length:--spacing(4)]" />
           </button>
           <button
+            hlmBtn
+            variant="ghost"
+            size="icon"
             type="button"
-            class="text-muted-foreground hover:text-foreground flex size-8 items-center justify-center rounded-md transition-colors"
+            class="text-muted-foreground"
             aria-label="Not helpful"
             (click)="notHelpful.emit()"
           >
@@ -50,9 +57,12 @@ import { cn } from '../utils/cn';
         </div>
         <div class="border-border flex items-center justify-center border-l">
           <button
+            hlmBtn
+            variant="ghost"
+            size="icon"
             type="button"
             (click)="closed.emit()"
-            class="text-muted-foreground hover:text-foreground flex items-center justify-center rounded-md p-3"
+            class="text-muted-foreground m-1"
             aria-label="Close"
           >
             <ng-icon name="lucideX" class="text-[length:--spacing(4)]" />

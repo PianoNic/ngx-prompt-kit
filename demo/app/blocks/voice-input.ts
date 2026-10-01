@@ -2,65 +2,71 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowUp, lucideMic, lucideSquare } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
+import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
+import { HlmTooltip } from '@spartan-ng/helm/tooltip';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
-import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
-import { PkTextShimmer } from 'ngx-prompt-kit/text-shimmer';
 
 type State = 'idle' | 'recording' | 'transcribing';
 
 @Component({
   selector: 'app-block-voice-input',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [BlockPage, DocExample, HlmButton, NgIcon, PkPromptInputImports, PkTextShimmer],
+  imports: [BlockPage, DocExample, HlmButton, HlmInputGroupImports, HlmTooltip, NgIcon],
   providers: [provideIcons({ lucideArrowUp, lucideMic, lucideSquare })],
   template: `
     <app-block-page
       title="Voice input"
-      description="Hold the mic to dictate. While the audio is being transcribed, a text-shimmer label sits above the input until the transcript drops in."
+      description="Hold the mic to dictate. While the audio is being transcribed, a shimmering label (spartan's shimmer utility) sits above the input until the transcript drops in."
     >
       <app-doc-example title="Mic → transcribing → ready to send" [code]="code">
         <div class="mx-auto flex w-full max-w-xl flex-col gap-3">
           @if (state() === 'transcribing') {
-            <pk-text-shimmer text="Transcribing audio…" class="text-sm" />
+            <span role="status" class="shimmer text-muted-foreground text-sm font-medium">
+              Transcribing audio…
+            </span>
           }
 
-          <pk-prompt-input [(value)]="value" (submitted)="onSubmit()">
-            <pk-prompt-input-textarea
+          <div hlmInputGroup class="rounded-3xl">
+            <textarea
+              hlmInputGroupTextarea
+              class="max-h-60 px-4 pt-3"
+              aria-label="Message"
               [placeholder]="state() === 'recording' ? 'Listening...' : 'Speak or type'"
-            />
-            <pk-prompt-input-actions class="mt-2 justify-between">
-              <pk-prompt-input-action [tooltip]="state() === 'recording' ? 'Stop' : 'Voice'">
-                <button
-                  hlmBtn
-                  size="icon-sm"
-                  [variant]="state() === 'recording' ? 'destructive' : 'ghost'"
-                  type="button"
-                  class="rounded-full"
-                  aria-label="Toggle voice"
-                  (click)="toggleVoice()"
-                >
-                  <ng-icon
-                    class="text-[length:--spacing(4)]"
-                    [name]="state() === 'recording' ? 'lucideSquare' : 'lucideMic'"
-                  />
-                </button>
-              </pk-prompt-input-action>
-              <pk-prompt-input-action tooltip="Send">
-                <button
-                  hlmBtn
-                  size="icon-sm"
-                  type="button"
-                  class="rounded-full"
-                  [disabled]="state() !== 'idle' || !value().trim()"
-                  (click)="onSubmit()"
-                  aria-label="Send"
-                >
-                  <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
-                </button>
-              </pk-prompt-input-action>
-            </pk-prompt-input-actions>
-          </pk-prompt-input>
+              [value]="value()"
+              (input)="value.set($any($event.target).value)"
+              (keydown.enter)="onEnter($event)"
+            ></textarea>
+            <div hlmInputGroupAddon align="block-end" class="justify-between px-3 pb-3">
+              <button
+                hlmBtn
+                size="icon-sm"
+                [variant]="state() === 'recording' ? 'destructive' : 'ghost'"
+                type="button"
+                class="rounded-full"
+                [hlmTooltip]="state() === 'recording' ? 'Stop' : 'Voice'"
+                aria-label="Toggle voice"
+                (click)="toggleVoice()"
+              >
+                <ng-icon
+                  class="text-[length:--spacing(4)]"
+                  [name]="state() === 'recording' ? 'lucideSquare' : 'lucideMic'"
+                />
+              </button>
+              <button
+                hlmBtn
+                size="icon-sm"
+                type="button"
+                class="rounded-full"
+                hlmTooltip="Send"
+                [disabled]="state() !== 'idle' || !value().trim()"
+                (click)="onSubmit()"
+                aria-label="Send"
+              >
+                <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
+              </button>
+            </div>
+          </div>
 
           <p class="text-muted-foreground text-xs">
             State: <span class="text-foreground font-mono">{{ state() }}</span>
@@ -96,6 +102,12 @@ export class VoiceInputBlock {
     }, 1100);
   }
 
+  protected onEnter(event: Event): void {
+    if ((event as KeyboardEvent).shiftKey) return;
+    event.preventDefault();
+    if (this.state() === 'idle') this.onSubmit();
+  }
+
   protected onSubmit(): void {
     const v = this.value().trim();
     if (!v) return;
@@ -104,31 +116,34 @@ export class VoiceInputBlock {
   }
 
   protected readonly code = `@if (state() === 'transcribing') {
-  <pk-text-shimmer text="Transcribing audio…" class="text-sm" />
+  <!-- spartan's shimmer utility -->
+  <span role="status" class="shimmer text-muted-foreground text-sm">Transcribing audio…</span>
 }
 
-<pk-prompt-input [(value)]="value" (submitted)="onSubmit()">
-  <pk-prompt-input-textarea
+<!-- spartan input-group: textarea plus a block-end addon -->
+<div hlmInputGroup class="rounded-3xl">
+  <textarea
+    hlmInputGroupTextarea
     [placeholder]="state() === 'recording' ? 'Listening...' : 'Speak or type'"
-  />
-  <pk-prompt-input-actions class="mt-2 justify-between">
-    <pk-prompt-input-action [tooltip]="state() === 'recording' ? 'Stop' : 'Voice'">
-      <button hlmBtn size="icon-sm"
-              [variant]="state() === 'recording' ? 'destructive' : 'ghost'"
-              (click)="toggleVoice()">
-        <ng-icon class="text-[length:--spacing(4)]"
-                 [name]="state() === 'recording' ? 'lucideSquare' : 'lucideMic'" />
-      </button>
-    </pk-prompt-input-action>
-    <pk-prompt-input-action tooltip="Send">
-      <button hlmBtn size="icon-sm" class="rounded-full"
-              [disabled]="state() !== 'idle' || !value().trim()"
-              (click)="onSubmit()">
-        <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
-      </button>
-    </pk-prompt-input-action>
-  </pk-prompt-input-actions>
-</pk-prompt-input>
+    [value]="value()"
+    (input)="value.set($any($event.target).value)"
+    (keydown.enter)="onEnter($event)"
+  ></textarea>
+  <div hlmInputGroupAddon align="block-end" class="justify-between">
+    <button hlmBtn size="icon-sm"
+            [variant]="state() === 'recording' ? 'destructive' : 'ghost'"
+            [hlmTooltip]="state() === 'recording' ? 'Stop' : 'Voice'"
+            (click)="toggleVoice()">
+      <ng-icon class="text-[length:--spacing(4)]"
+               [name]="state() === 'recording' ? 'lucideSquare' : 'lucideMic'" />
+    </button>
+    <button hlmBtn size="icon-sm" class="rounded-full" hlmTooltip="Send"
+            [disabled]="state() !== 'idle' || !value().trim()"
+            (click)="onSubmit()">
+      <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
+    </button>
+  </div>
+</div>
 
 // Component
 type State = 'idle' | 'recording' | 'transcribing';

@@ -14,7 +14,6 @@ import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { PkChainOfThoughtImports } from 'ngx-prompt-kit/chain-of-thought';
 import { PkReasoningImports } from 'ngx-prompt-kit/reasoning';
-import { PkThinkingBar } from 'ngx-prompt-kit/thinking-bar';
 
 const SUMMARY = `# Verdict
 The cycle is between \`refreshSession\` and \`verifyToken\`. Extracting the token-refresh path into its own module breaks the cycle at the import boundary.`;
@@ -22,20 +21,12 @@ The cycle is between \`refreshSession\` and \`verifyToken\`. Extracting the toke
 @Component({
   selector: 'app-block-reasoning-pane',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    BlockPage,
-    DocExample,
-    HlmButton,
-    NgIcon,
-    PkChainOfThoughtImports,
-    PkReasoningImports,
-    PkThinkingBar,
-  ],
+  imports: [BlockPage, DocExample, HlmButton, NgIcon, PkChainOfThoughtImports, PkReasoningImports],
   providers: [provideIcons({ lucideSearch, lucideLightbulb, lucideTarget })],
   template: `
     <app-block-page
       title="Reasoning / thinking pane"
-      description="Claude/o1-style 'show your work' surface. While streaming, a thinking bar pulses; once done, it collapses and a chain-of-thought timeline + a markdown summary take over."
+      description="Claude/o1-style 'show your work' surface. While streaming, a shimmering status line shows; once done, it collapses and a chain-of-thought timeline + a markdown summary take over."
     >
       <app-doc-example title="Thinking bar → chain-of-thought → summary" [code]="code">
         <div class="flex w-full max-w-2xl flex-col gap-4">
@@ -51,13 +42,21 @@ The cycle is between \`refreshSession\` and \`verifyToken\`. Extracting the toke
           </button>
 
           @if (thinking()) {
-            <pk-thinking-bar
-              text="Inspecting 14 functions"
-              stopLabel="Skip"
-              [showStop]="true"
-              (stopped)="stop()"
-              class="max-w-md"
-            />
+            <div class="flex w-full items-center justify-between max-w-md">
+              <span role="status" class="shimmer text-muted-foreground text-sm font-medium"
+                >Inspecting 14 functions</span
+              >
+              <button
+                hlmBtn
+                variant="link"
+                size="sm"
+                type="button"
+                class="text-muted-foreground"
+                (click)="stop()"
+              >
+                Skip
+              </button>
+            </div>
           } @else {
             <pk-chain-of-thought class="max-w-xl">
               <pk-chain-of-thought-step>
@@ -144,12 +143,19 @@ export class ReasoningPaneBlock {
   }
 
   protected readonly code = `@if (thinking()) {
-  <pk-thinking-bar
-    text="Inspecting 14 functions"
-    stopLabel="Skip"
-    [showStop]="true"
-    (stopped)="stop()"
-  />
+  <div class="flex w-full items-center justify-between">
+    <span role="status" class="shimmer text-muted-foreground text-sm font-medium">Inspecting 14 functions</span>
+    <button
+      hlmBtn
+      variant="link"
+      size="sm"
+      type="button"
+      class="text-muted-foreground"
+      (click)="stop()"
+    >
+      Skip
+    </button>
+  </div>
 } @else {
   <pk-chain-of-thought>
     <pk-chain-of-thought-step>

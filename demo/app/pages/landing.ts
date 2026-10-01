@@ -1,17 +1,12 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import {
-  lucideArrowUp,
-  lucideCoffee,
-  lucideEllipsis,
-  lucideGlobe,
-  lucidePlus,
-} from '@ng-icons/lucide';
+import { lucideCoffee, lucideEllipsis, lucideGlobe } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmCard, HlmCardDescription, HlmCardHeader, HlmCardTitle } from '@spartan-ng/helm/card';
 import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
-import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
+import { HlmTooltip } from '@spartan-ng/helm/tooltip';
+import { PkComposerImports } from 'ngx-prompt-kit/composer';
 
 interface Feature {
   title: string;
@@ -28,13 +23,12 @@ interface Feature {
     HlmCardDescription,
     HlmCardHeader,
     HlmCardTitle,
+    HlmTooltip,
     NgIcon,
     PkCodeBlockImports,
-    PkPromptInputImports,
+    PkComposerImports,
   ],
-  providers: [
-    provideIcons({ lucidePlus, lucideGlobe, lucideEllipsis, lucideArrowUp, lucideCoffee }),
-  ],
+  providers: [provideIcons({ lucideGlobe, lucideEllipsis, lucideCoffee })],
   template: `
     <div class="mx-auto max-w-4xl py-4 md:py-12">
       <section class="text-center">
@@ -58,61 +52,39 @@ interface Feature {
       </section>
 
       <section class="mx-auto mt-12 max-w-2xl">
-        <pk-prompt-input class="block" [(value)]="heroValue" (submitted)="onHeroSubmit()">
-          <pk-prompt-input-textarea placeholder="Ask ngx-prompt-kit anything..." />
-          <pk-prompt-input-actions class="mt-2 justify-between">
-            <div class="flex items-center gap-1">
-              <pk-prompt-input-action tooltip="Attach files">
-                <button
-                  hlmBtn
-                  variant="ghost"
-                  size="icon-sm"
-                  type="button"
-                  class="rounded-full"
-                  aria-label="Attach files"
-                >
-                  <ng-icon name="lucidePlus" class="text-[length:--spacing(4)]" />
-                </button>
-              </pk-prompt-input-action>
-              <pk-prompt-input-action tooltip="Search the web">
-                <button
-                  hlmBtn
-                  variant="outline"
-                  size="sm"
-                  type="button"
-                  class="rounded-full gap-1.5"
-                >
-                  <ng-icon name="lucideGlobe" class="text-[length:--spacing(3)]" />
-                  Search
-                </button>
-              </pk-prompt-input-action>
-              <pk-prompt-input-action tooltip="More tools">
-                <button
-                  hlmBtn
-                  variant="ghost"
-                  size="icon-sm"
-                  type="button"
-                  class="rounded-full"
-                  aria-label="More tools"
-                >
-                  <ng-icon name="lucideEllipsis" class="text-[length:--spacing(4)]" />
-                </button>
-              </pk-prompt-input-action>
-            </div>
-            <pk-prompt-input-action tooltip="Send message">
-              <button
-                hlmBtn
-                size="icon-sm"
-                type="button"
-                class="rounded-full"
-                (click)="onHeroSubmit()"
-                aria-label="Send"
-              >
-                <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
-              </button>
-            </pk-prompt-input-action>
-          </pk-prompt-input-actions>
-        </pk-prompt-input>
+        <pk-composer-dock variant="card">
+          <pk-composer
+            placeholder="Ask ngx-prompt-kit anything..."
+            [attachable]="true"
+            [(value)]="heroValue"
+            (submitted)="onHeroSubmit($event)"
+          >
+            <button
+              pkComposerStart
+              hlmBtn
+              variant="outline"
+              size="sm"
+              type="button"
+              class="gap-1.5 rounded-full"
+              hlmTooltip="Search the web"
+            >
+              <ng-icon name="lucideGlobe" class="text-[length:--spacing(3)]" />
+              Search
+            </button>
+            <button
+              pkComposerStart
+              hlmBtn
+              variant="ghost"
+              size="icon-sm"
+              type="button"
+              class="rounded-full"
+              hlmTooltip="More tools"
+              aria-label="More tools"
+            >
+              <ng-icon name="lucideEllipsis" class="text-[length:--spacing(4)]" />
+            </button>
+          </pk-composer>
+        </pk-composer-dock>
         @if (lastSubmitted()) {
           <p class="text-muted-foreground mt-2 text-center text-xs">
             Submitted: <span class="text-foreground font-mono">{{ lastSubmitted() }}</span>
@@ -191,29 +163,19 @@ export class Landing {
   protected readonly heroValue = signal('');
   protected readonly lastSubmitted = signal('');
 
-  protected readonly snippet = `<pk-prompt-input [(value)]="value" (submitted)="onSubmit()">
-  <pk-prompt-input-textarea placeholder="Ask ngx-prompt-kit anything..." />
-  <pk-prompt-input-actions class="mt-2 justify-between">
-    <div class="flex items-center gap-1">
-      <pk-prompt-input-action tooltip="Attach files">
-        <button hlmBtn variant="ghost" size="icon-sm">
-          <ng-icon name="lucidePlus" class="text-[length:--spacing(4)]" />
-        </button>
-      </pk-prompt-input-action>
-      <pk-prompt-input-action tooltip="Search the web">
-        <button hlmBtn variant="outline" size="sm">
-          <ng-icon name="lucideGlobe" class="text-[length:--spacing(3)]" />
-          Search
-        </button>
-      </pk-prompt-input-action>
-    </div>
-    <pk-prompt-input-action tooltip="Send message">
-      <button hlmBtn size="icon-sm" (click)="onSubmit()">
-        <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
-      </button>
-    </pk-prompt-input-action>
-  </pk-prompt-input-actions>
-</pk-prompt-input>`;
+  protected readonly snippet = `<pk-composer-dock variant="card">
+  <pk-composer
+    placeholder="Ask ngx-prompt-kit anything..."
+    [attachable]="true"
+    [(value)]="value"
+    (submitted)="onSubmit($event)"
+  >
+    <button pkComposerStart hlmBtn variant="outline" size="sm" hlmTooltip="Search the web">
+      <ng-icon name="lucideGlobe" class="text-[length:--spacing(3)]" />
+      Search
+    </button>
+  </pk-composer>
+</pk-composer-dock>`;
 
   protected readonly features: Feature[] = [
     {
@@ -224,7 +186,7 @@ export class Landing {
     {
       title: 'Built on Spartan UI',
       description:
-        'Composes with Spartan helm primitives (button, tooltip, avatar, textarea). Theme-consistent out of the box.',
+        'Built from Spartan helm and brain primitives (button, textarea, collapsible, hover card, sheet). Where Spartan already has the piece, use it directly. Theme-consistent out of the box.',
     },
     {
       title: 'Signal-based + standalone',
@@ -248,10 +210,7 @@ export class Landing {
     },
   ];
 
-  protected onHeroSubmit(): void {
-    const v = this.heroValue().trim();
-    if (!v) return;
-    this.lastSubmitted.set(v);
-    this.heroValue.set('');
+  protected onHeroSubmit(text: string): void {
+    this.lastSubmitted.set(text);
   }
 }

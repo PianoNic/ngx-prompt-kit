@@ -37,7 +37,7 @@ const QUATERNARY_IMAGE =
     <app-doc-page
       title="Attachment Preview"
       [original]="true"
-      description="Horizontal chip row for staged attachments above a prompt input. Image type renders an inline thumbnail; file/audio/video render an icon + filename + size. Hover or focus a chip to reveal its remove button."
+      description="Horizontal chip row for staged attachments above a prompt input. Each chip is a spartan hlm-attachment: image type renders an inline thumbnail; file/audio/video render an icon + filename + size. Click a chip to preview it; its remove action sits in the chip."
     >
       <app-doc-example
         title="Mixed types"

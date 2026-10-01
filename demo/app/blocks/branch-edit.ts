@@ -11,7 +11,8 @@ import {
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { PkBranchNavImports } from 'ngx-prompt-kit/branch-nav';
-import { PkMessageImports } from 'ngx-prompt-kit/message';
+import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
+import { HlmBubbleImports } from '@spartan-ng/helm/bubble';
 import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit';
 import {
   DEFAULT_ASSISTANT_ACTIONS,
@@ -27,7 +28,8 @@ import {
     BlockPage,
     DocExample,
     PkBranchNavImports,
-    PkMessageImports,
+    HlmAvatarImports,
+    HlmBubbleImports,
     PkMessageEditImports,
     PkMessageActionsBarImports,
     HlmMessageImports,
@@ -56,10 +58,9 @@ import {
                 [content]="userMessage()"
                 (saved)="onSaveUser($event)"
               >
-                <pk-message-content
-                  class="bg-primary text-primary-foreground"
-                  [content]="userMessage()"
-                />
+                <div hlmBubble class="max-w-full">
+                  <div hlmBubbleContent>{{ userMessage() }}</div>
+                </div>
               </pk-message-edit>
             </div>
             <pk-message-actions-bar
@@ -70,8 +71,16 @@ import {
 
           <div class="group flex flex-col gap-1">
             <div hlmMessage>
-              <pk-message-avatar src="" alt="Assistant" fallback="AI" />
-              <pk-message-content [content]="currentBranch()" />
+              <div hlmMessageAvatar>
+                <hlm-avatar>
+                  <span hlmAvatarFallback>AI</span>
+                </hlm-avatar>
+              </div>
+              <div hlmMessageContent>
+                <div hlmBubble variant="secondary">
+                  <div hlmBubbleContent>{{ currentBranch() }}</div>
+                </div>
+              </div>
             </div>
             <div class="ml-11 flex flex-wrap items-center justify-between gap-2">
               <pk-branch-nav
@@ -146,10 +155,9 @@ export class BranchEditBlock {
   <div hlmMessage align="end">
     <pk-message-edit #userEditor editTrigger="hidden"
       [content]="userMessage()" (saved)="onSaveUser($event)">
-      <pk-message-content
-        class="bg-primary text-primary-foreground"
-        [content]="userMessage()"
-      />
+      <div hlmBubble class="max-w-full">
+        <div hlmBubbleContent>{{ userMessage() }}</div>
+      </div>
     </pk-message-edit>
   </div>
   <pk-message-actions-bar
@@ -161,8 +169,16 @@ export class BranchEditBlock {
 <!-- Assistant message with sibling branches -->
 <div class="group flex flex-col gap-1">
   <div hlmMessage>
-    <pk-message-avatar src="" alt="Assistant" fallback="AI" />
-    <pk-message-content [content]="currentBranch()" />
+    <div hlmMessageAvatar>
+      <hlm-avatar>
+        <span hlmAvatarFallback>AI</span>
+      </hlm-avatar>
+    </div>
+    <div hlmMessageContent>
+      <div hlmBubble variant="secondary">
+        <div hlmBubbleContent>{{ currentBranch() }}</div>
+      </div>
+    </div>
   </div>
   <div class="ml-11 flex items-center justify-between gap-2">
     <pk-branch-nav

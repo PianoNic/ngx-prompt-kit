@@ -270,7 +270,7 @@ import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
         <p class="text-muted-foreground mt-3 text-sm leading-relaxed">
           Skip the prompt with
           <code class="bg-muted text-foreground rounded px-1 py-0.5 font-mono text-xs"
-            >--components=message,prompt-input,markdown</code
+            >--components=composer,chat-turn,markdown</code
           >.
         </p>
       </section>
@@ -317,37 +317,41 @@ ng g @spartan-ng/cli:ui`;
   protected readonly uiNpm = `npx ng generate ngx-prompt-kit:ui`;
   protected readonly uiNg = `ng generate ngx-prompt-kit:ui`;
 
-  protected readonly ngGenerateBun = `bun x ng generate ngx-prompt-kit:message
-bun x ng generate ngx-prompt-kit:prompt-input
+  protected readonly ngGenerateBun = `bun x ng generate ngx-prompt-kit:composer
+bun x ng generate ngx-prompt-kit:chat-turn
 bun x ng generate ngx-prompt-kit:markdown
 # ...etc.`;
 
-  protected readonly ngGenerateNpm = `npx ng generate ngx-prompt-kit:message
-npx ng generate ngx-prompt-kit:prompt-input
+  protected readonly ngGenerateNpm = `npx ng generate ngx-prompt-kit:composer
+npx ng generate ngx-prompt-kit:chat-turn
 npx ng generate ngx-prompt-kit:markdown
 # ...etc.`;
 
-  protected readonly ngGenerateNg = `ng generate ngx-prompt-kit:message
-ng generate ngx-prompt-kit:prompt-input
+  protected readonly ngGenerateNg = `ng generate ngx-prompt-kit:composer
+ng generate ngx-prompt-kit:chat-turn
 ng generate ngx-prompt-kit:markdown
 # ...etc.`;
 
   protected readonly usage = `import { Component, signal } from '@angular/core';
-import { PkPromptInputImports } from 'libs/prompt-kit/prompt-input';
+import { PkComposerImports } from 'libs/prompt-kit/composer';
 
 @Component({
   selector: 'app-chat',
-  imports: [PkPromptInputImports],
+  imports: [PkComposerImports],
   template: \`
-    <pk-prompt-input [(value)]="value" (submitted)="onSubmit()">
-      <pk-prompt-input-textarea placeholder="Ask anything..." />
-    </pk-prompt-input>
+    <pk-composer-dock variant="card">
+      <pk-composer
+        placeholder="Ask anything..."
+        [(value)]="value"
+        (submitted)="onSubmit($event)"
+      />
+    </pk-composer-dock>
   \`,
 })
 export class Chat {
   protected readonly value = signal('');
-  protected onSubmit(): void {
-    console.log('submitted:', this.value());
+  protected onSubmit(text: string): void {
+    console.log('submitted:', text);
   }
 }`;
 }

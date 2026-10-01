@@ -118,14 +118,14 @@
       <section class="flex h-full min-h-0 min-w-0 flex-1 flex-col">
         <!-- Header -->
         <header class="border-border flex items-center justify-between gap-3 border-b px-4 py-2">
-          <pk-model-picker [compact]="true" [models]="models" [(selectedId)]="selectedModelId" />
+          <pk-model-selector [models]="models" [(value)]="selectedModelId" />
           <span class="text-muted-foreground truncate text-xs">
             {{ currentConvoTitle() }}
           </span>
         </header>
 
         <!-- Message thread -->
-        <pk-chat-container-root class="relative flex-1 px-4 py-4">
+        <pk-chat-container-root #thread class="relative flex-1 px-4 py-4">
           <pk-chat-container-content class="gap-6">
             @for (m of currentMessages(); track m.id) {
               @if (m.role === 'user') {
@@ -137,10 +137,11 @@
                       [content]="m.content"
                       (saved)="onMessageSaved(m.id, $event)"
                     >
-                      <pk-message-content
-                        class="bg-primary text-primary-foreground"
-                        [content]="m.content"
-                      />
+                      <div hlmMessageContent>
+                        <div hlmBubble>
+                          <div hlmBubbleContent class="whitespace-pre-wrap">{{ m.content }}</div>
+                        </div>
+                      </div>
                     </pk-message-edit>
                   </div>
                   @if (m.attachments?.length) {
@@ -154,19 +155,29 @@
               } @else {
                 <div class="group flex max-w-[85%] flex-col gap-1 self-start">
                   <div hlmMessage>
-                    <pk-message-avatar src="" alt="Assistant" fallback="AI" />
-                    @if (m.streaming) {
-                      <pk-message-content>
-                        <pk-response-stream
-                          mode="typewriter"
-                          [speed]="60"
-                          [textStream]="m.content"
-                          (completed)="onStreamCompleted(m.id)"
-                        />
-                      </pk-message-content>
-                    } @else {
-                      <pk-message-content [markdown]="m.markdown === true" [content]="m.content" />
-                    }
+                    <div hlmMessageAvatar>
+                      <hlm-avatar>
+                        <span hlmAvatarFallback>AI</span>
+                      </hlm-avatar>
+                    </div>
+                    <div hlmMessageContent>
+                      <div hlmBubble variant="muted">
+                        <div hlmBubbleContent>
+                          @if (m.streaming) {
+                            <pk-response-stream
+                              mode="typewriter"
+                              [speed]="60"
+                              [textStream]="m.content"
+                              (completed)="onStreamCompleted(m.id)"
+                            />
+                          } @else if (m.markdown) {
+                            <pk-markdown [content]="m.content" />
+                          } @else {
+                            {{ m.content }}
+                          }
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   @if (!m.streaming) {
                     <pk-message-actions-bar
@@ -180,74 +191,78 @@
             }
             @if (isStreaming()) {
               <div class="flex items-center gap-3 pl-11">
-                <pk-loader variant="text-shimmer" text="Thinking..." />
+                <span class="shimmer text-muted-foreground text-sm font-medium" role="status">
+                  Thinking...
+                </span>
               </div>
             }
           </pk-chat-container-content>
           <pk-chat-container-scroll-anchor />
           <div class="sticky bottom-2 ml-auto w-fit pr-1">
-            <pk-scroll-button />
+            <button
+              hlmBtn
+              variant="outline"
+              size="icon"
+              type="button"
+              aria-label="Scroll to bottom"
+              class="rounded-full transition-opacity"
+              [class.opacity-0]="thread.isAtBottom()"
+              [class.pointer-events-none]="thread.isAtBottom()"
+              (click)="thread.scrollToBottom()"
+            >
+              <ng-icon name="lucideChevronDown" class="text-[length:--spacing(4)]" />
+            </button>
           </div>
         </pk-chat-container-root>
 
         <!-- Composer -->
-        <div class="border-border border-t px-4 py-3">
-          @if (stagedAttachments().length > 0) {
-            <pk-attachment-preview
-              class="mb-2"
-              [attachments]="stagedAttachments()"
-              (removed)="onStagedRemoved($event)"
-            />
-          }
-          <pk-prompt-input [(value)]="inputValue" (submitted)="send()">
-            <pk-prompt-input-textarea placeholder="Ask anything..." />
-            <pk-prompt-input-actions class="mt-2 justify-between">
-              <div class="flex items-center gap-1">
-                <pk-prompt-input-action tooltip="Attach files">
-                  <button
-                    hlmBtn
-                    variant="ghost"
-                    size="icon-sm"
-                    type="button"
-                    aria-label="Attach files"
-                    (click)="addSampleAttachment()"
-                  >
-                    <ng-icon name="lucidePaperclip" class="text-[length:--spacing(4)]" />
-                  </button>
-                </pk-prompt-input-action>
-                <pk-prompt-input-action tooltip="Voice input">
-                  <button
-                    hlmBtn
-                    variant="ghost"
-                    size="icon-sm"
-                    type="button"
-                    aria-label="Voice input"
-                  >
-                    <ng-icon name="lucideMic" class="text-[length:--spacing(4)]" />
-                  </button>
-                </pk-prompt-input-action>
-                <pk-token-counter
-                  class="ml-2"
-                  display="compact"
-                  [text]="inputValue()"
-                  [limit]="2000"
+        <div class="px-4 pt-2 pb-4">
+          <pk-composer-dock variant="card">
+            <pk-composer
+              placeholder="Ask anything..."
+              [(value)]="inputValue"
+              [sendBlocked]="isStreaming()"
+              (submitted)="send()"
+            >
+              @if (stagedAttachments().length > 0) {
+                <pk-attachment-preview
+                  pkComposerTop
+                  [attachments]="stagedAttachments()"
+                  (removed)="onStagedRemoved($event)"
                 />
-              </div>
-              <pk-prompt-input-action tooltip="Send message">
-                <button
-                  hlmBtn
-                  size="icon-sm"
-                  type="button"
-                  class="rounded-full"
-                  aria-label="Send message"
-                  [disabled]="!canSend()"
-                  (click)="send()"
-                >
-                  <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
-                </button>
-              </pk-prompt-input-action>
-            </pk-prompt-input-actions>
-          </pk-prompt-input>
+              }
+              <button
+                pkComposerStart
+                hlmBtn
+                variant="ghost"
+                size="icon-sm"
+                type="button"
+                hlmTooltip="Attach files"
+                aria-label="Attach files"
+                (click)="addSampleAttachment()"
+              >
+                <ng-icon name="lucidePaperclip" class="text-[length:--spacing(4)]" />
+              </button>
+              <button
+                pkComposerStart
+                hlmBtn
+                variant="ghost"
+                size="icon-sm"
+                type="button"
+                hlmTooltip="Voice input"
+                aria-label="Voice input"
+              >
+                <ng-icon name="lucideMic" class="text-[length:--spacing(4)]" />
+              </button>
+              <pk-token-counter
+                pkComposerStart
+                class="ml-2"
+                display="compact"
+                [text]="inputValue()"
+                [limit]="2000"
+              />
+            </pk-composer>
+          </pk-composer-dock>
         </div>
       </section>
     </div>

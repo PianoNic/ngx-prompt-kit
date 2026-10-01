@@ -20,7 +20,7 @@ const GRADIENT_SVG_BASE64 =
   template: `
     <app-doc-page
       title="Image"
-      description="Display an AI-generated image from base64 / Uint8Array bytes, or a regular URL via Angular's NgOptimizedImage."
+      description="Display an AI-generated image from base64 / Uint8Array bytes, or a regular URL via Angular's NgOptimizedImage. An hlm-skeleton holds the space until there is something to show."
     >
       <app-doc-example
         title="From a URL"

@@ -8,29 +8,21 @@
  *
  * Mirrors React's prompt-kit Tool component.
  */
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  DestroyRef,
-  ElementRef,
-  PLATFORM_ID,
-  computed,
-  effect,
-  inject,
-  input,
-  signal,
-  viewChild,
-} from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, input, linkedSignal } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideChevronDown,
   lucideCircleCheck,
   lucideCircleX,
-  lucideLoader,
   lucideSettings,
 } from '@ng-icons/lucide';
+import {
+  BrnCollapsible,
+  BrnCollapsibleContent,
+  BrnCollapsibleTrigger,
+} from '@spartan-ng/brain/collapsible';
+import { HlmBadge } from '@spartan-ng/helm/badge';
+import { HlmSpinner } from '@spartan-ng/helm/spinner';
 import { cn } from '../utils/cn';
 
 export type ToolState = 'input-streaming' | 'input-available' | 'output-available' | 'output-error';
@@ -71,41 +63,53 @@ const BADGE: Record<ToolState, BadgeStyle> = {
 @Component({
   selector: 'pk-tool',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgIcon],
+  imports: [
+    BrnCollapsible,
+    BrnCollapsibleTrigger,
+    BrnCollapsibleContent,
+    HlmBadge,
+    HlmSpinner,
+    NgIcon,
+  ],
   providers: [
     provideIcons({
       lucideChevronDown,
       lucideCircleCheck,
       lucideCircleX,
-      lucideLoader,
       lucideSettings,
     }),
   ],
   template: `
     <div [class]="containerClass()">
-      <div [attr.data-state]="isOpen() ? 'open' : 'closed'">
+      <div brnCollapsible [(expanded)]="isOpen">
         <button
-          type="button"
-          (click)="toggle()"
-          class="bg-background h-auto w-full justify-between rounded-b-none px-3 py-2 font-normal flex items-center transition-colors hover:bg-muted/50"
+          brnCollapsibleTrigger
+          class="bg-background hover:bg-muted/50 group flex h-auto w-full items-center justify-between rounded-b-none px-3 py-2 font-normal transition-colors"
         >
           <div class="flex items-center gap-2">
-            <ng-icon [name]="iconName()" [class]="iconColor()" class="text-[length:--spacing(4)]" />
+            @if (toolPart().state === 'input-streaming') {
+              <hlm-spinner class="text-blue-500" aria-label="Processing" />
+            } @else {
+              <ng-icon
+                [name]="iconName()"
+                [class]="iconColor()"
+                class="text-[length:--spacing(4)]"
+              />
+            }
             <span class="font-mono text-sm font-medium">{{ toolPart().type }}</span>
-            <span [class]="badgeClass()">{{ badgeLabel() }}</span>
+            <span hlmBadge [class]="badgeClass()">{{ badgeLabel() }}</span>
           </div>
           <ng-icon
             name="lucideChevronDown"
-            class="text-[length:--spacing(3)] transition-transform"
-            [class.rotate-180]="isOpen()"
+            class="text-[length:--spacing(3)] transition-transform group-data-[state=open]:rotate-180"
           />
         </button>
 
         <div
-          [class]="contentWrapperClass()"
-          [style.maxHeight]="isOpen() ? maxHeightPx() + 'px' : '0px'"
+          brnCollapsibleContent
+          class="block overflow-hidden transition-[height] duration-150 ease-out data-[state=closed]:h-0 data-[state=open]:h-(--brn-collapsible-content-height)"
         >
-          <div #inner class="bg-background space-y-3 p-3 border-t border-border">
+          <div class="bg-background border-border space-y-3 border-t p-3">
             @if (hasInput()) {
               <div>
                 <h4 class="text-muted-foreground mb-2 text-sm font-medium">Input</h4>
@@ -157,54 +161,19 @@ const BADGE: Record<ToolState, BadgeStyle> = {
     </div>
   `,
 })
-export class PkTool implements AfterViewInit {
+export class PkTool {
   public readonly toolPart = input.required<ToolPart>();
   public readonly defaultOpen = input<boolean>(false);
   public readonly class = input<string>('');
 
-  protected readonly isOpen = signal<boolean>(false);
-
-  private readonly inner = viewChild<ElementRef<HTMLDivElement>>('inner');
-  private readonly destroyRef = inject(DestroyRef);
-  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
-  protected readonly maxHeightPx = signal<number>(0);
-
-  constructor() {
-    effect(() => {
-      this.isOpen.set(this.defaultOpen());
-    });
-    effect(() => {
-      this.isOpen();
-      this.measure();
-    });
-  }
-
-  ngAfterViewInit(): void {
-    if (!this.isBrowser) return;
-    const el = this.inner?.()?.nativeElement;
-    if (!el) return;
-    const observer = new ResizeObserver(() => this.measure());
-    observer.observe(el);
-    this.destroyRef.onDestroy(() => observer.disconnect());
-    this.measure();
-  }
-
-  protected toggle(): void {
-    this.isOpen.update((v) => !v);
-  }
+  protected readonly isOpen = linkedSignal(() => this.defaultOpen());
 
   protected readonly containerClass = computed(() =>
     cn('border-border mt-3 overflow-hidden rounded-lg border', this.class()),
   );
 
-  protected readonly contentWrapperClass = computed(
-    () => 'overflow-hidden transition-[max-height] duration-150 ease-out',
-  );
-
   protected readonly iconName = computed(() => {
     switch (this.toolPart().state) {
-      case 'input-streaming':
-        return 'lucideLoader';
       case 'input-available':
         return 'lucideSettings';
       case 'output-available':
@@ -218,8 +187,6 @@ export class PkTool implements AfterViewInit {
 
   protected readonly iconColor = computed(() => {
     switch (this.toolPart().state) {
-      case 'input-streaming':
-        return 'text-blue-500 animate-spin';
       case 'input-available':
         return 'text-orange-500';
       case 'output-available':
@@ -232,9 +199,7 @@ export class PkTool implements AfterViewInit {
   });
 
   protected readonly badgeLabel = computed(() => BADGE[this.toolPart().state].label);
-  protected readonly badgeClass = computed(
-    () => `px-2 py-1 rounded-full text-xs font-medium ${BADGE[this.toolPart().state].classes}`,
-  );
+  protected readonly badgeClass = computed(() => BADGE[this.toolPart().state].classes);
 
   protected readonly hasInput = computed(() => {
     const i = this.toolPart().input;
@@ -251,10 +216,5 @@ export class PkTool implements AfterViewInit {
     if (typeof value === 'string') return value;
     if (typeof value === 'object') return JSON.stringify(value, null, 2);
     return String(value);
-  }
-
-  private measure(): void {
-    const el = this.inner?.()?.nativeElement;
-    if (el) this.maxHeightPx.set(el.scrollHeight);
   }
 }

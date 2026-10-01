@@ -12,6 +12,7 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { HlmSkeleton } from '@spartan-ng/helm/skeleton';
 import { cn } from '../utils/cn';
 
 /**
@@ -27,6 +28,7 @@ import { cn } from '../utils/cn';
 @Component({
   selector: 'pk-auth-image',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [HlmSkeleton],
   host: {
     '[class]': 'hostClass()',
   },
@@ -40,7 +42,7 @@ import { cn } from '../utils/cn';
         <ng-content select="[error]">Failed to load</ng-content>
       </div>
     } @else {
-      <div class="bg-muted h-full w-full animate-pulse"></div>
+      <div hlmSkeleton class="h-full w-full rounded-none"></div>
     }
   `,
 })

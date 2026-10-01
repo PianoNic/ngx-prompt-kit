@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { PkConversationListImports, type Conversation } from 'ngx-prompt-kit/conversation-list';
-import { PkModelPickerImports, type Model } from 'ngx-prompt-kit/model-picker';
+import { PkModelSelectorImports, type SelectorModel } from 'ngx-prompt-kit/model-selector';
 import { PkUsageCardImports } from 'ngx-prompt-kit/usage-card';
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -21,15 +21,15 @@ const AVATAR =
     BlockPage,
     DocExample,
     PkConversationListImports,
-    PkModelPickerImports,
+    PkModelSelectorImports,
     PkUsageCardImports,
   ],
   template: `
     <app-block-page
       title="Sidebar header"
-      description="Persistent left rail. Top: model picker for the current chat. Middle: scrollable conversation list. Bottom: usage card with the user's identity and budget."
+      description="Persistent left rail. Top: model selector for the current chat. Middle: scrollable conversation list. Bottom: usage card with the user's identity and budget."
     >
-      <app-doc-example title="Model picker · conversations · usage" [code]="code">
+      <app-doc-example title="Model selector · conversations · usage" [code]="code">
         <div class="flex w-full justify-center">
           <div
             class="border-border bg-background flex h-[600px] w-72 flex-col overflow-hidden rounded-lg border"
@@ -38,11 +38,7 @@ const AVATAR =
               <span class="text-muted-foreground text-[10px] font-medium uppercase tracking-wider">
                 Model
               </span>
-              <pk-model-picker
-                [compact]="true"
-                [models]="models"
-                [(selectedId)]="selectedModelId"
-              />
+              <pk-model-selector class="-mx-1" [models]="models" [(value)]="selectedModelId" />
             </div>
 
             <div class="flex-1 overflow-hidden">
@@ -72,10 +68,10 @@ const AVATAR =
 export class SidebarHeaderBlock {
   protected readonly avatar = AVATAR;
 
-  protected readonly models: Model[] = [
-    { id: 'fast', name: 'Quill Fast', provider: 'Acme', tier: 'fast' },
-    { id: 'balanced', name: 'Quill Balanced', provider: 'Acme', tier: 'balanced' },
-    { id: 'smart', name: 'Quill Reason', provider: 'Acme', tier: 'smart' },
+  protected readonly models: SelectorModel[] = [
+    { id: 'fast', name: 'Quill Fast', maker: 'Acme', priceTier: 1 },
+    { id: 'balanced', name: 'Quill Balanced', maker: 'Acme', priceTier: 2 },
+    { id: 'smart', name: 'Quill Reason', maker: 'Acme', priceTier: 3 },
   ];
   protected readonly selectedModelId = signal<string | null>('balanced');
 
@@ -112,11 +108,7 @@ export class SidebarHeaderBlock {
 
   protected readonly code = `<aside class="flex h-screen w-72 flex-col border-r">
   <div class="border-b p-3">
-    <pk-model-picker
-      [compact]="true"
-      [models]="models"
-      [(selectedId)]="selectedModelId"
-    />
+    <pk-model-selector [models]="models" [(value)]="selectedModelId" />
   </div>
 
   <div class="flex-1 overflow-hidden">

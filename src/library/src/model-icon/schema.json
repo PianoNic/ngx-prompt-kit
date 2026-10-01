@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
   "$id": "PromptKitModelIconSchema",
-  "title": "Add the model-icon utility",
+  "title": "Add the model-icon utility and its icon set",
   "type": "object",
   "properties": {
     "project": {
@@ -15,6 +15,12 @@
       "type": "string",
       "format": "path",
       "description": "Path where the utility is generated. Defaults to libs/prompt-kit."
+    },
+    "assetsPath": {
+      "type": "string",
+      "format": "path",
+      "description": "Folder the icon SVGs are copied to; the app must serve it as static files. The helper's URLs follow it (public/model-icons is served at /model-icons). Defaults to public/model-icons.",
+      "default": "public/model-icons"
     }
   },
   "required": []

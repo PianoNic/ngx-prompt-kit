@@ -12,7 +12,7 @@ import { PkAuthImageImports } from 'ngx-prompt-kit/auth-image';
     <app-doc-page
       title="Auth Image"
       [original]="true"
-      description="pk-auth-image fetches an image via HttpClient (so your auth interceptor attaches the token), shows the blob as an object URL, and revokes it on change/destroy. Skeleton while loading; a fallback (project [error] content) on failure."
+      description="pk-auth-image fetches an image via HttpClient (so your auth interceptor attaches the token), shows the blob as an object URL, and revokes it on change/destroy. An hlm-skeleton while loading; a fallback (project [error] content) on failure."
     >
       <app-doc-example
         title="Loads via HttpClient"

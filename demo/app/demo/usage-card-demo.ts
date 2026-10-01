@@ -19,7 +19,7 @@ const AVATAR = (a: string, b: string) =>
     <app-doc-page
       title="Usage Card"
       [original]="true"
-      description="Persistent session/account-level usage indicator. Three display modes — ring (Instagram/Discord pattern, usage IS the chrome), inline (sidebar header row), and card (standalone block, JetBrains AI widget pattern). All share threshold colors at 75/90/100% and identity-integrated by design."
+      description="Persistent session/account-level usage indicator. Three display modes — ring (Instagram/Discord pattern, usage IS the chrome), inline (sidebar header row), and card (standalone block, JetBrains AI widget pattern). All share threshold colors at 75/90/100% and identity-integrated by design. Bars are hlm-progress and avatars hlm-avatar."
     >
       <app-doc-example
         title="Ring — identity-integrated"

@@ -8,7 +8,7 @@ export interface SelectorModel {
   shortName?: string;
   /** Grouping key and rail/chip label, e.g. `Anthropic`. */
   maker: string;
-  /** Brand icon (URL or data URI). `modelIconUrl` from `../model-icon` resolves one from an id. */
+  /** Brand icon (URL or data URI). `providerIconUrl` from `../model-icon` resolves one from an id. */
   iconUrl?: string;
   /** The maker's own icon for the rail, when a model's icon is a sub-brand's (Gemma under Google). Falls back to the first model's `iconUrl`. */
   makerIconUrl?: string;

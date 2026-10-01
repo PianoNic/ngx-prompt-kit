@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/c
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowUp } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
+import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
+import { HlmTooltip } from '@spartan-ng/helm/tooltip';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { PkCostDisplayImports } from 'ngx-prompt-kit/cost-display';
-import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
 import { PkTokenCounterImports } from 'ngx-prompt-kit/token-counter';
 
 @Component({
@@ -15,9 +16,10 @@ import { PkTokenCounterImports } from 'ngx-prompt-kit/token-counter';
     BlockPage,
     DocExample,
     HlmButton,
+    HlmInputGroupImports,
+    HlmTooltip,
     NgIcon,
     PkCostDisplayImports,
-    PkPromptInputImports,
     PkTokenCounterImports,
   ],
   providers: [provideIcons({ lucideArrowUp })],
@@ -44,29 +46,36 @@ import { PkTokenCounterImports } from 'ngx-prompt-kit/token-counter';
             />
           </div>
 
-          <pk-prompt-input [(value)]="value" (submitted)="onSend()">
-            <pk-prompt-input-textarea placeholder="Type a long prompt to watch the meter..." />
-            <pk-prompt-input-actions class="mt-2 justify-between">
+          <div hlmInputGroup class="rounded-3xl">
+            <textarea
+              hlmInputGroupTextarea
+              class="max-h-60 px-4 pt-3"
+              placeholder="Type a long prompt to watch the meter..."
+              aria-label="Message"
+              [value]="value()"
+              (input)="value.set($any($event.target).value)"
+              (keydown.enter)="onEnter($event)"
+            ></textarea>
+            <div hlmInputGroupAddon align="block-end" class="justify-between gap-3 px-3 pb-3">
               <pk-token-counter
                 display="progress"
                 [text]="value()"
                 [limit]="800"
                 class="min-w-0 flex-1"
               />
-              <pk-prompt-input-action tooltip="Send">
-                <button
-                  hlmBtn
-                  size="icon-sm"
-                  type="button"
-                  class="rounded-full"
-                  (click)="onSend()"
-                  aria-label="Send"
-                >
-                  <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
-                </button>
-              </pk-prompt-input-action>
-            </pk-prompt-input-actions>
-          </pk-prompt-input>
+              <button
+                hlmBtn
+                size="icon-sm"
+                type="button"
+                class="rounded-full"
+                hlmTooltip="Send"
+                (click)="onSend()"
+                aria-label="Send"
+              >
+                <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
+              </button>
+            </div>
+          </div>
 
           <div
             class="border-border flex flex-col gap-2 rounded-md border border-dashed p-3 text-xs"
@@ -101,6 +110,12 @@ export class CostMeterBlock {
     Math.max(1, Math.ceil(this.value().length / 4)),
   );
 
+  protected onEnter(event: Event): void {
+    if ((event as KeyboardEvent).shiftKey) return;
+    event.preventDefault();
+    this.onSend();
+  }
+
   protected onSend(): void {
     const text = this.value().trim();
     if (!text) return;
@@ -126,22 +141,27 @@ export class CostMeterBlock {
 </div>
 
 <!-- Compose row with live token meter inside the actions footer -->
-<pk-prompt-input [(value)]="value" (submitted)="onSend()">
-  <pk-prompt-input-textarea placeholder="Type a prompt..." />
-  <pk-prompt-input-actions class="mt-2 justify-between">
+<!-- spartan input-group: textarea plus a block-end addon -->
+<div hlmInputGroup class="rounded-3xl">
+  <textarea
+    hlmInputGroupTextarea
+    placeholder="Type a prompt..."
+    [value]="value()"
+    (input)="value.set($any($event.target).value)"
+    (keydown.enter)="onEnter($event)"
+  ></textarea>
+  <div hlmInputGroupAddon align="block-end" class="justify-between gap-3">
     <pk-token-counter
       display="progress"
       [text]="value()"
       [limit]="800"
       class="flex-1"
     />
-    <pk-prompt-input-action tooltip="Send">
-      <button hlmBtn size="icon-sm" class="rounded-full" (click)="onSend()">
-        <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
-      </button>
-    </pk-prompt-input-action>
-  </pk-prompt-input-actions>
-</pk-prompt-input>
+    <button hlmBtn size="icon-sm" class="rounded-full" hlmTooltip="Send" (click)="onSend()">
+      <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
+    </button>
+  </div>
+</div>
 
 <!-- Pre-send estimate of just this message -->
 <pk-cost-display
@@ -159,6 +179,12 @@ protected readonly totalOutputTokens = signal(5_180);
 protected readonly estimatedTokens = computed(() =>
   Math.max(1, Math.ceil(this.value().length / 4))
 );
+
+protected onEnter(event: Event): void {
+  if ((event as KeyboardEvent).shiftKey) return; // Shift+Enter adds a line
+  event.preventDefault();
+  this.onSend();
+}
 
 protected onSend(): void {
   const tokens = this.estimatedTokens();

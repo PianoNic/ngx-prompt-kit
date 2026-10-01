@@ -9,12 +9,11 @@ import {
   signal,
 } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideFileSearch, lucideHammer, lucideRefreshCw } from '@ng-icons/lucide';
+import { lucideFileSearch, lucideHammer, lucideRefreshCw, lucideSquare } from '@ng-icons/lucide';
+import { HlmButton } from '@spartan-ng/helm/button';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { PkChainOfThoughtImports } from 'ngx-prompt-kit/chain-of-thought';
-import { PkStreamControlsImports, type StreamControlsState } from 'ngx-prompt-kit/stream-controls';
-import { PkThinkingBar } from 'ngx-prompt-kit/thinking-bar';
 import { PkTool, type ToolPart } from 'ngx-prompt-kit/tool';
 
 interface PhaseEntry {
@@ -26,31 +25,31 @@ interface PhaseEntry {
 @Component({
   selector: 'app-block-agent-task',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    BlockPage,
-    DocExample,
-    NgIcon,
-    PkChainOfThoughtImports,
-    PkStreamControlsImports,
-    PkThinkingBar,
-    PkTool,
-  ],
-  providers: [provideIcons({ lucideFileSearch, lucideHammer, lucideRefreshCw })],
+  imports: [BlockPage, DocExample, HlmButton, NgIcon, PkChainOfThoughtImports, PkTool],
+  providers: [provideIcons({ lucideFileSearch, lucideHammer, lucideRefreshCw, lucideSquare })],
   template: `
     <app-block-page
       title="Long-running agent task"
-      description="An autonomous task that takes a while: thinking-bar at the top while it works, narrated steps in a chain-of-thought, and a tool call that updates as it executes. Stream-controls let you abort or restart."
+      description="An autonomous task that takes a while: a shimmering status line at the top while it works, narrated steps in a chain-of-thought, and a tool call that updates as it executes. A Stop / Regenerate button lets you abort or restart."
     >
       <app-doc-example title="Live agent run" [code]="code">
         <div class="flex w-full max-w-2xl flex-col gap-4">
           @if (state() === 'streaming') {
-            <pk-thinking-bar
-              [text]="currentTrigger()"
-              stopLabel="Stop"
-              [showStop]="true"
-              (stopped)="stop()"
-              class="max-w-md"
-            />
+            <div class="flex w-full items-center justify-between max-w-md">
+              <span role="status" class="shimmer text-muted-foreground text-sm font-medium">{{
+                currentTrigger()
+              }}</span>
+              <button
+                hlmBtn
+                variant="link"
+                size="sm"
+                type="button"
+                class="text-muted-foreground"
+                (click)="stop()"
+              >
+                Stop
+              </button>
+            </div>
           }
 
           @if (visiblePhases().length > 0) {
@@ -72,7 +71,17 @@ interface PhaseEntry {
           <pk-tool [toolPart]="currentTool()" [defaultOpen]="true" />
 
           <div class="flex justify-end">
-            <pk-stream-controls [state]="state()" (stop)="stop()" (regenerate)="start()" />
+            @if (state() === 'streaming') {
+              <button hlmBtn variant="secondary" size="sm" type="button" (click)="stop()">
+                <ng-icon name="lucideSquare" />
+                Stop
+              </button>
+            } @else {
+              <button hlmBtn variant="ghost" size="sm" type="button" (click)="start()">
+                <ng-icon name="lucideRefreshCw" />
+                Regenerate
+              </button>
+            }
           </div>
         </div>
       </app-doc-example>
@@ -84,7 +93,7 @@ export class AgentTaskBlock {
   private readonly destroyRef = inject(DestroyRef);
   private timer: ReturnType<typeof setTimeout> | null = null;
 
-  protected readonly state = signal<StreamControlsState>('idle');
+  protected readonly state = signal<'idle' | 'streaming'>('idle');
   protected readonly phaseIdx = signal(0);
 
   private readonly phases: PhaseEntry[] = [
@@ -155,11 +164,19 @@ export class AgentTaskBlock {
   }
 
   protected readonly code = `@if (state() === 'streaming') {
-  <pk-thinking-bar
-    [text]="currentTrigger()"
-    stopLabel="Stop" [showStop]="true"
-    (stopped)="stop()"
-  />
+  <div class="flex w-full items-center justify-between">
+    <span role="status" class="shimmer text-muted-foreground text-sm font-medium">{{ currentTrigger() }}</span>
+    <button
+      hlmBtn
+      variant="link"
+      size="sm"
+      type="button"
+      class="text-muted-foreground"
+      (click)="stop()"
+    >
+      Stop
+    </button>
+  </div>
 }
 
 <pk-chain-of-thought>
@@ -178,11 +195,17 @@ export class AgentTaskBlock {
 
 <pk-tool [toolPart]="currentTool()" [defaultOpen]="true" />
 
-<pk-stream-controls
-  [state]="state()"
-  (stop)="stop()"
-  (regenerate)="start()"
-/>
+@if (state() === 'streaming') {
+  <button hlmBtn variant="secondary" size="sm" type="button" (click)="stop()">
+    <ng-icon name="lucideSquare" />
+    Stop
+  </button>
+} @else {
+  <button hlmBtn variant="ghost" size="sm" type="button" (click)="start()">
+    <ng-icon name="lucideRefreshCw" />
+    Regenerate
+  </button>
+}
 
 // Component
 private readonly phases = [
@@ -190,7 +213,7 @@ private readonly phases = [
   { trigger: 'Building the plan',    iconName: 'lucideHammer',     detail: '...' },
   { trigger: 'Pushing deletions',    iconName: 'lucideRefreshCw',  detail: '...' },
 ];
-protected readonly state = signal<StreamControlsState>('idle');
+protected readonly state = signal<'idle' | 'streaming'>('idle');
 protected readonly phaseIdx = signal(0);
 protected readonly visiblePhases = computed(() =>
   this.phases.slice(0, this.phaseIdx())

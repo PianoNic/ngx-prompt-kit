@@ -4,7 +4,7 @@ import { lucidePaperclip, lucideRefreshCw } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { PkChatTurnImports } from 'ngx-prompt-kit/chat-turn';
 import { PkMarkdown } from 'ngx-prompt-kit/markdown';
-import { modelIconUrl } from 'ngx-prompt-kit/model-icon';
+import { providerIconUrl } from 'ngx-prompt-kit/model-icon';
 import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
@@ -51,11 +51,11 @@ For most teams, 30 is a comfortable ceiling.`;
     <app-doc-page
       title="Chat Turn"
       [original]="true"
-      description="The two halves of a conversation: pk-user-turn is a soft right-aligned bubble that keeps line breaks, and pk-assistant-turn shows which model answered, the reply, and a row with a copy button, extra actions and details such as cost."
+      description="The two halves of a conversation: pk-user-turn is a right-aligned spartan hlm-bubble that keeps line breaks, and pk-assistant-turn shows which model answered, the reply, and a row with a copy button, extra actions and details such as cost."
     >
       <app-doc-example
         title="Conversation"
-        description="Assistant replies render through pk-markdown. The model icon comes from modelIconUrl(), and [pkAssistantTurnMeta] holds what the reply cost."
+        description="Assistant replies render through pk-markdown. The model icon comes from providerIconUrl(), and [pkAssistantTurnMeta] holds what the reply cost."
         [code]="conversationCode"
       >
         <div class="flex w-full flex-col gap-8">
@@ -139,8 +139,8 @@ export class ChatTurnDemo {
   // The demo has no typography plugin, so give the rendered markdown a little rhythm by hand.
   protected readonly markdownClass =
     'block [&_p]:my-3 [&_p:first-child]:mt-0 [&_p:last-child]:mb-0 [&_ul]:my-3 [&_ul]:list-disc [&_ul]:ps-5 [&_li]:my-1';
-  protected readonly sonnetIcon = modelIconUrl({ id: 'anthropic/claude-sonnet-5.5' });
-  protected readonly gptIcon = modelIconUrl({ id: 'openai/gpt-5' });
+  protected readonly sonnetIcon = providerIconUrl({ id: 'anthropic/claude-sonnet-5.5' });
+  protected readonly gptIcon = providerIconUrl({ id: 'openai/gpt-5' });
   protected readonly firstReply = FIRST_REPLY;
   protected readonly secondReply = SECOND_REPLY;
 
@@ -204,7 +204,7 @@ export class ChatTurnDemo {
           type: 'string | undefined',
           default: 'undefined',
           description:
-            'Brand icon for the model, e.g. from modelIconUrl(). Monochrome icons invert in dark mode.',
+            'Brand icon for the model, e.g. from providerIconUrl(). Monochrome icons invert in dark mode.',
         },
         {
           name: 'copyText',
@@ -252,7 +252,7 @@ export class ChatTurnDemo {
 
 <pk-assistant-turn
   modelName="Claude Sonnet 5.5"
-  [iconUrl]="modelIconUrl({ id: 'anthropic/claude-sonnet-5.5' })"
+  [iconUrl]="providerIconUrl({ id: 'anthropic/claude-sonnet-5.5' })"
   [copyText]="reply"
 >
   <pk-markdown class="prose dark:prose-invert max-w-none" [content]="reply" />
