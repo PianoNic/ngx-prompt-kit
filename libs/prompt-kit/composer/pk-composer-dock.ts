@@ -34,11 +34,14 @@ const R = 12;
  * - `card`: a bordered, softly shadowed card, for a composer centred in an empty chat.
  * - `plain`: no chrome, for a composer laid straight on the page, as on phones.
  *
- * A docked band replaces the panel's bottom corners with its own curves, so square them off, e.g.
- * `has-[pk-composer-dock[data-variant=docked]]:rounded-b-none` on the panel.
+ * Leave the panel's bottom corners rounded. The band is in the page colour, so they don't show at
+ * rest, and while the band is not covering them (e.g. sliding in during a view transition) a
+ * squared corner would show the panel's colour against the page.
  *
  * The band is drawn in `--pk-composer-dock-fill`, falling back to `--background`; set it to the
- * colour of the page around the panel when that differs, e.g. a sidebar layout's `--sidebar`.
+ * colour of the page around the panel when that differs, e.g. a sidebar layout's `--sidebar`. The
+ * wrapper over the notch is filled and rounded the same, so a view transition can carry it as a
+ * card of its own.
  *
  * `occupied` reports how many px of the panel the docked band covers, so the thread can pad its
  * bottom and keep the last message clear of it.
@@ -96,7 +99,10 @@ export class PkComposerDock {
   protected readonly contentClass = computed(() =>
     cn(
       'relative',
-      this.variant() === 'docked' && 'pointer-events-auto w-[min(784px,calc(100%-48px))]',
+      // The band's own fill over its middle, which it covers exactly: a view transition can then
+      // carry that middle as a card of its own.
+      this.variant() === 'docked' &&
+        'pointer-events-auto w-[min(784px,calc(100%-48px))] rounded-t-[12px] bg-[var(--pk-composer-dock-fill,var(--background))]',
       this.variant() === 'card' &&
         'bg-card rounded-[26px] border shadow-[0_4px_16px_rgb(10_10_10/0.05)]',
       this.contentClassName(),
@@ -132,13 +138,17 @@ export class PkComposerDock {
     const destroyRef = inject(DestroyRef);
 
     afterNextRender(() => {
-      const observer = new ResizeObserver(() => {
+      const measure = (): void => {
         this.width.set(this.host.nativeElement.clientWidth);
         const height = this.content().nativeElement.offsetHeight;
         this.contentHeight.set(height);
         if (height > 0) this.restingHeight.update((resting) => Math.min(resting, height));
         this.occupied.emit(this.variant() === 'docked' ? this.contentHeight() : 0);
-      });
+      };
+      // Measured once right away, within this render, so the band's sides are there in the first
+      // frame; a ResizeObserver's first report can land a frame later.
+      measure();
+      const observer = new ResizeObserver(measure);
       observer.observe(this.host.nativeElement);
       observer.observe(this.content().nativeElement);
       destroyRef.onDestroy(() => observer.disconnect());

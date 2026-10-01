@@ -1,4 +1,4 @@
-﻿import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
