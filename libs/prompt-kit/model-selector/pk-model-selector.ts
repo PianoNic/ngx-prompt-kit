@@ -194,7 +194,7 @@ const CLOSE_SPEED = 0.6;
       [attr.aria-label]="triggerLabel()"
       [disabled]="disabled()"
       (click)="toggle()"
-      class="h-9 max-w-full gap-2 rounded-full px-2.5 text-sm font-medium"
+      class="h-9 max-w-full min-w-0 shrink gap-2 rounded-full px-2.5 text-sm font-medium"
     >
       @if (selectedModel(); as s) {
         @if (s.iconUrl; as src) {
@@ -644,7 +644,9 @@ export class PkModelSelector {
   /** Keyboard navigation is in progress → show the active-row ring. */
   private readonly keyboardNav = signal(false);
 
-  protected readonly hostClass = computed(() => cn('inline-block', this.class()));
+  // min-w-0 lets the trigger shrink in a row (a composer), so a long name truncates instead of pushing
+  // the buttons beside it out of view.
+  protected readonly hostClass = computed(() => cn('inline-block min-w-0 max-w-full', this.class()));
   protected readonly desktopPanelClass = computed(() =>
     cn(
       'bg-popover text-popover-foreground flex h-[min(560px,calc(100dvh-6rem))] flex-col overflow-hidden rounded-[12px] border shadow-[0_0_5px_rgb(10_10_10/0.2)] outline-none dark:shadow-[0_0_5px_rgb(0_0_0/0.8)]',
