@@ -52,7 +52,7 @@ interface Feature {
       </section>
 
       <section class="mx-auto mt-12 max-w-2xl">
-        <pk-composer-dock variant="card">
+        <div class="rounded-2xl border bg-background px-3 pt-2 pb-3">
           <pk-composer
             placeholder="Ask ngx-prompt-kit anything..."
             [attachable]="true"
@@ -84,7 +84,7 @@ interface Feature {
               <ng-icon name="lucideEllipsis" class="text-[length:--spacing(4)]" />
             </button>
           </pk-composer>
-        </pk-composer-dock>
+        </div>
         @if (lastSubmitted()) {
           <p class="text-muted-foreground mt-2 text-center text-xs">
             Submitted: <span class="text-foreground font-mono">{{ lastSubmitted() }}</span>
@@ -163,7 +163,7 @@ export class Landing {
   protected readonly heroValue = signal('');
   protected readonly lastSubmitted = signal('');
 
-  protected readonly snippet = `<pk-composer-dock variant="card">
+  protected readonly snippet = `<div class="rounded-2xl border bg-background px-3 pt-2 pb-3">
   <pk-composer
     placeholder="Ask ngx-prompt-kit anything..."
     [attachable]="true"
@@ -175,7 +175,7 @@ export class Landing {
       Search
     </button>
   </pk-composer>
-</pk-composer-dock>`;
+</div>`;
 
   protected readonly features: Feature[] = [
     {

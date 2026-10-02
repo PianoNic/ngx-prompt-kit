@@ -37,7 +37,7 @@ import { DocPage } from '../layout/doc-page';
         [code]="composerCode"
       >
         <div class="flex min-h-[420px] flex-col justify-end gap-4">
-          <pk-composer-dock variant="card" class="mx-auto max-w-2xl">
+          <div class="rounded-2xl border bg-background px-3 pt-2 pb-3 mx-auto max-w-2xl">
             <pk-composer
               pkEmojiAutocomplete
               placeholder="Type :so to pick an emoji"
@@ -45,7 +45,7 @@ import { DocPage } from '../layout/doc-page';
               (submitted)="sent.set($event)"
               (emojiInserted)="inserted.set($event)"
             />
-          </pk-composer-dock>
+          </div>
           <p class="text-muted-foreground text-xs" aria-live="polite">
             (submitted): <span class="text-foreground font-mono">{{ sent() || '—' }}</span>
             · (emojiInserted):
