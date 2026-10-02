@@ -3,7 +3,7 @@ import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocPage } from '../layout/doc-page';
 import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
-import { makerIconUrl, providerIconUrl, VENDORS } from 'ngx-prompt-kit/model-icon';
+import { iconUrl, makerIconUrl, providerIconUrl, VENDORS } from 'ngx-prompt-kit/model-icon';
 
 const SAMPLE_IDS = [
   'openai/gpt-5',
@@ -18,6 +18,83 @@ const SAMPLE_IDS = [
   'somevendor/mystery-model',
 ];
 
+/** The inference providers in the bundled set; iconUrl(name) resolves each. */
+const PROVIDERS = [
+  'ai21',
+  'akashml',
+  'aleph-alpha',
+  'alibaba-cloud',
+  'assemblyai',
+  'atlascloud',
+  'aws',
+  'azure-ai',
+  'azure',
+  'baidu-cloud',
+  'baseten',
+  'bedrock',
+  'cerebras',
+  'chutes',
+  'cloudflare',
+  'coreweave',
+  'crusoe',
+  'decart',
+  'deepgram',
+  'deepinfra',
+  'digitalocean',
+  'elevenlabs',
+  'featherless',
+  'fishaudio',
+  'friendli',
+  'github',
+  'glama',
+  'gmicloud',
+  'google-ai-studio',
+  'groq',
+  'huggingface',
+  'hyperbolic',
+  'ibm',
+  'inceptron',
+  'infermatic',
+  'infomaniak',
+  'ionet',
+  'ionos',
+  'jina',
+  'kluster',
+  'lambda',
+  'llama-cpp',
+  'lmstudio',
+  'localai',
+  'modal',
+  'nebius',
+  'nextbit',
+  'novita',
+  'ollama',
+  'open-inference',
+  'ovhcloud',
+  'parasail',
+  'phala',
+  'prime-intellect',
+  'replicate',
+  'sail-research',
+  'sambanova',
+  'scaleway',
+  'siliconflow',
+  'snowflake',
+  'streamlake',
+  'targon',
+  'tencent-cloud',
+  'together',
+  'venice',
+  'vercel',
+  'vertex-ai',
+  'vllm',
+  'voyage',
+  'wafer',
+  'workers-ai',
+  'xinference',
+  'zenmux',
+];
+
 const SOURCES_URL =
   'https://github.com/PianoNic/ngx-prompt-kit/blob/master/src/library/src/model-icon/assets/SOURCES.md';
 
@@ -29,7 +106,7 @@ const SOURCES_URL =
     <app-doc-page
       title="Model Icon"
       [original]="true"
-      description="A monochrome icon for every OpenRouter vendor, copied into your app by the schematic and served with it, so no icon is fetched from a third party. providerIconUrl() and makerIconUrl() turn a model id into its icon's URL for pk-model-selector (iconUrl, makerIconUrl) and pk-model-browser (iconUrl). Vendors without an icon get a neutral box."
+      description="A monochrome icon for every OpenRouter vendor, copied into your app by the schematic and served with it, so no icon is fetched from a third party. providerIconUrl() and makerIconUrl() turn a model id into its icon's URL for pk-model-selector (iconUrl, makerIconUrl) and pk-model-browser (iconUrl). Vendors without an icon get a neutral box. The set also has an icon per inference provider (Groq, Azure, Bedrock, Ollama, ...), which iconUrl() resolves by file name."
     >
       <app-doc-example
         title="Every bundled icon"
@@ -85,6 +162,36 @@ const SOURCES_URL =
         </div>
       </app-doc-example>
 
+      <app-doc-example
+        title="Provider icons"
+        description="The platforms that serve models: clouds, hosted inference, local runtimes and speech or embedding APIs. They are not keyed by model id, so iconUrl(name) takes the file name. It does not check the file exists; these are the names in the set."
+        [code]="providerCode"
+        language="typescript"
+      >
+        <div class="grid w-full gap-4 md:grid-cols-2">
+          @for (dark of [false, true]; track dark) {
+            <div
+              [class]="dark ? 'dark bg-neutral-950 text-neutral-200' : 'bg-white text-neutral-700'"
+              class="grid grid-cols-3 gap-1 rounded-lg border p-3 sm:grid-cols-4"
+            >
+              @for (name of providers; track name) {
+                <div class="flex min-w-0 flex-col items-center gap-1 rounded-md p-2">
+                  <img
+                    [src]="icon(name)"
+                    [alt]="name"
+                    width="20"
+                    height="20"
+                    [class.invert]="dark"
+                    class="size-5 object-contain"
+                  />
+                  <span class="w-full truncate text-center font-mono text-[10px]">{{ name }}</span>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      </app-doc-example>
+
       <section class="mt-12">
         <h2 class="text-xl font-semibold tracking-tight">Installation</h2>
         <p class="text-muted-foreground mt-1 text-sm leading-relaxed">
@@ -105,8 +212,8 @@ const SOURCES_URL =
           Where each icon comes from and its licence is listed in
           <a [href]="sourcesUrl" target="_blank" rel="noopener noreferrer" class="underline"
             >SOURCES.md</a
-          >, which is copied next to the icons. Most are LobeHub's (MIT); every logo stays a
-          trademark of its owner and only labels that owner's models.
+          >, which is copied next to the icons. Most are LobeHub's (MIT), a few Simple Icons' (CC0);
+          every logo stays a trademark of its owner and only labels that owner's models or service.
         </p>
       </section>
 
@@ -116,11 +223,16 @@ const SOURCES_URL =
 })
 export class ModelIconDemo {
   protected readonly ids = SAMPLE_IDS;
+  protected readonly providers = PROVIDERS;
   protected readonly slugs = [...VENDORS, 'gemma', 'unknown'];
   protected readonly sourcesUrl = SOURCES_URL;
 
   protected provider(id: string): string {
     return providerIconUrl({ id });
+  }
+
+  protected icon(name: string): string {
+    return iconUrl(name);
   }
 
   protected maker(id: string): string {
@@ -145,6 +257,11 @@ const models: SelectorModel[] = apiModels.map((m) => ({
 // pk-model-browser
 const browserModels = apiModels.map((m) => ({ ...m, iconUrl: providerIconUrl(m) }));`;
 
+  protected readonly providerCode = `import { iconUrl } from 'ngx-prompt-kit/model-icon';
+
+// The platform serving the model, next to its maker's icon
+const servedBy = { name: 'Groq', iconUrl: iconUrl('groq') }; // /model-icons/groq.svg`;
+
   protected readonly api: ApiSection[] = [
     {
       name: 'model-icon',
@@ -160,6 +277,12 @@ const browserModels = apiModels.map((m) => ({ ...m, iconUrl: providerIconUrl(m) 
           type: '({ id, provider? }) => string',
           description:
             "The vendor's own icon, without sub-brands; for pk-model-selector's maker rail.",
+        },
+        {
+          name: 'iconUrl(name)',
+          type: '(name: string) => string',
+          description:
+            'The icon with this file name, without .svg: for inference providers (groq, azure, ollama, ...), which are not keyed by model id. Follows assetsPath like the others; does not check the file exists.',
         },
         {
           name: 'VENDORS',

@@ -167,7 +167,7 @@ See the [live demo](https://ngx-prompt-kit.pianonic.ch) for every component with
 ## Notes
 
 - Re-running a component schematic overwrites the existing files. If you've customized them, commit your changes first.
-- `model-icon` copies a monochrome icon per OpenRouter vendor (with `SOURCES.md` licence notes) to `public/model-icons` (`--assets-path` to change it) and generates `providerIconUrl()` / `makerIconUrl()` for `pk-model-selector` and `pk-model-browser`. Nothing is fetched from a third party.
+- `model-icon` copies a monochrome icon per OpenRouter vendor and per inference provider (with `SOURCES.md` licence notes) to `public/model-icons` (`--assets-path` to change it) and generates `providerIconUrl()` / `makerIconUrl()` for `pk-model-selector` and `pk-model-browser`, plus `iconUrl(name)` for provider icons by file name. Nothing is fetched from a third party.
 - You own the generated source — edit freely. Updates to this package won't push changes to your code.
 - `image` uses Angular's `NgOptimizedImage` directive when given a real `src` URL; falls back to a native `<img>` for base64/blob payloads.
 - `cost-display` does **not** bundle model pricing tables — those drift constantly. Pass `inputPricePer1M` / `outputPricePer1M` from your own source of truth.

@@ -1,10 +1,14 @@
 // ngx-prompt-kit original — not part of ibelick/prompt-kit
 /**
  * An icon for the maker of a model, from the set the `model-icon` schematic copies into the app
- * (`public/model-icons` by default; see SOURCES.md there for where each icon comes from and its
- * licence): one monochrome SVG per OpenRouter vendor, the part of the model id before the slash.
- * Served with the app, so nothing is fetched from a third party. Vendors added to OpenRouter later
- * get the neutral box until their icon is added.
+ * (`public/model-icons` by default, set by its `assetsPath` option; see SOURCES.md there for where
+ * each icon comes from and its licence): one monochrome SVG per OpenRouter vendor, the part of the
+ * model id before the slash. Served with the app, so nothing is fetched from a third party. Vendors
+ * added to OpenRouter later get the neutral box until their icon is added.
+ *
+ * The set also has an icon per inference provider, the platform serving the model (`groq`,
+ * `azure`, `bedrock`, `ollama`, ...; SOURCES.md lists them): get those by file name with
+ * the `iconUrl()` function.
  *
  * Feed the results to pk-model-selector (`iconUrl`, `makerIconUrl`) or pk-model-browser
  * (`iconUrl`). The icons are black on transparent: render them with `dark:invert`.
@@ -91,6 +95,12 @@ export function providerIconUrl(model: IconModel): string {
 export function makerIconUrl(model: IconModel): string {
   const vendor = vendorOf(model);
   return `${ICON_BASE}/${VENDORS.has(vendor) ? vendor : 'unknown'}.svg`;
+}
+
+/** The icon with this file name (without `.svg`), e.g. `iconUrl('groq')`: for providers, which
+ *  are not keyed by model id. Does not check that the file exists. */
+export function iconUrl(name: string): string {
+  return `${ICON_BASE}/${name}.svg`;
 }
 
 /** @deprecated Use `providerIconUrl`; kept so existing callers keep working. */
