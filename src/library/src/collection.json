@@ -112,7 +112,7 @@
       "schema": "./model-icon/schema.json"
     },
     "composer": {
-      "description": "Add the composer and composer-dock components (ngx-prompt-kit original).",
+      "description": "Add the composer component (ngx-prompt-kit original).",
       "factory": "./composer/index#composer",
       "schema": "./composer/schema.json"
     },

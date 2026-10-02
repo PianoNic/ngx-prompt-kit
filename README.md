@@ -144,9 +144,9 @@ import { PkComposerImports } from 'libs/prompt-kit/composer';
   selector: 'app-chat',
   imports: [PkComposerImports],
   template: `
-    <pk-composer-dock variant="card">
+    <div class="rounded-2xl border bg-background px-3 pt-2 pb-3">
       <pk-composer [(value)]="value" (submitted)="onSubmit($event)" placeholder="Ask anything..." />
-    </pk-composer-dock>
+    </div>
   `,
 })
 export class Chat {

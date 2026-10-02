@@ -47,11 +47,11 @@ const THREE_LEVELS: readonly ReasoningLevelOption<Effort>[] = [
         [code]="composerCode"
       >
         <div class="flex min-h-[420px] flex-col justify-end">
-          <pk-composer-dock variant="card" class="mx-auto max-w-2xl">
+          <div class="rounded-2xl border bg-background px-3 pt-2 pb-3 mx-auto max-w-2xl">
             <pk-composer placeholder="Ask anything" [attachable]="true">
               <pk-reasoning-selector pkComposerEnd [(value)]="level" />
             </pk-composer>
-          </pk-composer-dock>
+          </div>
         </div>
         <p class="text-muted-foreground mt-4 text-xs">
           value: <span class="text-foreground font-mono">{{ level() ?? 'null (auto)' }}</span>

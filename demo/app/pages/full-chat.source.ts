@@ -220,7 +220,7 @@ export const FULL_CHAT_HTML_SOURCE = `<hlm-tabs tab="preview" class="mx-auto fle
 
         <!-- Composer -->
         <div class="px-4 pt-2 pb-4">
-          <pk-composer-dock variant="card">
+          <div class="rounded-2xl border bg-background px-3 pt-2 pb-3">
             <pk-composer
               placeholder="Ask anything..."
               [(value)]="inputValue"
@@ -265,7 +265,7 @@ export const FULL_CHAT_HTML_SOURCE = `<hlm-tabs tab="preview" class="mx-auto fle
                 [limit]="2000"
               />
             </pk-composer>
-          </pk-composer-dock>
+          </div>
         </div>
       </section>
     </div>

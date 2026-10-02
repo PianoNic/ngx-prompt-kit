@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { HlmButton } from '@spartan-ng/helm/button';
-import { PkChatTurnImports } from 'ngx-prompt-kit/chat-turn';
 import { PkComposerImports } from 'ngx-prompt-kit/composer';
 import { providerIconUrl } from 'ngx-prompt-kit/model-icon';
 import { PkModelSelectorImports, type SelectorModel } from 'ngx-prompt-kit/model-selector';
@@ -8,11 +7,6 @@ import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
-
-interface Turn {
-  role: 'user' | 'assistant';
-  text: string;
-}
 
 const LONG_DRAFT = `Here is the incident timeline I want to turn into a post-mortem:
 
@@ -71,23 +65,22 @@ const MODELS: SelectorModel[] = [
     DocApi,
     HlmButton,
     PkComposerImports,
-    PkChatTurnImports,
     PkModelSelectorImports,
   ],
   template: `
     <app-doc-page
       title="Composer"
       [original]="true"
-      description="A chat composer whose text box grows with the draft and then scrolls, with an expand toggle for long drafts, an optional attach button, slots for chips and a model selector, and a send button that becomes stop while a reply streams. The text box is a borderless hlmTextarea and every button an hlmBtn. pk-composer-dock holds it as a card, as plain content, or docked into the bottom of a chat panel."
+      description="A chat composer whose text box grows with the draft and then scrolls, with an expand toggle for long drafts, an optional attach button, slots for chips and a model selector, and a send button that becomes stop while a reply streams. The text box is a borderless hlmTextarea and every button an hlmBtn. Put it in whatever frame your layout needs; the examples use a plain bordered box."
     >
       <app-doc-example
         title="Empty state"
-        description='variant="card" for a composer centred in an empty chat. Enter sends, Shift+Enter adds a line; the + button opens a file picker.'
+        description="A composer centred in an empty chat. Enter sends, Shift+Enter adds a line; the + button opens a file picker."
         [code]="cardCode"
       >
         <div class="flex min-h-[320px] flex-col items-center justify-center gap-6">
           <h2 class="text-center text-2xl font-semibold tracking-tight">What can I help with?</h2>
-          <pk-composer-dock variant="card" class="max-w-2xl">
+          <div class="rounded-2xl border bg-background px-3 pt-2 pb-3 max-w-2xl">
             <pk-composer
               placeholder="Ask anything"
               [attachable]="true"
@@ -95,7 +88,7 @@ const MODELS: SelectorModel[] = [
               (submitted)="cardSent.set($event)"
               (filesPicked)="cardFiles.set($event)"
             />
-          </pk-composer-dock>
+          </div>
           @if (cardSent() || cardFiles().length) {
             <p class="text-muted-foreground text-xs">
               @if (cardSent(); as text) {
@@ -111,50 +104,6 @@ const MODELS: SelectorModel[] = [
       </app-doc-example>
 
       <app-doc-example
-        title="Docked in a chat panel"
-        description="The dock draws a band in the page colour with a raised notch around the composer. The panel is relative and clips; its bottom corners stay rounded, since they meet the band in the page colour. (occupied) reports how much of the panel the band covers, so the thread pads its bottom by that much."
-        [code]="dockedCode"
-      >
-        <div
-          class="bg-background overflow-hidden rounded-2xl px-2 pt-2 [--background:var(--muted)]"
-        >
-          <div
-            class="bg-card relative h-[480px] overflow-hidden rounded-[18px] shadow-[inset_0_2px_10px_-2px_rgb(10_10_10/0.14),inset_0_0_0_1px_rgb(10_10_10/0.05)] dark:shadow-[inset_0_2px_12px_-2px_rgb(0_0_0/0.85),inset_0_0_0_1px_rgb(255_255_255/0.04)]"
-          >
-            <div
-              class="flex h-full flex-col gap-6 overflow-y-auto px-4 pt-5 md:px-6"
-              [style.padding-bottom.px]="occupied() + 24"
-            >
-              @for (turn of thread(); track $index) {
-                @if (turn.role === 'user') {
-                  <pk-user-turn>{{ turn.text }}</pk-user-turn>
-                } @else {
-                  <pk-assistant-turn
-                    modelName="Claude Sonnet 5.5"
-                    [iconUrl]="sonnetIcon"
-                    [copyText]="turn.text"
-                  >
-                    {{ turn.text }}
-                  </pk-assistant-turn>
-                }
-              }
-            </div>
-            <pk-composer-dock (occupied)="occupied.set($event)">
-              <pk-composer
-                placeholder="Reply to Claude Sonnet 5.5"
-                [attachable]="true"
-                [(value)]="dockedDraft"
-                (submitted)="reply($event)"
-              />
-            </pk-composer-dock>
-          </div>
-        </div>
-        <p class="text-muted-foreground mt-3 text-xs">
-          (occupied): <span class="text-foreground font-mono">{{ occupied() }}px</span>
-        </p>
-      </app-doc-example>
-
-      <app-doc-example
         title="Busy and stop"
         description="While busy, the send button becomes a stop button that emits (stopped). Typing still works, but Enter won't send until the reply is done."
         [code]="busyCode"
@@ -166,14 +115,14 @@ const MODELS: SelectorModel[] = [
             </button>
             <span class="text-muted-foreground text-xs" aria-live="polite">{{ busyLog() }}</span>
           </div>
-          <pk-composer-dock variant="card">
+          <div class="rounded-2xl border bg-background px-3 pt-2 pb-3">
             <pk-composer
               [busy]="busy()"
               [(value)]="busyDraft"
               (submitted)="busy.set(true); busyLog.set('(submitted) ' + $event)"
               (stopped)="busy.set(false); busyLog.set('(stopped)')"
             />
-          </pk-composer-dock>
+          </div>
         </div>
       </app-doc-example>
 
@@ -182,9 +131,9 @@ const MODELS: SelectorModel[] = [
         description="The text box grows up to maxHeight (here 160px) and then scrolls. Once it overflows, an expand toggle in the corner grows it to 60% of the viewport; sending shrinks it again."
         [code]="longCode"
       >
-        <pk-composer-dock variant="card">
+        <div class="rounded-2xl border bg-background px-3 pt-2 pb-3">
           <pk-composer [maxHeight]="160" [(value)]="longDraft" />
-        </pk-composer-dock>
+        </div>
       </app-doc-example>
 
       <app-doc-example
@@ -193,7 +142,7 @@ const MODELS: SelectorModel[] = [
         [code]="selectorCode"
       >
         <div class="flex min-h-[620px] flex-col justify-end">
-          <pk-composer-dock variant="card">
+          <div class="rounded-2xl border bg-background px-3 pt-2 pb-3">
             <pk-composer
               #composer
               [placeholder]="'Reply to ' + selectedName()"
@@ -207,7 +156,7 @@ const MODELS: SelectorModel[] = [
                 [(value)]="modelId"
               />
             </pk-composer>
-          </pk-composer-dock>
+          </div>
         </div>
       </app-doc-example>
 
@@ -217,27 +166,11 @@ const MODELS: SelectorModel[] = [
   `,
 })
 export class ComposerDemo {
-  protected readonly sonnetIcon = providerIconUrl({ id: 'anthropic/claude-sonnet-5.5' });
   protected readonly models = MODELS;
 
   protected readonly cardDraft = signal('');
   protected readonly cardSent = signal('');
   protected readonly cardFiles = signal<File[]>([]);
-
-  protected readonly dockedDraft = signal('');
-  protected readonly occupied = signal(0);
-  protected readonly thread = signal<Turn[]>([
-    { role: 'user', text: 'How long should I keep daily Postgres backups for a small SaaS?' },
-    {
-      role: 'assistant',
-      text: 'A common starting point is 14 daily, 8 weekly and 12 monthly backups. That covers a bad deploy you notice late, without paying to store every day forever.',
-    },
-    { role: 'user', text: 'And how do I prune the old ones from S3?' },
-    {
-      role: 'assistant',
-      text: 'Use a lifecycle rule on the bucket rather than a script: expire objects under daily/ after 14 days, and keep weekly and monthly copies under their own prefixes so the rule never touches them.',
-    },
-  ]);
 
   protected readonly busy = signal(false);
   protected readonly busyDraft = signal('');
@@ -254,17 +187,6 @@ export class ComposerDemo {
 
   protected fileNames(files: File[]): string {
     return files.map((f) => f.name).join(', ');
-  }
-
-  protected reply(text: string): void {
-    this.thread.update((turns) => [
-      ...turns,
-      { role: 'user', text },
-      {
-        role: 'assistant',
-        text: 'This is a demo, so here is a canned reply. Keep typing to watch the thread scroll above the dock.',
-      },
-    ]);
   }
 
   protected readonly api: ApiSection[] = [
@@ -399,54 +321,10 @@ export class ComposerDemo {
         },
       ],
     },
-    {
-      name: 'PkComposerDock',
-      props: [
-        {
-          name: 'variant',
-          type: "'docked' | 'card' | 'plain'",
-          default: "'docked'",
-          description:
-            'docked: pinned to the bottom of a relative, clipping panel with a band and raised notch in the page colour. card: a bordered, softly shadowed card for an empty chat. plain: no chrome, e.g. on phones.',
-        },
-        {
-          name: 'contentClass',
-          type: 'string',
-          default: "''",
-          description:
-            'Extra classes for the card or notch content wrapper, e.g. a dashed border for an incognito chat.',
-        },
-        {
-          name: 'class',
-          type: 'string',
-          default: "''",
-          description: 'Extra classes for the host.',
-        },
-        {
-          name: 'occupied',
-          type: '(px: number) => void',
-          description:
-            'Output. Px of the panel’s height the docked band covers (0 for the other variants), so the thread can pad its bottom.',
-        },
-        {
-          name: 'data-variant',
-          type: 'attribute',
-          description:
-            'Host attribute mirroring variant, e.g. to style the panel while a composer is docked in it.',
-        },
-        {
-          name: '--pk-composer-dock-fill',
-          type: 'CSS variable',
-          default: 'var(--background)',
-          description:
-            'Colour of the docked band and of the wrapper over its notch. Set it to the page colour around the panel when that is not --background, e.g. var(--sidebar) in a sidebar layout.',
-        },
-      ],
-    },
   ];
 
   protected readonly cardCode = `<h2>What can I help with?</h2>
-<pk-composer-dock variant="card" class="max-w-2xl">
+<div class="rounded-2xl border bg-background px-3 pt-2 pb-3 max-w-2xl">
   <pk-composer
     placeholder="Ask anything"
     [attachable]="true"
@@ -454,42 +332,26 @@ export class ComposerDemo {
     (submitted)="send($event)"
     (filesPicked)="upload($event)"
   />
-</pk-composer-dock>`;
+</div>`;
 
-  protected readonly dockedCode = `<!-- The page: its colour is --background, which the band is drawn in. -->
-<div class="bg-background px-2 pt-2">
-  <!-- The panel: relative and clips. Its rounded bottom corners meet the band in the page colour. -->
-  <main class="bg-card relative h-[480px] overflow-hidden rounded-[18px] shadow-[inset_…]">
-    <div class="h-full overflow-y-auto" [style.padding-bottom.px]="occupied() + 24">
-      @for (turn of thread(); track $index) { … }
-    </div>
-
-    <pk-composer-dock (occupied)="occupied.set($event)">
-      <pk-composer [attachable]="true" [(value)]="draft" (submitted)="send($event)" />
-    </pk-composer-dock>
-  </main>
-</div>
-
-occupied = signal(0);`;
-
-  protected readonly busyCode = `<pk-composer-dock variant="card">
+  protected readonly busyCode = `<div class="rounded-2xl border bg-background px-3 pt-2 pb-3">
   <pk-composer
     [busy]="busy()"
     [(value)]="draft"
     (submitted)="send($event)"
     (stopped)="stop()"
   />
-</pk-composer-dock>
+</div>
 
 // e.g. with readChatStream(events$, adapt, handlers, controller.signal)
 send(text: string) { this.busy.set(true); … }
 stop() { this.controller.abort(); this.busy.set(false); }`;
 
-  protected readonly longCode = `<pk-composer-dock variant="card">
+  protected readonly longCode = `<div class="rounded-2xl border bg-background px-3 pt-2 pb-3">
   <pk-composer [maxHeight]="160" [(value)]="draft" />
-</pk-composer-dock>`;
+</div>`;
 
-  protected readonly selectorCode = `<pk-composer-dock variant="card">
+  protected readonly selectorCode = `<div class="rounded-2xl border bg-background px-3 pt-2 pb-3">
   <pk-composer #composer [attachable]="true" [(value)]="draft">
     <pk-model-selector
       pkComposerEnd
@@ -498,5 +360,5 @@ stop() { this.controller.abort(); this.busy.set(false); }`;
       [(value)]="modelId"
     />
   </pk-composer>
-</pk-composer-dock>`;
+</div>`;
 }
