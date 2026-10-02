@@ -95,6 +95,7 @@ ng generate ngx-prompt-kit:ui --components=composer,chat-turn,markdown
 | `composer`               | button, textarea                        | —             |
 | `conversation-list`      | button, dropdown-menu, input            | —             |
 | `cost-display`           | —                                       | —             |
+| `emoji-autocomplete`     | —                                       | gemoji        |
 | `feedback-bar`           | button                                  | —             |
 | `file-upload`            | —                                       | —             |
 | `image`                  | skeleton                                | —             |

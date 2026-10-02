@@ -38,6 +38,7 @@ export const NAV: NavGroup[] = [
       { label: 'Composer', path: '/components/composer', badge: 'New' },
       { label: 'Conversation List', path: '/components/conversation-list', badge: 'New' },
       { label: 'Cost Display', path: '/components/cost-display', badge: 'New' },
+      { label: 'Emoji Autocomplete', path: '/components/emoji-autocomplete', badge: 'New' },
       { label: 'Feedback Bar', path: '/components/feedback-bar' },
       { label: 'File Upload', path: '/components/file-upload' },
       { label: 'Image', path: '/components/image' },

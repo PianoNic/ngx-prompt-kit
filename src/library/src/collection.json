@@ -116,6 +116,11 @@
       "factory": "./composer/index#composer",
       "schema": "./composer/schema.json"
     },
+    "emoji-autocomplete": {
+      "description": "Add the emoji shortcode autocomplete directive for prompt text boxes (ngx-prompt-kit original).",
+      "factory": "./emoji-autocomplete/index#emojiAutocomplete",
+      "schema": "./emoji-autocomplete/schema.json"
+    },
     "chat-turn": {
       "description": "Add the user-turn and assistant-turn components (ngx-prompt-kit original).",
       "factory": "./chat-turn/index#chatTurn",
