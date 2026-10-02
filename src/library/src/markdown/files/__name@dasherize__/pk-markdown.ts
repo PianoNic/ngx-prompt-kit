@@ -63,6 +63,35 @@ export class PkMarkdown {
   private readonly md = computed<Marked>(() => {
     const m = new Marked({ breaks: true, gfm: true });
     const enableDiagrams = this.enableDiagrams();
+    if (this.enableMath()) {
+      // Markdown would eat the backslash of \( and \[ and read _ or \\ inside a
+      // formula as emphasis or escapes, so math spans pass through verbatim for
+      // KaTeX auto-render to pick up afterwards.
+      const patterns = this.delimiters().map(
+        (d) => new RegExp(`^${escapeRegExp(d.left)}[\\s\\S]+?${escapeRegExp(d.right)}`),
+      );
+      const lefts = this.delimiters().map((d) => d.left);
+      m.use({
+        extensions: [
+          {
+            name: 'pkMath',
+            level: 'inline',
+            start: (src: string) => {
+              const at = lefts.map((l) => src.indexOf(l)).filter((i) => i >= 0);
+              return at.length ? Math.min(...at) : undefined;
+            },
+            tokenizer: (src: string) => {
+              for (const pattern of patterns) {
+                const match = pattern.exec(src);
+                if (match) return { type: 'pkMath', raw: match[0] };
+              }
+              return undefined;
+            },
+            renderer: (token) => escapeHtml(token.raw),
+          },
+        ],
+      });
+    }
     m.use({
       renderer: {
         code(token: Tokens.Code): string | false {
@@ -427,6 +456,10 @@ function attachCopyHandler(wrapper: HTMLElement, code: string): void {
       }, 1500);
     });
   });
+}
+
+function escapeRegExp(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 function decodeHtml(s: string): string {

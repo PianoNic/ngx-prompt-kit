@@ -40,7 +40,7 @@ import { PkMarkdown } from 'ngx-prompt-kit/markdown';
 
       <app-doc-example
         title="Math (LaTeX via KaTeX)"
-        description="Set [enableMath]='true' to render inline ($…$) and block ($$…$$) math. Bad LaTeX renders as source text rather than throwing — safe for streamed model output."
+        description="Set [enableMath]='true' to render inline ($…$) and block ($$…$$) math. Formulas pass through markdown untouched, so underscores and backslashes in LaTeX survive. Bad LaTeX renders as source text rather than throwing — safe for streamed model output."
         [code]="mathCode"
       >
         <pk-markdown
@@ -110,7 +110,8 @@ export class MarkdownDemo {
           name: 'mathInlineDelimiter',
           type: '"$" | "\\(" | "both"',
           default: '"$"',
-          description: 'Inline math delimiter style. "both" accepts either dollar or LaTeX-style.',
+          description:
+            'Inline math delimiter style. "both" accepts either dollar or LaTeX-style. Use "\\(" when replies mention prices, so a single $ stays text.',
         },
         {
           name: 'mathBlockDelimiter',
