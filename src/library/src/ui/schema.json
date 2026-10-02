@@ -27,6 +27,7 @@
           "model-browser",
           "model-selector",
           "composer",
+          "emoji-autocomplete",
           "chat-turn",
           "prompt-suggestion",
           "reasoning",
@@ -112,6 +113,10 @@
           {
             "value": "composer",
             "label": "composer"
+          },
+          {
+            "value": "emoji-autocomplete",
+            "label": "emoji-autocomplete"
           },
           {
             "value": "chat-turn",

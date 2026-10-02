@@ -39,6 +39,7 @@ const COMPONENT_TITLES: Readonly<Record<string, string>> = {
   composer: 'Composer',
   'conversation-list': 'Conversation List',
   'cost-display': 'Cost Display',
+  'emoji-autocomplete': 'Emoji Autocomplete',
   'feedback-bar': 'Feedback Bar',
   'file-upload': 'File Upload',
   image: 'Image',

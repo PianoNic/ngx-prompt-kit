@@ -19,6 +19,7 @@ export const PROMPT_KIT_COMPONENTS = [
   'model-browser',
   'model-selector',
   'composer',
+  'emoji-autocomplete',
   'chat-turn',
   'prompt-suggestion',
   'reasoning',

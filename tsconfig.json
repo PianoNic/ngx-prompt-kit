@@ -55,6 +55,7 @@
       "ngx-prompt-kit/model-icon": ["./libs/prompt-kit/model-icon"],
       "ngx-prompt-kit/model-selector": ["./libs/prompt-kit/model-selector"],
       "ngx-prompt-kit/composer": ["./libs/prompt-kit/composer"],
+      "ngx-prompt-kit/emoji-autocomplete": ["./libs/prompt-kit/emoji-autocomplete"],
       "ngx-prompt-kit/chat-turn": ["./libs/prompt-kit/chat-turn"],
       "ngx-prompt-kit/auth-image": ["./libs/prompt-kit/auth-image"],
       "ngx-prompt-kit/usage-card": ["./libs/prompt-kit/usage-card"],

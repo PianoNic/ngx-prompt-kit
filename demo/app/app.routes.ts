@@ -159,6 +159,11 @@ export const routes: Routes = [
         loadComponent: () => import('./demo/composer-demo').then((m) => m.ComposerDemo),
       },
       {
+        path: 'components/emoji-autocomplete',
+        loadComponent: () =>
+          import('./demo/emoji-autocomplete-demo').then((m) => m.EmojiAutocompleteDemo),
+      },
+      {
         path: 'components/chat-turn',
         loadComponent: () => import('./demo/chat-turn-demo').then((m) => m.ChatTurnDemo),
       },
