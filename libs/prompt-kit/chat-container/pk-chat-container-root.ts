@@ -30,6 +30,9 @@ const NEAR_BOTTOM_THRESHOLD = 32;
     role: 'log',
     '[class]': 'computedClass()',
     '(scroll)': 'onScroll()',
+    '(wheel)': 'takeOver()',
+    '(touchmove)': 'takeOver()',
+    '(keydown)': 'takeOver()',
   },
   providers: [
     { provide: CHAT_CONTAINER_STATE, useExisting: forwardRef(() => PkChatContainerRoot) },
@@ -54,8 +57,12 @@ export class PkChatContainerRoot implements AfterViewInit, ChatContainerState {
 
   private observer?: ResizeObserver;
   private lastScrollTop = 0;
-  /** The message held at the top, and how far below the view's top edge it sits. */
-  private pinned: { element: HTMLElement; offset: number } | null = null;
+  /**
+   * The message held at the top: how far below the view's top edge it sits, and whether the scroll
+   * that brings it there has arrived (only then is the position held, so it doesn't cut that scroll short).
+   */
+  private pinned: { element: HTMLElement; offset: number; arrived: boolean; top: number } | null =
+    null;
 
   ngAfterViewInit(): void {
     if (!this.isBrowser) return;
@@ -63,7 +70,7 @@ export class PkChatContainerRoot implements AfterViewInit, ChatContainerState {
     // Following a growing reply scrolls instantly: a smooth scroll is still animating when the next
     // token lands, and the half-way positions it passes through would read as the reader leaving.
     this.observer = new ResizeObserver(() => {
-      if (this.pinned) this.fitSpacer();
+      if (this.pinned) this.holdPin();
       else if (this.isAtBottom()) this.scrollToBottom('auto');
       this.measure();
     });
@@ -81,6 +88,8 @@ export class PkChatContainerRoot implements AfterViewInit, ChatContainerState {
    */
   protected onScroll(): void {
     const el = this.host.nativeElement;
+    if (this.pinned && !this.pinned.arrived && Math.abs(el.scrollTop - this.pinTarget()) <= 1)
+      this.pinned.arrived = true;
     const distance = this.contentHeight() - el.scrollTop - el.clientHeight;
     if (distance <= NEAR_BOTTOM_THRESHOLD && !this.pinned) this.isAtBottom.set(true);
     else if (el.scrollTop < this.lastScrollTop - 1) this.isAtBottom.set(false);
@@ -106,19 +115,57 @@ export class PkChatContainerRoot implements AfterViewInit, ChatContainerState {
    */
   public pinToTop(element: HTMLElement, offset = 16): void {
     if (!this.isBrowser) return;
-    this.pinned = { element, offset };
+    this.pinned = { element, offset, arrived: false, top: 0 };
     this.isAtBottom.set(false);
     this.fitSpacer();
     const el = this.host.nativeElement;
-    el.scrollTo({ top: Math.max(0, this.topOf(element) - offset), behavior: 'smooth' });
+    // Already there: nothing to wait for.
+    if (Math.abs(el.scrollTop - this.pinTarget()) <= 1) this.pinned.arrived = true;
+    else el.scrollTo({ top: this.pinTarget(), behavior: 'smooth' });
     this.measure();
+  }
+
+  /** The reader scrolled by hand: the pin lets go, and following works as usual from here. */
+  protected takeOver(): void {
+    if (!this.pinned) return;
+    // The room stays: taking it away now would pull the content under the reader.
+    this.pinned = null;
+  }
+
+  /**
+   * Called as the content changes under a pin. Once the reply fills the view below the message, the
+   * view goes back to following the bottom as it grows. Until then the room below is kept to size and
+   * the message held in place; ResizeObserver runs before paint, so a moment where the content is
+   * shorter (a streamed reply swapped for the saved one) never shows as a jump.
+   */
+  private holdPin(): void {
+    const pinned = this.pinned!;
+    this.fitSpacer();
+    if (pinned.arrived && this.spacer().nativeElement.offsetHeight === 0) {
+      this.scrollToBottom('auto');
+      return;
+    }
+    const el = this.host.nativeElement;
+    if (pinned.arrived && Math.abs(el.scrollTop - this.pinTarget()) > 1)
+      el.scrollTop = this.pinTarget();
+  }
+
+  /**
+   * Where the scroll sits with the pinned message at the top. An app may swap the message for a fresh
+   * element in the same place (a sent message getting its stored id); the last known place then holds.
+   */
+  private pinTarget(): number {
+    if (!this.pinned) return 0;
+    if (this.pinned.element.isConnected)
+      this.pinned.top = Math.max(0, this.topOf(this.pinned.element) - this.pinned.offset);
+    return this.pinned.top;
   }
 
   /** The room under the pinned message: enough for it to reach the top, none once the reply fills the view. */
   private fitSpacer(): void {
     if (!this.pinned) return;
     const el = this.host.nativeElement;
-    const below = this.contentHeight() - (this.topOf(this.pinned.element) - this.pinned.offset);
+    const below = this.contentHeight() - this.pinTarget();
     this.setSpacer(Math.max(0, el.clientHeight - below));
   }
 

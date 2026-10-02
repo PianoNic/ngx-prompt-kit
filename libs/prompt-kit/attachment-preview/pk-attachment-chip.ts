@@ -72,7 +72,8 @@ export class PkAttachmentChip {
   );
 
   protected readonly attachmentClass = computed(() =>
-    this.isImageWithThumb() ? 'min-w-fit' : 'h-12 max-w-xs',
+    // No fixed height: name and size need their room, and a box shorter than that pushes them off centre.
+    this.isImageWithThumb() ? 'min-w-fit' : 'max-w-xs',
   );
 
   protected readonly iconName = computed(() => {
