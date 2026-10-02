@@ -646,7 +646,9 @@ export class PkModelSelector {
 
   // min-w-0 lets the trigger shrink in a row (a composer), so a long name truncates instead of pushing
   // the buttons beside it out of view.
-  protected readonly hostClass = computed(() => cn('inline-block min-w-0 max-w-full', this.class()));
+  protected readonly hostClass = computed(() =>
+    cn('inline-block min-w-0 max-w-full', this.class()),
+  );
   protected readonly desktopPanelClass = computed(() =>
     cn(
       'bg-popover text-popover-foreground flex h-[min(560px,calc(100dvh-6rem))] flex-col overflow-hidden rounded-[12px] border shadow-[0_0_5px_rgb(10_10_10/0.2)] outline-none dark:shadow-[0_0_5px_rgb(0_0_0/0.8)]',
