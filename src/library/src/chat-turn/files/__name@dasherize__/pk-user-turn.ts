@@ -3,7 +3,10 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 import { HlmBubble, HlmBubbleContent } from '@spartan-ng/helm/bubble';
 import { cn } from '../utils/cn';
 
-/** A user's message: a spartan bubble on the right, keeping line breaks as typed. */
+/**
+ * A user's message: a spartan bubble on the right, keeping line breaks as typed. Actions such as
+ * edit and copy go in `[pkUserTurnActions]`, a row under the bubble.
+ */
 @Component({
   selector: 'pk-user-turn',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,12 +24,18 @@ import { cn } from '../utils/cn';
         <ng-content />
       </div>
     </div>
+    <!-- Shown on hover or focus where there is a pointer, always on touch screens. -->
+    <div
+      class="text-muted-foreground -me-2 flex items-center gap-0.5 transition-opacity group-hover/turn:opacity-100 group-focus-within/turn:opacity-100 [@media(hover:hover)]:opacity-0"
+    >
+      <ng-content select="[pkUserTurnActions]" />
+    </div>
   `,
 })
 export class PkUserTurn {
   public readonly class = input('');
 
   protected readonly computedClass = computed(() =>
-    cn('flex flex-col items-end gap-2', this.class()),
+    cn('group/turn flex flex-col items-end gap-2', this.class()),
   );
 }

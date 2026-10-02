@@ -45,6 +45,13 @@ export class PkMarkdown {
    * management, pass 'default' or 'dark' explicitly.
    */
   public readonly mermaidTheme = input<MermaidThemeMode>('auto');
+  /**
+   * What an image from another site does: 'load' shows it; 'link' turns it into a link to it instead.
+   * Use 'link' for text a model wrote: loading an image sends a request to whatever address the text
+   * names, so text the model was fed (a web page, a tool result) could make it leak the conversation
+   * through an image URL. Images from this site, data: and blob: always load.
+   */
+  public readonly externalImages = input<'load' | 'link'>('load');
 
   private readonly platformId = inject(PLATFORM_ID);
   private readonly sanitizer = inject(DomSanitizer);
@@ -130,12 +137,15 @@ export class PkMarkdown {
       return parsed;
     }
 
-    return this.sanitizer.bypassSecurityTrustHtml(
-      DOMPurify.sanitize(parsed, {
-        // Mermaid and KaTeX render into this subtree, so SVG and MathML stay.
-        USE_PROFILES: { html: true, svg: true, mathMl: true },
-      }),
-    );
+    const clean = DOMPurify.sanitize(parsed, {
+      // Mermaid and KaTeX render into this subtree, so SVG and MathML stay.
+      USE_PROFILES: { html: true, svg: true, mathMl: true },
+      RETURN_DOM_FRAGMENT: true,
+    });
+    if (this.externalImages() === 'link') linkExternalImages(clean);
+    const holder = document.createElement('div');
+    holder.append(clean);
+    return this.sanitizer.bypassSecurityTrustHtml(holder.innerHTML);
   });
 
   private readonly delimiters = computed<KatexDelimiter[]>(() => {
@@ -469,4 +479,30 @@ function decodeHtml(s: string): string {
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'")
     .replace(/&amp;/g, '&');
+}
+
+/**
+ * Replaces every image whose source is on another site with a link to it, so nothing is requested until
+ * the reader chooses to open it. Same-site, data: and blob: images stay.
+ */
+function linkExternalImages(root: DocumentFragment): void {
+  for (const image of Array.from(root.querySelectorAll('img'))) {
+    const src = image.getAttribute('src') ?? '';
+    let url: URL;
+    try {
+      url = new URL(src, location.href);
+    } catch {
+      image.remove();
+      continue;
+    }
+    if (url.protocol === 'data:' || url.protocol === 'blob:' || url.origin === location.origin)
+      continue;
+
+    const link = document.createElement('a');
+    link.href = url.href;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.textContent = `🖼 ${image.getAttribute('alt') || 'Image'} (${url.hostname})`;
+    image.replaceWith(link);
+  }
 }
