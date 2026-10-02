@@ -30,6 +30,7 @@ const NEAR_BOTTOM_THRESHOLD = 32;
     role: 'log',
     '[class]': 'computedClass()',
     '(scroll)': 'onScroll()',
+    '(scrollend)': 'onScrollEnd()',
     '(wheel)': 'takeOver()',
     '(touchmove)': 'takeOver()',
     '(keydown)': 'takeOver()',
@@ -125,6 +126,11 @@ export class PkChatContainerRoot implements AfterViewInit, ChatContainerState {
     this.measure();
   }
 
+  /** A scroll came to rest: the one bringing a pinned turn up is done, wherever it stopped. */
+  protected onScrollEnd(): void {
+    if (this.pinned) this.pinned.arrived = true;
+  }
+
   /** The reader scrolled by hand: the pin lets go, and following works as usual from here. */
   protected takeOver(): void {
     if (!this.pinned) return;
@@ -141,7 +147,9 @@ export class PkChatContainerRoot implements AfterViewInit, ChatContainerState {
   private holdPin(): void {
     const pinned = this.pinned!;
     this.fitSpacer();
-    if (pinned.arrived && this.spacer().nativeElement.offsetHeight === 0) {
+    // Once the reply fills the view below the message it is followed, even if the scroll bringing the
+    // message up was cut short on the way.
+    if (this.spacer().nativeElement.offsetHeight === 0) {
       this.scrollToBottom('auto');
       return;
     }
