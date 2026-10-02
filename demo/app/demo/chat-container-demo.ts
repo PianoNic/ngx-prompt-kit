@@ -30,7 +30,7 @@ import { HlmBubbleImports } from '@spartan-ng/helm/bubble';
   template: `
     <app-doc-page
       title="Chat Container"
-      description="A scroll area that auto-sticks to the bottom on new content — but only if the user is already there. For a back-to-bottom affordance, bind a spartan hlmBtn to the container's isAtBottom() and scrollToBottom()."
+      description="A scroll area that auto-sticks to the bottom on new content — but only if the user is already there. For a back-to-bottom affordance, bind a spartan hlmBtn to the container's canScrollDown() and scrollToBottom(); pinToTop() holds a just-sent message at the top while the reply comes in."
     >
       <app-doc-example
         title="Auto-scroll on new messages"
@@ -105,7 +105,19 @@ export class ChatContainerDemo {
         {
           name: 'scrollToBottom()',
           type: '(behavior?: ScrollBehavior) => void',
-          description: 'Method to programmatically scroll to bottom.',
+          description: 'Method to programmatically scroll to bottom. Ends a pin.',
+        },
+        {
+          name: 'canScrollDown',
+          type: 'Signal<boolean>',
+          description:
+            'Whether there is content below the view (the room kept under a pinned turn not counted). Bind a spartan hlmBtn to it for a back-to-bottom button.',
+        },
+        {
+          name: 'pinToTop()',
+          type: '(element: HTMLElement, offset?: number) => void',
+          description:
+            'Scrolls a turn to the top of the view, offset px below the edge (16 by default), and holds it there while the reply below grows, keeping room under it as long as the reply is shorter than the view. Call it with a message the user just sent, as Claude does.',
         },
       ],
     },
