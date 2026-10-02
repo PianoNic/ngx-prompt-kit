@@ -13,7 +13,7 @@ import { PkApprovalImports } from 'ngx-prompt-kit/approval';
     <app-doc-page
       title="Approval"
       [original]="true"
-      description="A confirmation card for tool execution. Three severity tiers (info / warning / destructive) drive the action badge color and the Approve button variant."
+      description="A confirmation card for tool execution. Three severity tiers (info / warning / destructive) drive the action badge color and the Approve button variant. Built on spartan's card, badge and button; the pending state shows an hlm-spinner."
     >
       <app-doc-example
         title="Minimal — yes / no question"

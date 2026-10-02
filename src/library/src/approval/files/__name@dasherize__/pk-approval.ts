@@ -1,10 +1,9 @@
 // ngx-prompt-kit original — not part of ibelick/prompt-kit
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
-import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideLoaderCircle } from '@ng-icons/lucide';
 import { HlmBadge } from '@spartan-ng/helm/badge';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmCard } from '@spartan-ng/helm/card';
+import { HlmSpinner } from '@spartan-ng/helm/spinner';
 import { cn } from '../utils/cn';
 import { PkApprovalParameter } from './pk-approval-parameter';
 import type { ApprovalParameter, ApprovalSeverity } from './pk-approval-types';
@@ -12,8 +11,7 @@ import type { ApprovalParameter, ApprovalSeverity } from './pk-approval-types';
 @Component({
   selector: 'pk-approval',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [HlmBadge, HlmButton, HlmCard, NgIcon, PkApprovalParameter],
-  providers: [provideIcons({ lucideLoaderCircle })],
+  imports: [HlmBadge, HlmButton, HlmCard, HlmSpinner, PkApprovalParameter],
   host: {
     '[class]': 'hostClass()',
     '(keydown.enter)': 'onEnterKey($event)',
@@ -66,7 +64,7 @@ import type { ApprovalParameter, ApprovalSeverity } from './pk-approval-types';
           (click)="approved.emit()"
         >
           @if (pending()) {
-            <ng-icon name="lucideLoaderCircle" class="text-[length:--spacing(3)] animate-spin" />
+            <hlm-spinner class="text-[length:--spacing(3)]" />
           }
           {{ approveLabel() }}
         </button>

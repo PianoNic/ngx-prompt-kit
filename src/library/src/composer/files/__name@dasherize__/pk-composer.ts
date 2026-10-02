@@ -14,6 +14,8 @@ import {
 } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowUp, lucideMaximize2, lucideMinimize2, lucidePlus } from '@ng-icons/lucide';
+import { HlmButton } from '@spartan-ng/helm/button';
+import { HlmTextarea } from '@spartan-ng/helm/textarea';
 import { cn } from '../utils/cn';
 
 let nextId = 0;
@@ -31,7 +33,7 @@ let nextId = 0;
 @Component({
   selector: 'pk-composer',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgIcon],
+  imports: [HlmButton, HlmTextarea, NgIcon],
   providers: [provideIcons({ lucideArrowUp, lucideMaximize2, lucideMinimize2, lucidePlus })],
   host: {
     '[class]': 'computedClass()',
@@ -43,6 +45,7 @@ let nextId = 0;
     <div class="relative flex">
       <label class="sr-only" [for]="textareaId">{{ label() }}</label>
       <textarea
+        hlmTextarea
         #textarea
         rows="1"
         [id]="textareaId"
@@ -56,8 +59,11 @@ let nextId = 0;
       ></textarea>
       @if (overflowing() || expanded()) {
         <button
+          hlmBtn
+          variant="ghost"
+          size="icon"
           type="button"
-          class="text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 absolute end-0 top-0 flex size-8 items-center justify-center rounded-lg outline-none focus-visible:ring-3"
+          class="text-muted-foreground absolute end-0 top-0"
           [attr.aria-label]="expanded() ? 'Shrink message box' : 'Expand message box'"
           [attr.aria-pressed]="expanded()"
           (click)="expanded.set(!expanded())"
@@ -73,8 +79,11 @@ let nextId = 0;
     <div class="flex items-center gap-1.5">
       @if (attachable()) {
         <button
+          hlmBtn
+          variant="outline"
+          size="icon-lg"
           type="button"
-          class="border-input hover:bg-accent focus-visible:ring-ring/50 flex size-9 shrink-0 items-center justify-center rounded-full border outline-none focus-visible:ring-3 disabled:opacity-50"
+          class="border-input rounded-full bg-transparent dark:bg-transparent"
           aria-label="Attach files"
           [disabled]="disabled()"
           (click)="fileInput.click()"
@@ -97,8 +106,10 @@ let nextId = 0;
       <ng-content select="[pkComposerEnd]" />
       @if (busy()) {
         <button
+          hlmBtn
+          size="icon-lg"
           type="button"
-          class="bg-primary text-primary-foreground focus-visible:ring-ring/50 flex size-9 shrink-0 items-center justify-center rounded-full outline-none focus-visible:ring-3"
+          class="rounded-full"
           aria-label="Stop generating"
           (click)="stopped.emit()"
         >
@@ -108,8 +119,10 @@ let nextId = 0;
         </button>
       } @else {
         <button
+          hlmBtn
+          size="icon-lg"
           type="button"
-          class="bg-primary text-primary-foreground focus-visible:ring-ring/50 flex size-9 shrink-0 items-center justify-center rounded-full outline-none transition-opacity focus-visible:ring-3 disabled:opacity-30"
+          class="rounded-full data-disabled:opacity-30"
           aria-label="Send message"
           [disabled]="!canSend()"
           (click)="send()"
@@ -168,7 +181,8 @@ export class PkComposer {
 
   protected readonly textareaClass = computed(() =>
     cn(
-      'placeholder:text-muted-foreground w-full resize-none bg-transparent py-1 ps-0.5 text-[15px] leading-normal outline-none disabled:cursor-not-allowed',
+      // hlmTextarea, stripped to bare text: the composer around it is the field.
+      'field-sizing-fixed min-h-0 resize-none rounded-none border-0 bg-transparent px-0 py-1 ps-0.5 text-[15px] leading-normal shadow-none focus-visible:ring-0 disabled:bg-transparent disabled:opacity-100 md:text-[15px] dark:bg-transparent dark:disabled:bg-transparent',
       (this.overflowing() || this.expanded()) && 'pe-9',
     ),
   );

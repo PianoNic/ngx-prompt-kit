@@ -15,7 +15,7 @@ import { PkChainOfThoughtImports } from 'ngx-prompt-kit/chain-of-thought';
   template: `
     <app-doc-page
       title="Chain Of Thought"
-      description="Vertical reasoning timeline. Each step is independently expandable; the connecting line stops at the last step."
+      description="Vertical reasoning timeline. Each step is a spartan brain collapsible, independently expandable, with aria-expanded on its trigger; the connecting line stops at the last step."
     >
       <app-doc-example
         title="Three-step reasoning"

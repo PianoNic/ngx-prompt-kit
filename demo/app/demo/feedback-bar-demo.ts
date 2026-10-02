@@ -15,7 +15,7 @@ import { PkFeedbackBar } from 'ngx-prompt-kit/feedback-bar';
   template: `
     <app-doc-page
       title="Feedback Bar"
-      description="A pill bar prompting the user to rate an assistant response. Thumbs up / thumbs down / dismiss."
+      description="A pill bar prompting the user to rate an assistant response. Thumbs up / thumbs down / dismiss, all spartan ghost icon buttons."
     >
       <app-doc-example
         title="Default"

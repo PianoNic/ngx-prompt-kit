@@ -4,7 +4,9 @@ import { lucideRefreshCw } from '@ng-icons/lucide';
 import { HlmMessageImports } from '@spartan-ng/helm/message';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
-import { PkMessageImports } from 'ngx-prompt-kit/message';
+import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
+import { HlmBubbleImports } from '@spartan-ng/helm/bubble';
+import { PkMarkdown } from 'ngx-prompt-kit/markdown';
 import { PkPromptSuggestion } from 'ngx-prompt-kit/prompt-suggestion';
 
 interface Variant {
@@ -16,7 +18,16 @@ interface Variant {
 @Component({
   selector: 'app-block-regenerate-variants',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [BlockPage, DocExample, NgIcon, PkMessageImports, PkPromptSuggestion, HlmMessageImports],
+  imports: [
+    BlockPage,
+    DocExample,
+    NgIcon,
+    HlmAvatarImports,
+    HlmBubbleImports,
+    PkMarkdown,
+    PkPromptSuggestion,
+    HlmMessageImports,
+  ],
   providers: [provideIcons({ lucideRefreshCw })],
   template: `
     <app-block-page
@@ -26,16 +37,25 @@ interface Variant {
       <app-doc-example title="Tone presets · live message swap" [code]="code">
         <div class="flex w-full max-w-2xl flex-col gap-4">
           <div hlmMessage align="end">
-            <pk-message-content
-              class="bg-primary text-primary-foreground"
-              content="Explain why semantic versioning matters."
-            />
+            <div hlmMessageContent>
+              <div hlmBubble>
+                <div hlmBubbleContent>Explain why semantic versioning matters.</div>
+              </div>
+            </div>
           </div>
 
           <div hlmMessage>
-            <pk-message-avatar src="" alt="Assistant" fallback="AI" />
-            <div class="flex min-w-0 flex-1 flex-col gap-3">
-              <pk-message-content [markdown]="true" [content]="current().text" />
+            <div hlmMessageAvatar>
+              <hlm-avatar>
+                <span hlmAvatarFallback>AI</span>
+              </hlm-avatar>
+            </div>
+            <div hlmMessageContent>
+              <div hlmBubble variant="secondary">
+                <div hlmBubbleContent class="prose dark:prose-invert">
+                  <pk-markdown [content]="current().text" />
+                </div>
+              </div>
 
               <div class="border-border flex flex-col gap-2 border-t pt-3">
                 <span
@@ -91,9 +111,17 @@ export class RegenerateVariantsBlock {
   );
 
   protected readonly code = `<div hlmMessage>
-  <pk-message-avatar src="" alt="Assistant" fallback="AI" />
-  <div class="flex flex-1 flex-col gap-3">
-    <pk-message-content [markdown]="true" [content]="current().text" />
+  <div hlmMessageAvatar>
+    <hlm-avatar>
+      <span hlmAvatarFallback>AI</span>
+    </hlm-avatar>
+  </div>
+  <div hlmMessageContent>
+    <div hlmBubble variant="secondary">
+      <div hlmBubbleContent class="prose dark:prose-invert">
+        <pk-markdown [content]="current().text" />
+      </div>
+    </div>
 
     <div class="border-t pt-3">
       <span class="text-xs uppercase">Try a different tone</span>

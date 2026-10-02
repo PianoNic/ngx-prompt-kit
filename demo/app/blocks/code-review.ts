@@ -3,7 +3,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { PkCodeBlockImports } from 'ngx-prompt-kit/code-block';
-import { PkMessageImports } from 'ngx-prompt-kit/message';
+import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
+import { HlmBubbleImports } from '@spartan-ng/helm/bubble';
+import { PkMarkdown } from 'ngx-prompt-kit/markdown';
 
 const BEFORE = `function refreshSession(token: string) {
   if (!token) throw new Error('no token');
@@ -26,7 +28,15 @@ function refreshSession(token: string) {
 @Component({
   selector: 'app-block-code-review',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [BlockPage, DocExample, PkCodeBlockImports, PkMessageImports, HlmMessageImports],
+  imports: [
+    BlockPage,
+    DocExample,
+    PkCodeBlockImports,
+    HlmAvatarImports,
+    HlmBubbleImports,
+    PkMarkdown,
+    HlmMessageImports,
+  ],
   template: `
     <app-block-page
       title="Code review thread"
@@ -35,11 +45,10 @@ function refreshSession(token: string) {
       <app-doc-example title="Snippet → review with diff" [code]="code">
         <div class="flex w-full max-w-2xl flex-col gap-4">
           <div hlmMessage align="end">
-            <div class="flex max-w-full min-w-0 flex-col gap-2">
-              <pk-message-content
-                class="bg-primary text-primary-foreground"
-                content="Review this — it's stuck in a recursion loop."
-              />
+            <div hlmMessageContent>
+              <div hlmBubble>
+                <div hlmBubbleContent>Review this — it's stuck in a recursion loop.</div>
+              </div>
               <pk-code-block class="overflow-hidden">
                 <pk-code-block-group
                   class="border-border text-muted-foreground border-b px-3 py-1.5 text-[11px]"
@@ -53,12 +62,19 @@ function refreshSession(token: string) {
           </div>
 
           <div hlmMessage>
-            <pk-message-avatar src="" alt="Assistant" fallback="AI" />
-            <div class="flex min-w-0 flex-1 flex-col gap-3">
-              <pk-message-content
-                [markdown]="true"
-                content="The cycle is the recursive call — \`refreshSession\` calls itself with the refresh token, which goes back through \`verifyToken\`. **Fix:** decode without verifying, then exchange the refresh token via a separate code path."
-              />
+            <div hlmMessageAvatar>
+              <hlm-avatar>
+                <span hlmAvatarFallback>AI</span>
+              </hlm-avatar>
+            </div>
+            <div hlmMessageContent>
+              <div hlmBubble variant="secondary">
+                <div hlmBubbleContent class="prose dark:prose-invert">
+                  <pk-markdown
+                    content="The cycle is the recursive call — \`refreshSession\` calls itself with the refresh token, which goes back through \`verifyToken\`. **Fix:** decode without verifying, then exchange the refresh token via a separate code path."
+                  />
+                </div>
+              </div>
               <pk-code-block class="overflow-hidden">
                 <pk-code-block-group
                   class="border-border text-muted-foreground border-b px-3 py-1.5 text-[11px]"
@@ -81,11 +97,10 @@ export class CodeReviewBlock {
 
   protected readonly code = `<!-- User message: prose + the snippet inside one bubble -->
 <div hlmMessage align="end">
-  <div class="flex flex-col gap-2 max-w-full min-w-0">
-    <pk-message-content
-      class="bg-primary text-primary-foreground"
-      content="Review this — it's stuck in a recursion loop."
-    />
+  <div hlmMessageContent>
+    <div hlmBubble>
+      <div hlmBubbleContent>Review this — it's stuck in a recursion loop.</div>
+    </div>
     <pk-code-block>
       <pk-code-block-group class="border-b px-3 py-1.5 text-[11px]">
         <span class="font-mono">session.ts (before)</span>
@@ -98,12 +113,17 @@ export class CodeReviewBlock {
 
 <!-- Assistant: markdown commentary + suggested fix -->
 <div hlmMessage>
-  <pk-message-avatar src="" alt="Assistant" fallback="AI" />
-  <div class="flex flex-1 flex-col gap-3">
-    <pk-message-content
-      [markdown]="true"
-      content="The cycle is the recursive call — **fix:** decode without verifying, then exchange via a separate code path."
-    />
+  <div hlmMessageAvatar>
+    <hlm-avatar>
+      <span hlmAvatarFallback>AI</span>
+    </hlm-avatar>
+  </div>
+  <div hlmMessageContent>
+    <div hlmBubble variant="secondary">
+      <div hlmBubbleContent class="prose dark:prose-invert">
+        <pk-markdown content="The cycle is the recursive call — **fix:** decode without verifying, then exchange via a separate code path." />
+      </div>
+    </div>
     <pk-code-block>
       <pk-code-block-group class="border-b px-3 py-1.5 text-[11px]">
         <span class="font-mono">session/refresh.ts (after)</span>

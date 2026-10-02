@@ -8,9 +8,10 @@ import {
   type BrowserFilter,
   type BrowserModel,
 } from 'ngx-prompt-kit/model-browser';
+import { makerIconUrl } from 'ngx-prompt-kit/model-icon';
 
-const ICON = (name: string) =>
-  `https://unpkg.com/@lobehub/icons-static-svg@latest/icons/${name}.svg`;
+/** The bundled icon of an OpenRouter vendor, from the model-icon utility. */
+const ICON = (vendor: string) => makerIconUrl({ id: `${vendor}/` });
 
 @Component({
   selector: 'app-model-browser-demo',
@@ -20,7 +21,7 @@ const ICON = (name: string) =>
     <app-doc-page
       title="Model Browser"
       [original]="true"
-      description="OpenRouter-style split-pane model picker. Search + optional filter chips on the left, model list grouped by category, and a detail pane on the right showing description, pricing, and arbitrary metric rows. The marketplace pattern when a single dropdown isn't enough."
+      description="OpenRouter-style split-pane model picker. A spartan input-group search + optional filter chips on the left, model list grouped by category, and a detail pane on the right showing description, pricing, and arbitrary metric rows. The marketplace pattern when a single dropdown isn't enough."
     >
       <app-doc-example
         title="Full marketplace"
@@ -91,7 +92,7 @@ export class ModelBrowserDemo {
     {
       id: 'gemini-pro',
       name: 'Gemini 2.5 Pro',
-      iconUrl: ICON('gemini'),
+      iconUrl: ICON('google'),
       provider: 'Google',
       group: 'Frontier',
       description:
@@ -139,7 +140,7 @@ export class ModelBrowserDemo {
     {
       id: 'mistral-large',
       name: 'Mistral Large',
-      iconUrl: ICON('mistral'),
+      iconUrl: ICON('mistralai'),
       provider: 'Mistral',
       group: 'Open Source',
       description: "Mistral's flagship open model with strong tool-use performance. Apache 2.0.",

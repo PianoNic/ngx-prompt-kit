@@ -18,6 +18,7 @@ import {
   HlmDropdownMenuItem,
   HlmDropdownMenuTrigger,
 } from '@spartan-ng/helm/dropdown-menu';
+import { HlmInput } from '@spartan-ng/helm/input';
 import { cn } from '../utils/cn';
 import type { Conversation } from './pk-conversation-types';
 
@@ -40,12 +41,14 @@ const ROW_TARGET =
     HlmDropdownMenu,
     HlmDropdownMenuItem,
     HlmDropdownMenuTrigger,
+    HlmInput,
   ],
   providers: [provideIcons({ lucideEllipsis, lucidePencil, lucideTrash })],
   template: `
     <div [class]="rowClass()" class="group relative">
       @if (editing()) {
         <input
+          hlmInput
           #editInput
           type="text"
           [value]="draft()"
@@ -53,7 +56,7 @@ const ROW_TARGET =
           (keydown.enter)="commitRename()"
           (keydown.escape)="cancelRename()"
           (blur)="commitRename()"
-          class="bg-background border-border focus-visible:ring-ring my-1 w-full rounded-md border px-2 py-1 text-sm outline-none focus-visible:ring-2"
+          class="my-1 h-7 px-2"
           aria-label="Rename conversation"
         />
       } @else {

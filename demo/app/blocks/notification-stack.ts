@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucidePlus } from '@ng-icons/lucide';
+import { lucideCircleAlert, lucideInfo, lucidePlus, lucideTriangleAlert } from '@ng-icons/lucide';
+import { HlmAlertImports } from '@spartan-ng/helm/alert';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
-import { PkSystemMessage } from 'ngx-prompt-kit/system-message';
 
 interface Notice {
   id: number;
@@ -15,12 +15,12 @@ interface Notice {
 @Component({
   selector: 'app-block-notification-stack',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [BlockPage, DocExample, HlmButton, NgIcon, PkSystemMessage],
-  providers: [provideIcons({ lucidePlus })],
+  imports: [BlockPage, DocExample, HlmAlertImports, HlmButton, NgIcon],
+  providers: [provideIcons({ lucideCircleAlert, lucideInfo, lucidePlus, lucideTriangleAlert })],
   template: `
     <app-block-page
       title="Notification stack"
-      description="A toast/notification centre composed of stacked system-messages. Click Add to push a new notice; close any to dismiss it."
+      description="A toast/notification centre composed of stacked spartan alerts. Click Add to push a new notice; close any to dismiss it."
     >
       <app-doc-example title="Add · dismiss · variant mix" [code]="code">
         <div class="flex w-full max-w-md flex-col gap-3">
@@ -33,13 +33,19 @@ interface Notice {
 
           <div class="flex flex-col gap-2">
             @for (n of notices(); track n.id) {
-              <pk-system-message
-                [text]="n.text"
-                [variant]="n.variant"
-                [fill]="true"
-                ctaLabel="Dismiss"
-                (ctaClicked)="dismiss(n.id)"
-              />
+              <div
+                hlmAlert
+                [variant]="n.variant === 'error' ? 'destructive' : 'default'"
+                [class]="n.variant === 'warning' ? 'text-amber-700 dark:text-amber-500' : ''"
+              >
+                <ng-icon [name]="icons[n.variant]" />
+                <p hlmAlertDescription class="text-current">{{ n.text }}</p>
+                <div hlmAlertAction>
+                  <button hlmBtn variant="outline" size="xs" type="button" (click)="dismiss(n.id)">
+                    Dismiss
+                  </button>
+                </div>
+              </div>
             }
 
             @if (notices().length === 0) {
@@ -52,6 +58,12 @@ interface Notice {
   `,
 })
 export class NotificationStackBlock {
+  protected readonly icons: Record<Notice['variant'], string> = {
+    action: 'lucideInfo',
+    warning: 'lucideTriangleAlert',
+    error: 'lucideCircleAlert',
+  };
+
   private readonly templates: Omit<Notice, 'id'>[] = [
     { text: 'Connected to model gpt-5.', variant: 'action' },
     { text: 'Rate limit hit — backing off for 30s.', variant: 'warning' },
@@ -78,13 +90,17 @@ export class NotificationStackBlock {
 
   protected readonly code = `<div class="flex flex-col gap-2">
   @for (n of notices(); track n.id) {
-    <pk-system-message
-      [text]="n.text"
-      [variant]="n.variant"
-      [fill]="true"
-      ctaLabel="Dismiss"
-      (ctaClicked)="dismiss(n.id)"
-    />
+    <div
+      hlmAlert
+      [variant]="n.variant === 'error' ? 'destructive' : 'default'"
+      [class]="n.variant === 'warning' ? 'text-amber-700 dark:text-amber-500' : ''"
+    >
+      <ng-icon [name]="icons[n.variant]" />
+      <p hlmAlertDescription class="text-current">{{ n.text }}</p>
+      <div hlmAlertAction>
+        <button hlmBtn variant="outline" size="xs" (click)="dismiss(n.id)">Dismiss</button>
+      </div>
+    </div>
   }
 </div>
 
@@ -95,6 +111,11 @@ interface Notice {
   variant: 'action' | 'error' | 'warning';
 }
 
+protected readonly icons: Record<Notice['variant'], string> = {
+  action: 'lucideInfo',
+  warning: 'lucideTriangleAlert',
+  error: 'lucideCircleAlert',
+};
 protected readonly notices = signal<Notice[]>([]);
 private nextId = 1;
 

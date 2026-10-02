@@ -12,7 +12,7 @@ import { PkTool, type ToolPart } from 'ngx-prompt-kit/tool';
   template: `
     <app-doc-page
       title="Tool"
-      description="Visualization for an agent tool-call. Four states (input-streaming, input-available, output-available, output-error), expandable body with the input args, output, error, and call ID."
+      description="Visualization for an agent tool-call. Four states (input-streaming, input-available, output-available, output-error), expandable body with the input args, output, error, and call ID. The body is a spartan brain collapsible, the state an hlm-badge and the running icon an hlm-spinner."
     >
       <app-doc-example
         title="Output available (success)"

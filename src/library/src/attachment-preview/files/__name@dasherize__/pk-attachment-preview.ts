@@ -23,7 +23,7 @@ import type { Attachment } from './pk-attachment-types';
     }
     @if (overflowCount() > 0) {
       <span
-        class="border-border bg-muted text-muted-foreground inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-md border text-sm font-medium"
+        class="bg-card text-muted-foreground inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border text-sm font-medium"
         [attr.aria-label]="overflowCount() + ' more'"
       >
         +{{ overflowCount() }}

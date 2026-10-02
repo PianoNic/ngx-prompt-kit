@@ -3,7 +3,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { PkMarkdown } from 'ngx-prompt-kit/markdown';
-import { PkMessageImports } from 'ngx-prompt-kit/message';
+import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
+import { HlmBubbleImports } from '@spartan-ng/helm/bubble';
 
 const RICH_DOC = `# How vector search works
 
@@ -48,7 +49,14 @@ The \`<=>\` operator is pgvector's cosine-distance shorthand. For a 1M-row corpu
 @Component({
   selector: 'app-block-markdown-showcase',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [BlockPage, DocExample, PkMarkdown, PkMessageImports, HlmMessageImports],
+  imports: [
+    BlockPage,
+    DocExample,
+    PkMarkdown,
+    HlmAvatarImports,
+    HlmBubbleImports,
+    HlmMessageImports,
+  ],
   template: `
     <app-block-page
       title="Markdown showcase"
@@ -57,14 +65,21 @@ The \`<=>\` operator is pgvector's cosine-distance shorthand. For a 1M-row corpu
       <app-doc-example title="Math · code · Mermaid in one reply" [code]="code">
         <div class="flex w-full max-w-3xl flex-col gap-4">
           <div hlmMessage align="end">
-            <pk-message-content
-              class="bg-primary text-primary-foreground"
-              content="Explain how vector search works — formulas + a pipeline diagram + sample code."
-            />
+            <div hlmMessageContent>
+              <div hlmBubble>
+                <div hlmBubbleContent>
+                  Explain how vector search works — formulas + a pipeline diagram + sample code.
+                </div>
+              </div>
+            </div>
           </div>
 
           <div hlmMessage>
-            <pk-message-avatar src="" alt="Assistant" fallback="AI" />
+            <div hlmMessageAvatar>
+              <hlm-avatar>
+                <span hlmAvatarFallback>AI</span>
+              </hlm-avatar>
+            </div>
             <pk-markdown
               class="prose prose-sm dark:prose-invert min-w-0 flex-1"
               [enableMath]="true"
@@ -81,7 +96,11 @@ export class MarkdownShowcaseBlock {
   protected readonly doc = RICH_DOC;
 
   protected readonly code = `<div hlmMessage>
-  <pk-message-avatar src="" alt="Assistant" fallback="AI" />
+  <div hlmMessageAvatar>
+    <hlm-avatar>
+      <span hlmAvatarFallback>AI</span>
+    </hlm-avatar>
+  </div>
   <pk-markdown
     class="prose prose-sm dark:prose-invert flex-1"
     [enableMath]="true"

@@ -32,6 +32,7 @@ import {
   lucideX,
 } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
+import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 import { HlmSheet, HlmSheetContent, HlmSheetPortal, HlmSheetTitle } from '@spartan-ng/helm/sheet';
 import { cn } from '../utils/cn';
 import {
@@ -172,6 +173,7 @@ const CLOSE_SPEED = 0.6;
     NgTemplateOutlet,
     NgIcon,
     HlmButton,
+    HlmInputGroupImports,
     HlmSheet,
     HlmSheetContent,
     HlmSheetTitle,
@@ -284,13 +286,16 @@ const CLOSE_SPEED = 0.6;
             : 'flex shrink-0 items-center gap-3 border-b px-3.5 pt-3.5 pb-3'
         "
       >
-        <div class="relative flex min-w-0 grow items-center">
-          <ng-icon
-            name="lucideSearch"
-            aria-hidden="true"
-            class="text-muted-foreground pointer-events-none absolute left-3 text-[length:--spacing(4)]"
-          />
+        <hlm-input-group
+          [class]="
+            cn('bg-muted dark:bg-muted min-w-0 grow rounded-xl border-0', mobile ? 'h-11' : 'h-10')
+          "
+        >
+          <hlm-input-group-addon class="ps-3">
+            <ng-icon name="lucideSearch" aria-hidden="true" />
+          </hlm-input-group-addon>
           <input
+            hlmInputGroupInput
             #search
             type="text"
             role="combobox"
@@ -306,24 +311,22 @@ const CLOSE_SPEED = 0.6;
             [value]="query()"
             (input)="onSearch($event)"
             (keydown)="onSearchKeydown($event)"
-            [class]="
-              cn(
-                'bg-muted text-foreground placeholder:text-muted-foreground focus-visible:ring-ring/40 w-full rounded-xl border-0 pr-9 pl-9 outline-none focus-visible:ring-2',
-                mobile ? 'h-11 text-base' : 'h-10 text-sm'
-              )
-            "
+            [class]="mobile ? 'text-base' : 'text-sm'"
           />
           @if (query()) {
-            <button
-              type="button"
-              aria-label="Clear search"
-              (click)="clearSearch(search)"
-              class="text-muted-foreground hover:text-foreground focus-visible:ring-ring/50 absolute right-2 flex size-6 items-center justify-center rounded-md outline-none focus-visible:ring-[3px]"
-            >
-              <ng-icon name="lucideX" aria-hidden="true" class="text-[length:--spacing(3.5)]" />
-            </button>
+            <hlm-input-group-addon align="inline-end">
+              <button
+                hlmInputGroupButton
+                size="icon-xs"
+                aria-label="Clear search"
+                class="text-muted-foreground"
+                (click)="clearSearch(search)"
+              >
+                <ng-icon name="lucideX" aria-hidden="true" />
+              </button>
+            </hlm-input-group-addon>
           }
-        </div>
+        </hlm-input-group>
       </div>
 
       @if (mobile && !searching()) {
@@ -333,6 +336,8 @@ const CLOSE_SPEED = 0.6;
         >
           @if (hasSections()) {
             <button
+              hlmBtn
+              variant="ghost"
               type="button"
               [attr.aria-pressed]="view() === sectionsView"
               (click)="setView(sectionsView)"
@@ -344,6 +349,8 @@ const CLOSE_SPEED = 0.6;
           }
           @for (m of makers(); track m.name) {
             <button
+              hlmBtn
+              variant="ghost"
               type="button"
               [attr.aria-pressed]="view() === m.name"
               (click)="setView(m.name)"
@@ -376,6 +383,8 @@ const CLOSE_SPEED = 0.6;
           >
             @if (hasSections()) {
               <button
+                hlmBtn
+                variant="ghost"
                 type="button"
                 [attr.aria-current]="view() === sectionsView"
                 (click)="setView(sectionsView)"
@@ -392,6 +401,8 @@ const CLOSE_SPEED = 0.6;
             }
             @for (m of makers(); track m.name) {
               <button
+                hlmBtn
+                variant="ghost"
                 type="button"
                 [attr.aria-current]="view() === m.name"
                 (click)="setView(m.name)"
@@ -922,15 +933,19 @@ export class PkModelSelector {
 
   protected chipClass(active: boolean): string {
     return cn(
-      'focus-visible:ring-ring/50 flex h-9 shrink-0 items-center gap-[7px] rounded-full border px-[13px] text-sm font-medium outline-none focus-visible:ring-[3px]',
-      active ? 'bg-foreground text-background border-foreground' : 'border-border hover:bg-accent',
+      'h-9 gap-[7px] rounded-full border px-[13px]',
+      active
+        ? 'bg-foreground text-background border-foreground hover:bg-foreground hover:text-background dark:hover:bg-foreground'
+        : 'border-border hover:bg-accent dark:hover:bg-accent',
     );
   }
 
   protected railItemClass(active: boolean): string {
     return cn(
-      'focus-visible:ring-ring/50 flex h-10 shrink-0 items-center gap-2.5 rounded-[10px] px-2.5 text-left text-sm outline-none focus-visible:ring-[3px]',
-      active ? 'bg-accent text-accent-foreground font-semibold' : 'hover:bg-accent/60',
+      'h-10 justify-start gap-2.5 rounded-[10px] px-2.5 text-left font-normal',
+      active
+        ? 'bg-accent text-accent-foreground hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent font-semibold'
+        : 'hover:bg-accent/60 dark:hover:bg-accent/60',
     );
   }
 

@@ -2,11 +2,12 @@ import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowUp, lucidePaperclip, lucideUpload } from '@ng-icons/lucide';
 import { HlmButton } from '@spartan-ng/helm/button';
+import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
+import { HlmTooltip } from '@spartan-ng/helm/tooltip';
 import { DocExample } from '../layout/doc-example';
 import { BlockPage } from './block-page';
 import { PkAttachmentPreviewImports, type Attachment } from 'ngx-prompt-kit/attachment-preview';
 import { PkFileUploadImports } from 'ngx-prompt-kit/file-upload';
-import { PkPromptInputImports } from 'ngx-prompt-kit/prompt-input';
 
 const SAMPLE_THUMB =
   'data:image/svg+xml;utf8,' +
@@ -21,10 +22,11 @@ const SAMPLE_THUMB =
     BlockPage,
     DocExample,
     HlmButton,
+    HlmInputGroupImports,
+    HlmTooltip,
     NgIcon,
     PkAttachmentPreviewImports,
     PkFileUploadImports,
-    PkPromptInputImports,
   ],
   providers: [provideIcons({ lucideArrowUp, lucidePaperclip, lucideUpload })],
   template: `
@@ -44,38 +46,44 @@ const SAMPLE_THUMB =
               <pk-attachment-preview [attachments]="attachments()" (removed)="onRemove($event)" />
             }
 
-            <pk-prompt-input [(value)]="value" [isLoading]="isSending()" (submitted)="onSubmit()">
-              <pk-prompt-input-textarea
+            <div hlmInputGroup class="rounded-3xl">
+              <textarea
+                hlmInputGroupTextarea
+                class="max-h-60 px-4 pt-3"
                 placeholder="Describe what you want or drop files anywhere..."
-              />
-              <pk-prompt-input-actions class="mt-2 justify-between">
-                <pk-prompt-input-action tooltip="Attach files">
-                  <button
-                    hlmBtn
-                    size="icon-sm"
-                    variant="ghost"
-                    type="button"
-                    class="rounded-full"
-                    aria-label="Attach"
-                    (click)="fu.openPicker(); $event.stopPropagation()"
-                  >
-                    <ng-icon name="lucidePaperclip" class="text-[length:--spacing(4)]" />
-                  </button>
-                </pk-prompt-input-action>
-                <pk-prompt-input-action tooltip="Send">
-                  <button
-                    hlmBtn
-                    size="icon-sm"
-                    type="button"
-                    class="rounded-full"
-                    (click)="onSubmit()"
-                    aria-label="Send"
-                  >
-                    <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
-                  </button>
-                </pk-prompt-input-action>
-              </pk-prompt-input-actions>
-            </pk-prompt-input>
+                aria-label="Message"
+                [value]="value()"
+                [disabled]="isSending()"
+                (input)="value.set($any($event.target).value)"
+                (keydown.enter)="onEnter($event)"
+              ></textarea>
+              <div hlmInputGroupAddon align="block-end" class="justify-between px-3 pb-3">
+                <button
+                  hlmBtn
+                  size="icon-sm"
+                  variant="ghost"
+                  type="button"
+                  class="rounded-full"
+                  hlmTooltip="Attach files"
+                  aria-label="Attach"
+                  (click)="fu.openPicker(); $event.stopPropagation()"
+                >
+                  <ng-icon name="lucidePaperclip" class="text-[length:--spacing(4)]" />
+                </button>
+                <button
+                  hlmBtn
+                  size="icon-sm"
+                  type="button"
+                  class="rounded-full"
+                  hlmTooltip="Send"
+                  [disabled]="isSending()"
+                  (click)="onSubmit()"
+                  aria-label="Send"
+                >
+                  <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
+                </button>
+              </div>
+            </div>
 
             @if (lastSent(); as msg) {
               <p class="text-muted-foreground text-center text-xs">Sent {{ msg }}</p>
@@ -141,6 +149,12 @@ export class AttachmentComposeBlock {
     this.attachments.update((list) => list.filter((a) => a.id !== id));
   }
 
+  protected onEnter(event: Event): void {
+    if ((event as KeyboardEvent).shiftKey) return;
+    event.preventDefault();
+    this.onSubmit();
+  }
+
   protected onSubmit(): void {
     const text = this.value().trim();
     const count = this.attachments().length;
@@ -166,22 +180,25 @@ export class AttachmentComposeBlock {
     />
   }
 
-  <pk-prompt-input [(value)]="value" (submitted)="onSubmit()">
-    <pk-prompt-input-textarea placeholder="Describe what you want or drop files..." />
-    <pk-prompt-input-actions class="mt-2 justify-between">
-      <pk-prompt-input-action tooltip="Attach files">
-        <button hlmBtn size="icon-sm" variant="ghost"
-                (click)="fu.openPicker(); $event.stopPropagation()">
-          <ng-icon name="lucidePaperclip" class="text-[length:--spacing(4)]" />
-        </button>
-      </pk-prompt-input-action>
-      <pk-prompt-input-action tooltip="Send">
-        <button hlmBtn size="icon-sm" class="rounded-full" (click)="onSubmit()">
-          <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
-        </button>
-      </pk-prompt-input-action>
-    </pk-prompt-input-actions>
-  </pk-prompt-input>
+  <!-- spartan input-group: textarea plus a block-end addon -->
+  <div hlmInputGroup class="rounded-3xl">
+    <textarea
+      hlmInputGroupTextarea
+      placeholder="Describe what you want or drop files..."
+      [value]="value()"
+      (input)="value.set($any($event.target).value)"
+      (keydown.enter)="onEnter($event)"
+    ></textarea>
+    <div hlmInputGroupAddon align="block-end" class="justify-between">
+      <button hlmBtn size="icon-sm" variant="ghost" hlmTooltip="Attach files"
+              (click)="fu.openPicker(); $event.stopPropagation()">
+        <ng-icon name="lucidePaperclip" class="text-[length:--spacing(4)]" />
+      </button>
+      <button hlmBtn size="icon-sm" class="rounded-full" hlmTooltip="Send" (click)="onSubmit()">
+        <ng-icon name="lucideArrowUp" class="text-[length:--spacing(3)]" />
+      </button>
+    </div>
+  </div>
 
   <pk-file-upload-content>
     <!-- drag-state overlay -->

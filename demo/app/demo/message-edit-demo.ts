@@ -5,7 +5,8 @@ import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
-import { PkMessageImports } from 'ngx-prompt-kit/message';
+import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
+import { HlmBubbleImports } from '@spartan-ng/helm/bubble';
 import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit';
 
 @Component({
@@ -17,7 +18,8 @@ import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit
     DocInstall,
     DocApi,
     HlmButton,
-    PkMessageImports,
+    HlmAvatarImports,
+    HlmBubbleImports,
     PkMessageEditImports,
     HlmMessageImports,
   ],
@@ -35,17 +37,24 @@ import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit
         <div class="flex w-full flex-col gap-4">
           <div hlmMessage align="end">
             <pk-message-edit [content]="overlayContent()" (saved)="overlayContent.set($event)">
-              <pk-message-content
-                class="bg-primary text-primary-foreground"
-                [content]="overlayContent()"
-              />
+              <div hlmBubble class="max-w-full">
+                <div hlmBubbleContent>{{ overlayContent() }}</div>
+              </div>
             </pk-message-edit>
           </div>
           <div hlmMessage>
-            <pk-message-avatar src="" alt="Assistant" fallback="AI" />
-            <pk-message-content
-              content="Sure — let me know what you'd like to change and I'll update my reply."
-            />
+            <div hlmMessageAvatar>
+              <hlm-avatar>
+                <span hlmAvatarFallback>AI</span>
+              </hlm-avatar>
+            </div>
+            <div hlmMessageContent>
+              <div hlmBubble variant="secondary">
+                <div hlmBubbleContent>
+                  Sure — let me know what you'd like to change and I'll update my reply.
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </app-doc-example>
@@ -62,10 +71,9 @@ import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit
               [content]="belowContent()"
               (saved)="belowContent.set($event)"
             >
-              <pk-message-content
-                class="bg-primary text-primary-foreground"
-                [content]="belowContent()"
-              />
+              <div hlmBubble class="max-w-full">
+                <div hlmBubbleContent>{{ belowContent() }}</div>
+              </div>
             </pk-message-edit>
           </div>
         </div>
@@ -83,10 +91,9 @@ import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit
               [content]="persistentContent()"
               (saved)="persistentContent.set($event)"
             >
-              <pk-message-content
-                class="bg-primary text-primary-foreground"
-                [content]="persistentContent()"
-              />
+              <div hlmBubble class="max-w-full">
+                <div hlmBubbleContent>{{ persistentContent() }}</div>
+              </div>
             </pk-message-edit>
           </div>
         </div>
@@ -104,10 +111,9 @@ import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit
               [content]="iconBelowContent()"
               (saved)="iconBelowContent.set($event)"
             >
-              <pk-message-content
-                class="bg-primary text-primary-foreground"
-                [content]="iconBelowContent()"
-              />
+              <div hlmBubble class="max-w-full">
+                <div hlmBubbleContent>{{ iconBelowContent() }}</div>
+              </div>
             </pk-message-edit>
           </div>
         </div>
@@ -125,10 +131,9 @@ import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit
               [content]="menuContent()"
               (saved)="menuContent.set($event)"
             >
-              <pk-message-content
-                class="bg-primary text-primary-foreground"
-                [content]="menuContent()"
-              />
+              <div hlmBubble class="max-w-full">
+                <div hlmBubbleContent>{{ menuContent() }}</div>
+              </div>
             </pk-message-edit>
           </div>
         </div>
@@ -147,10 +152,9 @@ import { PkMessageEdit, PkMessageEditImports } from 'ngx-prompt-kit/message-edit
               [content]="hiddenContent()"
               (saved)="hiddenContent.set($event)"
             >
-              <pk-message-content
-                class="bg-primary text-primary-foreground"
-                [content]="hiddenContent()"
-              />
+              <div hlmBubble class="max-w-full">
+                <div hlmBubbleContent>{{ hiddenContent() }}</div>
+              </div>
             </pk-message-edit>
           </div>
           <div class="flex justify-end">
@@ -253,10 +257,9 @@ export class MessageEditDemo {
     [content]="content()"
     (saved)="content.set($event)"
   >
-    <pk-message-content
-      class="bg-primary text-primary-foreground"
-      [content]="content()"
-    />
+    <div hlmBubble class="max-w-full">
+      <div hlmBubbleContent>{{ content() }}</div>
+    </div>
   </pk-message-edit>
 </div>`;
 
@@ -265,7 +268,9 @@ export class MessageEditDemo {
   [content]="content()"
   (saved)="content.set($event)"
 >
-  <pk-message-content [content]="content()" />
+  <div hlmBubble class="max-w-full">
+    <div hlmBubbleContent>{{ content() }}</div>
+  </div>
 </pk-message-edit>`;
 
   protected readonly persistentCode = `<pk-message-edit
@@ -273,7 +278,9 @@ export class MessageEditDemo {
   [content]="content()"
   (saved)="content.set($event)"
 >
-  <pk-message-content [content]="content()" />
+  <div hlmBubble class="max-w-full">
+    <div hlmBubbleContent>{{ content() }}</div>
+  </div>
 </pk-message-edit>`;
 
   protected readonly iconBelowCode = `<pk-message-edit
@@ -281,7 +288,9 @@ export class MessageEditDemo {
   [content]="content()"
   (saved)="content.set($event)"
 >
-  <pk-message-content [content]="content()" />
+  <div hlmBubble class="max-w-full">
+    <div hlmBubbleContent>{{ content() }}</div>
+  </div>
 </pk-message-edit>`;
 
   protected readonly menuCode = `<pk-message-edit
@@ -289,7 +298,9 @@ export class MessageEditDemo {
   [content]="content()"
   (saved)="content.set($event)"
 >
-  <pk-message-content [content]="content()" />
+  <div hlmBubble class="max-w-full">
+    <div hlmBubbleContent>{{ content() }}</div>
+  </div>
 </pk-message-edit>`;
 
   protected readonly hiddenCode = `<pk-message-edit
@@ -298,7 +309,9 @@ export class MessageEditDemo {
   [content]="content()"
   (saved)="content.set($event)"
 >
-  <pk-message-content [content]="content()" />
+  <div hlmBubble class="max-w-full">
+    <div hlmBubbleContent>{{ content() }}</div>
+  </div>
 </pk-message-edit>
 
 <button (click)="editor.startEdit()">Edit last message</button>`;

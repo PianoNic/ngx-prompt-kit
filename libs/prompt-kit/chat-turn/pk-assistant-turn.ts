@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideCheck, lucideCopy } from '@ng-icons/lucide';
+import { HlmButton } from '@spartan-ng/helm/button';
 import { cn } from '../utils/cn';
 
 const COPIED_FOR_MS = 1500;
@@ -24,7 +25,7 @@ const COPIED_FOR_MS = 1500;
 @Component({
   selector: 'pk-assistant-turn',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgIcon],
+  imports: [HlmButton, NgIcon],
   providers: [provideIcons({ lucideCheck, lucideCopy })],
   host: {
     '[class]': 'computedClass()',
@@ -47,8 +48,10 @@ const COPIED_FOR_MS = 1500;
       <div class="text-muted-foreground -ms-2 flex items-center gap-0.5">
         @if (copyText()) {
           <button
+            hlmBtn
+            variant="ghost"
+            size="icon"
             type="button"
-            class="hover:bg-accent hover:text-foreground focus-visible:ring-ring/50 flex size-8 items-center justify-center rounded-lg outline-none focus-visible:ring-3"
             [attr.aria-label]="copied() ? 'Copied' : 'Copy'"
             (click)="copy()"
           >
@@ -69,7 +72,7 @@ const COPIED_FOR_MS = 1500;
 export class PkAssistantTurn {
   /** Name of the model that answered, shown above the reply. */
   public readonly modelName = input('');
-  /** Brand icon for the model (e.g. from `modelIconUrl`). Monochrome icons invert in dark mode. */
+  /** Brand icon for the model (e.g. from `providerIconUrl`). Monochrome icons invert in dark mode. */
   public readonly iconUrl = input<string | undefined>(undefined);
   /** The text the copy button puts on the clipboard; no copy button without it. */
   public readonly copyText = input('');

@@ -4,7 +4,8 @@ import { DocApi, type ApiSection } from '../layout/doc-api';
 import { DocExample } from '../layout/doc-example';
 import { DocInstall } from '../layout/doc-install';
 import { DocPage } from '../layout/doc-page';
-import { PkMessageImports } from 'ngx-prompt-kit/message';
+import { HlmAvatarImports } from '@spartan-ng/helm/avatar';
+import { HlmBubbleImports } from '@spartan-ng/helm/bubble';
 import { PkBranchNavImports } from 'ngx-prompt-kit/branch-nav';
 
 @Component({
@@ -15,7 +16,8 @@ import { PkBranchNavImports } from 'ngx-prompt-kit/branch-nav';
     DocExample,
     DocInstall,
     DocApi,
-    PkMessageImports,
+    HlmAvatarImports,
+    HlmBubbleImports,
     PkBranchNavImports,
     HlmMessageImports,
   ],
@@ -50,8 +52,16 @@ import { PkBranchNavImports } from 'ngx-prompt-kit/branch-nav';
       >
         <div class="flex w-full flex-col gap-1">
           <div hlmMessage>
-            <pk-message-avatar src="" alt="Assistant" fallback="AI" />
-            <pk-message-content [content]="branchedContent()" />
+            <div hlmMessageAvatar>
+              <hlm-avatar>
+                <span hlmAvatarFallback>AI</span>
+              </hlm-avatar>
+            </div>
+            <div hlmMessageContent>
+              <div hlmBubble variant="secondary">
+                <div hlmBubbleContent>{{ branchedContent() }}</div>
+              </div>
+            </div>
           </div>
           <div class="ml-11">
             <pk-branch-nav
@@ -135,8 +145,16 @@ export class BranchNavDemo {
 />`;
 
   protected readonly verboseCode = `<div hlmMessage>
-  <pk-message-avatar src="" alt="Assistant" fallback="AI" />
-  <pk-message-content [content]="branchContent()" />
+  <div hlmMessageAvatar>
+    <hlm-avatar>
+      <span hlmAvatarFallback>AI</span>
+    </hlm-avatar>
+  </div>
+  <div hlmMessageContent>
+    <div hlmBubble variant="secondary">
+      <div hlmBubbleContent>{{ branchContent() }}</div>
+    </div>
+  </div>
 </div>
 <pk-branch-nav
   class="ml-11"

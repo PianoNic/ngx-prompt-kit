@@ -15,35 +15,25 @@
           "branch-nav",
           "chain-of-thought",
           "chat-container",
-          "chat-empty",
           "code-block",
           "conversation-list",
           "cost-display",
           "feedback-bar",
           "file-upload",
           "image",
-          "loader",
           "markdown",
-          "message",
           "message-actions-bar",
           "message-edit",
           "model-browser",
-          "model-list",
-          "model-picker",
           "model-selector",
           "composer",
           "chat-turn",
-          "prompt-input",
           "prompt-suggestion",
           "reasoning",
+          "reasoning-selector",
           "response-stream",
-          "scroll-button",
           "source",
           "steps",
-          "stream-controls",
-          "system-message",
-          "text-shimmer",
-          "thinking-bar",
           "token-counter",
           "tool",
           "usage-card"
@@ -76,10 +66,6 @@
             "label": "chat-container"
           },
           {
-            "value": "chat-empty",
-            "label": "chat-empty"
-          },
-          {
             "value": "code-block",
             "label": "code-block"
           },
@@ -104,16 +90,8 @@
             "label": "image"
           },
           {
-            "value": "loader",
-            "label": "loader"
-          },
-          {
             "value": "markdown",
             "label": "markdown"
-          },
-          {
-            "value": "message",
-            "label": "message"
           },
           {
             "value": "message-actions-bar",
@@ -128,14 +106,6 @@
             "label": "model-browser"
           },
           {
-            "value": "model-list",
-            "label": "model-list"
-          },
-          {
-            "value": "model-picker",
-            "label": "model-picker"
-          },
-          {
             "value": "model-selector",
             "label": "model-selector"
           },
@@ -148,10 +118,6 @@
             "label": "chat-turn"
           },
           {
-            "value": "prompt-input",
-            "label": "prompt-input"
-          },
-          {
             "value": "prompt-suggestion",
             "label": "prompt-suggestion"
           },
@@ -160,12 +126,12 @@
             "label": "reasoning"
           },
           {
-            "value": "response-stream",
-            "label": "response-stream"
+            "value": "reasoning-selector",
+            "label": "reasoning-selector"
           },
           {
-            "value": "scroll-button",
-            "label": "scroll-button"
+            "value": "response-stream",
+            "label": "response-stream"
           },
           {
             "value": "source",
@@ -174,22 +140,6 @@
           {
             "value": "steps",
             "label": "steps"
-          },
-          {
-            "value": "stream-controls",
-            "label": "stream-controls"
-          },
-          {
-            "value": "system-message",
-            "label": "system-message"
-          },
-          {
-            "value": "text-shimmer",
-            "label": "text-shimmer"
-          },
-          {
-            "value": "thinking-bar",
-            "label": "thinking-bar"
           },
           {
             "value": "token-counter",

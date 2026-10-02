@@ -15,7 +15,7 @@ export const BLOCKS: readonly BlockMeta[] = [
   {
     slug: 'streaming-message',
     title: 'Streaming assistant message',
-    description: 'Live response with markdown, fenced code, and a stream-controls button.',
+    description: 'Live response with markdown, fenced code, and a Stop / Regenerate button.',
   },
   {
     slug: 'tool-approval',
@@ -26,7 +26,7 @@ export const BLOCKS: readonly BlockMeta[] = [
     slug: 'reasoning-pane',
     title: 'Reasoning / thinking pane',
     description:
-      '"Show your work" pattern: a thinking bar collapses into a chain-of-thought timeline.',
+      '"Show your work" pattern: a shimmering status line collapses into a chain-of-thought timeline.',
   },
   {
     slug: 'branch-edit',
@@ -77,7 +77,7 @@ export const BLOCKS: readonly BlockMeta[] = [
   {
     slug: 'voice-input',
     title: 'Voice input',
-    description: 'Mic button toggles recording; text-shimmer overlays during transcription.',
+    description: 'Mic button toggles recording; a spartan shimmer overlays during transcription.',
   },
   {
     slug: 'code-review',
@@ -87,17 +87,18 @@ export const BLOCKS: readonly BlockMeta[] = [
   {
     slug: 'setup-tour',
     title: 'Onboarding tour',
-    description: 'First-run hero plus a setup checklist driven by chat-empty + steps.',
+    description: 'First-run hero plus a setup checklist driven by spartan empty + steps.',
   },
   {
     slug: 'agent-task',
     title: 'Long-running agent task',
-    description: 'Thinking bar + chain-of-thought + live tool card during a multi-step agent run.',
+    description:
+      'Shimmering status line + chain-of-thought + live tool card during a multi-step agent run.',
   },
   {
     slug: 'notification-stack',
     title: 'Notification stack',
-    description: 'Toast centre composed of dismissible system-message rows of mixed variants.',
+    description: 'Toast centre composed of dismissible spartan alert rows of mixed variants.',
   },
   {
     slug: 'markdown-showcase',
