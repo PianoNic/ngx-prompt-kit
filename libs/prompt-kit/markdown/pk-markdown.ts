@@ -20,6 +20,9 @@ import { Marked, type Tokens } from 'marked';
 export type MathInlineDelimiter = '$' | '\\(' | 'both';
 export type MathBlockDelimiter = '$$' | '\\[' | 'both';
 export type MermaidThemeMode = 'auto' | 'default' | 'dark';
+export type MarkdownExternalImages = 'load' | 'link' | 'none';
+export type MarkdownRawHtml = 'sanitize' | 'escape';
+export type MarkdownLinkPolicy = 'default' | 'strict';
 
 interface KatexDelimiter {
   left: string;
@@ -46,12 +49,28 @@ export class PkMarkdown {
    */
   public readonly mermaidTheme = input<MermaidThemeMode>('auto');
   /**
-   * What an image from another site does: 'load' shows it; 'link' turns it into a link to it instead.
-   * Use 'link' for text a model wrote: loading an image sends a request to whatever address the text
-   * names, so text the model was fed (a web page, a tool result) could make it leak the conversation
-   * through an image URL. Images from this site, data: and blob: always load.
+   * What an image does: 'load' shows it; 'link' turns an image from another site into a plain-text link
+   * ("Image: alt (host)") the reader can choose to open; 'none' replaces EVERY image, whatever its
+   * source (external, same-site, data:, blob:), with the plain text "Image: alt" - no element, no link,
+   * so nothing can be requested, not even on click.
+   * Use 'link' or 'none' for text a model wrote: loading an image sends a request to whatever address the
+   * text names, so text the model was fed (a web page, a tool result) could make it leak the conversation
+   * through an image URL. With 'link', images from this site, data: and blob: still load.
    */
-  public readonly externalImages = input<'load' | 'link'>('load');
+  public readonly externalImages = input<MarkdownExternalImages>('load');
+  /**
+   * How raw HTML in the markdown source is handled: 'sanitize' (default) parses it and runs it through
+   * DOMPurify; 'escape' shows it as literal text and never parses it.
+   */
+  public readonly rawHtml = input<MarkdownRawHtml>('sanitize');
+  /**
+   * 'default' leaves links as written. 'strict' keeps only http, https and mailto links (any other, and
+   * relative ones, become their plain text), opens every link in a new tab with
+   * rel="noopener noreferrer nofollow", sets a title with the destination (host, or address for mailto)
+   * and appends a muted " (host)" label when the visible text differs from the URL. Needs a DOM, so
+   * during server rendering links are left to Angular's sanitizer until the browser renders.
+   */
+  public readonly linkPolicy = input<MarkdownLinkPolicy>('default');
 
   private readonly platformId = inject(PLATFORM_ID);
   private readonly sanitizer = inject(DomSanitizer);
@@ -99,8 +118,18 @@ export class PkMarkdown {
         ],
       });
     }
+    const rawHtml = this.rawHtml();
+    const images = this.externalImages();
     m.use({
       renderer: {
+        // Raw HTML (block or inline) is shown as text instead of being parsed.
+        ...(rawHtml === 'escape'
+          ? { html: (token: Tokens.HTML | Tokens.Tag) => escapeHtml(token.text) }
+          : {}),
+        // Markdown images never become an element at all in 'none' mode (also without a DOM, e.g. SSR).
+        ...(images === 'none'
+          ? { image: (token: Tokens.Image) => escapeHtml(imageText(token.text)) }
+          : {}),
         code(token: Tokens.Code): string | false {
           // Mermaid takes priority when enabled — emits its own placeholder
           // that applyDiagrams() turns into an SVG.
@@ -142,7 +171,10 @@ export class PkMarkdown {
       USE_PROFILES: { html: true, svg: true, mathMl: true },
       RETURN_DOM_FRAGMENT: true,
     });
-    if (this.externalImages() === 'link') linkExternalImages(clean);
+    const images = this.externalImages();
+    if (images === 'none') removeAllImages(clean);
+    else if (images === 'link') linkExternalImages(clean);
+    if (this.linkPolicy() === 'strict') hardenLinks(clean);
     const holder = document.createElement('div');
     holder.append(clean);
     return this.sanitizer.bypassSecurityTrustHtml(holder.innerHTML);
@@ -481,9 +513,20 @@ function decodeHtml(s: string): string {
     .replace(/&amp;/g, '&');
 }
 
+function imageText(alt: string | null | undefined): string {
+  return `Image: ${alt?.trim() || 'image'}`;
+}
+
+/** Replaces every <img> (raw HTML ones included) with the plain text "Image: alt"; nothing is ever requested. */
+function removeAllImages(root: DocumentFragment): void {
+  for (const image of Array.from(root.querySelectorAll('img'))) {
+    image.replaceWith(root.ownerDocument.createTextNode(imageText(image.getAttribute('alt'))));
+  }
+}
+
 /**
- * Replaces every image whose source is on another site with a link to it, so nothing is requested until
- * the reader chooses to open it. Same-site, data: and blob: images stay.
+ * Replaces every image whose source is on another site with a plain-text link to it, so nothing is
+ * requested until the reader chooses to open it. Same-site, data: and blob: images stay.
  */
 function linkExternalImages(root: DocumentFragment): void {
   for (const image of Array.from(root.querySelectorAll('img'))) {
@@ -502,7 +545,56 @@ function linkExternalImages(root: DocumentFragment): void {
     link.href = url.href;
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
-    link.textContent = `🖼 ${image.getAttribute('alt') || 'Image'} (${url.hostname})`;
+    link.textContent = `${imageText(image.getAttribute('alt'))} (${url.hostname})`;
     image.replaceWith(link);
+  }
+}
+
+const STRICT_PROTOCOLS = new Set(['http:', 'https:', 'mailto:']);
+
+function parseStrictHref(href: string): URL | null {
+  try {
+    const url = new URL(href); // relative and protocol-relative links do not parse without a base
+    return STRICT_PROTOCOLS.has(url.protocol) ? url : null;
+  } catch {
+    return null;
+  }
+}
+
+function safeDecode(value: string): string {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
+
+/** Keeps only http(s)/mailto links, opens them safely and shows where they go when the text says otherwise. */
+function hardenLinks(root: DocumentFragment): void {
+  const doc = root.ownerDocument;
+  const bare = (value: string) =>
+    value
+      .trim()
+      .replace(/^(https?:\/\/|mailto:)/i, '')
+      .replace(/\/$/, '');
+  for (const a of Array.from(root.querySelectorAll('a'))) {
+    const href = (a.getAttribute('href') ?? '').trim();
+    const url = parseStrictHref(href);
+    if (!url) {
+      a.replaceWith(doc.createTextNode(a.textContent ?? ''));
+      continue;
+    }
+    a.setAttribute('href', url.href);
+    a.setAttribute('target', '_blank');
+    a.setAttribute('rel', 'noopener noreferrer nofollow');
+    const destination = url.protocol === 'mailto:' ? safeDecode(url.pathname) : url.hostname;
+    a.setAttribute('title', destination);
+    const text = bare(a.textContent ?? '');
+    if (text !== bare(href) && text !== bare(url.href)) {
+      const label = doc.createElement('span');
+      label.className = 'text-muted-foreground text-xs';
+      label.textContent = ` (${destination})`;
+      a.after(label);
+    }
   }
 }
