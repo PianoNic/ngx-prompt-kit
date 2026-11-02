@@ -126,6 +126,27 @@ export class MarkdownDemo {
           description:
             'Mermaid theme. "auto" detects via the .dark class on documentElement; pass explicitly for bespoke theme management.',
         },
+        {
+          name: 'externalImages',
+          type: '"load" | "link" | "none"',
+          default: '"load"',
+          description:
+            '"link" turns images from other sites into a plain-text link ("Image: alt (host)"). "none" replaces every image, whatever its source, with the text "Image: alt" - no element, no link, nothing is ever requested.',
+        },
+        {
+          name: 'rawHtml',
+          type: '"sanitize" | "escape"',
+          default: '"sanitize"',
+          description:
+            '"sanitize" parses raw HTML and runs it through DOMPurify. "escape" shows raw HTML in the source as literal text and never parses it.',
+        },
+        {
+          name: 'linkPolicy',
+          type: '"default" | "strict"',
+          default: '"default"',
+          description:
+            '"strict" keeps only http, https and mailto links (others become plain text), opens them in a new tab with rel="noopener noreferrer nofollow", sets a title with the destination and appends a muted "(host)" label when the link text differs from the URL.',
+        },
       ],
     },
   ];
